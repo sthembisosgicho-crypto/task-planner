@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192">
+  <!-- Background -->
+  <rect width="192" height="192" rx="28" fill="#1a1a2e"/>
+  <!-- Calendar card body -->
+  <rect x="28" y="52" width="136" height="116" rx="14" fill="#16213e"/>
+  <!-- Calendar header bar -->
+  <rect x="28" y="52" width="136" height="42" rx="14" fill="#0f3460"/>
+  <rect x="28" y="76" width="136" height="18" fill="#0f3460"/>
+  <!-- Calendar binding hooks -->
+  <rect x="66" y="36" width="10" height="32" rx="5" fill="#e94560"/>
+  <rect x="116" y="36" width="10" height="32" rx="5" fill="#e94560"/>
+  <!-- Task lines -->
+  <rect x="48" y="116" width="56" height="9" rx="4.5" fill="#4ecdc4" opacity="0.9"/>
+  <rect x="48" y="134" width="40" height="9" rx="4.5" fill="#a78bfa" opacity="0.9"/>
+  <rect x="48" y="152" width="72" height="9" rx="4.5" fill="#3b82f6" opacity="0.9"/>
+  <!-- Done checkmark -->
+  <circle cx="140" cy="120" r="11" fill="#10b981" opacity="0.25"/>
+  <polyline points="134,120 139,126 147,113" fill="none" stroke="#10b981" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
