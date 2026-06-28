@@ -1557,10 +1557,10 @@ document.getElementById('poolToggle').addEventListener('click', () => {
 });
 
 // ===== HELPERS =====
-function showStatus(msg) {
+function showStatus(msg, ms) {
   const el = document.getElementById('syncStatus');
   el.textContent = msg;
-  setTimeout(() => { el.textContent = ''; }, 3000);
+  setTimeout(() => { el.textContent = ''; }, ms || 3000);
 }
 
 // Export as downloadable JSON file
@@ -2232,26 +2232,32 @@ const GH_API   = 'https://api.github.com/repos/' + GH_OWNER + '/' + GH_REPO + '/
 
 let _ghSyncTimer = null;
 let _ghSyncState = 'idle';
+let _ghResetTimer = null;
 
 function getGhToken() { return localStorage.getItem('ghToken') || ''; }
 
 function setGhSyncState(state, msg) {
   _ghSyncState = state;
-  const dot = document.getElementById('ghSyncDot');
+  clearTimeout(_ghResetTimer);
+  var dot = document.getElementById('ghSyncDot');
   if (!dot) return;
-  const S = {
-    idle:    { color: '#6b6b80', title: 'GitHub sync — click to configure', text: '○' },
-    pending: { color: '#f5a623', title: 'Changes pending sync…',        text: '◉' },
-    pushing: { color: '#a78bfa', title: 'Syncing to GitHub…',           text: '↻', spin: true },
-    ok:      { color: '#10b981', title: msg || 'Synced to GitHub',           text: '●' },
-    error:   { color: '#e94560', title: msg || 'Sync failed — click to retry', text: '●' },
+  var hasToken = !!getGhToken();
+  var S = {
+    idle:    { color: '#6b6b80', title: hasToken ? 'Click to sync now' : 'Click to set up GitHub sync', text: hasToken ? '●' : '○' },
+    pending: { color: '#f5a623', title: 'Changes queued — pushing soon…', text: '◉' },
+    pushing: { color: '#a78bfa', title: 'Pushing to GitHub…',             text: '↻', spin: true },
+    ok:      { color: '#10b981', title: msg || 'Synced to GitHub',         text: '✓' },
+    error:   { color: '#e94560', title: msg || 'Sync failed — click to retry', text: '✗' },
   };
-  const s = S[state] || S.idle;
-  dot.style.color = s.color;
+  var s = S[state] || S.idle;
+  dot.style.color  = s.color;
+  dot.textContent  = s.text;
   document.getElementById('ghSyncBtn').title = s.title;
-  dot.textContent = s.text;
   if (s.spin) dot.classList.add('gh-spinning');
   else        dot.classList.remove('gh-spinning');
+  if (state === 'ok') {
+    _ghResetTimer = setTimeout(function() { if (_ghSyncState === 'ok') setGhSyncState('idle'); }, 3000);
+  }
 }
 
 function schedulePush() {
@@ -2317,7 +2323,9 @@ async function doPush(retryCount) {
     _ghUpdateStatusBox();
   } catch (err) {
     console.warn('[GH Sync]', err.message);
-    setGhSyncState('error', 'Sync failed: ' + err.message);
+    var short = err.message.length > 80 ? err.message.slice(0, 77) + '…' : err.message;
+    setGhSyncState('error', 'Sync failed: ' + short);
+    showStatus('GitHub sync failed: ' + short, 7000);
   }
 }
 
@@ -2396,7 +2404,21 @@ document.getElementById('ghSyncNowBtn').addEventListener('click', function() {
   doPush(0);
 });
 
-document.getElementById('ghSyncBtn').addEventListener('click', openGhSyncModal);
+document.getElementById('ghSyncBtn').addEventListener('click', function() {
+  if (!getGhToken()) {
+    var t = prompt(
+      'Paste your GitHub Personal Access Token to enable sync.\n\n' +
+      'Create one at: github.com/settings/personal-access-tokens/new\n' +
+      '  • Fine-grained token\n' +
+      '  • Repository: task-planner\n' +
+      '  • Permission: Contents → Read and write'
+    );
+    if (!t || !t.trim()) return;
+    localStorage.setItem('ghToken', t.trim());
+    setGhSyncState('idle');
+  }
+  doPush(0);
+});
 document.getElementById('mHamGhSync').addEventListener('click', function() {
   document.getElementById('mobileHamburgerMenu').classList.remove('open');
   openGhSyncModal();
