@@ -2050,17 +2050,7 @@ document.getElementById('mNavPool').addEventListener('click', openMobilePool);
 document.getElementById('mobilePoolClose').addEventListener('click', closeMobilePool);
 document.getElementById('mobilePoolOverlay').addEventListener('click', closeMobilePool);
 
-// Pool swipe-down to close — only when scrolled to top
-let _poolTouchY = 0;
-let _poolScrollAtStart = 0;
-document.getElementById('mobilePoolDrawer').addEventListener('touchstart', e => {
-  _poolTouchY = e.touches[0].clientY;
-  _poolScrollAtStart = document.getElementById('mobilePoolBody').scrollTop;
-}, { passive: true });
-document.getElementById('mobilePoolDrawer').addEventListener('touchend', e => {
-  const dy = e.changedTouches[0].clientY - _poolTouchY;
-  if (dy > 80 && _poolScrollAtStart <= 0) closeMobilePool();
-});
+// Pool close via X button only (swipe removed)
 
 // --- Hamburger menu ---
 document.getElementById('mobileHamburgerBtn').addEventListener('click', e => {
