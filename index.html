@@ -656,6 +656,10 @@ input, select, textarea { font-family: inherit; }
     <span class="mob-nav-icon">&#128203;</span>
     <span class="mob-nav-label">Tasks</span>
   </button>
+  <button class="mob-nav-btn" id="mNavSync">
+    <span class="mob-nav-icon">&#8635;</span>
+    <span class="mob-nav-label">Sync</span>
+  </button>
 </nav>
 
 <script>
@@ -2018,6 +2022,7 @@ function renderMobilePool() {
 }
 
 document.getElementById('mNavPool').addEventListener('click', openMobilePool);
+document.getElementById('mNavSync').addEventListener('click', function() { openGhSyncModal(); });
 document.getElementById('mobilePoolClose').addEventListener('click', closeMobilePool);
 document.getElementById('mobilePoolOverlay').addEventListener('click', closeMobilePool);
 
