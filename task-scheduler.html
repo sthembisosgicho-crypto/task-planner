@@ -292,7 +292,7 @@ input, select, textarea { font-family: inherit; }
   /* Simplified header */
   .app-header { padding: 10px 12px; flex-wrap: nowrap; gap: 8px; }
   .app-header h1 { font-size: 1rem; flex: 1; }
-  #autoScheduleBtn, #undoBtn, #backupsBtn, #exportBtn, .sync-status { display: none !important; }
+  #autoScheduleBtn, #undoBtn, #backupsBtn, #exportBtn, .sync-status, #ghSyncBtn { display: none !important; }
   #addTaskBtn { min-height: 44px; padding: 0 14px; font-size: 0.82rem; }
   .mobile-hamburger-btn { display: flex !important; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; font-size: 1.4rem; background: var(--surface2); border-radius: var(--radius); color: var(--text); flex-shrink: 0; }
 
@@ -454,6 +454,13 @@ input, select, textarea { font-family: inherit; }
 @media (min-width: 768px) {
   .install-banner { bottom: 22px; left: auto; right: 22px; width: 340px; }
 }
+/* ===== GitHub Sync ===== */
+#ghSyncBtn { padding: 5px 9px; font-size: 0.85rem; display: inline-flex; align-items: center; }
+#ghSyncDot { font-size: 1.1rem; line-height: 1; transition: color 0.3s; }
+.gh-spinning { animation: gh-spin 0.7s linear infinite; display: inline-block; }
+@keyframes gh-spin { to { transform: rotate(360deg); } }
+#ghSyncStatusBox a { color: var(--accent); }
+#ghSyncModal .modal-actions { justify-content: space-between; }
 </style>
 </head>
 <body>
@@ -477,6 +484,7 @@ input, select, textarea { font-family: inherit; }
       <button class="btn-undo disabled" id="undoBtn">Undo</button>
       <button class="btn-backups" id="backupsBtn">Backups</button>
       <button class="btn-secondary" id="exportBtn">Export JSON</button>
+      <button class="btn-secondary" id="ghSyncBtn" title="GitHub Sync — click to configure"><span id="ghSyncDot" style="color:#6b6b80">○</span></button>
       <button class="btn-secondary" id="headerInstallBtn" style="display:none;background:#0f3460;color:#a78bfa;font-weight:600" title="Install app">&#8659; Install</button>
       <button class="mobile-hamburger-btn" id="mobileHamburgerBtn" title="Menu">&#9776;</button>
       <span class="sync-status" id="syncStatus"></span>
@@ -596,6 +604,7 @@ input, select, textarea { font-family: inherit; }
   <button id="mHamUndo">&#8635; Undo</button>
   <button id="mHamBackups">&#128190; Backups</button>
   <button id="mHamExport">&#8595; Export JSON</button>
+  <button id="mHamGhSync">&#8635; GitHub Sync</button>
   <button id="mHamInstall" style="display:none;color:#a78bfa">&#8659; Install App</button>
 </div>
 
@@ -2214,6 +2223,226 @@ document.getElementById('mHamInstall').addEventListener('click', () => {
   document.getElementById('mobileHamburgerMenu').classList.remove('open');
   triggerInstall();
 });
+
+// ===== GITHUB SYNC =====
+const GH_OWNER = 'sthembisosgicho-crypto';
+const GH_REPO  = 'task-planner';
+const GH_FILE  = 'task-data.json';
+const GH_API   = 'https://api.github.com/repos/' + GH_OWNER + '/' + GH_REPO + '/contents/' + GH_FILE;
+
+let _ghSyncTimer = null;
+let _ghSyncState = 'idle';
+
+function getGhToken() { return localStorage.getItem('ghToken') || ''; }
+
+function setGhSyncState(state, msg) {
+  _ghSyncState = state;
+  const dot = document.getElementById('ghSyncDot');
+  if (!dot) return;
+  const S = {
+    idle:    { color: '#6b6b80', title: 'GitHub sync — click to configure', text: '○' },
+    pending: { color: '#f5a623', title: 'Changes pending sync…',        text: '◉' },
+    pushing: { color: '#a78bfa', title: 'Syncing to GitHub…',           text: '↻', spin: true },
+    ok:      { color: '#10b981', title: msg || 'Synced to GitHub',           text: '●' },
+    error:   { color: '#e94560', title: msg || 'Sync failed — click to retry', text: '●' },
+  };
+  const s = S[state] || S.idle;
+  dot.style.color = s.color;
+  document.getElementById('ghSyncBtn').title = s.title;
+  dot.textContent = s.text;
+  if (s.spin) dot.classList.add('gh-spinning');
+  else        dot.classList.remove('gh-spinning');
+}
+
+function schedulePush() {
+  if (!getGhToken()) return;
+  setGhSyncState('pending');
+  clearTimeout(_ghSyncTimer);
+  _ghSyncTimer = setTimeout(function() { doPush(0); }, 8000);
+}
+
+function ghToBase64(str) {
+  var bytes = new TextEncoder().encode(str);
+  var bin = '';
+  for (var i = 0; i < bytes.length; i += 8192) {
+    bin += String.fromCharCode.apply(null, bytes.subarray(i, i + 8192));
+  }
+  return btoa(bin);
+}
+
+async function doPush(retryCount) {
+  if (retryCount === undefined) retryCount = 0;
+  var token = getGhToken();
+  if (!token) return;
+  if (!navigator.onLine) { setGhSyncState('pending'); return; }
+  clearTimeout(_ghSyncTimer);
+  setGhSyncState('pushing');
+  try {
+    var getRes = await fetch(GH_API, {
+      headers: { 'Authorization': 'Bearer ' + token, 'Accept': 'application/vnd.github+json' },
+      cache: 'no-store'
+    });
+    var sha = null;
+    if (getRes.ok) {
+      sha = (await getRes.json()).sha;
+    } else if (getRes.status !== 404) {
+      var eg = await getRes.json().catch(function(){ return {}; });
+      throw new Error(eg.message || 'GET failed: HTTP ' + getRes.status);
+    }
+
+    var now = new Date();
+    var ts  = now.toLocaleString('en-ZA', { dateStyle: 'short', timeStyle: 'short' });
+    var body = { message: 'sync: tasks ' + ts, content: ghToBase64(JSON.stringify(tasks, null, 2)) };
+    if (sha) body.sha = sha;
+
+    var putRes = await fetch(GH_API, {
+      method: 'PUT',
+      headers: {
+        'Authorization': 'Bearer ' + token,
+        'Content-Type': 'application/json',
+        'Accept': 'application/vnd.github+json'
+      },
+      body: JSON.stringify(body)
+    });
+    if (!putRes.ok) {
+      var ep = await putRes.json().catch(function(){ return {}; });
+      if ((putRes.status === 409 || (ep.message || '').toLowerCase().indexOf('sha') !== -1) && retryCount < 2) {
+        return doPush(retryCount + 1);
+      }
+      throw new Error(ep.message || 'PUT failed: HTTP ' + putRes.status);
+    }
+    var timeStr = now.toLocaleTimeString('en-ZA', { hour: '2-digit', minute: '2-digit' });
+    setGhSyncState('ok', 'Synced at ' + timeStr);
+    localStorage.setItem('ghLastSync', now.toISOString());
+    _ghUpdateStatusBox();
+  } catch (err) {
+    console.warn('[GH Sync]', err.message);
+    setGhSyncState('error', 'Sync failed: ' + err.message);
+  }
+}
+
+// Patch exportData so every task save also schedules a push
+(function() {
+  var _orig = exportData;
+  exportData = function() {
+    _orig();
+    schedulePush();
+  };
+})();
+
+// Flush pending push when connectivity is restored
+window.addEventListener('online', function() {
+  if (_ghSyncState === 'pending' || _ghSyncState === 'error') {
+    doPush(0);
+  }
+});
+
+// ── GitHub Sync Modal ─────────────────────────────────────────────────────────
+function _ghUpdateStatusBox() {
+  var box = document.getElementById('ghSyncStatusBox');
+  if (!box) return;
+  var token = getGhToken();
+  var lastSync = localStorage.getItem('ghLastSync');
+  if (token) {
+    var lastStr = lastSync ? new Date(lastSync).toLocaleString('en-ZA') : 'never';
+    box.innerHTML = '<span style="color:#10b981">&#10003; Connected</span>'
+      + ' — syncing to <a href="https://github.com/' + GH_OWNER + '/' + GH_REPO + '" '
+      + 'target="_blank" rel="noopener">' + GH_OWNER + '/' + GH_REPO + '</a>'
+      + '<br>Token: ···' + token.slice(-4)
+      + '<br>Last sync: ' + lastStr;
+  } else {
+    box.innerHTML = '<span style="color:var(--text-dim)">&#9675; Not configured</span>'
+      + ' — enter a token below to enable automatic sync.';
+  }
+  document.getElementById('ghDisconnectBtn').style.display = token ? '' : 'none';
+  document.getElementById('ghSyncNowBtn').style.display    = token ? '' : 'none';
+  document.getElementById('ghSyncSaveBtn').textContent     = token ? 'Update Token' : 'Connect';
+  document.getElementById('ghTokenInput').value            = '';
+}
+
+function openGhSyncModal() {
+  _ghUpdateStatusBox();
+  document.getElementById('ghSyncModal').classList.add('active');
+}
+
+function closeGhSyncModal() {
+  document.getElementById('ghSyncModal').classList.remove('active');
+}
+
+document.getElementById('ghSyncCancelBtn').addEventListener('click', closeGhSyncModal);
+document.getElementById('ghSyncModal').addEventListener('click', function(e) {
+  if (e.target === document.getElementById('ghSyncModal')) closeGhSyncModal();
+});
+
+document.getElementById('ghSyncSaveBtn').addEventListener('click', function() {
+  var val = document.getElementById('ghTokenInput').value.trim();
+  if (!val) { showStatus('Please enter a token'); return; }
+  localStorage.setItem('ghToken', val);
+  closeGhSyncModal();
+  setGhSyncState('idle');
+  doPush(0);
+});
+
+document.getElementById('ghDisconnectBtn').addEventListener('click', function() {
+  if (!confirm('Remove GitHub token? Auto-sync will stop.')) return;
+  localStorage.removeItem('ghToken');
+  localStorage.removeItem('ghLastSync');
+  setGhSyncState('idle');
+  closeGhSyncModal();
+});
+
+document.getElementById('ghSyncNowBtn').addEventListener('click', function() {
+  closeGhSyncModal();
+  doPush(0);
+});
+
+document.getElementById('ghSyncBtn').addEventListener('click', openGhSyncModal);
+document.getElementById('mHamGhSync').addEventListener('click', function() {
+  document.getElementById('mobileHamburgerMenu').classList.remove('open');
+  openGhSyncModal();
+});
+
+// Restore last-known sync state on load
+(function() {
+  if (!getGhToken()) return;
+  var ls = localStorage.getItem('ghLastSync');
+  if (ls) {
+    var ago = Date.now() - new Date(ls).getTime();
+    var t   = new Date(ls).toLocaleTimeString('en-ZA', { hour: '2-digit', minute: '2-digit' });
+    setGhSyncState('ok', 'Last synced at ' + t);
+  }
+})();
 </script>
+
+<!-- GitHub Sync Settings Modal -->
+<div class="modal-overlay" id="ghSyncModal">
+  <div class="modal" style="max-width:460px">
+    <h2>&#8635; GitHub Sync</h2>
+    <p style="font-size:0.78rem;color:var(--text-dim);margin-bottom:14px">
+      Automatically pushes your tasks to <strong>sthembisosgicho-crypto/task-planner</strong> whenever you make changes — so any device can load the latest data.
+    </p>
+    <div id="ghSyncStatusBox" style="padding:10px 14px;background:var(--surface2);border-radius:var(--radius);font-size:0.8rem;line-height:1.7;margin-bottom:16px"></div>
+    <div class="form-group">
+      <label for="ghTokenInput">
+        Personal Access Token
+        <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener noreferrer"
+           style="margin-left:8px;font-size:0.7rem;color:var(--accent)">Create token &#8599;</a>
+      </label>
+      <input type="password" id="ghTokenInput" placeholder="github_pat_…  or  ghp_…" autocomplete="off" spellcheck="false">
+      <p style="font-size:0.68rem;color:var(--text-dim);margin-top:6px;line-height:1.5">
+        Create a <strong>Fine-grained token</strong> scoped only to the <em>task-planner</em> repo<br>
+        with permission <strong>Contents: Read and write</strong>.
+      </p>
+    </div>
+    <div class="modal-actions">
+      <div><button class="btn-danger" id="ghDisconnectBtn">Disconnect</button></div>
+      <div style="display:flex;gap:8px">
+        <button class="btn-secondary" id="ghSyncNowBtn">Sync Now</button>
+        <button class="btn-secondary" id="ghSyncCancelBtn">Cancel</button>
+        <button class="btn-primary" id="ghSyncSaveBtn">Connect</button>
+      </div>
+    </div>
+  </div>
+</div>
 </body>
 </html>
