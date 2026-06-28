@@ -2032,15 +2032,17 @@
   },
   {
     "id": "mqxoe5zoe9p5s",
-    "title": "New Task",
+    "title": "ddddddd",
     "category": "Engineering",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 11,
     "deadline": null,
     "notes": "",
     "workType": "Project Work",
     "status": "backlog",
     "scheduledDate": null,
-    "subtasks": []
+    "subtasks": [],
+    "totalHours": 0,
+    "hoursDone": 0
   }
 ]
