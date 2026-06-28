@@ -1915,17 +1915,7 @@ document.getElementById('kanbanNextBtn').addEventListener('click', () => {
   mobileUpdateKanban();
 });
 
-// Kanban swipe
-let _kTouchX = 0;
-document.getElementById('kanbanView').addEventListener('touchstart', e => { _kTouchX = e.touches[0].clientX; }, { passive: true });
-document.getElementById('kanbanView').addEventListener('touchend', e => {
-  if (!isMobile()) return;
-  const dx = e.changedTouches[0].clientX - _kTouchX;
-  if (Math.abs(dx) > 55) {
-    mobileKanbanIdx = Math.max(0, Math.min(3, mobileKanbanIdx + (dx < 0 ? 1 : -1)));
-    mobileUpdateKanban();
-  }
-});
+// Kanban navigation via buttons only
 
 // Patch renderKanban to update mobile display after
 const _origRenderKanban = renderKanban;
@@ -1990,26 +1980,7 @@ renderCalendar = function() {
   _origRenderCalendar();
 };
 
-// Calendar swipe
-let _calTouchX = 0;
-document.getElementById('calendarView').addEventListener('touchstart', e => { _calTouchX = e.touches[0].clientX; }, { passive: true });
-document.getElementById('calendarView').addEventListener('touchend', e => {
-  if (!isMobile()) return;
-  const dx = e.changedTouches[0].clientX - _calTouchX;
-  if (Math.abs(dx) > 55) { _mobileCalWeekOff += (dx < 0 ? 1 : -1); renderCalendarMobileWeek(); }
-});
-
-// --- Day view swipe ---
-let _dayTouchX = 0;
-document.getElementById('dayView').addEventListener('touchstart', e => { _dayTouchX = e.touches[0].clientX; }, { passive: true });
-document.getElementById('dayView').addEventListener('touchend', e => {
-  if (!isMobile()) return;
-  const dx = e.changedTouches[0].clientX - _dayTouchX;
-  if (Math.abs(dx) > 60) {
-    dayViewDate = new Date(dayViewDate.getTime() + (dx < 0 ? 86400000 : -86400000));
-    renderDayView();
-  }
-});
+// Calendar and Day navigation via buttons only
 
 // --- Task Pool bottom drawer ---
 function openMobilePool() {
