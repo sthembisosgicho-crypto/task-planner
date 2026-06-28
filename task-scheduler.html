@@ -2451,13 +2451,13 @@ document.getElementById('mHamGhSync').addEventListener('click', function(e) {
     var content = atob(data.content.replace(/\n/g, ''));
     var remoteTasks = JSON.parse(content);
     if (!Array.isArray(remoteTasks) || remoteTasks.length === 0) return;
-    var localTime = localStorage.getItem('taskDataJsonTime') || '1970-01-01';
-    var remoteTime = data.commit ? data.commit.committer.date : null;
-    if (remoteTime && remoteTime > localTime) {
+    var localJson = JSON.stringify(tasks);
+    var remoteJson = JSON.stringify(remoteTasks);
+    if (localJson !== remoteJson) {
       tasks = remoteTasks;
       saveTasks();
-      localStorage.setItem('taskDataJson', JSON.stringify(tasks));
-      localStorage.setItem('taskDataJsonTime', remoteTime);
+      localStorage.setItem('taskDataJson', remoteJson);
+      localStorage.setItem('taskDataJsonTime', new Date().toISOString());
       renderAll();
       showStatus('Pulled latest tasks from GitHub');
     }
