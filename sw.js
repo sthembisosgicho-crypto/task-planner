@@ -1,8 +1,10 @@
 // Task Planner Service Worker
-const CACHE_VERSION = 'v3';
+const CACHE_VERSION = 'v4';
 const CACHE_NAME = `task-planner-${CACHE_VERSION}`;
 
 const PRECACHE_ASSETS = [
+  './',
+  './index.html',
   './task-scheduler.html',
   './manifest.json',
   './icon.svg',
