@@ -1783,8 +1783,8 @@ function checkIncompleteTasks() {
 function showIncompleteModal(items) {
   const existing = document.getElementById('incompleteModal');
   if (existing) existing.remove();
-  let html = '<div class="modal-overlay active" id="incompleteModal"><div class="modal" style="max-width:560px;max-height:85vh;overflow-y:auto"><h2 style="color:#e67e22">Tasks Need Info</h2><p style="font-size:0.78rem;color:var(--text-dim);margin-bottom:14px">' + items.length + ' tasks have no duration set. Set hours to schedule them, or skip for now.</p>';
-  html += '<div style="display:flex;flex-direction:column;gap:6px">';
+  let html = '<div class="modal-overlay active" id="incompleteModal"><div class="modal" style="max-width:560px;max-height:85vh;overflow:hidden;display:flex;flex-direction:column"><h2 style="color:#e67e22;flex-shrink:0">Tasks Need Info</h2><p style="font-size:0.78rem;color:var(--text-dim);margin-bottom:14px;flex-shrink:0">' + items.length + ' tasks have no duration set. Set hours to schedule them, or skip for now.</p>';
+  html += '<div style="display:flex;flex-direction:column;gap:6px;overflow-y:auto;flex:1;min-height:0;padding-bottom:8px">';
   items.forEach((t, i) => {
     html += `<div class="inc-row" data-id="${t.id}" style="padding:10px 12px;background:var(--surface2);border-radius:6px;border-left:3px solid #e67e22">
       <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
@@ -1803,7 +1803,7 @@ function showIncompleteModal(items) {
       </div>
     </div>`;
   });
-  html += '</div><div class="modal-actions" style="margin-top:16px"><button class="btn-secondary" onclick="closeIncompleteModal()">Skip All</button><button class="btn-primary" onclick="incSaveAll()">Save All</button></div></div></div>';
+  html += '</div><div class="modal-actions" style="margin-top:12px;flex-shrink:0;padding-top:8px;border-top:1px solid rgba(255,255,255,0.08)"><button class="btn-secondary" onclick="closeIncompleteModal()">Skip All</button><button class="btn-primary" onclick="incSaveAll()">Save All</button></div></div></div>';
   document.body.insertAdjacentHTML('beforeend', html);
   // Store items for save all
   window._incItems = items;
