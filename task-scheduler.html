@@ -2335,6 +2335,7 @@ function _ghUpdateStatusBox() {
 
 function openGhSyncModal() {
   _ghUpdateStatusBox();
+  window._ghModalOpenedAt = Date.now();
   document.getElementById('ghSyncModal').classList.add('active');
 }
 
@@ -2344,7 +2345,7 @@ function closeGhSyncModal() {
 
 document.getElementById('ghSyncCancelBtn').addEventListener('click', closeGhSyncModal);
 document.getElementById('ghSyncModal').addEventListener('click', function(e) {
-  if (e.target === document.getElementById('ghSyncModal')) closeGhSyncModal();
+  if (e.target === document.getElementById('ghSyncModal') && Date.now() - (window._ghModalOpenedAt || 0) > 200) closeGhSyncModal();
 });
 
 document.getElementById('ghSyncSaveBtn').addEventListener('click', function() {
@@ -2384,7 +2385,8 @@ document.getElementById('ghSyncBtn').addEventListener('click', function() {
   }
   doPush(0);
 });
-document.getElementById('mHamGhSync').addEventListener('click', function() {
+document.getElementById('mHamGhSync').addEventListener('click', function(e) {
+  e.stopPropagation();
   document.getElementById('mobileHamburgerMenu').classList.remove('open');
   openGhSyncModal();
 });
