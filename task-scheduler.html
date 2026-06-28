@@ -662,6 +662,37 @@ input, select, textarea { font-family: inherit; }
   </button>
 </nav>
 
+<!-- GitHub Sync Settings Modal -->
+<div class="modal-overlay" id="ghSyncModal">
+  <div class="modal" style="max-width:460px">
+    <h2>&#8635; GitHub Sync</h2>
+    <p style="font-size:0.78rem;color:var(--text-dim);margin-bottom:14px">
+      Automatically pushes your tasks to <strong>sthembisosgicho-crypto/task-planner</strong> whenever you make changes — so any device can load the latest data.
+    </p>
+    <div id="ghSyncStatusBox" style="padding:10px 14px;background:var(--surface2);border-radius:var(--radius);font-size:0.8rem;line-height:1.7;margin-bottom:16px"></div>
+    <div class="form-group">
+      <label for="ghTokenInput">
+        Personal Access Token
+        <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener noreferrer"
+           style="margin-left:8px;font-size:0.7rem;color:var(--accent)">Create token &#8599;</a>
+      </label>
+      <input type="password" id="ghTokenInput" placeholder="github_pat_…  or  ghp_…" autocomplete="off" spellcheck="false">
+      <p style="font-size:0.68rem;color:var(--text-dim);margin-top:6px;line-height:1.5">
+        Create a <strong>Fine-grained token</strong> scoped only to the <em>task-planner</em> repo<br>
+        with permission <strong>Contents: Read and write</strong>.
+      </p>
+    </div>
+    <div class="modal-actions">
+      <div><button class="btn-danger" id="ghDisconnectBtn">Disconnect</button></div>
+      <div style="display:flex;gap:8px">
+        <button class="btn-secondary" id="ghSyncNowBtn">Sync Now</button>
+        <button class="btn-secondary" id="ghSyncCancelBtn">Cancel</button>
+        <button class="btn-primary" id="ghSyncSaveBtn">Connect</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
 // ===== CONFIG =====
 const CATEGORIES = ['Engineering','Markets','Chores','Chores Desk','House Chores','Shopping','Errands','Side Hustle','Health'];
@@ -2406,37 +2437,7 @@ document.getElementById('mHamGhSync').addEventListener('click', function(e) {
     setGhSyncState('ok', 'Last synced at ' + t);
   }
 })();
-</script>
 
-<!-- GitHub Sync Settings Modal -->
-<div class="modal-overlay" id="ghSyncModal">
-  <div class="modal" style="max-width:460px">
-    <h2>&#8635; GitHub Sync</h2>
-    <p style="font-size:0.78rem;color:var(--text-dim);margin-bottom:14px">
-      Automatically pushes your tasks to <strong>sthembisosgicho-crypto/task-planner</strong> whenever you make changes — so any device can load the latest data.
-    </p>
-    <div id="ghSyncStatusBox" style="padding:10px 14px;background:var(--surface2);border-radius:var(--radius);font-size:0.8rem;line-height:1.7;margin-bottom:16px"></div>
-    <div class="form-group">
-      <label for="ghTokenInput">
-        Personal Access Token
-        <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener noreferrer"
-           style="margin-left:8px;font-size:0.7rem;color:var(--accent)">Create token &#8599;</a>
-      </label>
-      <input type="password" id="ghTokenInput" placeholder="github_pat_…  or  ghp_…" autocomplete="off" spellcheck="false">
-      <p style="font-size:0.68rem;color:var(--text-dim);margin-top:6px;line-height:1.5">
-        Create a <strong>Fine-grained token</strong> scoped only to the <em>task-planner</em> repo<br>
-        with permission <strong>Contents: Read and write</strong>.
-      </p>
-    </div>
-    <div class="modal-actions">
-      <div><button class="btn-danger" id="ghDisconnectBtn">Disconnect</button></div>
-      <div style="display:flex;gap:8px">
-        <button class="btn-secondary" id="ghSyncNowBtn">Sync Now</button>
-        <button class="btn-secondary" id="ghSyncCancelBtn">Cancel</button>
-        <button class="btn-primary" id="ghSyncSaveBtn">Connect</button>
-      </div>
-    </div>
-  </div>
-</div>
+</script>
 </body>
 </html>
