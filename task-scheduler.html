@@ -2432,10 +2432,36 @@ document.getElementById('mHamGhSync').addEventListener('click', function(e) {
   if (!getGhToken()) return;
   var ls = localStorage.getItem('ghLastSync');
   if (ls) {
-    var ago = Date.now() - new Date(ls).getTime();
     var t   = new Date(ls).toLocaleTimeString('en-ZA', { hour: '2-digit', minute: '2-digit' });
     setGhSyncState('ok', 'Last synced at ' + t);
   }
+})();
+
+// ── Pull latest from GitHub on load ──────────────────────────────────────────
+(async function ghPullOnLoad() {
+  var token = getGhToken();
+  if (!token || !navigator.onLine) return;
+  try {
+    var res = await fetch(GH_API, {
+      headers: { 'Authorization': 'Bearer ' + token, 'Accept': 'application/vnd.github+json' },
+      cache: 'no-store'
+    });
+    if (!res.ok) return;
+    var data = await res.json();
+    var content = atob(data.content.replace(/\n/g, ''));
+    var remoteTasks = JSON.parse(content);
+    if (!Array.isArray(remoteTasks) || remoteTasks.length === 0) return;
+    var localTime = localStorage.getItem('taskDataJsonTime') || '1970-01-01';
+    var remoteTime = data.commit ? data.commit.committer.date : null;
+    if (remoteTime && remoteTime > localTime) {
+      tasks = remoteTasks;
+      saveTasks();
+      localStorage.setItem('taskDataJson', JSON.stringify(tasks));
+      localStorage.setItem('taskDataJsonTime', remoteTime);
+      renderAll();
+      showStatus('Pulled latest tasks from GitHub');
+    }
+  } catch (e) { /* silent fail — local data is still valid */ }
 })();
 
 </script>
