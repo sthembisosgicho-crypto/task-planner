@@ -2,6 +2,7 @@
   "name": "Task Planner",
   "short_name": "Planner",
   "description": "Personal task scheduling and management — works fully offline",
+  "id": "./task-scheduler.html",
   "start_url": "./task-scheduler.html",
   "scope": "./",
   "display": "standalone",
