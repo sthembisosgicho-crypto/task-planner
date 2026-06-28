@@ -4,14 +4,2467 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Task Planner</title>
-<meta http-equiv="refresh" content="0;url=task-scheduler.html">
+<!-- PWA -->
+<link rel="manifest" href="./manifest.json">
+<meta name="theme-color" content="#16213e">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Planner">
+<link rel="apple-touch-icon" href="./icon.svg">
 <style>
-  body { margin:0; background:#1a1a2e; display:flex; align-items:center;
-         justify-content:center; height:100vh; font-family:system-ui,sans-serif; color:#eaeaea; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg: #1a1a2e;
+  --surface: #16213e;
+  --surface2: #0f3460;
+  --accent: #e94560;
+  --text: #eaeaea;
+  --text-dim: #a0a0b0;
+  --urgent: #e94560;
+  --soon: #f5a623;
+  --normal: #4ecdc4;
+  --recurring: #a78bfa;
+  --engineering: #3b82f6;
+  --markets: #10b981;
+  --chores: #f59e0b;
+  --sidehustle: #ec4899;
+  --health: #8b5cf6;
+  --choresdesk: #14b8a6;
+  --housechores: #f97316;
+  --shopping: #84cc16;
+  --errands: #6366f1;
+  --radius: 8px;
+  --pool-width: 300px;
+}
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; display: flex; }
+button { cursor: pointer; border: none; font-family: inherit; }
+input, select, textarea { font-family: inherit; }
+.btn-primary { background: var(--accent); color: white; border-radius: var(--radius); }
+.btn-primary:hover { background: #d63d56; }
+.btn-secondary { background: var(--surface2); color: var(--text); border-radius: var(--radius); }
+.btn-secondary:hover { background: #1a4a7a; }
+
+/* Task Pool (Left Panel) */
+.task-pool { width: var(--pool-width); background: var(--surface); border-right: 1px solid rgba(255,255,255,0.05); height: 100vh; position: fixed; left: 0; top: 0; z-index: 100; display: flex; flex-direction: column; transition: transform 0.3s; }
+.task-pool.collapsed { transform: translateX(calc(-1 * var(--pool-width) + 32px)); }
+.task-pool.collapsed .pool-content { opacity: 0; pointer-events: none; }
+.task-pool.collapsed .pool-toggle { transform: rotate(180deg); }
+.pool-header { padding: 14px 16px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: space-between; }
+.pool-header h2 { font-size: 0.95rem; font-weight: 600; }
+.pool-toggle { background: none; color: var(--text-dim); font-size: 1.1rem; padding: 4px 8px; transition: transform 0.3s; }
+.pool-content { flex: 1; overflow-y: auto; padding: 8px; }
+.pool-group { margin-bottom: 12px; }
+.pool-group-header { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-dim); padding: 6px 8px; cursor: pointer; display: flex; align-items: center; justify-content: space-between; }
+.pool-group-header .count { font-size: 0.65rem; background: var(--surface2); padding: 1px 6px; border-radius: 8px; }
+.pool-group-items { display: flex; flex-direction: column; gap: 3px; }
+.pool-task { padding: 7px 10px; background: var(--surface2); border-radius: 6px; cursor: pointer; font-size: 0.78rem; border-left: 3px solid transparent; transition: all 0.15s; display: flex; align-items: center; justify-content: space-between; }
+.pool-task:hover { background: rgba(255,255,255,0.08); }
+.pool-task.no-duration { border-right: 3px solid #e67e22; }
+.pool-task .pool-task-title { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pool-task .pool-task-hrs { font-size: 0.65rem; color: var(--text-dim); margin-left: 6px; white-space: nowrap; }
+.pool-task[data-cat="Engineering"] { border-left-color: var(--engineering); }
+.pool-task[data-cat="Markets"] { border-left-color: var(--markets); }
+.pool-task[data-cat="Chores"] { border-left-color: var(--chores); }
+.pool-task[data-cat="Chores Desk"] { border-left-color: var(--choresdesk); }
+.pool-task[data-cat="House Chores"] { border-left-color: var(--housechores); }
+.pool-task[data-cat="Shopping"] { border-left-color: var(--shopping); }
+.pool-task[data-cat="Errands"] { border-left-color: var(--errands); }
+.pool-task[data-cat="Side Hustle"] { border-left-color: var(--sidehustle); }
+.pool-task[data-cat="Health"] { border-left-color: var(--health); }
+
+/* Main */
+.main-content { margin-left: var(--pool-width); flex: 1; display: flex; flex-direction: column; min-height: 100vh; transition: margin-left 0.3s; }
+.task-pool.collapsed ~ .main-content { margin-left: 32px; }
+
+.app-header { display: flex; align-items: center; justify-content: space-between; padding: 12px 20px; background: var(--surface); border-bottom: 1px solid rgba(255,255,255,0.05); flex-wrap: wrap; gap: 8px; }
+.app-header h1 { font-size: 1.2rem; font-weight: 600; }
+.header-actions { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+.header-actions button { padding: 7px 14px; font-size: 0.8rem; font-weight: 500; }
+.btn-undo { background: #e67e22; color: white; }
+.btn-undo:hover { background: #d35400; }
+.btn-undo.disabled { opacity: 0.4; cursor: not-allowed; }
+.btn-backups { background: #2d6a4f; color: white; }
+.btn-backups:hover { background: #1b4332; }
+.sync-status { font-size: 0.7rem; color: var(--text-dim); }
+
+.tabs { display: flex; gap: 4px; padding: 0 20px; background: var(--surface); }
+.tab { padding: 9px 18px; border-radius: var(--radius) var(--radius) 0 0; font-size: 0.82rem; font-weight: 500; color: var(--text-dim); background: transparent; }
+.tab.active { background: var(--bg); color: var(--text); }
+.tab:hover { color: var(--text); }
+
+.view { display: none; padding: 20px; flex: 1; overflow-y: auto; }
+.view.active { display: flex; flex-direction: column; }
+
+/* Day View */
+.day-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+.day-header h2 { font-size: 1.1rem; }
+.day-nav { display: flex; gap: 6px; }
+.day-nav button { padding: 6px 12px; font-size: 0.8rem; }
+.day-slots { display: flex; flex-direction: column; gap: 8px; flex: 1; }
+.day-slot { background: var(--surface); border-radius: var(--radius); padding: 12px 16px; display: flex; gap: 16px; align-items: flex-start; min-height: 60px; position: relative; }
+.day-slot.over-capacity { border: 1px solid var(--accent); background: rgba(233,69,96,0.05); }
+.slot-time { min-width: 110px; }
+.slot-time .slot-name { font-size: 0.85rem; font-weight: 600; }
+.slot-time .slot-range { font-size: 0.7rem; color: var(--text-dim); }
+.slot-time .slot-capacity { font-size: 0.65rem; margin-top: 2px; }
+.slot-time .slot-capacity.over { color: var(--accent); font-weight: 600; }
+.slot-tasks { display: flex; flex-direction: column; gap: 4px; flex: 1; position: relative; }
+.slot-task { padding: 8px 12px; border-radius: 5px; font-size: 0.75rem; cursor: pointer; border-left: 4px solid transparent; display: flex; align-items: center; justify-content: space-between; gap: 8px; transition: all 0.15s; }
+.slot-task:hover { filter: brightness(1.2); }
+.slot-task .st-title { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 500; }
+.slot-task .st-dur { font-size: 0.7rem; opacity: 0.7; white-space: nowrap; }
+.slot-task .st-done { padding: 2px 6px; border-radius: 4px; font-size: 0.65rem; background: rgba(16,185,129,0.3); color: #10b981; font-weight: 600; cursor: pointer; }
+.slot-task .st-done:hover { background: rgba(16,185,129,0.5); }
+.slot-task .st-notdone { padding: 2px 6px; border-radius: 4px; font-size: 0.65rem; background: rgba(245,158,11,0.25); color: #f5a623; font-weight: 600; cursor: pointer; margin-left: 3px; }
+.slot-task .st-notdone:hover { background: rgba(245,158,11,0.5); }
+.slot-task.completed { opacity: 0.5; text-decoration: line-through; }
+.slot-task.completed .st-check { color: #10b981; margin-right: 6px; }
+.time-indicator { position: absolute; left: 0; right: 0; height: 2px; background: var(--accent); z-index: 10; pointer-events: none; }
+.day-slot.has-now { border: 1px solid var(--accent); }
+.slot-task[data-cat="Engineering"] { border-left-color: var(--engineering); background: rgba(59,130,246,0.15); }
+.slot-task[data-cat="Markets"] { border-left-color: var(--markets); background: rgba(16,185,129,0.15); }
+.slot-task[data-cat="Chores"] { border-left-color: var(--chores); background: rgba(245,158,11,0.15); }
+.slot-task[data-cat="Chores Desk"] { border-left-color: var(--choresdesk); background: rgba(20,184,166,0.15); }
+.slot-task[data-cat="House Chores"] { border-left-color: var(--housechores); background: rgba(249,115,22,0.15); }
+.slot-task[data-cat="Shopping"] { border-left-color: var(--shopping); background: rgba(132,204,22,0.15); }
+.slot-task[data-cat="Errands"] { border-left-color: var(--errands); background: rgba(99,102,241,0.15); }
+.slot-task[data-cat="Side Hustle"] { border-left-color: var(--sidehustle); background: rgba(236,72,153,0.15); }
+.slot-task[data-cat="Health"] { border-left-color: var(--health); background: rgba(139,92,246,0.15); }
+
+/* Kanban */
+.kanban { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; flex: 1; }
+.kanban-col { background: var(--surface); border-radius: var(--radius); padding: 12px; display: flex; flex-direction: column; }
+.kanban-col-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+.kanban-col-header h3 { font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-dim); }
+.kanban-col-header .count { background: var(--surface2); padding: 2px 7px; border-radius: 10px; font-size: 0.7rem; }
+.kanban-cards { flex: 1; overflow-y: auto; min-height: 80px; }
+.kanban-cards.drag-over { background: rgba(233,69,96,0.05); border-radius: var(--radius); }
+.task-card { background: var(--surface2); border-radius: 6px; padding: 10px; margin-bottom: 6px; cursor: pointer; border-left: 3px solid transparent; font-size: 0.8rem; }
+.task-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.3); }
+.task-card[data-cat="Engineering"] { border-left-color: var(--engineering); }
+.task-card[data-cat="Markets"] { border-left-color: var(--markets); }
+.task-card[data-cat="Chores"] { border-left-color: var(--chores); }
+.task-card[data-cat="Chores Desk"] { border-left-color: var(--choresdesk); }
+.task-card[data-cat="House Chores"] { border-left-color: var(--housechores); }
+.task-card[data-cat="Shopping"] { border-left-color: var(--shopping); }
+.task-card[data-cat="Errands"] { border-left-color: var(--errands); }
+.task-card[data-cat="Side Hustle"] { border-left-color: var(--sidehustle); }
+.task-card[data-cat="Health"] { border-left-color: var(--health); }
+.task-card .tc-title { font-weight: 500; margin-bottom: 4px; }
+.task-card .tc-meta { font-size: 0.7rem; color: var(--text-dim); }
+
+/* Calendar */
+.calendar-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+.calendar-header h2 { font-size: 1.1rem; }
+.calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; flex: 1; }
+.calendar-day-header { text-align: center; font-size: 0.7rem; font-weight: 600; color: var(--text-dim); padding: 6px; }
+.calendar-day { background: var(--surface); border-radius: 6px; min-height: 90px; padding: 6px; position: relative; font-size: 0.7rem; }
+.calendar-day.other-month { opacity: 0.35; }
+.calendar-day.today { border: 1px solid var(--accent); }
+.calendar-day .day-number { font-size: 0.75rem; font-weight: 600; margin-bottom: 3px; }
+.calendar-day .cal-task { padding: 2px 4px; border-radius: 3px; margin-bottom: 2px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; cursor: pointer; }
+
+/* Lists view */
+.list-group { margin-bottom: 16px; }
+.list-group-header { font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-dim); padding: 8px 12px; background: var(--surface); border-radius: var(--radius) var(--radius) 0 0; display: flex; justify-content: space-between; align-items: center; }
+.list-group-header .lg-count { font-size: 0.7rem; background: var(--surface2); padding: 2px 8px; border-radius: 10px; }
+.list-table { width: 100%; border-collapse: collapse; background: var(--surface); border-radius: 0 0 var(--radius) var(--radius); overflow: hidden; font-size: 0.75rem; }
+.list-table thead { background: var(--surface2); }
+.list-table th { padding: 5px 6px; text-align: left; font-size: 0.65rem; font-weight: 600; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.3px; white-space: nowrap; }
+.list-table td { padding: 4px 6px; border-top: 1px solid rgba(255,255,255,0.03); vertical-align: middle; }
+.list-table tr:hover td { background: rgba(255,255,255,0.04); }
+.list-table .no-hrs-row td:nth-child(4) { color: #e67e22; font-weight: 600; }
+.list-table input, .list-table select { background: transparent; border: 1px solid transparent; color: var(--text); padding: 3px 5px; border-radius: 4px; font-size: 0.75rem; width: 100%; }
+.list-table input:hover, .list-table select:hover { border-color: rgba(255,255,255,0.15); }
+.list-table input:focus, .list-table select:focus { outline: none; border-color: var(--accent); background: var(--surface2); }
+.list-table .lt-title { min-width: 140px; }
+.list-table .lt-pri { width: 80px; }
+.list-table .lt-hrs { width: 50px; }
+.list-table .lt-dl { width: 100px; }
+.list-table .lt-wt { width: 90px; }
+.list-table .lt-budget { width: 70px; }
+.list-table .lt-done { width: 40px; text-align: center; }
+.list-table .lt-more { width: 40px; text-align: center; }
+.lt-done-btn { background: rgba(16,185,129,0.2); color: #10b981; border: none; padding: 3px 6px; border-radius: 4px; font-size: 0.65rem; cursor: pointer; }
+.lt-done-btn:hover { background: rgba(16,185,129,0.4); }
+.lt-more-btn { background: rgba(255,255,255,0.08); color: var(--text-dim); border: none; padding: 3px 6px; border-radius: 4px; font-size: 0.7rem; cursor: pointer; }
+.lt-more-btn:hover { background: rgba(255,255,255,0.15); color: var(--text); }
+
+/* Done view */
+.done-item { display: flex; align-items: center; gap: 10px; padding: 10px 12px; background: var(--surface); border-radius: 6px; margin-bottom: 5px; border-left: 3px solid rgba(16,185,129,0.5); }
+.done-item .di-title { flex: 1; font-size: 0.8rem; text-decoration: line-through; color: var(--text-dim); }
+.done-item .di-date { font-size: 0.7rem; color: var(--text-dim); }
+.done-item .di-restore { padding: 4px 10px; font-size: 0.7rem; border-radius: 4px; background: rgba(78,205,196,0.2); color: var(--normal); border: none; cursor: pointer; }
+.done-item .di-restore:hover { background: rgba(78,205,196,0.4); }
+.done-item .di-delete { padding: 4px 10px; font-size: 0.7rem; border-radius: 4px; background: rgba(233,69,96,0.15); color: var(--accent); border: none; cursor: pointer; }
+.done-item .di-delete:hover { background: rgba(233,69,96,0.3); }
+
+/* Prioritise view */
+.prio-controls { margin-bottom: 14px; display: flex; gap: 10px; align-items: center; }
+.prio-controls select { padding: 7px 12px; border-radius: var(--radius); border: 1px solid rgba(255,255,255,0.1); background: var(--surface); color: var(--text); font-size: 0.82rem; }
+.prio-list { display: flex; flex-direction: column; gap: 4px; }
+.prio-item { display: flex; align-items: center; gap: 8px; padding: 8px 12px; background: var(--surface); border-radius: 6px; border-left: 3px solid transparent; font-size: 0.8rem; }
+.prio-item .pi-arrows { display: flex; flex-direction: column; gap: 2px; }
+.prio-item .pi-arrows button { background: rgba(255,255,255,0.08); border: none; color: var(--text-dim); padding: 1px 6px; border-radius: 3px; cursor: pointer; font-size: 0.7rem; line-height: 1; }
+.prio-item .pi-arrows button:hover { background: var(--accent); color: white; }
+.prio-item .pi-num { font-size: 0.75rem; color: var(--accent); min-width: 22px; font-weight: 600; text-align: center; }
+.prio-item .pi-title { flex: 1; }
+.prio-item .pi-meta { font-size: 0.7rem; color: var(--text-dim); }
+
+/* Checklist */
+.checklist-add { display: flex; gap: 6px; margin-top: 8px; }
+.checklist-add input { flex: 1; padding: 7px 10px; border-radius: var(--radius); border: 1px solid rgba(255,255,255,0.1); background: var(--surface2); color: var(--text); font-size: 0.8rem; }
+.checklist-add input:focus { outline: none; border-color: var(--accent); }
+.checklist-add button { padding: 7px 12px; font-size: 0.85rem; }
+.checklist-item { display: flex; align-items: center; gap: 8px; padding: 6px 8px; border-radius: 4px; font-size: 0.8rem; }
+.checklist-item:hover { background: rgba(255,255,255,0.03); }
+.checklist-item input[type="checkbox"] { width: 16px; height: 16px; accent-color: var(--normal); cursor: pointer; }
+.checklist-item .ci-text { flex: 1; }
+.checklist-item.checked .ci-text { text-decoration: line-through; color: var(--text-dim); }
+.checklist-item .ci-actions { display: flex; gap: 4px; }
+.checklist-item .ci-btn { font-size: 0.7rem; color: var(--text-dim); cursor: pointer; padding: 2px 6px; border-radius: 3px; background: none; border: none; }
+.checklist-item .ci-btn:hover { background: rgba(255,255,255,0.1); color: var(--text); }
+.checklist-item .ci-btn.ci-delete:hover { background: rgba(233,69,96,0.2); color: var(--accent); }
+.checklist-item .ci-btn.ci-promote:hover { background: rgba(78,205,196,0.2); color: var(--normal); }
+.checklist-item .ci-dur { font-size: 0.65rem; color: var(--text-dim); min-width: 28px; }
+
+/* Modal */
+.modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 1000; align-items: center; justify-content: center; }
+.modal-overlay.active { display: flex; }
+.modal { background: var(--surface); border-radius: 12px; padding: 24px; width: 90%; max-width: 440px; max-height: 90vh; overflow-y: auto; }
+.modal h2 { font-size: 1.05rem; margin-bottom: 14px; }
+.form-group { margin-bottom: 12px; }
+.form-group label { display: block; font-size: 0.75rem; color: var(--text-dim); margin-bottom: 3px; font-weight: 500; }
+.form-group input, .form-group select, .form-group textarea { width: 100%; padding: 9px 11px; border-radius: var(--radius); border: 1px solid rgba(255,255,255,0.1); background: var(--surface2); color: var(--text); font-size: 0.85rem; }
+.form-group textarea { resize: vertical; min-height: 60px; }
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--accent); }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.modal-actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 16px; }
+.modal-actions button { padding: 9px 18px; font-size: 0.82rem; font-weight: 500; }
+.btn-danger { background: rgba(233,69,96,0.2); color: var(--accent); border-radius: var(--radius); }
+.btn-danger:hover { background: rgba(233,69,96,0.4); }
+
+/* Backup list */
+.backup-item { display: flex; align-items: center; justify-content: space-between; padding: 8px 10px; background: var(--surface2); border-radius: 6px; margin-bottom: 5px; }
+.backup-item .backup-time { font-size: 0.78rem; }
+.backup-item .backup-label { font-size: 0.65rem; color: var(--text-dim); }
+.backup-item button { padding: 4px 10px; font-size: 0.7rem; border-radius: 4px; background: var(--accent); color: white; }
+
+/* Tier badges */
+.tier-badge { display:inline-flex; align-items:center; padding:2px 7px; border-radius:8px; font-size:0.6rem; font-weight:700; letter-spacing:0.3px; white-space:nowrap; }
+.tier-1 { background:rgba(233,69,96,0.22); color:#e94560; }
+.tier-2 { background:rgba(245,158,11,0.22); color:#f5a623; }
+.tier-3 { background:rgba(251,191,36,0.22); color:#fbbf24; }
+.tier-4 { background:rgba(160,160,176,0.15); color:#a0a0b0; }
+.tier-pos { font-size:0.65rem; color:var(--text-dim); min-width:16px; text-align:center; font-weight:700; }
+/* Task List unified */
+.tl-group { margin-bottom:16px; }
+.tl-group-header { font-size:0.8rem; font-weight:600; text-transform:uppercase; letter-spacing:0.5px; color:var(--text-dim); padding:8px 12px; background:var(--surface); border-radius:var(--radius) var(--radius) 0 0; display:flex; justify-content:space-between; align-items:center; }
+.tl-table { width:100%; border-collapse:collapse; background:var(--surface); border-radius:0 0 var(--radius) var(--radius); overflow:hidden; font-size:0.75rem; }
+.tl-table thead { background:var(--surface2); }
+.tl-table th { padding:5px 6px; text-align:left; font-size:0.65rem; font-weight:600; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.3px; white-space:nowrap; }
+.tl-table td { padding:4px 6px; border-top:1px solid rgba(255,255,255,0.03); vertical-align:middle; }
+.tl-table tr:hover td { background:rgba(255,255,255,0.04); }
+.tl-table .no-hrs-row td:nth-child(7) { color:#e67e22; font-weight:600; }
+.tl-table input, .tl-table select { background:transparent; border:1px solid transparent; color:var(--text); padding:3px 5px; border-radius:4px; font-size:0.75rem; width:100%; }
+.tl-table input:hover, .tl-table select:hover { border-color:rgba(255,255,255,0.15); }
+.tl-table input:focus, .tl-table select:focus { outline:none; border-color:var(--accent); background:var(--surface2); }
+.tl-row { transition:background 0.1s; cursor:default; }
+.tl-row.dragging { opacity:0.3; }
+.tl-row.drag-over { border-top:2px solid var(--accent) !important; }
+.tl-drag { cursor:grab; color:var(--text-dim); padding:2px 6px; font-size:1rem; user-select:none; display:inline-block; }
+.tl-drag:active { cursor:grabbing; }
+
+@media (min-width: 768px) and (max-width: 1000px) { .kanban { grid-template-columns: repeat(2, 1fr); } }
+
+/* Desktop-only: hide mobile elements */
+@media (min-width: 768px) {
+  .mobile-bottom-nav, .mobile-hamburger-menu, .mobile-pool-drawer, .mobile-pool-overlay, .mobile-kanban-nav, .mobile-hamburger-btn { display: none !important; }
+}
+
+/* ===== MOBILE (< 768px) ===== */
+@media (max-width: 767px) {
+  body { display: block; }
+  .task-pool { display: none !important; }
+  .main-content { margin-left: 0 !important; padding-bottom: 68px; min-height: 100vh; }
+
+  /* Simplified header */
+  .app-header { padding: 10px 12px; flex-wrap: nowrap; gap: 8px; }
+  .app-header h1 { font-size: 1rem; flex: 1; }
+  #autoScheduleBtn, #undoBtn, #backupsBtn, #exportBtn, .sync-status, #ghSyncBtn { display: none !important; }
+  #addTaskBtn { min-height: 44px; padding: 0 14px; font-size: 0.82rem; }
+  .mobile-hamburger-btn { display: flex !important; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; font-size: 1.4rem; background: var(--surface2); border-radius: var(--radius); color: var(--text); flex-shrink: 0; }
+
+  /* Hamburger dropdown */
+  .mobile-hamburger-menu { display: flex; flex-direction: column; position: fixed; top: 58px; right: 10px; background: var(--surface); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius); z-index: 600; min-width: 190px; box-shadow: 0 6px 24px rgba(0,0,0,0.5); transform-origin: top right; transform: scale(0.85); opacity: 0; transition: transform 0.15s, opacity 0.15s; pointer-events: none; }
+  .mobile-hamburger-menu.open { transform: scale(1); opacity: 1; pointer-events: all; }
+  .mobile-hamburger-menu button { min-height: 48px; padding: 12px 18px; background: none; color: var(--text); font-size: 0.88rem; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.05); width: 100%; border-radius: 0; }
+  .mobile-hamburger-menu button:last-child { border-bottom: none; }
+  .mobile-hamburger-menu button:active { background: rgba(255,255,255,0.07); }
+
+  /* Hide desktop tabs */
+  .tabs { display: none !important; }
+
+  /* Views */
+  .view { padding: 10px; }
+
+  /* --- Day View --- */
+  .day-header { margin-bottom: 10px; }
+  .day-header h2 { font-size: 0.83rem; text-align: center; }
+  #dayPrev, #dayNext { min-height: 44px; min-width: 44px; padding: 0 10px; }
+  .day-slot { flex-direction: column; gap: 6px; padding: 10px 12px; }
+  .slot-time { display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 6px; margin-bottom: 4px; }
+  .slot-time .slot-name { font-size: 0.88rem; }
+  .slot-time .slot-range { font-size: 0.7rem; }
+  .slot-time .slot-capacity { margin-top: 0; font-size: 0.68rem; }
+  .slot-tasks { width: 100%; }
+  .slot-task { min-height: 44px; padding: 10px 12px; font-size: 0.8rem; flex-wrap: wrap; gap: 6px; align-items: center; }
+  .slot-task .st-dur { font-size: 0.68rem; width: 100%; order: 3; }
+  .slot-task .st-done { min-height: 34px; padding: 6px 12px; font-size: 0.72rem; border-radius: 5px; }
+  .slot-task .st-notdone { min-height: 34px; padding: 6px 12px; font-size: 0.72rem; border-radius: 5px; }
+
+  /* --- Kanban --- */
+  .kanban { display: block; }
+  .kanban-col { display: none !important; }
+  .kanban-col.mobile-active { display: flex !important; }
+  .mobile-kanban-nav { display: flex !important; align-items: center; justify-content: space-between; padding: 8px 6px; background: var(--surface); border-radius: var(--radius); margin-bottom: 10px; gap: 8px; }
+  .mobile-kanban-nav button { min-height: 44px; min-width: 44px; padding: 0 12px; font-size: 1rem; }
+  .mobile-kanban-center { text-align: center; flex: 1; }
+  .mobile-kanban-title { font-size: 1rem; font-weight: 600; }
+  .mobile-kanban-count { font-size: 0.72rem; color: var(--text-dim); margin-top: 2px; }
+  .task-card { min-height: 44px; padding: 12px; font-size: 0.82rem; }
+  .kanban-cards { min-height: 120px; }
+
+  /* --- Calendar --- */
+  .calendar-header h2 { font-size: 0.88rem; text-align: center; }
+  #calPrev, #calNext { min-height: 44px; min-width: 44px; padding: 0 10px; }
+  .calendar-grid { gap: 2px; }
+  .calendar-day { min-height: 56px; padding: 3px; font-size: 0.62rem; cursor: pointer; }
+  .calendar-day .day-number { font-size: 0.68rem; margin-bottom: 2px; }
+  .calendar-day .cal-task { font-size: 0.52rem; padding: 1px 2px; margin-bottom: 1px; }
+  .calendar-day-header { font-size: 0.58rem; padding: 3px 1px; }
+
+  /* --- Modal: full-screen slide-up --- */
+  .modal-overlay.active { align-items: flex-end; }
+  .modal { border-radius: 20px 20px 0 0 !important; width: 100% !important; max-width: 100% !important; max-height: 92vh !important; padding: 20px 16px 28px; }
+  .modal h2 { font-size: 1rem; margin-bottom: 12px; }
+  .form-group { margin-bottom: 10px; }
+  .form-group input:not([type="range"]), .form-group select, .form-group textarea { font-size: 16px; padding: 12px 14px; min-height: 48px; }
+  .form-group label { font-size: 0.8rem; margin-bottom: 4px; }
+  .form-group input[type="range"] { margin-top: 10px; height: 32px; touch-action: none; }
+  #mDurVal { font-size: 1rem; }
+  .form-row { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .modal-actions { flex-wrap: wrap; gap: 8px; }
+  .modal-actions button { min-height: 48px; padding: 12px 18px; font-size: 0.85rem; flex: 1; min-width: 80px; }
+  .btn-danger { flex: 0 0 auto !important; }
+  .checklist-item { min-height: 40px; }
+  .checklist-item input[type="checkbox"] { width: 22px; height: 22px; }
+  .checklist-add input { font-size: 16px; padding: 10px; min-height: 48px; }
+  .checklist-add button { min-height: 48px; padding: 0 18px; font-size: 1rem; }
+
+  /* --- Task Pool as bottom drawer --- */
+  .mobile-pool-overlay { display: block; position: fixed; inset: 0; background: rgba(0,0,0,0.55); z-index: 400; opacity: 0; pointer-events: none; transition: opacity 0.28s; }
+  .mobile-pool-overlay.open { opacity: 1; pointer-events: all; }
+  .mobile-pool-drawer { display: flex !important; flex-direction: column; position: fixed; bottom: 60px; left: 0; right: 0; max-height: 72vh; background: var(--surface); border-radius: 20px 20px 0 0; z-index: 401; transform: translateY(100%); transition: transform 0.32s cubic-bezier(0.4,0,0.2,1); overflow: hidden; }
+  .mobile-pool-drawer.open { transform: translateY(0); }
+  .mobile-pool-handle { width: 44px; height: 5px; background: rgba(255,255,255,0.18); border-radius: 3px; margin: 10px auto 4px; flex-shrink: 0; }
+  .mobile-pool-header { display: flex; align-items: center; justify-content: space-between; padding: 8px 16px 10px; flex-shrink: 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .mobile-pool-header h2 { font-size: 1rem; font-weight: 600; }
+  .mobile-pool-close { background: none; color: var(--text-dim); font-size: 1.3rem; min-width: 40px; min-height: 40px; border-radius: 50%; }
+  .mobile-pool-close:hover { background: rgba(255,255,255,0.08); }
+  .mobile-pool-body { overflow-y: auto; flex: 1; padding: 6px 10px 10px; }
+  .mobile-pool-body .pool-task { min-height: 42px; padding: 10px 12px; }
+  .mobile-pool-body .pool-group-header { min-height: 36px; }
+
+  /* --- Bottom Navigation --- */
+  .mobile-bottom-nav { display: flex !important; position: fixed; bottom: 0; left: 0; right: 0; height: 60px; background: var(--surface); border-top: 1px solid rgba(255,255,255,0.07); z-index: 300; align-items: stretch; }
+  .mob-nav-btn { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; background: none; border: none; color: var(--text-dim); cursor: pointer; padding: 6px 2px; min-height: 60px; transition: color 0.15s, background 0.15s; -webkit-tap-highlight-color: transparent; }
+  .mob-nav-btn.active { color: var(--accent); }
+  .mob-nav-btn:active { background: rgba(255,255,255,0.05); }
+  .mob-nav-icon { font-size: 1.35rem; line-height: 1; }
+  .mob-nav-label { font-size: 0.56rem; letter-spacing: 0.2px; text-transform: uppercase; font-weight: 500; }
+
+  /* Task list horizontal scroll */
+  #tasklistView { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .tl-table { min-width: 580px; }
+  .prio-controls select { min-height: 44px; padding: 10px 12px; font-size: 0.85rem; }
+
+  /* Done view */
+  .done-item { flex-wrap: wrap; gap: 6px; }
+  .done-item .di-restore, .done-item .di-delete { min-height: 36px; padding: 7px 14px; }
+  #clearDoneBtn { min-height: 40px !important; }
+}
+
+/* ===== PWA UI ===== */
+/* Offline badge — slides down from top when offline */
+.offline-badge {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%) translateY(-110%);
+  background: #e67e22;
+  color: #fff;
+  padding: 5px 18px 5px 14px;
+  border-radius: 0 0 12px 12px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  z-index: 9999;
+  transition: transform 0.32s cubic-bezier(0.4,0,0.2,1);
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  white-space: nowrap;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.35);
+  pointer-events: none;
+}
+.offline-badge.visible { transform: translateX(-50%) translateY(0); }
+.offline-dot { width: 8px; height: 8px; border-radius: 50%; background: #fff; flex-shrink: 0; animation: pulse-dot 1.6s ease-in-out infinite; }
+@keyframes pulse-dot { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+/* Install banner — slides up from bottom */
+.install-banner {
+  display: none;
+  position: fixed;
+  bottom: 80px;
+  left: 12px;
+  right: 12px;
+  background: var(--surface);
+  border: 1px solid rgba(255,255,255,0.13);
+  border-radius: 14px;
+  padding: 14px 16px;
+  z-index: 250;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 6px 28px rgba(0,0,0,0.5);
+  transform: translateY(20px);
+  opacity: 0;
+  transition: transform 0.3s, opacity 0.3s;
+}
+.install-banner.visible { display: flex; transform: translateY(0); opacity: 1; }
+.install-banner-icon { font-size: 1.6rem; flex-shrink: 0; line-height: 1; }
+.install-banner-text { flex: 1; font-size: 0.82rem; line-height: 1.4; }
+.install-banner-text strong { color: var(--accent); }
+.install-banner-btns { display: flex; gap: 8px; flex-shrink: 0; }
+.install-banner-btns .btn-install { background: var(--accent); color: #fff; border-radius: var(--radius); padding: 9px 18px; font-size: 0.8rem; font-weight: 600; min-height: 40px; }
+.install-banner-btns .btn-install:hover { background: #d63d56; }
+.install-banner-btns .btn-dismiss { background: rgba(255,255,255,0.07); color: var(--text-dim); border-radius: var(--radius); padding: 9px 12px; font-size: 0.85rem; min-height: 40px; }
+.install-banner-btns .btn-dismiss:hover { background: rgba(255,255,255,0.13); }
+@media (min-width: 768px) {
+  .install-banner { bottom: 22px; left: auto; right: 22px; width: 340px; }
+}
+/* ===== GitHub Sync ===== */
+#ghSyncBtn { padding: 5px 9px; font-size: 0.85rem; display: inline-flex; align-items: center; }
+#ghSyncDot { font-size: 1.1rem; line-height: 1; transition: color 0.3s; }
+.gh-spinning { animation: gh-spin 0.7s linear infinite; display: inline-block; }
+@keyframes gh-spin { to { transform: rotate(360deg); } }
+#ghSyncStatusBox a { color: var(--accent); }
+#ghSyncModal .modal-actions { justify-content: space-between; }
 </style>
 </head>
 <body>
-<script>location.replace('task-scheduler.html');</script>
-<p>Loading Task Planner… <a href="task-scheduler.html" style="color:#e94560">click if not redirected</a></p>
+
+<!-- Task Pool -->
+<aside class="task-pool" id="taskPool">
+  <div class="pool-header">
+    <h2>Task Pool</h2>
+    <button class="pool-toggle" id="poolToggle">&laquo;</button>
+  </div>
+  <div class="pool-content" id="poolContent"></div>
+</aside>
+
+<!-- Main -->
+<div class="main-content">
+  <div class="app-header">
+    <h1>Task Scheduler</h1>
+    <div class="header-actions">
+      <button class="btn-primary" id="addTaskBtn">+ Add Task</button>
+      <button class="btn-secondary" id="autoScheduleBtn">Auto-Schedule</button>
+      <button class="btn-undo disabled" id="undoBtn">Undo</button>
+      <button class="btn-backups" id="backupsBtn">Backups</button>
+      <button class="btn-secondary" id="exportBtn">Export JSON</button>
+      <button class="btn-secondary" id="ghSyncBtn" title="GitHub Sync — click to configure"><span id="ghSyncDot" style="color:#6b6b80">○</span></button>
+      <button class="btn-secondary" id="headerInstallBtn" style="display:none;background:#0f3460;color:#a78bfa;font-weight:600" title="Install app">&#8659; Install</button>
+      <button class="mobile-hamburger-btn" id="mobileHamburgerBtn" title="Menu">&#9776;</button>
+      <span class="sync-status" id="syncStatus"></span>
+    </div>
+  </div>
+  <div class="tabs">
+    <button class="tab active" data-view="day">Day</button>
+    <button class="tab" data-view="tasklist">Task List</button>
+    <button class="tab" data-view="kanban">Kanban</button>
+    <button class="tab" data-view="calendar">Calendar</button>
+    <button class="tab" data-view="done">Done</button>
+  </div>
+
+  <div class="view active" id="dayView">
+    <div class="day-header">
+      <button class="btn-secondary" id="dayPrev">&larr;</button>
+      <h2 id="dayTitle"></h2>
+      <button class="btn-secondary" id="dayNext">&rarr;</button>
+    </div>
+    <div class="day-slots" id="daySlots"></div>
+  </div>
+
+  <div class="view" id="tasklistView">
+    <div class="prio-controls" style="margin-bottom:12px">
+      <select id="tasklistFilter" onchange="renderTaskList()" style="padding:7px 12px;border-radius:var(--radius);border:1px solid rgba(255,255,255,0.1);background:var(--surface);color:var(--text);font-size:0.82rem">
+        <option value="all">All Groups</option>
+      </select>
+    </div>
+    <div id="tasklistContent"></div>
+  </div>
+
+  <div class="view" id="kanbanView">
+    <div class="mobile-kanban-nav" id="mobileKanbanNav">
+      <button class="btn-secondary" id="kanbanPrevBtn">&#8592;</button>
+      <div class="mobile-kanban-center">
+        <div class="mobile-kanban-title" id="mobileKanbanTitle">Backlog</div>
+        <div class="mobile-kanban-count" id="mobileKanbanCount"></div>
+      </div>
+      <button class="btn-secondary" id="kanbanNextBtn">&#8594;</button>
+    </div>
+    <div class="kanban">
+      <div class="kanban-col" data-status="backlog"><div class="kanban-col-header"><h3>Backlog</h3><span class="count" id="cntBacklog">0</span></div><div class="kanban-cards" data-status="backlog"></div></div>
+      <div class="kanban-col" data-status="thisweek"><div class="kanban-col-header"><h3>This Week</h3><span class="count" id="cntThisweek">0</span></div><div class="kanban-cards" data-status="thisweek"></div></div>
+      <div class="kanban-col" data-status="today"><div class="kanban-col-header"><h3>Today</h3><span class="count" id="cntToday">0</span></div><div class="kanban-cards" data-status="today"></div></div>
+      <div class="kanban-col" data-status="done"><div class="kanban-col-header"><h3>Done</h3><span class="count" id="cntDone">0</span></div><div class="kanban-cards" data-status="done"></div></div>
+    </div>
+  </div>
+
+  <div class="view" id="calendarView">
+    <div class="calendar-header">
+      <button class="btn-secondary" id="calPrev">&larr;</button>
+      <h2 id="calTitle"></h2>
+      <button class="btn-secondary" id="calNext">&rarr;</button>
+    </div>
+    <div class="calendar-grid" id="calendarGrid"></div>
+  </div>
+
+  <div class="view" id="doneView">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+      <h2 style="font-size:1.1rem">Completed Tasks</h2>
+      <button class="btn-danger" id="clearDoneBtn" style="padding:6px 14px;font-size:0.75rem;border-radius:var(--radius)">Clear All Done</button>
+    </div>
+    <div id="doneList"></div>
+  </div>
+</div>
+
+<!-- Task Detail Modal -->
+<div class="modal-overlay" id="taskModal">
+  <div class="modal" style="max-width:520px">
+    <h2 id="modalTitle">Edit Task</h2>
+    <div class="form-group"><label>Title</label><input type="text" id="mTitle" style="font-size:1rem;padding:12px"></div>
+    <div class="form-row">
+      <div class="form-group"><label>Category</label><select id="mCategory"><option value="Engineering">Engineering</option><option value="Markets">Markets</option><option value="Chores">Chores</option><option value="Chores Desk">Chores Desk</option><option value="House Chores">House Chores</option><option value="Shopping">Shopping</option><option value="Errands">Errands</option><option value="Side Hustle">Side Hustle</option><option value="Health">Health</option></select></div>
+      <div class="form-group"><label>Priority</label><select id="mPriority"><option value="Normal">Normal</option><option value="Urgent">Urgent</option><option value="Soon">Soon</option><option value="Recurring">Recurring</option></select></div>
+    </div>
+    <div class="form-group" id="mWorkTypeGroup"><label>Work Type</label><select id="mWorkType"><option value="Project Work">Project Work (Mon/Tue/Thu)</option><option value="R&D">R&D (Wednesday)</option><option value="Admin">Admin (Fri 4h)</option><option value="Personal Dev">Personal Dev (Fri 5h)</option></select></div>
+    <div class="form-group">
+      <label>Duration <span id="mDurVal" style="color:var(--accent);font-weight:600">0h</span></label>
+      <input type="range" id="mDuration" min="0" max="16" step="0.25" value="0" style="width:100%;accent-color:var(--accent);margin-top:4px">
+    </div>
+    <div class="form-group"><label>Deadline</label><input type="date" id="mDeadline"></div>
+    <div class="form-group" id="mRecurGroup" style="background:var(--surface2);padding:10px 12px;border-radius:var(--radius)">
+      <label style="margin-bottom:6px;display:block">Recurring Budget</label>
+      <div class="form-row">
+        <div class="form-group"><label>Total hours</label><input type="number" id="mTotalHours" min="0" step="0.5" value="0"></div>
+        <div class="form-group"><label>Done</label><input type="number" id="mHoursDone" min="0" step="0.25" value="0"></div>
+      </div>
+      <div style="font-size:0.7rem;color:var(--text-dim);margin-top:4px" id="mRecurInfo"></div>
+    </div>
+    <div class="form-group"><label>Notes</label><textarea id="mNotes" placeholder="Optional notes..."></textarea></div>
+    <div class="form-group" id="mChecklistGroup">
+      <label>Sub-tasks <span id="mChecklistInfo" style="font-size:0.7rem;color:var(--text-dim)"></span></label>
+      <div id="mChecklistItems"></div>
+      <div class="checklist-add"><input type="text" id="mNewSubtask" placeholder="Add sub-task..."><button class="btn-secondary" id="mAddSubtaskBtn">+</button></div>
+    </div>
+    <div class="modal-actions" style="justify-content:space-between">
+      <div><button class="btn-danger" id="mDeleteBtn">Delete</button></div>
+      <div style="display:flex;gap:8px"><button class="btn-secondary" id="mPromoteBtn" title="Promote to standalone task">&#8593; Promote</button><button class="btn-secondary" id="mCancelBtn">Cancel</button><button class="btn-primary" id="mSaveBtn">Save</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- Backups Modal -->
+<div class="modal-overlay" id="backupsModal">
+  <div class="modal">
+    <h2>Backups</h2>
+    <p style="font-size:0.75rem;color:var(--text-dim);margin-bottom:10px">Last 10 snapshots. Auto-saved every 60 min and before scheduling.</p>
+    <div id="backupsList"></div>
+    <div class="modal-actions"><button class="btn-secondary" id="closeBackupsBtn">Close</button></div>
+  </div>
+</div>
+
+<!-- Mobile hamburger dropdown -->
+<div class="mobile-hamburger-menu" id="mobileHamburgerMenu">
+  <button id="mHamAddTask">&#43; Add Task</button>
+  <button id="mHamAutoSchedule">&#9654; Auto-Schedule</button>
+  <button id="mHamUndo">&#8635; Undo</button>
+  <button id="mHamBackups">&#128190; Backups</button>
+  <button id="mHamExport">&#8595; Export JSON</button>
+  <button id="mHamGhSync">&#8635; GitHub Sync</button>
+  <button id="mHamInstall" style="display:none;color:#a78bfa">&#8659; Install App</button>
+</div>
+
+<!-- Offline badge -->
+<div class="offline-badge" id="offlineBadge" role="status" aria-live="polite">
+  <span class="offline-dot"></span> Offline
+</div>
+
+<!-- Install banner -->
+<div class="install-banner" id="installBanner" role="dialog" aria-label="Install Task Planner">
+  <div class="install-banner-icon">&#128221;</div>
+  <div class="install-banner-text">Install <strong>Task Planner</strong> — works offline, no browser bar</div>
+  <div class="install-banner-btns">
+    <button class="btn-install" id="installBtn">Install</button>
+    <button class="btn-dismiss" id="installDismiss" aria-label="Dismiss">&#10005;</button>
+  </div>
+</div>
+
+<!-- Mobile pool overlay + drawer -->
+<div class="mobile-pool-overlay" id="mobilePoolOverlay"></div>
+<div class="mobile-pool-drawer" id="mobilePoolDrawer">
+  <div class="mobile-pool-handle"></div>
+  <div class="mobile-pool-header">
+    <h2>Task Pool</h2>
+    <button class="mobile-pool-close" id="mobilePoolClose">&#10005;</button>
+  </div>
+  <div class="mobile-pool-body" id="mobilePoolBody"></div>
+</div>
+
+<!-- Mobile bottom navigation -->
+<nav class="mobile-bottom-nav" id="mobileBottomNav">
+  <button class="mob-nav-btn" id="mNavPool">
+    <span class="mob-nav-icon">&#128221;</span>
+    <span class="mob-nav-label">Pool</span>
+  </button>
+  <button class="mob-nav-btn" data-view="kanban" id="mNavKanban">
+    <span class="mob-nav-icon">&#9724;</span>
+    <span class="mob-nav-label">Kanban</span>
+  </button>
+  <button class="mob-nav-btn active" data-view="day" id="mNavDay">
+    <span class="mob-nav-icon">&#9728;</span>
+    <span class="mob-nav-label">Day</span>
+  </button>
+  <button class="mob-nav-btn" data-view="calendar" id="mNavCalendar">
+    <span class="mob-nav-icon">&#128197;</span>
+    <span class="mob-nav-label">Calendar</span>
+  </button>
+  <button class="mob-nav-btn" data-view="tasklist" id="mNavTasklist">
+    <span class="mob-nav-icon">&#128203;</span>
+    <span class="mob-nav-label">Tasks</span>
+  </button>
+</nav>
+
+<script>
+// ===== CONFIG =====
+const CATEGORIES = ['Engineering','Markets','Chores','Chores Desk','House Chores','Shopping','Errands','Side Hustle','Health'];
+const LIST_ONLY = ['Shopping'];
+const ENG_WORKTYPE_DAYS = { 'Project Work': [1,2,4], 'R&D': [3], 'Admin': [5], 'Personal Dev': [5] };
+const ENG_WORKTYPE_HOURS = { 'Project Work': 9, 'R&D': 9, 'Admin': 4, 'Personal Dev': 5 };
+
+const WEEKDAY_SLOTS = [
+  { name: 'Day Start', start: 5, end: 6.5, categories: ['Health'] },
+  { name: 'Washing', start: 6.5, end: 7, categories: [] },
+  { name: 'Engineering', start: 8, end: 17, categories: ['Engineering'] },
+  { name: 'Homework', start: 17, end: 19, categories: ['Chores','Chores Desk'] },
+  { name: 'Supper Chill', start: 19, end: 20, categories: [] },
+  { name: 'Planning', start: 20, end: 21, categories: ['Chores Desk'] },
+];
+const WEEKEND_SLOTS = [
+  { name: 'Side Hustle', start: 5, end: 9, categories: ['Side Hustle','Markets','Health'] },
+  { name: 'Washing', start: 9, end: 10, categories: [] },
+  { name: 'Shops Errands', start: 10, end: 16, categories: ['Shopping','Errands','House Chores'] },
+  { name: 'Weekend Duties', start: 16, end: 18, categories: ['House Chores','Chores Desk'] },
+  { name: 'Supper Chill', start: 18, end: 20, categories: [] },
+  { name: 'Planning', start: 20, end: 21, categories: ['Chores Desk'] },
+];
+
+function getSlotsForDay(dayOfWeek) { return (dayOfWeek === 0 || dayOfWeek === 6) ? WEEKEND_SLOTS : WEEKDAY_SLOTS; }
+function slotCapacity(slot) { return slot.end - slot.start; }
+function formatTime(h) { const hh = Math.floor(h); const mm = Math.round((h % 1) * 60); return `${String(hh).padStart(2,'0')}:${String(mm).padStart(2,'0')}`; }
+
+// GMT+2 (SAST) — use browser local time directly
+function getLocalNow() { return new Date(); }
+function isRecurringTask(t) {
+  if (t.priority === 'Recurring') return true;
+  if (t.totalHours && t.totalHours > (t.hoursDone || 0)) return true;
+  return false;
+}
+function getLocalDateStr() {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+
+// ===== TASK DATA =====
+const DEFAULT_TASKS = [
+  {id:'eng01',title:'Note to E Vorster',category:'Engineering',priority:'Urgent',duration:0.25,deadline:'2026-06-22',notes:'',workType:'Project Work',status:'backlog',scheduledDate:null},
+  {id:'eng02',title:'Write memo stability at BR',category:'Engineering',priority:'Urgent',duration:6,deadline:'2026-06-22',notes:'',workType:'Project Work',status:'backlog',scheduledDate:null,subtasks:[{id:'eng02s1',title:'Parameter selection',done:false,duration:0,priority:'Normal',deadline:null,notes:''},{id:'eng02s2',title:'Kapa review and compare interpretation',done:false,duration:0,priority:'Normal',deadline:null,notes:''},{id:'eng02s3',title:'In CC template',done:false,duration:0,priority:'Normal',deadline:null,notes:''},{id:'eng02s4',title:'Add Kat to do CPTu',done:false,duration:0,priority:'Normal',deadline:null,notes:''},{id:'eng02s5',title:'Talk about 10 rules for stability',done:false,duration:0,priority:'Normal',deadline:null,notes:''},{id:'eng02s6',title:'Consider including stats analysis',done:false,duration:0,priority:'Normal',deadline:null,notes:''},{id:'eng02s7',title:'Check slope stability against memo selected parameters',done:false,duration:0,priority:'Normal',deadline:null,notes:''},{id:'eng02s8',title:'Analyse seismic data',done:false,duration:0,priority:'Normal',deadline:null,notes:''}]},
+  {id:'eng03',title:'Lab results finalisation',category:'Engineering',priority:'Urgent',duration:3,deadline:'2026-06-18',notes:'',workType:'Project Work',status:'backlog',scheduledDate:null},
+  {id:'eng04',title:'VWP layout',category:'Engineering',priority:'Urgent',duration:2,deadline:'2026-06-23',notes:'',workType:'Project Work',status:'backlog',scheduledDate:null,subtasks:[{id:'eng04s1',title:'20 VWPs SW SE NW 4 per line 1-3-1',done:false,duration:0,priority:'Normal',deadline:null,notes:''}]},
+  {id:'eng05',title:'ICSGE abstract',category:'Engineering',priority:'Urgent',duration:2,deadline:'2026-06-15',notes:'',workType:'R&D',status:'backlog',scheduledDate:null},
+  {id:'eng06',title:'Start annual reports',category:'Engineering',priority:'Normal',duration:4,deadline:'2026-06-22',notes:'',workType:'Project Work',status:'backlog',scheduledDate:null},
+  {id:'eng07',title:'ECSA admin',category:'Engineering',priority:'Normal',duration:1.5,deadline:'2026-06-26',notes:'',workType:'Admin',status:'backlog',scheduledDate:null,subtasks:[{id:'eng07s1',title:'Check if ECSA has not double-charged',done:false,duration:0,priority:'Normal',deadline:null,notes:''},{id:'eng07s2',title:'Check if ECSA invoices are correct',done:false,duration:0,priority:'Normal',deadline:null,notes:''},{id:'eng07s3',title:'Share webinar recording with Esther',done:false,duration:0,priority:'Normal',deadline:null,notes:''}]},
+  {id:'eng08',title:'Read memos',category:'Engineering',priority:'Normal',duration:1,deadline:'2026-06-22',notes:'',workType:'Admin',status:'backlog',scheduledDate:null},
+  {id:'eng09',title:'Update CV',category:'Engineering',priority:'Normal',duration:1,deadline:'2026-06-26',notes:'',workType:'Admin',status:'backlog',scheduledDate:null,subtasks:[{id:'eng09s1',title:'Start doing dashboards',done:false,duration:0,priority:'Normal',deadline:null,notes:''},{id:'eng09s2',title:'Update CV with CPD',done:false,duration:0,priority:'Normal',deadline:null,notes:''}]},
+  {id:'eng10',title:'Lab testing Norsand',category:'Engineering',priority:'Normal',duration:2,deadline:null,notes:'',workType:'Project Work',status:'backlog',scheduledDate:null,subtasks:[{id:'eng10s1',title:'Arrange with Greg on scheduling',done:false,duration:0,priority:'Normal',deadline:null,notes:''},{id:'eng10s2',title:'Re-check proposal and schedule accordingly',done:false,duration:0,priority:'Normal',deadline:null,notes:''},{id:'eng10s3',title:'Create test and budget tracking sheet',done:false,duration:0,priority:'Normal',deadline:null,notes:''},{id:'eng10s4',title:'Save results and plot PSD get someone with classification',done:false,duration:0,priority:'Normal',deadline:null,notes:''},{id:'eng10s5',title:'FI thus far N1 10.2-11.2 and NW1 8.5-9.5 SM SE1 8-9m ML',done:false,duration:0,priority:'Normal',deadline:null,notes:''}]},
+  {id:'eng11',title:'SW samples invoice',category:'Engineering',priority:'Normal',duration:1,deadline:null,notes:'',workType:'Admin',status:'backlog',scheduledDate:null},
+  {id:'eng12',title:'Check large shear box',category:'Engineering',priority:'Normal',duration:1,deadline:null,notes:'',workType:'Project Work',status:'backlog',scheduledDate:null},
+  {id:'eng13',title:'Restore sync folders',category:'Engineering',priority:'Normal',duration:0.5,deadline:null,notes:'',workType:'Admin',status:'backlog',scheduledDate:null},
+  {id:'eng14',title:'TT scheduling Norsand',category:'Engineering',priority:'Normal',duration:1,deadline:null,notes:'',workType:'Project Work',status:'backlog',scheduledDate:null},
+  {id:'eng15',title:'Enquire for Candice',category:'Engineering',priority:'Normal',duration:0.5,deadline:null,notes:'',workType:'Admin',status:'backlog',scheduledDate:null},
+  {id:'eng16',title:'Update Mkhaya',category:'Engineering',priority:'Normal',duration:0.5,deadline:null,notes:'',workType:'Admin',status:'backlog',scheduledDate:null},
+  {id:'eng17',title:'Medical update',category:'Engineering',priority:'Normal',duration:1,deadline:null,notes:'',workType:'Admin',status:'backlog',scheduledDate:null},
+  {id:'eng18',title:'Time sheets',category:'Engineering',priority:'Recurring',duration:0.5,deadline:null,notes:'Weekly',workType:'Admin',status:'backlog',scheduledDate:null},
+  {id:'eng19',title:'En T folder attend',category:'Engineering',priority:'Recurring',duration:0.5,deadline:null,notes:'Daily',workType:'Admin',status:'backlog',scheduledDate:null},
+  {id:'eng20',title:'USB organise',category:'Engineering',priority:'Recurring',duration:0.5,deadline:null,notes:'Weekly',workType:'Admin',status:'backlog',scheduledDate:null},
+  {id:'mkt01',title:'Recode FIB',category:'Markets',priority:'Normal',duration:3,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'mkt02',title:'Pine script indicator',category:'Markets',priority:'Normal',duration:2,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'mkt03',title:'Prop check TopStep GFT',category:'Markets',priority:'Normal',duration:1,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'mkt04',title:'FSP registration',category:'Markets',priority:'Normal',duration:1,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'mkt05',title:'Update CV via AE Support',category:'Markets',priority:'Normal',duration:1,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'chr01',title:'Withdraw',category:'Chores',priority:'Recurring',duration:0.5,deadline:null,notes:'Weekly',status:'backlog',scheduledDate:null},
+  {id:'chr02',title:'Find school Sparko Entabeni',category:'Chores',priority:'Normal',duration:1,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'chr03',title:'Medical',category:'Chores',priority:'Normal',duration:1,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'chr04',title:'Chat to Madlebe',category:'Chores',priority:'Normal',duration:0.5,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'chr05',title:'Chat to Cristina',category:'Chores',priority:'Normal',duration:0.5,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'chr06',title:'Change car insurance',category:'Chores',priority:'Normal',duration:1,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'hlt01',title:'Castor oil honey lemon',category:'Health',priority:'Recurring',duration:0.25,deadline:null,notes:'Daily',status:'backlog',scheduledDate:null},
+  {id:'mkt06',title:'Bank holidays check',category:'Markets',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'mkt07',title:'Write code by hand for flow',category:'Markets',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'mkt08',title:'Run live CV',category:'Markets',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'mkt09',title:'FSP registration',category:'Markets',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'mkt10',title:'FX YouTube video',category:'Markets',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'mkt11',title:'Confirm range expanding FIB',category:'Markets',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'mkt12',title:'Check hour close vs wick breakout',category:'Markets',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'mkt13',title:'Performance coach',category:'Markets',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'mkt14',title:'Make notebook coding backtesting',category:'Markets',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'mkt15',title:'Do and dont video',category:'Markets',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'mkt16',title:'Video trading and multiverse',category:'Markets',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'mkt17',title:'Run Discord Telegram channel via agent',category:'Markets',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'mkt18',title:'Research facilitate payment increase views',category:'Markets',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'sh01',title:'Budget to work with Mfene',category:'Side Hustle',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'sh02',title:'Apply Majuba',category:'Side Hustle',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'sh03',title:'Access to smart app',category:'Side Hustle',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'sh04',title:'Job seeking group and shadow',category:'Side Hustle',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'sh05',title:'Check with Zelle recommend job',category:'Side Hustle',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'sh06',title:'Call Joe Ndeni',category:'Side Hustle',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'cd01',title:'Chat to Madlebe',category:'Chores Desk',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'cd02',title:'Find school appeal Sparko Entabeni',category:'Chores Desk',priority:'Soon',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'cd03',title:'Life book write',category:'Chores Desk',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'cd04',title:'Risk benefit check',category:'Chores Desk',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'cd05',title:'USB slide photos',category:'Chores Desk',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'cd06',title:'Medical',category:'Chores Desk',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'cd07',title:'SIM card',category:'Chores Desk',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'cd08',title:'Send Munei KG number',category:'Chores Desk',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'cd09',title:'Track suits price',category:'Chores Desk',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'cd10',title:'Share photo gents',category:'Chores Desk',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'cd11',title:'De removal',category:'Chores Desk',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'cd12',title:'Vumani nonke bazalwane',category:'Chores Desk',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'cd13',title:'Banking powder research',category:'Chores Desk',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'cd14',title:'Phone photos',category:'Chores Desk',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'cd15',title:'Find methods improve machine performance',category:'Chores Desk',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'cd16',title:'Dent repair research',category:'Chores Desk',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'cd17',title:'Imali yenkonzo',category:'Chores Desk',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'cd18',title:'WorksheetCloud after Dojo',category:'Chores Desk',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'cd19',title:'Change car insurance',category:'Chores Desk',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'cd20',title:'Check diary',category:'Chores Desk',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'cd21',title:'Dojo training',category:'Chores Desk',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'cd22',title:'Groceries list',category:'Chores Desk',priority:'Recurring',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'cd23',title:'Read Makro documents',category:'Chores Desk',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'cd24',title:'Read understand Claude Code',category:'Chores Desk',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'cd25',title:'Give Dojo points cleaning washing training',category:'Chores Desk',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'cd26',title:'Moonskie clothes budget MAK MNR',category:'Chores Desk',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'cd27',title:'Pots budget',category:'Chores Desk',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'cd28',title:'Ext checks',category:'Chores Desk',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'cd29',title:'Wash bag',category:'Chores Desk',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'cd30',title:'Tokila hinda rights',category:'Chores Desk',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'cd31',title:'Review vehicle contract',category:'Chores Desk',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'cd32',title:'Lawto',category:'Chores Desk',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'cd33',title:'Bike design MM PKT',category:'Chores Desk',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'cd34',title:'Chat to Cristina',category:'Chores Desk',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'cd35',title:'Research safety feature linking apps AI',category:'Chores Desk',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'hc01',title:'Sort PC',category:'House Chores',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'hc02',title:'Seal Bavu',category:'House Chores',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'hc03',title:'Test blender burning smell',category:'House Chores',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'hc04',title:'Wash shoes',category:'House Chores',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'hc05',title:'Shower grain',category:'House Chores',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'hc06',title:'Paint',category:'House Chores',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'hc07',title:'Clean balcony',category:'House Chores',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'hc08',title:'Fold and sort storage',category:'House Chores',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'hc09',title:'Sort basic wardrobe',category:'House Chores',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'hc10',title:'Move fridge and TV',category:'House Chores',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'hc11',title:'Wash bin',category:'House Chores',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'hc12',title:'Remove bucket',category:'House Chores',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'hc13',title:'Swap heater reg with stove',category:'House Chores',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'sp01',title:'Pots',category:'Shopping',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'sp02',title:'Calculator',category:'Shopping',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'sp03',title:'Dojo App',category:'Shopping',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'sp04',title:'Vinegar',category:'Shopping',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'sp05',title:'Calpol',category:'Shopping',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'sp06',title:'Ginger tea',category:'Shopping',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'sp07',title:'Eggs',category:'Shopping',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'sp08',title:'Domestos x2 Handy Andy x2',category:'Shopping',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'sp09',title:'Sugar',category:'Shopping',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'sp10',title:'Rice',category:'Shopping',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'sp11',title:'Oats',category:'Shopping',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'sp12',title:'Mphuphu',category:'Shopping',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'sp13',title:'Oros',category:'Shopping',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'sp14',title:'Batteries',category:'Shopping',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'sp15',title:'Chips',category:'Shopping',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'sp16',title:'Cheese',category:'Shopping',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'sp17',title:'Vianna',category:'Shopping',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'sp18',title:'Avocado',category:'Shopping',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'sp19',title:'Tomato',category:'Shopping',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'er01',title:'Visit ABSA to update',category:'Errands',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'er02',title:'Tooth removal',category:'Errands',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'er03',title:'Thungisa',category:'Errands',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'er04',title:'Brake replace',category:'Errands',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'er05',title:'Laminate certificate',category:'Errands',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'er06',title:'Print photos get frames',category:'Errands',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'er07',title:'Dent repair',category:'Errands',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'er08',title:'Car servicing',category:'Errands',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'er09',title:'Fix heater',category:'Errands',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'er10',title:'Emvelweni',category:'Errands',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'er11',title:'Izitshalo',category:'Errands',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'er12',title:'Tow bar',category:'Errands',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'er13',title:'Large room construction',category:'Errands',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'eng21',title:'Lab in-house',category:'Engineering',priority:'Normal',duration:2,deadline:null,notes:'',workType:'Project Work',status:'backlog',scheduledDate:null,subtasks:[{id:'eng21s1',title:'Reshare Excel programme',done:false,duration:0,priority:'Normal',deadline:null,notes:''},{id:'eng21s2',title:'Funnel design',done:false,duration:0,priority:'Normal',deadline:null,notes:''},{id:'eng21s3',title:'Follow up with Enar send vid of shaft issue',done:false,duration:0,priority:'Normal',deadline:null,notes:''},{id:'eng21s4',title:'Inventory',done:false,duration:0,priority:'Normal',deadline:null,notes:''},{id:'eng21s5',title:'Interest group presentation combine with BB',done:false,duration:0,priority:'Normal',deadline:null,notes:''},{id:'eng21s6',title:'Speak headphone and camera',done:false,duration:0,priority:'Normal',deadline:null,notes:''},{id:'eng21s7',title:'Clock and humidifier batteries',done:false,duration:0,priority:'Normal',deadline:null,notes:''},{id:'eng21s8',title:'Master folder template',done:false,duration:0,priority:'Normal',deadline:null,notes:''},{id:'eng21s9',title:'Zweli diagraph',done:false,duration:0,priority:'Normal',deadline:null,notes:''}]},
+  {id:'eng22',title:'Emergency works',category:'Engineering',priority:'Urgent',duration:2,deadline:'2026-06-22',notes:'',workType:'Project Work',status:'backlog',scheduledDate:null,subtasks:[{id:'eng22s1',title:'Budget tracker for personal hours',done:false,duration:0,priority:'Normal',deadline:'2026-06-22',notes:''},{id:'eng22s2',title:'SW3 1.4-3.4m starter wall toe missing sample',done:false,duration:0,priority:'Normal',deadline:null,notes:''}]},
+  {id:'eng23',title:'Personal improvement',category:'Engineering',priority:'Normal',duration:2,deadline:null,notes:'',workType:'Personal Dev',status:'backlog',scheduledDate:null,subtasks:[{id:'eng23s1',title:'Get abstract list from Reesha email 14-05-2026',done:false,duration:0,priority:'Normal',deadline:null,notes:''},{id:'eng23s2',title:'Relook at appraisal dedicate a day per work week',done:false,duration:0,priority:'Normal',deadline:null,notes:''},{id:'eng23s3',title:'Write engineering book',done:false,duration:0,priority:'Normal',deadline:null,notes:''},{id:'eng23s4',title:'SSIM 2027 abstract',done:false,duration:0,priority:'Normal',deadline:'2027-02-01',notes:''},{id:'eng23s5',title:'ICSGE 2027 abstract',done:false,duration:0,priority:'Normal',deadline:'2026-06-15',notes:''}]},
+  {id:'eng24',title:'ECSA presentation',category:'Engineering',priority:'Normal',duration:2,deadline:null,notes:'',workType:'Personal Dev',status:'backlog',scheduledDate:null,subtasks:[{id:'eng24s1',title:'Prepare ECSA presentation slides',done:false,duration:0,priority:'Normal',deadline:null,notes:''},{id:'eng24s2',title:'ECSA presentation delivery',done:false,duration:0,priority:'Normal',deadline:null,notes:''}]},
+  {id:'eng25',title:'Slip surface 20 rule check',category:'Engineering',priority:'Normal',duration:0,deadline:null,notes:'',workType:'Project Work',status:'backlog',scheduledDate:null},
+  {id:'eng26',title:'Residual parameter updated',category:'Engineering',priority:'Normal',duration:0,deadline:null,notes:'',workType:'Project Work',status:'backlog',scheduledDate:null},
+  {id:'eng27',title:'Invoicing boxes sampling box circulate email',category:'Engineering',priority:'Normal',duration:0,deadline:null,notes:'',workType:'Project Work',status:'backlog',scheduledDate:null},
+  {id:'eng28',title:'SW3 1.4-3.4m starter wall toe missing sample',category:'Engineering',priority:'Normal',duration:0,deadline:null,notes:'note-only',workType:'Project Work',status:'backlog',scheduledDate:null},
+  {id:'eng29',title:'Restore CPTu programme with AI assistance',category:'Engineering',priority:'Normal',duration:0,deadline:null,notes:'',workType:'R&D',status:'backlog',scheduledDate:null},
+  {id:'eng30',title:'Eng PR note collusion detection systems',category:'Engineering',priority:'Normal',duration:0,deadline:null,notes:'',workType:'R&D',status:'backlog',scheduledDate:null},
+  {id:'eng31',title:'Ask Fran for waste disposal procedure',category:'Engineering',priority:'Normal',duration:0,deadline:null,notes:'',workType:'R&D',status:'backlog',scheduledDate:null},
+  {id:'eng32',title:'SSIM 2027 abstract',category:'Engineering',priority:'Normal',duration:0,deadline:'2027-02-11',notes:'',workType:'Admin',status:'backlog',scheduledDate:null},
+  {id:'eng33',title:'ICSGE 2027 conference',category:'Engineering',priority:'Normal',duration:0,deadline:'2027-06-28',notes:'',workType:'Admin',status:'backlog',scheduledDate:null},
+  {id:'cd36',title:'Clear Google space',category:'Chores Desk',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'mkt19',title:'Run Discord live trading Telegram channel website via agent',category:'Markets',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'mkt20',title:'Video trading and multiverse trading and obedience',category:'Markets',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+];
+
+let tasks = JSON.parse(localStorage.getItem('taskDataJson') || 'null') || JSON.parse(localStorage.getItem('tasks') || 'null');
+if (!tasks || tasks.length === 0) { tasks = DEFAULT_TASKS; }
+localStorage.setItem('tasks', JSON.stringify(tasks));
+let editingTaskId = null;
+let preAutoScheduleSnapshot = null;
+let dayViewDate = new Date(getLocalDateStr() + 'T00:00:00');
+let calendarMonth = new Date().getMonth();
+let calendarYear = new Date().getFullYear();
+
+function generateId() { return Date.now().toString(36) + Math.random().toString(36).substr(2,5); }
+function saveTasks() { localStorage.setItem('tasks', JSON.stringify(tasks)); }
+function exportData() {
+  localStorage.setItem('taskDataJson', JSON.stringify(tasks));
+  localStorage.setItem('taskDataJsonTime', new Date().toISOString());
+}
+function importData() {
+  const saved = localStorage.getItem('taskDataJson');
+  if (saved) { try { tasks = JSON.parse(saved); saveTasks(); } catch(e) {} }
+}
+
+// ===== POOL GROUPS =====
+function getPoolGroupKey(t) {
+  if (t.category === 'Engineering') return `Engineering-${t.workType || 'Project Work'}`;
+  return t.category;
+}
+const POOL_GROUPS = ['Engineering-Project Work','Engineering-R&D','Engineering-Admin','Engineering-Personal Dev','Markets','Side Hustle','Chores Desk','House Chores','Shopping','Errands','Health','Chores'];
+
+function renderPool() {
+  const unscheduled = tasks.filter(t => !t.scheduledDate && t.status !== 'done');
+  const grouped = {};
+  POOL_GROUPS.forEach(g => { grouped[g] = []; });
+  unscheduled.forEach(t => {
+    const k = getPoolGroupKey(t);
+    if (!grouped[k]) grouped[k] = [];
+    grouped[k].push(t);
+  });
+  let html = '';
+  POOL_GROUPS.forEach(g => {
+    const items = grouped[g] || [];
+    if (items.length === 0) return;
+    html += `<div class="pool-group"><div class="pool-group-header"><span>${g}</span><span class="count">${items.length}</span></div><div class="pool-group-items">`;
+    items.forEach(t => {
+      const isListOnly = LIST_ONLY.includes(t.category);
+      const noDur = (!isListOnly && (!t.duration || t.duration === 0)) ? ' no-duration' : '';
+      const hrs = isListOnly ? '' : (t.duration ? `${t.duration}h` : 'set hrs');
+      html += `<div class="pool-task${noDur}" data-cat="${t.category}" onclick="openModal('${t.id}')"><span class="pool-task-title">${t.title}</span><span class="pool-task-hrs">${hrs}</span></div>`;
+    });
+    html += '</div></div>';
+  });
+  document.getElementById('poolContent').innerHTML = html || '<p style="padding:16px;font-size:0.8rem;color:var(--text-dim)">All tasks scheduled!</p>';
+}
+
+// ===== DAY VIEW =====
+function renderDayView() {
+  const dateStr = dayViewDate.toISOString().split('T')[0];
+  const dow = new Date(dateStr + 'T12:00:00Z').getUTCDay();
+  const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  const now = getLocalNow();
+  const currentHour = now.getHours() + now.getMinutes() / 60;
+  const isToday = dateStr === getLocalDateStr();
+  const isPast = dateStr < getLocalDateStr();
+  const nowTime = isToday ? ` — Now: ${formatTime(currentHour)}` : '';
+  document.getElementById('dayTitle').textContent = `${days[dow]}, ${dateStr}${nowTime}`;
+
+  const slots = getSlotsForDay(dow);
+  // Include sub-tasks with duration as separate events on the day view
+  // Show tasks scheduled on this date (single date or in scheduledDates array)
+  let dayTasks = tasks.filter(t => {
+    if (t.scheduledDate === dateStr) return true;
+    if (t.scheduledDates && t.scheduledDates.includes(dateStr)) return true;
+    return false;
+  });
+  // Add sub-tasks with duration
+  tasks.filter(t => t.scheduledDate === dateStr && t.subtasks).forEach(parent => {
+    parent.subtasks.filter(st => st.duration > 0 && !st.done).forEach(st => {
+      dayTasks.push({...st, category: parent.category, workType: parent.workType, scheduledDate: parent.scheduledDate, status: parent.status, _isSubtask: true, _parentTitle: parent.title, _parentId: parent.id});
+    });
+  });
+
+  let html = '';
+  const shownIds = new Set();
+  slots.forEach(slot => {
+    const cap = slotCapacity(slot);
+    const matching = dayTasks.filter(t => taskFitsSlot(t, slot, dow) && !shownIds.has(t.id || t._parentId + t.title));
+    matching.forEach(t => shownIds.add(t.id || t._parentId + t.title));
+    const activeTasks = matching.filter(t => t.status !== 'done');
+    const doneTasks = matching.filter(t => t.status === 'done');
+    const used = activeTasks.reduce((s,t) => s + (t.duration || 0), 0);
+    const over = used > cap;
+    const slotHeight = Math.max(60, cap * 40);
+    const hasNowLine = isToday && currentHour >= slot.start && currentHour < slot.end;
+    const nowPct = hasNowLine ? ((currentHour - slot.start) / cap) * 100 : 0;
+    html += `<div class="day-slot${over ? ' over-capacity' : ''}${hasNowLine ? ' has-now' : ''}" style="min-height:${slotHeight}px">`;
+    if (hasNowLine) html += `<div class="time-indicator" style="top:${nowPct}%"></div>`;
+    html += `<div class="slot-time"><div class="slot-name">${slot.name}</div><div class="slot-range">${formatTime(slot.start)} - ${formatTime(slot.end)}</div><div class="slot-capacity${over ? ' over' : ''}">${used}/${cap}h used</div></div>`;
+    html += '<div class="slot-tasks">';
+
+    // Task blocks sized proportionally with start/end times
+    let runningTime = slot.start;
+    activeTasks.forEach(t => {
+      const taskStart = runningTime;
+      const taskEnd = runningTime + (t.duration || 0);
+      runningTime = taskEnd;
+      const heightPx = Math.max(32, (t.duration / cap) * slotHeight * 0.8);
+      const progress = t.totalHours ? ` [${t.hoursDone||0}/${t.totalHours}h]` : '';
+      const subInfo = (t.subtasks && t.subtasks.length) ? ` (${t.subtasks.filter(s=>s.done).length}/${t.subtasks.length})` : '';
+      const btnLabel = t.totalHours ? 'Session Done' : 'Done';
+      const stLabel = t._isSubtask ? `<span style="font-size:0.6rem;opacity:0.6">&#8627; ${t._parentTitle}</span> ` : '';
+      const clickId = t._isSubtask ? t._parentId : t.id;
+      const doneId = t._isSubtask ? t._parentId : t.id;
+      const notDoneBtn = (isPast && !t._isSubtask) ? `<span class="st-notdone" onclick="event.stopPropagation();notDone('${doneId}')">Not Done</span>` : '';
+      html += `<div class="slot-task" data-cat="${t.category}" style="min-height:${heightPx}px" onclick="openModal('${clickId}')"><span class="st-title">${stLabel}${t.title}${progress}${subInfo}</span><span class="st-dur">${formatTime(taskStart)}-${formatTime(taskEnd)} (${t.duration}h)</span>${!t._isSubtask ? `<span class="st-done" onclick="event.stopPropagation();markDone('${doneId}')">${btnLabel}</span>` : ''}${notDoneBtn}</div>`;
+    });
+    doneTasks.forEach(t => {
+      html += `<div class="slot-task completed" data-cat="${t.category}" onclick="openModal('${t.id}')"><span class="st-check">&#10003;</span><span class="st-title">${t.title}</span><span class="st-dur">${t.completedDate ? t.completedDate.split('T')[0] : ''}</span></div>`;
+    });
+    if (matching.length === 0) html += '<span style="font-size:0.7rem;color:var(--text-dim);padding:8px">No tasks</span>';
+    html += '</div></div>';
+  });
+  document.getElementById('daySlots').innerHTML = html;
+}
+
+function markDone(id) {
+  const t = tasks.find(x => x.id === id);
+  if (!t) return;
+
+  // Check subtasks first
+  if (t.subtasks && t.subtasks.length > 0) {
+    const incomplete = t.subtasks.filter(s => !s.done).length;
+    if (incomplete > 0 && !(t.totalHours && t.totalHours > 0)) {
+      showStatus(`${incomplete} sub-task(s) still incomplete — check them off first`);
+      return;
+    }
+  }
+
+  if (t.totalHours && t.totalHours > 0) {
+    t.hoursDone = (t.hoursDone || 0) + (t.duration || 0);
+    if (t.hoursDone >= t.totalHours) {
+      t.status = 'done';
+      t.completedDate = new Date().toISOString();
+      showStatus(`Completed! ${t.hoursDone}/${t.totalHours}h done`);
+    } else {
+      t.scheduledDate = null;
+      t.status = 'backlog';
+      showStatus(`Session done: ${t.hoursDone}/${t.totalHours}h — will reschedule`);
+    }
+  } else {
+    t.status = 'done';
+    t.completedDate = new Date().toISOString();
+    showStatus('Task completed!');
+  }
+  saveTasks(); exportData(); renderAll();
+}
+
+function notDone(id) {
+  const t = tasks.find(x => x.id === id);
+  if (!t) return;
+  t.scheduledDate = null;
+  t.scheduledDates = [];
+  t.status = 'backlog';
+  t.tierSortOrder = -1;
+  saveTasks(); exportData(); renderAll();
+  showStatus('Returned to backlog — will reschedule next run');
+}
+
+// ===== ROLLOVER =====
+function rolloverOverdueTasks() {
+  const todayStr = getLocalDateStr();
+  const overdue = tasks.filter(t => t.scheduledDate && t.scheduledDate < todayStr && t.status !== 'done');
+  if (overdue.length === 0) return;
+  showOverdueModal(overdue);
+}
+
+function showOverdueModal(overdue) {
+  let html = '<div class="modal-overlay active" id="overdueModal"><div class="modal" style="max-width:520px"><h2 style="color:var(--accent)">Overdue Tasks</h2><p style="font-size:0.78rem;color:var(--text-dim);margin-bottom:14px">These tasks were not completed by their scheduled date. Mark done or reschedule.</p>';
+  html += '<div style="display:flex;flex-direction:column;gap:6px">';
+  overdue.forEach(t => {
+    html += `<div style="display:flex;align-items:center;gap:8px;padding:10px 12px;background:var(--surface2);border-radius:6px;border-left:3px solid var(--accent)">
+      <div style="flex:1"><div style="font-size:0.85rem;font-weight:500">${t.title}</div><div style="font-size:0.7rem;color:var(--text-dim)">${t.category}${t.workType?' / '+t.workType:''} &bull; ${t.duration||0}h &bull; Was: ${t.scheduledDate}</div></div>
+      <button onclick="overdueDone('${t.id}')" style="padding:5px 12px;border-radius:5px;font-size:0.75rem;background:rgba(16,185,129,0.25);color:#10b981;border:none;cursor:pointer;font-weight:600">Done</button>
+      <button onclick="overdueReschedule('${t.id}')" style="padding:5px 12px;border-radius:5px;font-size:0.75rem;background:rgba(245,166,35,0.25);color:var(--soon);border:none;cursor:pointer;font-weight:600">Reschedule</button>
+    </div>`;
+  });
+  html += '</div><div class="modal-actions" style="margin-top:16px"><button class="btn-secondary" onclick="overdueRescheduleAll()">Reschedule All</button><button class="btn-primary" onclick="closeOverdueModal()">Close</button></div></div></div>';
+  document.body.insertAdjacentHTML('beforeend', html);
+}
+
+function overdueDone(id) {
+  const t = tasks.find(x => x.id === id);
+  if (!t) return;
+  t.status = 'done';
+  t.completedDate = new Date().toISOString();
+  saveTasks(); exportData();
+  removeOverdueRow(id);
+}
+
+function overdueReschedule(id) {
+  const t = tasks.find(x => x.id === id);
+  if (!t) return;
+  t.scheduledDate = null;
+  t.scheduledDates = [];
+  t.status = 'backlog';
+  t.sortOrder = -1; // top of priority list
+  saveTasks(); exportData();
+  removeOverdueRow(id);
+}
+
+function overdueRescheduleAll() {
+  const todayStr = getLocalDateStr();
+  tasks.filter(t => t.scheduledDate && t.scheduledDate < todayStr && t.status !== 'done').forEach(t => {
+    t.scheduledDate = null;
+    t.scheduledDates = [];
+    t.status = 'backlog';
+    t.sortOrder = -1;
+  });
+  saveTasks(); exportData();
+  closeOverdueModal();
+  renderAll();
+  showStatus('All overdue tasks rescheduled to top of priority');
+}
+
+function removeOverdueRow(id) {
+  const modal = document.getElementById('overdueModal');
+  if (!modal) return;
+  // Check if any overdue tasks remain
+  const todayStr = getLocalDateStr();
+  const remaining = tasks.filter(t => t.scheduledDate && t.scheduledDate < todayStr && t.status !== 'done');
+  if (remaining.length === 0) {
+    closeOverdueModal();
+    renderAll();
+  } else {
+    closeOverdueModal();
+    showOverdueModal(remaining);
+  }
+}
+
+function closeOverdueModal() {
+  const m = document.getElementById('overdueModal');
+  if (m) m.remove();
+  renderAll();
+}
+
+function autoScheduleQuiet(taskList) {
+  const todayStr = getLocalDateStr();
+  const slotUsage = {};
+  function usageKey(ds, sn, wt) { return wt ? `${ds}_${sn}_${wt}` : `${ds}_${sn}`; }
+  function addDays(dateStr, n) { const d = new Date(dateStr + 'T12:00:00Z'); d.setUTCDate(d.getUTCDate() + n); return d.toISOString().split('T')[0]; }
+  function getDow(dateStr) { return new Date(dateStr + 'T12:00:00Z').getUTCDay(); }
+  tasks.filter(t => t.scheduledDate && t.status !== 'done').forEach(t => {
+    const dow = getDow(t.scheduledDate);
+    const slots = getSlotsForDay(dow);
+    const wt = (t.category === 'Engineering') ? t.workType : null;
+    slots.forEach(slot => { if (taskFitsSlot(t, slot, dow)) { const k = usageKey(t.scheduledDate, slot.name, wt); slotUsage[k] = (slotUsage[k]||0) + t.duration; } });
+  });
+  taskList.forEach(task => {
+    if (!task.duration || task.duration === 0) return;
+    for (let off = 0; off < 90; off++) {
+      const ds = addDays(todayStr, off);
+      const dow = getDow(ds);
+      const slots = getSlotsForDay(dow);
+      for (const slot of slots) {
+        if (!taskFitsSlot(task, slot, dow)) continue;
+        if (task.category === 'Engineering') { const ad = ENG_WORKTYPE_DAYS[task.workType]||[1,2,3,4,5]; if (!ad.includes(dow)) continue; }
+        const wt = (task.category === 'Engineering') ? task.workType : null;
+        const k = usageKey(ds, slot.name, wt); const used = slotUsage[k]||0;
+        const cap = (task.category === 'Engineering' && task.workType && ENG_WORKTYPE_HOURS[task.workType]) ? ENG_WORKTYPE_HOURS[task.workType] : slotCapacity(slot);
+        if (used + task.duration <= cap) { task.scheduledDate = ds; task.status = 'thisweek'; slotUsage[k] = used + task.duration; break; }
+      }
+      if (task.scheduledDate) break;
+    }
+  });
+  saveTasks();
+}
+
+function taskFitsSlot(task, slot, dow) {
+  if (task.category === 'Engineering') {
+    if (slot.name !== 'Engineering') return false;
+    const allowedDays = ENG_WORKTYPE_DAYS[task.workType] || [1,2,3,4,5];
+    return allowedDays.includes(dow);
+  }
+  return slot.categories.includes(task.category);
+}
+
+document.getElementById('dayPrev').addEventListener('click', () => { dayViewDate = new Date(dayViewDate.getTime() - 86400000); renderDayView(); });
+document.getElementById('dayNext').addEventListener('click', () => { dayViewDate = new Date(dayViewDate.getTime() + 86400000); renderDayView(); });
+
+// ===== KANBAN =====
+function renderKanban() {
+  ['backlog','thisweek','today','done'].forEach(status => {
+    const col = document.querySelector(`.kanban-cards[data-status="${status}"]`);
+    const items = tasks.filter(t => t.status === status);
+    col.innerHTML = items.slice(0,50).map(t => `<div class="task-card" data-cat="${t.category}" onclick="openModal('${t.id}')"><div class="tc-title">${t.title}</div><div class="tc-meta">${t.category}${t.workType ? ' / '+t.workType : ''} &bull; ${t.duration}h</div></div>`).join('');
+    const cnt = document.getElementById(`cnt${status.charAt(0).toUpperCase()+status.slice(1)}`);
+    if (cnt) cnt.textContent = items.length;
+  });
+}
+
+// ===== CALENDAR =====
+function renderCalendar() {
+  const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  document.getElementById('calTitle').textContent = `${months[calendarMonth]} ${calendarYear}`;
+  const firstDay = new Date(calendarYear, calendarMonth, 1);
+  const lastDay = new Date(calendarYear, calendarMonth + 1, 0);
+  const startDay = firstDay.getDay();
+  const today = new Date(); today.setHours(0,0,0,0);
+
+  let html = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].map(d => `<div class="calendar-day-header">${d}</div>`).join('');
+  const prevLast = new Date(calendarYear, calendarMonth, 0).getDate();
+  for (let i = startDay-1; i >= 0; i--) html += `<div class="calendar-day other-month"><div class="day-number">${prevLast-i}</div></div>`;
+  for (let day = 1; day <= lastDay.getDate(); day++) {
+    const date = new Date(calendarYear, calendarMonth, day);
+    const ds = date.toISOString().split('T')[0];
+    const isToday = date.getTime() === today.getTime();
+    const dow = new Date(ds + 'T12:00:00Z').getUTCDay();
+    const daySlots = getSlotsForDay(dow);
+    const dt = tasks.filter(t => t.scheduledDate === ds).sort((a,b) => {
+      const slotA = daySlots.findIndex(s => taskFitsSlot(a, s, dow));
+      const slotB = daySlots.findIndex(s => taskFitsSlot(b, s, dow));
+      return (slotA === -1 ? 99 : slotA) - (slotB === -1 ? 99 : slotB);
+    }).slice(0,4);
+    const tasksHtml = dt.map(t => `<div class="cal-task" style="background:rgba(255,255,255,0.08)" onclick="openModal('${t.id}')">${t.title}</div>`).join('');
+    html += `<div class="calendar-day${isToday ? ' today' : ''}"><div class="day-number">${day}</div>${tasksHtml}</div>`;
+  }
+  const rem = 7 - ((startDay + lastDay.getDate()) % 7);
+  if (rem < 7) for (let i = 1; i <= rem; i++) html += `<div class="calendar-day other-month"><div class="day-number">${i}</div></div>`;
+  document.getElementById('calendarGrid').innerHTML = html;
+}
+document.getElementById('calPrev').addEventListener('click', () => { calendarMonth--; if (calendarMonth<0){calendarMonth=11;calendarYear--;} renderCalendar(); });
+document.getElementById('calNext').addEventListener('click', () => { calendarMonth++; if (calendarMonth>11){calendarMonth=0;calendarYear++;} renderCalendar(); });
+
+// ===== MODAL =====
+function openModal(id) {
+  editingTaskId = id;
+  const t = tasks.find(x => x.id === id);
+  if (!t) return;
+  document.getElementById('modalTitle').textContent = 'Edit Task';
+  document.getElementById('mTitle').value = t.title;
+  document.getElementById('mCategory').value = t.category;
+  document.getElementById('mPriority').value = t.priority;
+  document.getElementById('mWorkType').value = t.workType || 'Project Work';
+  document.getElementById('mDuration').value = t.duration || 0;
+  document.getElementById('mDurVal').textContent = (t.duration || 0) + 'h';
+  document.getElementById('mDeadline').value = t.deadline || '';
+  document.getElementById('mNotes').value = t.notes || '';
+  document.getElementById('mTotalHours').value = t.totalHours || 0;
+  document.getElementById('mHoursDone').value = t.hoursDone || 0;
+  document.getElementById('mNewSubtask').value = '';
+  // Show promote button only if task is a sub-task (has parentId)
+  document.getElementById('mPromoteBtn').style.display = t.parentId ? 'inline-block' : 'none';
+  updateRecurInfo();
+  toggleWorkType();
+  renderChecklist();
+  document.getElementById('taskModal').classList.add('active');
+}
+
+function renderChecklist() {
+  const t = tasks.find(x => x.id === editingTaskId);
+  if (!t) return;
+  if (!t.subtasks) t.subtasks = [];
+  const container = document.getElementById('mChecklistItems');
+  container.innerHTML = t.subtasks.map((st, i) => {
+    const durTxt = st.duration ? st.duration + 'h' : '';
+    return `<div class="checklist-item${st.done ? ' checked' : ''}">
+      <input type="checkbox" ${st.done ? 'checked' : ''} onchange="toggleSubtask(${i})">
+      <span class="ci-text">${st.title}</span>
+      <span class="ci-dur">${durTxt}</span>
+      <div class="ci-actions">
+        <button class="ci-btn ci-promote" onclick="promoteSubtask(${i})" title="Promote to task">&#8593;</button>
+        <button class="ci-btn" onclick="editSubtask(${i})" title="Edit">&#9998;</button>
+        <button class="ci-btn ci-delete" onclick="deleteSubtask(${i})" title="Delete">&#10005;</button>
+      </div>
+    </div>`;
+  }).join('');
+  const done = t.subtasks.filter(s => s.done).length;
+  const total = t.subtasks.length;
+  document.getElementById('mChecklistInfo').textContent = total > 0 ? `(${done}/${total})` : '';
+}
+
+function toggleSubtask(idx) {
+  const t = tasks.find(x => x.id === editingTaskId);
+  if (!t || !t.subtasks[idx]) return;
+  t.subtasks[idx].done = !t.subtasks[idx].done;
+  saveTasks(); exportData(); renderChecklist();
+}
+
+function deleteSubtask(idx) {
+  const t = tasks.find(x => x.id === editingTaskId);
+  if (!t) return;
+  t.subtasks.splice(idx, 1);
+  saveTasks(); exportData(); renderChecklist();
+}
+
+function editSubtask(idx) {
+  const t = tasks.find(x => x.id === editingTaskId);
+  if (!t || !t.subtasks[idx]) return;
+  const st = t.subtasks[idx];
+  const newTitle = prompt('Sub-task title:', st.title);
+  if (newTitle === null) return;
+  if (newTitle.trim()) st.title = newTitle.trim();
+  const newDur = prompt('Duration (hours):', st.duration || 0);
+  if (newDur !== null) st.duration = parseFloat(newDur) || 0;
+  const newDeadline = prompt('Deadline (YYYY-MM-DD or blank):', st.deadline || '');
+  if (newDeadline !== null) st.deadline = newDeadline.trim() || null;
+  const newNotes = prompt('Notes:', st.notes || '');
+  if (newNotes !== null) st.notes = newNotes.trim();
+  saveTasks(); exportData(); renderChecklist();
+}
+
+function promoteSubtask(idx) {
+  const t = tasks.find(x => x.id === editingTaskId);
+  if (!t || !t.subtasks[idx]) return;
+  const st = t.subtasks[idx];
+  // Create new standalone task from sub-task
+  tasks.push({
+    id: generateId(),
+    title: st.title,
+    category: t.category,
+    priority: st.priority || t.priority,
+    duration: st.duration || 0,
+    deadline: st.deadline || null,
+    notes: st.notes || '',
+    workType: t.workType,
+    status: 'backlog',
+    scheduledDate: null,
+    subtasks: []
+  });
+  t.subtasks.splice(idx, 1);
+  saveTasks(); exportData(); renderChecklist(); renderAll();
+  showStatus('Sub-task promoted to standalone task');
+}
+
+// Promote button in modal — for tasks that are children
+document.getElementById('mPromoteBtn').addEventListener('click', () => {
+  const t = tasks.find(x => x.id === editingTaskId);
+  if (!t || !t.parentId) return;
+  const parent = tasks.find(x => x.id === t.parentId);
+  if (parent && parent.subtasks) {
+    parent.subtasks = parent.subtasks.filter(s => s.id !== t.id);
+  }
+  delete t.parentId;
+  saveTasks(); exportData(); closeModal(); renderAll();
+  showStatus('Promoted to standalone task');
+});
+
+document.getElementById('mAddSubtaskBtn').addEventListener('click', addSubtask);
+document.getElementById('mNewSubtask').addEventListener('keydown', e => { if (e.key === 'Enter') addSubtask(); });
+function addSubtask() {
+  const input = document.getElementById('mNewSubtask');
+  const title = input.value.trim();
+  if (!title || !editingTaskId) return;
+  const t = tasks.find(x => x.id === editingTaskId);
+  if (!t) return;
+  if (!t.subtasks) t.subtasks = [];
+  t.subtasks.push({ id: generateId(), title, done: false, duration: 0, priority: 'Normal', deadline: null, notes: '' });
+  input.value = '';
+  saveTasks(); exportData(); renderChecklist();
+}
+
+function updateRecurInfo() {
+  const total = parseFloat(document.getElementById('mTotalHours').value) || 0;
+  const done = parseFloat(document.getElementById('mHoursDone').value) || 0;
+  const perDay = parseFloat(document.getElementById('mDuration').value) || 0;
+  const info = document.getElementById('mRecurInfo');
+  if (total > 0 && perDay > 0) {
+    const remaining = Math.max(0, total - done);
+    const sessions = Math.ceil(remaining / perDay);
+    info.textContent = `${remaining}h remaining — ${sessions} sessions of ${perDay}h each`;
+  } else { info.textContent = ''; }
+}
+document.getElementById('mTotalHours').addEventListener('input', updateRecurInfo);
+document.getElementById('mHoursDone').addEventListener('input', updateRecurInfo);
+document.getElementById('mDuration').addEventListener('input', () => {
+  document.getElementById('mDurVal').textContent = document.getElementById('mDuration').value + 'h';
+  updateRecurInfo();
+});
+function closeModal() { document.getElementById('taskModal').classList.remove('active'); editingTaskId = null; }
+
+// Add new task
+document.getElementById('addTaskBtn').addEventListener('click', () => {
+  const newTask = {
+    id: generateId(),
+    title: 'New Task',
+    category: 'Engineering',
+    priority: 'Normal',
+    duration: 0,
+    deadline: null,
+    notes: '',
+    workType: 'Project Work',
+    status: 'backlog',
+    scheduledDate: null,
+    subtasks: []
+  };
+  tasks.push(newTask);
+  saveTasks(); exportData();
+  openModal(newTask.id);
+  document.getElementById('mTitle').select();
+});
+function toggleWorkType() { document.getElementById('mWorkTypeGroup').style.display = document.getElementById('mCategory').value === 'Engineering' ? 'block' : 'none'; }
+document.getElementById('mCategory').addEventListener('change', toggleWorkType);
+
+document.getElementById('mSaveBtn').addEventListener('click', () => {
+  if (!editingTaskId) return;
+  const t = tasks.find(x => x.id === editingTaskId);
+  if (!t) return;
+  t.title = document.getElementById('mTitle').value.trim() || t.title;
+  t.category = document.getElementById('mCategory').value;
+  t.priority = document.getElementById('mPriority').value;
+  t.duration = parseFloat(document.getElementById('mDuration').value) || 0;
+  t.deadline = document.getElementById('mDeadline').value || null;
+  t.notes = document.getElementById('mNotes').value.trim();
+  t.totalHours = parseFloat(document.getElementById('mTotalHours').value) || 0;
+  t.hoursDone = parseFloat(document.getElementById('mHoursDone').value) || 0;
+  if (t.category === 'Engineering') t.workType = document.getElementById('mWorkType').value;
+  else delete t.workType;
+  saveTasks(); exportData(); closeModal(); renderAll();
+});
+document.getElementById('mDeleteBtn').addEventListener('click', () => {
+  if (!editingTaskId) return;
+  saveBackup('Before delete');
+  tasks = tasks.filter(t => t.id !== editingTaskId);
+  saveTasks(); closeModal(); renderAll();
+});
+document.getElementById('mCancelBtn').addEventListener('click', closeModal);
+document.getElementById('taskModal').addEventListener('click', e => { if (e.target.id === 'taskModal') closeModal(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeModal(); closeBackups(); } });
+
+// ===== AUTO-SCHEDULE =====
+function autoSchedule() {
+  saveBackup('Before auto-schedule');
+  preAutoScheduleSnapshot = JSON.parse(JSON.stringify(tasks));
+  document.getElementById('undoBtn').classList.remove('disabled');
+
+  // Recurring tasks are always eligible (they fill every slot); one-offs only if unscheduled
+  const allActive = tasks.filter(t => t.status !== 'done' && t.duration > 0);
+  const unscheduled = allActive.filter(t => !t.scheduledDate || isRecurringTask(t));
+  unscheduled.sort((a,b) => {
+    const ta = getTaskTier(a), tb = getTaskTier(b);
+    if (ta !== tb) return ta - tb;
+    return getTierSortKey(a, ta) - getTierSortKey(b, tb);
+  });
+
+  const slotUsage = {};
+  function usageKey(dateStr, slotName, workType) {
+    return workType ? `${dateStr}_${slotName}_${workType}` : `${dateStr}_${slotName}`;
+  }
+  function getCapForTask(slot, task) {
+    if (task.category === 'Engineering' && task.workType && ENG_WORKTYPE_HOURS[task.workType]) return ENG_WORKTYPE_HOURS[task.workType];
+    return slotCapacity(slot);
+  }
+
+  // Pre-fill usage from already-scheduled tasks (only those NOT being rescheduled)
+  tasks.filter(t => t.status !== 'done' && t.scheduledDate && !unscheduled.includes(t)).forEach(t => {
+    const dates = t.scheduledDates || [t.scheduledDate];
+    dates.forEach(ds => {
+      const dow = new Date(ds + 'T12:00:00Z').getUTCDay();
+      const slots = getSlotsForDay(dow);
+      slots.forEach(slot => {
+        if (taskFitsSlot(t, slot, dow)) {
+          const wt = (t.category === 'Engineering') ? t.workType : null;
+          const k = usageKey(ds, slot.name, wt);
+          const cap = (wt && ENG_WORKTYPE_HOURS[wt]) ? ENG_WORKTYPE_HOURS[wt] : slotCapacity(slot);
+          const sessionHrs = Math.min(t.duration || 0, cap);
+          slotUsage[k] = (slotUsage[k] || 0) + sessionHrs;
+        }
+      });
+    });
+  });
+
+  const todayStr = getLocalDateStr();
+
+  function addDays(dateStr, n) {
+    const d = new Date(dateStr + 'T12:00:00Z');
+    d.setUTCDate(d.getUTCDate() + n);
+    return d.toISOString().split('T')[0];
+  }
+  function getDow(dateStr) {
+    return new Date(dateStr + 'T12:00:00Z').getUTCDay();
+  }
+
+  // Clear scheduledDates for recurring tasks
+  unscheduled.filter(t => isRecurringTask(t)).forEach(t => { t.scheduledDates = []; });
+
+  // Sort by 4-tier system, then by manual tierSortOrder within each tier
+  unscheduled.sort((a,b) => {
+    const ta = getTaskTier(a), tb = getTaskTier(b);
+    if (ta !== tb) return ta - tb;
+    return getTierSortKey(a, ta) - getTierSortKey(b, tb);
+  });
+
+  const maxDays = 30;
+  // Track remaining hours for each one-off task (for spill-over)
+  const remaining = {};
+  unscheduled.forEach(t => { remaining[t.id] = t.duration || 0; });
+
+  // Process each task in priority order — find slots across days
+  // Each task goes into ONE slot per day (first matching with capacity)
+  unscheduled.forEach(task => {
+    const isRecur = isRecurringTask(task);
+    if (!isRecur && remaining[task.id] <= 0) return;
+
+    for (let off = 0; off < maxDays; off++) {
+      if (!isRecur && remaining[task.id] <= 0) break;
+
+      const dateStr = addDays(todayStr, off);
+      const dow = getDow(dateStr);
+      const slots = getSlotsForDay(dow);
+      let placedThisDay = false;
+
+      for (const slot of slots) {
+        if (placedThisDay && !isRecur) break;
+        if (!taskFitsSlot(task, slot, dow)) continue;
+
+        let wt = null;
+        if (task.category === 'Engineering') {
+          wt = task.workType || 'Project Work';
+          const allowedDays = ENG_WORKTYPE_DAYS[wt] || [1,2,3,4,5];
+          if (!allowedDays.includes(dow)) continue;
+        }
+
+        const cap = (wt && ENG_WORKTYPE_HOURS[wt]) ? ENG_WORKTYPE_HOURS[wt] : slotCapacity(slot);
+        const k = usageKey(dateStr, slot.name, wt);
+        const used = slotUsage[k] || 0;
+        const available = cap - used;
+        if (available <= 0) continue;
+
+        let sessionHrs;
+        if (isRecur) {
+          sessionHrs = Math.min(task.duration || available, available);
+        } else {
+          sessionHrs = Math.min(remaining[task.id], available);
+        }
+        if (sessionHrs <= 0) continue;
+
+        slotUsage[k] = used + sessionHrs;
+        if (!isRecur) remaining[task.id] -= sessionHrs;
+        placedThisDay = true;
+
+        if (!task.scheduledDate) {
+          task.scheduledDate = dateStr;
+          task.status = (dateStr === todayStr) ? 'today' : 'thisweek';
+        }
+        if (isRecur) {
+          if (!task.scheduledDates) task.scheduledDates = [];
+          if (!task.scheduledDates.includes(dateStr)) task.scheduledDates.push(dateStr);
+        } else if (remaining[task.id] > 0) {
+          if (!task.scheduledDates) task.scheduledDates = [task.scheduledDate];
+          if (!task.scheduledDates.includes(dateStr)) task.scheduledDates.push(dateStr);
+        }
+        break; // one slot per day per task
+      }
+    }
+  });
+
+  saveTasks(); exportData(); renderAll();
+  const placed = unscheduled.filter(t => t.scheduledDate).length;
+  showStatus(`Scheduled ${placed} tasks`);
+}
+
+document.getElementById('autoScheduleBtn').addEventListener('click', autoSchedule);
+document.getElementById('undoBtn').addEventListener('click', () => {
+  if (!preAutoScheduleSnapshot) return;
+  tasks = preAutoScheduleSnapshot; preAutoScheduleSnapshot = null;
+  document.getElementById('undoBtn').classList.add('disabled');
+  saveTasks(); renderAll(); showStatus('Schedule undone');
+});
+
+// ===== BACKUPS =====
+function getBackups() { return JSON.parse(localStorage.getItem('taskBackups') || '[]'); }
+function saveBackup(label) {
+  const backups = getBackups();
+  const now = new Date();
+  backups.unshift({ time: now.toLocaleString('en-ZA',{year:'numeric',month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}), label, data: JSON.stringify(tasks) });
+  if (backups.length > 10) backups.length = 10;
+  localStorage.setItem('taskBackups', JSON.stringify(backups));
+}
+function restoreBackup(i) {
+  const b = getBackups()[i]; if (!b) return;
+  tasks = JSON.parse(b.data); saveTasks(); closeBackups(); renderAll(); showStatus('Restored from backup');
+}
+function openBackups() {
+  const backups = getBackups();
+  document.getElementById('backupsList').innerHTML = backups.length ? backups.map((b,i) => `<div class="backup-item"><div><div class="backup-time">${b.time}</div><div class="backup-label">${b.label}</div></div><button onclick="restoreBackup(${i})">Restore</button></div>`).join('') : '<p style="font-size:0.8rem;color:var(--text-dim);padding:12px">No backups yet.</p>';
+  document.getElementById('backupsModal').classList.add('active');
+}
+function closeBackups() { document.getElementById('backupsModal').classList.remove('active'); }
+document.getElementById('backupsBtn').addEventListener('click', openBackups);
+document.getElementById('closeBackupsBtn').addEventListener('click', closeBackups);
+document.getElementById('backupsModal').addEventListener('click', e => { if (e.target.id === 'backupsModal') closeBackups(); });
+
+setInterval(() => { saveBackup('Auto-save (30 min)'); exportData(); }, 30 * 60 * 1000);
+
+// ===== TABS =====
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById(tab.dataset.view + 'View').classList.add('active');
+    renderAll();
+  });
+});
+
+// ===== POOL TOGGLE =====
+document.getElementById('poolToggle').addEventListener('click', () => {
+  document.getElementById('taskPool').classList.toggle('collapsed');
+});
+
+// ===== HELPERS =====
+function showStatus(msg, ms) {
+  const el = document.getElementById('syncStatus');
+  el.textContent = msg;
+  setTimeout(() => { el.textContent = ''; }, ms || 3000);
+}
+
+// Export as downloadable JSON file
+document.getElementById('exportBtn').addEventListener('click', () => {
+  exportData();
+  const blob = new Blob([JSON.stringify(tasks, null, 2)], {type: 'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a'); a.href = url;
+  const now = new Date();
+  a.download = `task-data-${now.toISOString().slice(0,16).replace(/[T:]/g,'-')}.json`;
+  a.click(); URL.revokeObjectURL(url);
+  showStatus('Exported task-data.json');
+});
+// ===== TIER SYSTEM =====
+function getTaskTier(t) {
+  const hasDeadline = !!t.deadline;
+  const isUrgentOrSoon = t.priority === 'Urgent' || t.priority === 'Soon';
+  if (hasDeadline && isUrgentOrSoon) return 1;
+  if (hasDeadline) return 2;
+  if (isUrgentOrSoon) return 3;
+  return 4;
+}
+
+function getTierSortKey(t, tier) {
+  if (t.tierSortOrder !== undefined && t.tierSortOrder !== null) return t.tierSortOrder;
+  if (tier === 1 || tier === 2) return t.deadline ? new Date(t.deadline).getTime() / 1e10 : 9999;
+  if (tier === 3) return t.priority === 'Urgent' ? 0 : 1;
+  return t.sortOrder !== undefined ? t.sortOrder : 999;
+}
+
+// ===== TASK LIST (UNIFIED) =====
+function listUpdate(id, field, value) {
+  const t = tasks.find(x => x.id === id);
+  if (!t) return;
+  t[field] = value;
+  if (field === 'priority' || field === 'deadline') delete t.tierSortOrder;
+  saveTasks(); exportData();
+  if (field === 'priority' || field === 'deadline') renderTaskList();
+}
+
+function catColor(cat) {
+  const map = {Engineering:'engineering',Markets:'markets',Chores:'chores','Chores Desk':'choresdesk','House Chores':'housechores',Shopping:'shopping',Errands:'errands','Side Hustle':'sidehustle',Health:'health'};
+  return map[cat] || 'text-dim';
+}
+
+let _tlDragSrcId = null;
+function tlDragStart(e, id) { _tlDragSrcId = id; e.dataTransfer.effectAllowed = 'move'; setTimeout(() => e.target.classList.add('dragging'), 0); }
+function tlDragEnd(e) { e.target.classList.remove('dragging'); document.querySelectorAll('.tl-row').forEach(r => r.classList.remove('drag-over')); }
+function tlDragOver(e, id) { e.preventDefault(); e.dataTransfer.dropEffect = 'move'; document.querySelectorAll('.tl-row').forEach(r => r.classList.remove('drag-over')); if (id !== _tlDragSrcId) e.currentTarget.classList.add('drag-over'); }
+function tlDrop(e, targetId) {
+  e.preventDefault();
+  document.querySelectorAll('.tl-row').forEach(r => r.classList.remove('drag-over'));
+  if (!_tlDragSrcId || _tlDragSrcId === targetId) { _tlDragSrcId = null; return; }
+  const src = tasks.find(t => t.id === _tlDragSrcId);
+  if (!src) { _tlDragSrcId = null; return; }
+  const srcTier = getTaskTier(src);
+  const tierItems = tasks.filter(t => t.status !== 'done' && getTaskTier(t) === srcTier);
+  tierItems.sort((a,b) => getTierSortKey(a, srcTier) - getTierSortKey(b, srcTier));
+  const srcIdx = tierItems.findIndex(t => t.id === _tlDragSrcId);
+  if (srcIdx !== -1) tierItems.splice(srcIdx, 1);
+  const tgtIdx = tierItems.findIndex(t => t.id === targetId);
+  tierItems.splice(tgtIdx === -1 ? tierItems.length : tgtIdx, 0, src);
+  tierItems.forEach((t, i) => { t.tierSortOrder = i; });
+  _tlDragSrcId = null;
+  saveTasks(); exportData(); renderTaskList();
+}
+
+function renderTaskList() {
+  const TIER_LABEL = ['','T1','T2','T3','T4'];
+  const TIER_CLASS = ['','tier-1','tier-2','tier-3','tier-4'];
+  const TIER_DESC  = ['','Deadline + Urgent/Soon (schedules first)','Deadline, Normal/Recurring','Urgent/Soon, no deadline','Normal/Recurring, no deadline'];
+
+  // Populate filter dropdown, preserving current selection
+  const filterSel = document.getElementById('tasklistFilter');
+  const filterVal = filterSel ? filterSel.value : 'all';
+  if (filterSel) {
+    const prevVal = filterSel.value;
+    filterSel.innerHTML = '<option value="all">All Groups</option>' + POOL_GROUPS.map(g => `<option value="${g}"${g===prevVal?' selected':''}>${g}</option>`).join('');
+  }
+
+  // Pre-compute global tier positions
+  const allActive = tasks.filter(t => t.status !== 'done');
+  const tierPositions = {};
+  [1,2,3,4].forEach(tier => {
+    const tItems = allActive.filter(t => getTaskTier(t) === tier);
+    tItems.sort((a,b) => getTierSortKey(a, tier) - getTierSortKey(b, tier));
+    tItems.forEach((t, i) => { tierPositions[t.id] = { tier, pos: i + 1, total: tItems.length }; });
+  });
+
+  const groups = {};
+  allActive.forEach(t => {
+    const key = getPoolGroupKey(t);
+    if (!groups[key]) groups[key] = [];
+    groups[key].push(t);
+  });
+
+  // Determine which groups to show
+  const visibleGroups = filterVal && filterVal !== 'all' ? [filterVal] : POOL_GROUPS;
+
+  let html = '';
+  visibleGroups.forEach(key => {
+    const items = (groups[key] || []).slice();
+    if (items.length === 0) return;
+    // Sort within group by tier then tierSortKey
+    items.sort((a,b) => {
+      const ta = getTaskTier(a), tb = getTaskTier(b);
+      if (ta !== tb) return ta - tb;
+      return getTierSortKey(a, ta) - getTierSortKey(b, tb);
+    });
+    const totalHrs = items.reduce((s,t) => s + (t.duration||0), 0);
+    html += `<div class="tl-group">
+<div class="tl-group-header"><span>${key}</span><span class="lg-count">${items.length} tasks &bull; ${totalHrs}h</span></div>
+<table class="tl-table"><thead><tr><th></th><th>Tier</th><th>#</th><th style="min-width:160px">Title</th><th style="width:90px">Priority</th><th style="width:90px">Type</th><th style="width:55px">Hrs</th><th style="width:105px">Deadline</th><th style="width:36px">&#10003;</th><th style="width:44px">&#8943;</th></tr></thead><tbody>`;
+    items.forEach(t => {
+      const tp = tierPositions[t.id] || { tier:4, pos:'?', total:0 };
+      const isListOnly = LIST_ONLY.includes(t.category);
+      const noHrs = (!isListOnly && (!t.duration || t.duration === 0)) ? ' no-hrs-row' : '';
+      const priOpts = ['Normal','Urgent','Soon','Recurring'].map(p => `<option${p===t.priority?' selected':''}>${p}</option>`).join('');
+      const isEng = t.category === 'Engineering';
+      const wtOpts = isEng ? ['Project Work','R&D','Admin','Personal Dev'].map(w => `<option${w===t.workType?' selected':''}>${w}</option>`).join('') : '';
+      const hrsCell = isListOnly ? '<td style="color:var(--text-dim);font-size:0.65rem">&#8211;</td>' : `<td><input type="number" value="${t.duration||0}" min="0" step="0.25" onchange="listUpdate('${t.id}','duration',parseFloat(this.value)||0)"></td>`;
+      const subCount = (t.subtasks && t.subtasks.length) ? `<span style="font-size:0.6rem;color:var(--text-dim);margin-left:2px">${t.subtasks.filter(s=>s.done).length}/${t.subtasks.length}</span>` : '';
+      html += `<tr class="tl-row${noHrs}" data-id="${t.id}" style="border-left:3px solid var(--${catColor(t.category)})" draggable="true" ondragstart="tlDragStart(event,'${t.id}')" ondragend="tlDragEnd(event)" ondragover="tlDragOver(event,'${t.id}')" ondrop="tlDrop(event,'${t.id}')">
+<td><span class="tl-drag">&#8285;</span></td>
+<td><span class="tier-badge ${TIER_CLASS[tp.tier]}" title="${TIER_DESC[tp.tier]}">${TIER_LABEL[tp.tier]}</span></td>
+<td><span class="tier-pos">${tp.pos}</span></td>
+<td><input value="${t.title.replace(/"/g,'&quot;').replace(/</g,'&lt;')}" onchange="listUpdate('${t.id}','title',this.value)"></td>
+<td><select onchange="listUpdate('${t.id}','priority',this.value)">${priOpts}</select></td>
+<td>${isEng ? `<select onchange="listUpdate('${t.id}','workType',this.value)">${wtOpts}</select>` : `<span style="color:var(--text-dim);font-size:0.65rem">${t.category}</span>`}</td>
+${hrsCell}
+<td><input type="date" value="${t.deadline||''}" onchange="listUpdate('${t.id}','deadline',this.value||null)"></td>
+<td style="text-align:center"><button class="lt-done-btn" onclick="markDone('${t.id}')">&#10003;</button></td>
+<td style="text-align:center"><button class="lt-more-btn" onclick="openModal('${t.id}')" title="Notes &amp; sub-tasks">&#8943;</button>${subCount}</td>
+</tr>`;
+    });
+    html += '</tbody></table></div>';
+  });
+
+  // Unlisted tasks (only shown when no group filter active)
+  const listed = new Set();
+  POOL_GROUPS.forEach(k => { (groups[k]||[]).forEach(t => listed.add(t.id)); });
+  const unlisted = allActive.filter(t => !listed.has(t.id));
+  if (unlisted.length > 0 && filterVal === 'all') {
+    const uHrs = unlisted.reduce((s,t) => s + (t.duration||0), 0);
+    html += `<div class="tl-group"><div class="tl-group-header"><span>Unlisted</span><span class="lg-count">${unlisted.length} tasks &bull; ${uHrs}h</span></div>
+<table class="tl-table"><thead><tr><th></th><th>Tier</th><th>#</th><th>Title</th><th>Priority</th><th>Type</th><th>Hrs</th><th>Deadline</th><th>&#10003;</th><th>&#8943;</th></tr></thead><tbody>`;
+    unlisted.forEach(t => {
+      const tp = tierPositions[t.id] || { tier:4, pos:'?', total:0 };
+      const TIER_CLASS2 = ['','tier-1','tier-2','tier-3','tier-4'];
+      html += `<tr class="tl-row" data-id="${t.id}" draggable="true" ondragstart="tlDragStart(event,'${t.id}')" ondragend="tlDragEnd(event)" ondragover="tlDragOver(event,'${t.id}')" ondrop="tlDrop(event,'${t.id}')">
+<td><span class="tl-drag">&#8285;</span></td>
+<td><span class="tier-badge ${TIER_CLASS2[tp.tier]}">${TIER_LABEL[tp.tier]}</span></td>
+<td><span class="tier-pos">${tp.pos}</span></td>
+<td><input value="${t.title.replace(/"/g,'&quot;').replace(/</g,'&lt;')}" onchange="listUpdate('${t.id}','title',this.value)"></td>
+<td><select onchange="listUpdate('${t.id}','priority',this.value)">${['Normal','Urgent','Soon','Recurring'].map(p=>`<option${p===t.priority?' selected':''}>${p}</option>`).join('')}</select></td>
+<td style="color:var(--text-dim);font-size:0.65rem">${t.category}</td>
+<td><input type="number" value="${t.duration||0}" min="0" step="0.25" onchange="listUpdate('${t.id}','duration',parseFloat(this.value)||0)"></td>
+<td><input type="date" value="${t.deadline||''}" onchange="listUpdate('${t.id}','deadline',this.value||null)"></td>
+<td><button class="lt-done-btn" onclick="markDone('${t.id}')">&#10003;</button></td>
+<td><button class="lt-more-btn" onclick="openModal('${t.id}')">&#8943;</button></td>
+</tr>`;
+    });
+    html += '</tbody></table></div>';
+  }
+
+  document.getElementById('tasklistContent').innerHTML = html || '<p style="padding:16px;color:var(--text-dim)">No tasks.</p>';
+}
+
+// ===== DONE / RESTORE BIN =====
+function renderDone() {
+  const doneTasks = tasks.filter(t => t.status === 'done').sort((a,b) => {
+    const da = a.completedDate || ''; const db = b.completedDate || '';
+    return db.localeCompare(da);
+  });
+  const container = document.getElementById('doneList');
+  if (doneTasks.length === 0) {
+    container.innerHTML = '<p style="padding:20px;color:var(--text-dim);font-size:0.85rem">No completed tasks yet.</p>';
+    return;
+  }
+  container.innerHTML = doneTasks.map(t => {
+    const dateStr = t.completedDate ? new Date(t.completedDate).toLocaleDateString('en-ZA',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'}) : '';
+    return `<div class="done-item"><span class="di-title">${t.title}</span><span class="di-date">${dateStr}</span><button class="di-restore" onclick="restoreTask('${t.id}')">Restore</button><button class="di-delete" onclick="permanentDelete('${t.id}')">Delete</button></div>`;
+  }).join('');
+}
+
+function restoreTask(id) {
+  const t = tasks.find(x => x.id === id);
+  if (!t) return;
+  t.status = 'backlog';
+  t.scheduledDate = null;
+  delete t.completedDate;
+  saveTasks(); exportData(); renderAll();
+  showStatus('Task restored');
+}
+
+function permanentDelete(id) {
+  tasks = tasks.filter(t => t.id !== id);
+  saveTasks(); exportData(); renderAll();
+  showStatus('Permanently deleted');
+}
+
+document.getElementById('clearDoneBtn').addEventListener('click', () => {
+  const count = tasks.filter(t => t.status === 'done').length;
+  if (count === 0) return;
+  if (!confirm(`Permanently delete ${count} completed task(s)?`)) return;
+  tasks = tasks.filter(t => t.status !== 'done');
+  saveTasks(); exportData(); renderAll();
+  showStatus(`Cleared ${count} done tasks`);
+});
+
+function renderAll() { renderPool(); renderDayView(); renderKanban(); renderCalendar(); renderTaskList(); renderDone(); }
+
+// ===== INCOMPLETE TASKS PROMPT =====
+function checkIncompleteTasks() {
+  const incomplete = tasks.filter(t => t.status !== 'done' && (!t.duration || t.duration === 0) && !LIST_ONLY.includes(t.category));
+  if (incomplete.length === 0) return;
+  showIncompleteModal(incomplete);
+}
+
+function showIncompleteModal(items) {
+  const existing = document.getElementById('incompleteModal');
+  if (existing) existing.remove();
+  let html = '<div class="modal-overlay active" id="incompleteModal"><div class="modal" style="max-width:560px;max-height:85vh;overflow-y:auto"><h2 style="color:#e67e22">Tasks Need Info</h2><p style="font-size:0.78rem;color:var(--text-dim);margin-bottom:14px">' + items.length + ' tasks have no duration set. Set hours to schedule them, or skip for now.</p>';
+  html += '<div style="display:flex;flex-direction:column;gap:6px">';
+  items.forEach((t, i) => {
+    html += `<div class="inc-row" data-id="${t.id}" style="padding:10px 12px;background:var(--surface2);border-radius:6px;border-left:3px solid #e67e22">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+        <span style="flex:1;font-size:0.85rem;font-weight:500">${t.title}</span>
+        <span style="font-size:0.7rem;color:var(--text-dim)">${t.category}${t.workType?' / '+t.workType:''}</span>
+      </div>
+      <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
+        <label style="font-size:0.7rem;color:var(--text-dim)">Hours:</label>
+        <input type="number" min="0.25" step="0.25" value="" placeholder="0" style="width:60px;padding:4px 6px;border-radius:4px;border:1px solid rgba(255,255,255,0.15);background:var(--surface);color:var(--text);font-size:0.8rem" id="incDur${i}">
+        <label style="font-size:0.7rem;color:var(--text-dim)">Priority:</label>
+        <select style="padding:4px 6px;border-radius:4px;border:1px solid rgba(255,255,255,0.15);background:var(--surface);color:var(--text);font-size:0.75rem" id="incPri${i}">
+          <option${t.priority==='Normal'?' selected':''}>Normal</option><option${t.priority==='Urgent'?' selected':''}>Urgent</option><option${t.priority==='Soon'?' selected':''}>Soon</option><option${t.priority==='Recurring'?' selected':''}>Recurring</option>
+        </select>
+        <button onclick="incSave(${i},'${t.id}')" style="padding:4px 10px;border-radius:4px;font-size:0.7rem;background:rgba(16,185,129,0.25);color:#10b981;border:none;cursor:pointer;font-weight:600">Save</button>
+        <button onclick="incSkip(${i})" style="padding:4px 10px;border-radius:4px;font-size:0.7rem;background:rgba(255,255,255,0.08);color:var(--text-dim);border:none;cursor:pointer">Skip</button>
+      </div>
+    </div>`;
+  });
+  html += '</div><div class="modal-actions" style="margin-top:16px"><button class="btn-secondary" onclick="closeIncompleteModal()">Skip All</button><button class="btn-primary" onclick="incSaveAll()">Save All</button></div></div></div>';
+  document.body.insertAdjacentHTML('beforeend', html);
+  // Store items for save all
+  window._incItems = items;
+}
+
+function incSave(idx, id) {
+  const t = tasks.find(x => x.id === id);
+  if (!t) return;
+  const dur = parseFloat(document.getElementById('incDur'+idx).value);
+  const pri = document.getElementById('incPri'+idx).value;
+  if (dur && dur > 0) t.duration = dur;
+  t.priority = pri;
+  saveTasks(); exportData();
+  // Hide this row
+  const rows = document.querySelectorAll('#incompleteModal .inc-row');
+  if (rows[idx]) rows[idx].style.display = 'none';
+  // Check if all handled
+  const remaining = tasks.filter(t => t.status !== 'done' && (!t.duration || t.duration === 0));
+  if (remaining.length === 0) closeIncompleteModal();
+}
+
+function incSkip(idx) {
+  const rows = document.querySelectorAll('#incompleteModal .inc-row');
+  if (rows[idx]) rows[idx].style.display = 'none';
+}
+
+function incSaveAll() {
+  const items = window._incItems || [];
+  items.forEach((t, i) => {
+    const durEl = document.getElementById('incDur'+i);
+    const priEl = document.getElementById('incPri'+i);
+    if (!durEl || !priEl) return;
+    const dur = parseFloat(durEl.value);
+    if (dur && dur > 0) t.duration = dur;
+    t.priority = priEl.value;
+  });
+  saveTasks(); exportData();
+  closeIncompleteModal();
+}
+
+function closeIncompleteModal() {
+  const m = document.getElementById('incompleteModal');
+  if (m) m.remove();
+  window._incItems = null;
+  renderAll();
+}
+
+// ===== INIT =====
+importData();
+rolloverOverdueTasks();
+checkIncompleteTasks();
+exportData();
+renderAll();
+// Update time indicator every minute
+setInterval(() => { if (document.getElementById('dayView').classList.contains('active')) renderDayView(); }, 60000);
+
+// ===== MOBILE SUPPORT =====
+function isMobile() { return window.innerWidth <= 767; }
+
+// --- Mobile view switching ---
+let _mobileActiveView = 'day';
+function switchMobileView(viewName) {
+  _mobileActiveView = viewName;
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  const viewEl = document.getElementById(viewName + 'View');
+  if (viewEl) viewEl.classList.add('active');
+  document.querySelectorAll('.mob-nav-btn[data-view]').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.view === viewName);
+  });
+  document.querySelectorAll('.tab').forEach(tab => {
+    if (tab.dataset.view === viewName) tab.classList.add('active');
+  });
+  renderAll();
+  if (viewName === 'kanban') mobileUpdateKanban();
+}
+
+// Bottom nav view buttons
+document.querySelectorAll('.mob-nav-btn[data-view]').forEach(btn => {
+  btn.addEventListener('click', () => switchMobileView(btn.dataset.view));
+});
+
+// --- Kanban mobile column navigation ---
+let mobileKanbanIdx = 0;
+const MOB_K_COLS = ['backlog', 'thisweek', 'today', 'done'];
+const MOB_K_NAMES = ['Backlog', 'This Week', 'Today', 'Done'];
+
+function mobileUpdateKanban() {
+  if (!isMobile()) return;
+  document.querySelectorAll('.kanban-col').forEach((col, i) => {
+    col.classList.toggle('mobile-active', i === mobileKanbanIdx);
+  });
+  const titleEl = document.getElementById('mobileKanbanTitle');
+  const countEl = document.getElementById('mobileKanbanCount');
+  if (titleEl) titleEl.textContent = MOB_K_NAMES[mobileKanbanIdx];
+  if (countEl) {
+    const status = MOB_K_COLS[mobileKanbanIdx];
+    const cntEl = document.getElementById('cnt' + status.charAt(0).toUpperCase() + status.slice(1));
+    countEl.textContent = cntEl ? cntEl.textContent + ' tasks' : '';
+  }
+}
+
+document.getElementById('kanbanPrevBtn').addEventListener('click', () => {
+  mobileKanbanIdx = Math.max(0, mobileKanbanIdx - 1);
+  mobileUpdateKanban();
+});
+document.getElementById('kanbanNextBtn').addEventListener('click', () => {
+  mobileKanbanIdx = Math.min(3, mobileKanbanIdx + 1);
+  mobileUpdateKanban();
+});
+
+// Kanban swipe
+let _kTouchX = 0;
+document.getElementById('kanbanView').addEventListener('touchstart', e => { _kTouchX = e.touches[0].clientX; }, { passive: true });
+document.getElementById('kanbanView').addEventListener('touchend', e => {
+  if (!isMobile()) return;
+  const dx = e.changedTouches[0].clientX - _kTouchX;
+  if (Math.abs(dx) > 55) {
+    mobileKanbanIdx = Math.max(0, Math.min(3, mobileKanbanIdx + (dx < 0 ? 1 : -1)));
+    mobileUpdateKanban();
+  }
+});
+
+// Patch renderKanban to update mobile display after
+const _origRenderKanban = renderKanban;
+renderKanban = function() {
+  _origRenderKanban();
+  if (isMobile()) mobileUpdateKanban();
+};
+
+// --- Calendar mobile: week view with swipe ---
+let _mobileCalWeekOff = 0;
+
+// Intercept cal prev/next on mobile using capture phase
+document.getElementById('calPrev').addEventListener('click', e => {
+  if (!isMobile()) return;
+  e.stopImmediatePropagation();
+  _mobileCalWeekOff--;
+  renderCalendarMobileWeek();
+}, true);
+document.getElementById('calNext').addEventListener('click', e => {
+  if (!isMobile()) return;
+  e.stopImmediatePropagation();
+  _mobileCalWeekOff++;
+  renderCalendarMobileWeek();
+}, true);
+
+function renderCalendarMobileWeek() {
+  const today = new Date(); today.setHours(0,0,0,0);
+  const sun = new Date(today);
+  sun.setDate(today.getDate() - today.getDay() + _mobileCalWeekOff * 7);
+  const sat = new Date(sun); sat.setDate(sun.getDate() + 6);
+  const MNAMES = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  document.getElementById('calTitle').textContent =
+    `${sun.getDate()} ${MNAMES[sun.getMonth()]} – ${sat.getDate()} ${MNAMES[sat.getMonth()]} ${sat.getFullYear()}`;
+
+  let html = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].map(d => `<div class="calendar-day-header">${d}</div>`).join('');
+  for (let i = 0; i < 7; i++) {
+    const d = new Date(sun); d.setDate(sun.getDate() + i);
+    const ds = d.toISOString().split('T')[0];
+    const isToday = d.getTime() === today.getTime();
+    const dow = new Date(ds + 'T12:00:00Z').getUTCDay();
+    const daySlots = getSlotsForDay(dow);
+    const dt = tasks.filter(t => t.scheduledDate === ds).sort((a,b) => {
+      const ia = daySlots.findIndex(s => taskFitsSlot(a,s,dow));
+      const ib = daySlots.findIndex(s => taskFitsSlot(b,s,dow));
+      return (ia===-1?99:ia)-(ib===-1?99:ib);
+    }).slice(0, 3);
+    const tHtml = dt.map(t => `<div class="cal-task" style="background:rgba(255,255,255,0.09)" onclick="event.stopPropagation();openModal('${t.id}')">${t.title}</div>`).join('');
+    html += `<div class="calendar-day${isToday?' today':''}" onclick="mobileJumpToDay('${ds}')"><div class="day-number">${d.getDate()}</div>${tHtml}</div>`;
+  }
+  document.getElementById('calendarGrid').innerHTML = html;
+}
+
+function mobileJumpToDay(ds) {
+  dayViewDate = new Date(ds + 'T00:00:00');
+  switchMobileView('day');
+}
+
+// Patch renderCalendar to use week view on mobile
+const _origRenderCalendar = renderCalendar;
+renderCalendar = function() {
+  if (isMobile()) { renderCalendarMobileWeek(); return; }
+  _origRenderCalendar();
+};
+
+// Calendar swipe
+let _calTouchX = 0;
+document.getElementById('calendarView').addEventListener('touchstart', e => { _calTouchX = e.touches[0].clientX; }, { passive: true });
+document.getElementById('calendarView').addEventListener('touchend', e => {
+  if (!isMobile()) return;
+  const dx = e.changedTouches[0].clientX - _calTouchX;
+  if (Math.abs(dx) > 55) { _mobileCalWeekOff += (dx < 0 ? 1 : -1); renderCalendarMobileWeek(); }
+});
+
+// --- Day view swipe ---
+let _dayTouchX = 0;
+document.getElementById('dayView').addEventListener('touchstart', e => { _dayTouchX = e.touches[0].clientX; }, { passive: true });
+document.getElementById('dayView').addEventListener('touchend', e => {
+  if (!isMobile()) return;
+  const dx = e.changedTouches[0].clientX - _dayTouchX;
+  if (Math.abs(dx) > 60) {
+    dayViewDate = new Date(dayViewDate.getTime() + (dx < 0 ? 86400000 : -86400000));
+    renderDayView();
+  }
+});
+
+// --- Task Pool bottom drawer ---
+function openMobilePool() {
+  renderMobilePool();
+  document.getElementById('mobilePoolDrawer').classList.add('open');
+  document.getElementById('mobilePoolOverlay').classList.add('open');
+}
+function closeMobilePool() {
+  document.getElementById('mobilePoolDrawer').classList.remove('open');
+  document.getElementById('mobilePoolOverlay').classList.remove('open');
+}
+function renderMobilePool() {
+  const unscheduled = tasks.filter(t => !t.scheduledDate && t.status !== 'done');
+  const grouped = {};
+  POOL_GROUPS.forEach(g => { grouped[g] = []; });
+  unscheduled.forEach(t => {
+    const k = getPoolGroupKey(t);
+    if (!grouped[k]) grouped[k] = [];
+    grouped[k].push(t);
+  });
+  let html = '';
+  POOL_GROUPS.forEach(g => {
+    const items = grouped[g] || [];
+    if (items.length === 0) return;
+    html += `<div class="pool-group"><div class="pool-group-header"><span>${g}</span><span class="count">${items.length}</span></div><div class="pool-group-items">`;
+    items.forEach(t => {
+      const isListOnly = LIST_ONLY.includes(t.category);
+      const noDur = (!isListOnly && (!t.duration || t.duration === 0)) ? ' no-duration' : '';
+      const hrs = isListOnly ? '' : (t.duration ? `${t.duration}h` : 'set hrs');
+      html += `<div class="pool-task${noDur}" data-cat="${t.category}" onclick="closeMobilePool();openModal('${t.id}')"><span class="pool-task-title">${t.title}</span><span class="pool-task-hrs">${hrs}</span></div>`;
+    });
+    html += '</div></div>';
+  });
+  document.getElementById('mobilePoolBody').innerHTML = html || '<p style="padding:16px;font-size:0.8rem;color:var(--text-dim)">All tasks scheduled!</p>';
+}
+
+document.getElementById('mNavPool').addEventListener('click', openMobilePool);
+document.getElementById('mobilePoolClose').addEventListener('click', closeMobilePool);
+document.getElementById('mobilePoolOverlay').addEventListener('click', closeMobilePool);
+
+// Pool swipe-down to close
+let _poolTouchY = 0;
+document.getElementById('mobilePoolDrawer').addEventListener('touchstart', e => { _poolTouchY = e.touches[0].clientY; }, { passive: true });
+document.getElementById('mobilePoolDrawer').addEventListener('touchend', e => {
+  const dy = e.changedTouches[0].clientY - _poolTouchY;
+  if (dy > 60) closeMobilePool();
+});
+
+// --- Hamburger menu ---
+document.getElementById('mobileHamburgerBtn').addEventListener('click', e => {
+  e.stopPropagation();
+  document.getElementById('mobileHamburgerMenu').classList.toggle('open');
+});
+document.addEventListener('click', e => {
+  if (!e.target.closest('#mobileHamburgerMenu') && !e.target.closest('#mobileHamburgerBtn')) {
+    document.getElementById('mobileHamburgerMenu').classList.remove('open');
+  }
+});
+
+function _hamDo(fn) {
+  document.getElementById('mobileHamburgerMenu').classList.remove('open');
+  fn();
+}
+document.getElementById('mHamAddTask').addEventListener('click', () => _hamDo(() => document.getElementById('addTaskBtn').click()));
+document.getElementById('mHamAutoSchedule').addEventListener('click', () => _hamDo(autoSchedule));
+document.getElementById('mHamUndo').addEventListener('click', () => _hamDo(() => {
+  if (!preAutoScheduleSnapshot) { showStatus('Nothing to undo'); return; }
+  tasks = preAutoScheduleSnapshot; preAutoScheduleSnapshot = null;
+  document.getElementById('undoBtn').classList.add('disabled');
+  saveTasks(); renderAll(); showStatus('Schedule undone');
+}));
+document.getElementById('mHamBackups').addEventListener('click', () => _hamDo(openBackups));
+document.getElementById('mHamExport').addEventListener('click', () => _hamDo(() => document.getElementById('exportBtn').click()));
+
+// Re-render on resize to swap between mobile/desktop modes
+window.addEventListener('resize', () => {
+  clearTimeout(window._resizeTimer);
+  window._resizeTimer = setTimeout(() => { renderAll(); if (isMobile()) mobileUpdateKanban(); }, 150);
+});
+
+// Initial mobile setup
+if (isMobile()) { mobileUpdateKanban(); }
+
+// ===== PWA =====
+
+// ── Service Worker registration ───────────────────────────────────────────────
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js', { scope: './' })
+      .then(reg => {
+        // Tell SW to skip waiting when a new version is found
+        reg.addEventListener('updatefound', () => {
+          const nw = reg.installing;
+          if (!nw) return;
+          nw.addEventListener('statechange', () => {
+            if (nw.state === 'installed' && navigator.serviceWorker.controller) {
+              showStatus('App updated — refresh to apply');
+            }
+          });
+        });
+      })
+      .catch(() => {
+        // SW registration fails on file:// — app still works via localStorage
+      });
+  });
+}
+
+// ── Offline / online detection ────────────────────────────────────────────────
+function setOfflineUI(offline) {
+  const badge = document.getElementById('offlineBadge');
+  if (badge) badge.classList.toggle('visible', offline);
+}
+
+window.addEventListener('online', () => {
+  setOfflineUI(false);
+  // When back online, flush pending data and tell SW to refresh task-data.json
+  exportData();
+  if (navigator.serviceWorker && navigator.serviceWorker.controller) {
+    navigator.serviceWorker.controller.postMessage('syncTaskData');
+  }
+  if (window._wasOffline) {
+    showStatus('Back online — data synced');
+    window._wasOffline = false;
+  }
+});
+
+window.addEventListener('offline', () => {
+  setOfflineUI(true);
+  window._wasOffline = true;
+  showStatus('Offline — changes saved locally');
+});
+
+// Set initial state
+setOfflineUI(!navigator.onLine);
+
+// ── Async bootstrap from task-data.json (first-run or empty localStorage) ─────
+(async function bootstrapFromFile() {
+  const hasLocal = localStorage.getItem('taskDataJson');
+  if (hasLocal) return; // localStorage is the authoritative source once populated
+  try {
+    const res = await fetch('./task-data.json', { cache: 'no-cache' });
+    if (!res.ok) return;
+    const fileData = await res.json();
+    if (Array.isArray(fileData) && fileData.length > 0) {
+      tasks = fileData;
+      saveTasks();
+      exportData();
+      renderAll();
+    }
+  } catch (_) { /* offline or file absent — DEFAULT_TASKS already loaded */ }
+})();
+
+// ── Install prompt ────────────────────────────────────────────────────────────
+let _deferredInstall = null;
+
+function showInstallBanner() {
+  if (localStorage.getItem('pwaInstallDismissed')) return;
+  const banner = document.getElementById('installBanner');
+  if (banner) {
+    banner.style.display = 'flex';
+    // Animate in on next frame
+    requestAnimationFrame(() => banner.classList.add('visible'));
+  }
+}
+
+function hideInstallBanner() {
+  const banner = document.getElementById('installBanner');
+  if (!banner) return;
+  banner.classList.remove('visible');
+  setTimeout(() => { banner.style.display = 'none'; }, 320);
+}
+
+function showInstallEntry(show) {
+  const btn = document.getElementById('headerInstallBtn');
+  const ham = document.getElementById('mHamInstall');
+  if (btn) btn.style.display = show ? 'inline-flex' : 'none';
+  if (ham) ham.style.display = show ? 'block' : 'none';
+}
+
+async function triggerInstall() {
+  if (!_deferredInstall) return;
+  const { outcome } = await _deferredInstall.prompt();
+  if (outcome === 'accepted') {
+    _deferredInstall = null;
+    hideInstallBanner();
+    showInstallEntry(false);
+  }
+}
+
+window.addEventListener('beforeinstallprompt', e => {
+  e.preventDefault();
+  _deferredInstall = e;
+  showInstallBanner();
+  showInstallEntry(true);
+});
+
+window.addEventListener('appinstalled', () => {
+  _deferredInstall = null;
+  hideInstallBanner();
+  showInstallEntry(false);
+  showStatus('Task Planner installed!');
+});
+
+document.getElementById('installBtn').addEventListener('click', triggerInstall);
+document.getElementById('installDismiss').addEventListener('click', () => {
+  localStorage.setItem('pwaInstallDismissed', '1');
+  hideInstallBanner();
+});
+document.getElementById('headerInstallBtn').addEventListener('click', triggerInstall);
+document.getElementById('mHamInstall').addEventListener('click', () => {
+  document.getElementById('mobileHamburgerMenu').classList.remove('open');
+  triggerInstall();
+});
+
+// ===== GITHUB SYNC =====
+const GH_OWNER = 'sthembisosgicho-crypto';
+const GH_REPO  = 'task-planner';
+const GH_FILE  = 'task-data.json';
+const GH_API   = 'https://api.github.com/repos/' + GH_OWNER + '/' + GH_REPO + '/contents/' + GH_FILE;
+
+let _ghSyncTimer = null;
+let _ghSyncState = 'idle';
+let _ghResetTimer = null;
+
+function getGhToken() { return localStorage.getItem('ghToken') || ''; }
+
+function setGhSyncState(state, msg) {
+  _ghSyncState = state;
+  clearTimeout(_ghResetTimer);
+  var dot = document.getElementById('ghSyncDot');
+  if (!dot) return;
+  var hasToken = !!getGhToken();
+  var S = {
+    idle:    { color: '#6b6b80', title: hasToken ? 'Click to sync now' : 'Click to set up GitHub sync', text: hasToken ? '●' : '○' },
+    pending: { color: '#f5a623', title: 'Changes queued — pushing soon…', text: '◉' },
+    pushing: { color: '#a78bfa', title: 'Pushing to GitHub…',             text: '↻', spin: true },
+    ok:      { color: '#10b981', title: msg || 'Synced to GitHub',         text: '✓' },
+    error:   { color: '#e94560', title: msg || 'Sync failed — click to retry', text: '✗' },
+  };
+  var s = S[state] || S.idle;
+  dot.style.color  = s.color;
+  dot.textContent  = s.text;
+  document.getElementById('ghSyncBtn').title = s.title;
+  if (s.spin) dot.classList.add('gh-spinning');
+  else        dot.classList.remove('gh-spinning');
+  if (state === 'ok') {
+    _ghResetTimer = setTimeout(function() { if (_ghSyncState === 'ok') setGhSyncState('idle'); }, 3000);
+  }
+}
+
+function schedulePush() {
+  if (!getGhToken()) return;
+  setGhSyncState('pending');
+  clearTimeout(_ghSyncTimer);
+  _ghSyncTimer = setTimeout(function() { doPush(0); }, 8000);
+}
+
+function ghToBase64(str) {
+  var bytes = new TextEncoder().encode(str);
+  var bin = '';
+  for (var i = 0; i < bytes.length; i += 8192) {
+    bin += String.fromCharCode.apply(null, bytes.subarray(i, i + 8192));
+  }
+  return btoa(bin);
+}
+
+async function doPush(retryCount) {
+  if (retryCount === undefined) retryCount = 0;
+  var token = getGhToken();
+  if (!token) return;
+  if (!navigator.onLine) { setGhSyncState('pending'); return; }
+  clearTimeout(_ghSyncTimer);
+  setGhSyncState('pushing');
+  try {
+    var getRes = await fetch(GH_API, {
+      headers: { 'Authorization': 'Bearer ' + token, 'Accept': 'application/vnd.github+json' },
+      cache: 'no-store'
+    });
+    var sha = null;
+    if (getRes.ok) {
+      sha = (await getRes.json()).sha;
+    } else if (getRes.status !== 404) {
+      var eg = await getRes.json().catch(function(){ return {}; });
+      throw new Error(eg.message || 'GET failed: HTTP ' + getRes.status);
+    }
+
+    var now = new Date();
+    var ts  = now.toLocaleString('en-ZA', { dateStyle: 'short', timeStyle: 'short' });
+    var body = { message: 'sync: tasks ' + ts, content: ghToBase64(JSON.stringify(tasks, null, 2)) };
+    if (sha) body.sha = sha;
+
+    var putRes = await fetch(GH_API, {
+      method: 'PUT',
+      headers: {
+        'Authorization': 'Bearer ' + token,
+        'Content-Type': 'application/json',
+        'Accept': 'application/vnd.github+json'
+      },
+      body: JSON.stringify(body)
+    });
+    if (!putRes.ok) {
+      var ep = await putRes.json().catch(function(){ return {}; });
+      if ((putRes.status === 409 || (ep.message || '').toLowerCase().indexOf('sha') !== -1) && retryCount < 2) {
+        return doPush(retryCount + 1);
+      }
+      throw new Error(ep.message || 'PUT failed: HTTP ' + putRes.status);
+    }
+    var timeStr = now.toLocaleTimeString('en-ZA', { hour: '2-digit', minute: '2-digit' });
+    setGhSyncState('ok', 'Synced at ' + timeStr);
+    localStorage.setItem('ghLastSync', now.toISOString());
+    _ghUpdateStatusBox();
+  } catch (err) {
+    console.warn('[GH Sync]', err.message);
+    var short = err.message.length > 80 ? err.message.slice(0, 77) + '…' : err.message;
+    setGhSyncState('error', 'Sync failed: ' + short);
+    showStatus('GitHub sync failed: ' + short, 7000);
+  }
+}
+
+// Patch exportData so every task save also schedules a push
+(function() {
+  var _orig = exportData;
+  exportData = function() {
+    _orig();
+    schedulePush();
+  };
+})();
+
+// Flush pending push when connectivity is restored
+window.addEventListener('online', function() {
+  if (_ghSyncState === 'pending' || _ghSyncState === 'error') {
+    doPush(0);
+  }
+});
+
+// ── GitHub Sync Modal ─────────────────────────────────────────────────────────
+function _ghUpdateStatusBox() {
+  var box = document.getElementById('ghSyncStatusBox');
+  if (!box) return;
+  var token = getGhToken();
+  var lastSync = localStorage.getItem('ghLastSync');
+  if (token) {
+    var lastStr = lastSync ? new Date(lastSync).toLocaleString('en-ZA') : 'never';
+    box.innerHTML = '<span style="color:#10b981">&#10003; Connected</span>'
+      + ' — syncing to <a href="https://github.com/' + GH_OWNER + '/' + GH_REPO + '" '
+      + 'target="_blank" rel="noopener">' + GH_OWNER + '/' + GH_REPO + '</a>'
+      + '<br>Token: ···' + token.slice(-4)
+      + '<br>Last sync: ' + lastStr;
+  } else {
+    box.innerHTML = '<span style="color:var(--text-dim)">&#9675; Not configured</span>'
+      + ' — enter a token below to enable automatic sync.';
+  }
+  document.getElementById('ghDisconnectBtn').style.display = token ? '' : 'none';
+  document.getElementById('ghSyncNowBtn').style.display    = token ? '' : 'none';
+  document.getElementById('ghSyncSaveBtn').textContent     = token ? 'Update Token' : 'Connect';
+  document.getElementById('ghTokenInput').value            = '';
+}
+
+function openGhSyncModal() {
+  _ghUpdateStatusBox();
+  document.getElementById('ghSyncModal').classList.add('active');
+}
+
+function closeGhSyncModal() {
+  document.getElementById('ghSyncModal').classList.remove('active');
+}
+
+document.getElementById('ghSyncCancelBtn').addEventListener('click', closeGhSyncModal);
+document.getElementById('ghSyncModal').addEventListener('click', function(e) {
+  if (e.target === document.getElementById('ghSyncModal')) closeGhSyncModal();
+});
+
+document.getElementById('ghSyncSaveBtn').addEventListener('click', function() {
+  var val = document.getElementById('ghTokenInput').value.trim();
+  if (!val) { showStatus('Please enter a token'); return; }
+  localStorage.setItem('ghToken', val);
+  closeGhSyncModal();
+  setGhSyncState('idle');
+  doPush(0);
+});
+
+document.getElementById('ghDisconnectBtn').addEventListener('click', function() {
+  if (!confirm('Remove GitHub token? Auto-sync will stop.')) return;
+  localStorage.removeItem('ghToken');
+  localStorage.removeItem('ghLastSync');
+  setGhSyncState('idle');
+  closeGhSyncModal();
+});
+
+document.getElementById('ghSyncNowBtn').addEventListener('click', function() {
+  closeGhSyncModal();
+  doPush(0);
+});
+
+document.getElementById('ghSyncBtn').addEventListener('click', function() {
+  if (!getGhToken()) {
+    var t = prompt(
+      'Paste your GitHub Personal Access Token to enable sync.\n\n' +
+      'Create one at: github.com/settings/personal-access-tokens/new\n' +
+      '  • Fine-grained token\n' +
+      '  • Repository: task-planner\n' +
+      '  • Permission: Contents → Read and write'
+    );
+    if (!t || !t.trim()) return;
+    localStorage.setItem('ghToken', t.trim());
+    setGhSyncState('idle');
+  }
+  doPush(0);
+});
+document.getElementById('mHamGhSync').addEventListener('click', function() {
+  document.getElementById('mobileHamburgerMenu').classList.remove('open');
+  openGhSyncModal();
+});
+
+// Restore last-known sync state on load
+(function() {
+  if (!getGhToken()) return;
+  var ls = localStorage.getItem('ghLastSync');
+  if (ls) {
+    var ago = Date.now() - new Date(ls).getTime();
+    var t   = new Date(ls).toLocaleTimeString('en-ZA', { hour: '2-digit', minute: '2-digit' });
+    setGhSyncState('ok', 'Last synced at ' + t);
+  }
+})();
+</script>
+
+<!-- GitHub Sync Settings Modal -->
+<div class="modal-overlay" id="ghSyncModal">
+  <div class="modal" style="max-width:460px">
+    <h2>&#8635; GitHub Sync</h2>
+    <p style="font-size:0.78rem;color:var(--text-dim);margin-bottom:14px">
+      Automatically pushes your tasks to <strong>sthembisosgicho-crypto/task-planner</strong> whenever you make changes — so any device can load the latest data.
+    </p>
+    <div id="ghSyncStatusBox" style="padding:10px 14px;background:var(--surface2);border-radius:var(--radius);font-size:0.8rem;line-height:1.7;margin-bottom:16px"></div>
+    <div class="form-group">
+      <label for="ghTokenInput">
+        Personal Access Token
+        <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener noreferrer"
+           style="margin-left:8px;font-size:0.7rem;color:var(--accent)">Create token &#8599;</a>
+      </label>
+      <input type="password" id="ghTokenInput" placeholder="github_pat_…  or  ghp_…" autocomplete="off" spellcheck="false">
+      <p style="font-size:0.68rem;color:var(--text-dim);margin-top:6px;line-height:1.5">
+        Create a <strong>Fine-grained token</strong> scoped only to the <em>task-planner</em> repo<br>
+        with permission <strong>Contents: Read and write</strong>.
+      </p>
+    </div>
+    <div class="modal-actions">
+      <div><button class="btn-danger" id="ghDisconnectBtn">Disconnect</button></div>
+      <div style="display:flex;gap:8px">
+        <button class="btn-secondary" id="ghSyncNowBtn">Sync Now</button>
+        <button class="btn-secondary" id="ghSyncCancelBtn">Cancel</button>
+        <button class="btn-primary" id="ghSyncSaveBtn">Connect</button>
+      </div>
+    </div>
+  </div>
+</div>
 </body>
 </html>
