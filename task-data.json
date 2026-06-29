@@ -26,7 +26,7 @@
       {
         "id": "eng02s1",
         "title": "Parameter selection",
-        "done": false,
+        "done": true,
         "duration": 0,
         "priority": "Normal",
         "deadline": null,
@@ -35,7 +35,7 @@
       {
         "id": "eng02s2",
         "title": "Kapa review and compare interpretation",
-        "done": false,
+        "done": true,
         "duration": 0,
         "priority": "Normal",
         "deadline": null,
@@ -53,7 +53,7 @@
       {
         "id": "eng02s4",
         "title": "Add Kat to do CPTu",
-        "done": false,
+        "done": true,
         "duration": 0,
         "priority": "Normal",
         "deadline": null,
@@ -71,7 +71,7 @@
       {
         "id": "eng02s6",
         "title": "Consider including stats analysis",
-        "done": false,
+        "done": true,
         "duration": 0,
         "priority": "Normal",
         "deadline": null,
@@ -110,7 +110,8 @@
     "notes": "",
     "workType": "Project Work",
     "status": "today",
-    "scheduledDate": "2026-06-29"
+    "scheduledDate": "2026-06-29",
+    "subtasks": []
   },
   {
     "id": "eng04",
