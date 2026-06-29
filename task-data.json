@@ -7,9 +7,12 @@
     "duration": 0.25,
     "deadline": "2026-06-22",
     "notes": "",
-    "workType": "Project Work",
+    "workType": "Admin",
     "status": "today",
-    "scheduledDate": "2026-06-29"
+    "scheduledDate": "2026-06-29",
+    "subtasks": [],
+    "totalHours": 0,
+    "hoursDone": 0
   },
   {
     "id": "eng02",
