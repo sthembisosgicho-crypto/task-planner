@@ -856,8 +856,9 @@
     "duration": 0,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null
+    "status": "done",
+    "scheduledDate": null,
+    "completedDate": "2026-06-29T16:36:18.910Z"
   },
   {
     "id": "cd04",
