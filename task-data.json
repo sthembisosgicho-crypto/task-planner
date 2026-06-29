@@ -832,8 +832,9 @@
     "duration": 0,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null
+    "status": "done",
+    "scheduledDate": null,
+    "completedDate": "2026-06-29T16:33:44.764Z"
   },
   {
     "id": "cd02",
@@ -843,8 +844,9 @@
     "duration": 0,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null
+    "status": "done",
+    "scheduledDate": null,
+    "completedDate": "2026-06-29T16:33:42.792Z"
   },
   {
     "id": "cd03",
