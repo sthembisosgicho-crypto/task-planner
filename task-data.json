@@ -20,7 +20,7 @@
     "deadline": "2026-06-22",
     "notes": "",
     "workType": "Project Work",
-    "status": "today",
+    "status": "done",
     "scheduledDate": "2026-06-29",
     "subtasks": [
       {
@@ -42,27 +42,9 @@
         "notes": ""
       },
       {
-        "id": "eng02s3",
-        "title": "In CC template",
-        "done": false,
-        "duration": 0,
-        "priority": "Normal",
-        "deadline": null,
-        "notes": ""
-      },
-      {
         "id": "eng02s4",
         "title": "Add Kat to do CPTu",
         "done": true,
-        "duration": 0,
-        "priority": "Normal",
-        "deadline": null,
-        "notes": ""
-      },
-      {
-        "id": "eng02s5",
-        "title": "Talk about 10 rules for stability",
-        "done": false,
         "duration": 0,
         "priority": "Normal",
         "deadline": null,
@@ -80,16 +62,7 @@
       {
         "id": "eng02s7",
         "title": "Check slope stability against memo selected parameters",
-        "done": false,
-        "duration": 0,
-        "priority": "Normal",
-        "deadline": null,
-        "notes": ""
-      },
-      {
-        "id": "eng02s8",
-        "title": "Analyse seismic data",
-        "done": false,
+        "done": true,
         "duration": 0,
         "priority": "Normal",
         "deadline": null,
@@ -98,7 +71,10 @@
     ],
     "scheduledDates": [
       "2026-06-29"
-    ]
+    ],
+    "totalHours": 0,
+    "hoursDone": 0,
+    "completedDate": "2026-06-29T15:39:10.578Z"
   },
   {
     "id": "eng03",
@@ -2120,5 +2096,44 @@
     "scheduledDates": [
       "2026-06-30"
     ]
+  },
+  {
+    "id": "mqzdus0g9tlhz",
+    "title": "Talk about 10 rules for stability",
+    "category": "Engineering",
+    "priority": "Normal",
+    "duration": 0,
+    "deadline": null,
+    "notes": "",
+    "workType": "Project Work",
+    "status": "backlog",
+    "scheduledDate": null,
+    "subtasks": []
+  },
+  {
+    "id": "mqzduu7s7sn4p",
+    "title": "Analyse seismic data",
+    "category": "Engineering",
+    "priority": "Normal",
+    "duration": 0,
+    "deadline": null,
+    "notes": "",
+    "workType": "Project Work",
+    "status": "backlog",
+    "scheduledDate": null,
+    "subtasks": []
+  },
+  {
+    "id": "mqzdux9iarn8d",
+    "title": "In CC template",
+    "category": "Engineering",
+    "priority": "Normal",
+    "duration": 0,
+    "deadline": null,
+    "notes": "",
+    "workType": "Project Work",
+    "status": "backlog",
+    "scheduledDate": null,
+    "subtasks": []
   }
 ]
