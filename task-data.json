@@ -832,9 +832,8 @@
     "duration": 0,
     "deadline": null,
     "notes": "",
-    "status": "done",
-    "scheduledDate": null,
-    "completedDate": "2026-06-29T16:33:44.764Z"
+    "status": "backlog",
+    "scheduledDate": null
   },
   {
     "id": "cd02",
@@ -844,9 +843,8 @@
     "duration": 0,
     "deadline": null,
     "notes": "",
-    "status": "done",
-    "scheduledDate": null,
-    "completedDate": "2026-06-29T16:33:42.792Z"
+    "status": "backlog",
+    "scheduledDate": null
   },
   {
     "id": "cd03",
@@ -856,9 +854,8 @@
     "duration": 0,
     "deadline": null,
     "notes": "",
-    "status": "done",
-    "scheduledDate": null,
-    "completedDate": "2026-06-29T16:36:18.910Z"
+    "status": "backlog",
+    "scheduledDate": null
   },
   {
     "id": "cd04",
