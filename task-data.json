@@ -8,8 +8,8 @@
     "deadline": "2026-06-22",
     "notes": "",
     "workType": "Project Work",
-    "status": "backlog",
-    "scheduledDate": null
+    "status": "today",
+    "scheduledDate": "2026-06-29"
   },
   {
     "id": "eng02",
@@ -20,8 +20,8 @@
     "deadline": "2026-06-22",
     "notes": "",
     "workType": "Project Work",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "today",
+    "scheduledDate": "2026-06-29",
     "subtasks": [
       {
         "id": "eng02s1",
@@ -95,6 +95,9 @@
         "deadline": null,
         "notes": ""
       }
+    ],
+    "scheduledDates": [
+      "2026-06-29"
     ]
   },
   {
@@ -106,8 +109,8 @@
     "deadline": "2026-06-18",
     "notes": "",
     "workType": "Project Work",
-    "status": "backlog",
-    "scheduledDate": null
+    "status": "today",
+    "scheduledDate": "2026-06-29"
   },
   {
     "id": "eng04",
@@ -118,8 +121,8 @@
     "deadline": "2026-06-23",
     "notes": "",
     "workType": "Project Work",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-06-30",
     "subtasks": [
       {
         "id": "eng04s1",
@@ -141,8 +144,8 @@
     "deadline": "2026-06-15",
     "notes": "",
     "workType": "R&D",
-    "status": "backlog",
-    "scheduledDate": null
+    "status": "thisweek",
+    "scheduledDate": "2026-07-01"
   },
   {
     "id": "eng06",
@@ -153,8 +156,8 @@
     "deadline": "2026-06-22",
     "notes": "",
     "workType": "Project Work",
-    "status": "backlog",
-    "scheduledDate": null
+    "status": "thisweek",
+    "scheduledDate": "2026-06-30"
   },
   {
     "id": "eng07",
@@ -165,8 +168,8 @@
     "deadline": "2026-06-26",
     "notes": "",
     "workType": "Admin",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-07-03",
     "subtasks": [
       {
         "id": "eng07s1",
@@ -206,8 +209,8 @@
     "deadline": "2026-06-22",
     "notes": "",
     "workType": "Admin",
-    "status": "backlog",
-    "scheduledDate": null
+    "status": "thisweek",
+    "scheduledDate": "2026-07-03"
   },
   {
     "id": "eng09",
@@ -218,8 +221,8 @@
     "deadline": "2026-06-26",
     "notes": "",
     "workType": "Admin",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-07-03",
     "subtasks": [
       {
         "id": "eng09s1",
@@ -250,8 +253,8 @@
     "deadline": null,
     "notes": "",
     "workType": "Project Work",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-07-02",
     "subtasks": [
       {
         "id": "eng10s1",
@@ -298,6 +301,9 @@
         "deadline": null,
         "notes": ""
       }
+    ],
+    "scheduledDates": [
+      "2026-07-02"
     ]
   },
   {
@@ -309,8 +315,11 @@
     "deadline": null,
     "notes": "",
     "workType": "Admin",
-    "status": "backlog",
-    "scheduledDate": null
+    "status": "thisweek",
+    "scheduledDate": "2026-07-03",
+    "scheduledDates": [
+      "2026-07-03"
+    ]
   },
   {
     "id": "eng12",
@@ -321,8 +330,8 @@
     "deadline": null,
     "notes": "",
     "workType": "Project Work",
-    "status": "backlog",
-    "scheduledDate": null
+    "status": "thisweek",
+    "scheduledDate": "2026-07-06"
   },
   {
     "id": "eng13",
@@ -333,8 +342,8 @@
     "deadline": null,
     "notes": "",
     "workType": "Admin",
-    "status": "backlog",
-    "scheduledDate": null
+    "status": "thisweek",
+    "scheduledDate": "2026-07-10"
   },
   {
     "id": "eng14",
@@ -345,8 +354,8 @@
     "deadline": null,
     "notes": "",
     "workType": "Project Work",
-    "status": "backlog",
-    "scheduledDate": null
+    "status": "thisweek",
+    "scheduledDate": "2026-07-06"
   },
   {
     "id": "eng15",
@@ -357,8 +366,8 @@
     "deadline": null,
     "notes": "",
     "workType": "Admin",
-    "status": "backlog",
-    "scheduledDate": null
+    "status": "thisweek",
+    "scheduledDate": "2026-07-10"
   },
   {
     "id": "eng16",
@@ -369,8 +378,8 @@
     "deadline": null,
     "notes": "",
     "workType": "Admin",
-    "status": "backlog",
-    "scheduledDate": null
+    "status": "thisweek",
+    "scheduledDate": "2026-07-10"
   },
   {
     "id": "eng17",
@@ -381,8 +390,8 @@
     "deadline": null,
     "notes": "",
     "workType": "Admin",
-    "status": "backlog",
-    "scheduledDate": null
+    "status": "thisweek",
+    "scheduledDate": "2026-07-10"
   },
   {
     "id": "eng18",
@@ -393,8 +402,13 @@
     "deadline": null,
     "notes": "Weekly",
     "workType": "Admin",
-    "status": "backlog",
-    "scheduledDate": null
+    "status": "thisweek",
+    "scheduledDate": "2026-07-10",
+    "scheduledDates": [
+      "2026-07-10",
+      "2026-07-17",
+      "2026-07-24"
+    ]
   },
   {
     "id": "eng19",
@@ -405,8 +419,13 @@
     "deadline": null,
     "notes": "Daily",
     "workType": "Admin",
-    "status": "backlog",
-    "scheduledDate": null
+    "status": "thisweek",
+    "scheduledDate": "2026-07-10",
+    "scheduledDates": [
+      "2026-07-10",
+      "2026-07-17",
+      "2026-07-24"
+    ]
   },
   {
     "id": "eng20",
@@ -417,8 +436,12 @@
     "deadline": null,
     "notes": "Weekly",
     "workType": "Admin",
-    "status": "backlog",
-    "scheduledDate": null
+    "status": "thisweek",
+    "scheduledDate": "2026-07-17",
+    "scheduledDates": [
+      "2026-07-17",
+      "2026-07-24"
+    ]
   },
   {
     "id": "mkt01",
@@ -428,8 +451,8 @@
     "duration": 3,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null
+    "status": "thisweek",
+    "scheduledDate": "2026-07-04"
   },
   {
     "id": "mkt02",
@@ -439,8 +462,11 @@
     "duration": 2,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null
+    "status": "thisweek",
+    "scheduledDate": "2026-07-04",
+    "scheduledDates": [
+      "2026-07-04"
+    ]
   },
   {
     "id": "mkt03",
@@ -450,8 +476,8 @@
     "duration": 1,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null
+    "status": "thisweek",
+    "scheduledDate": "2026-07-05"
   },
   {
     "id": "mkt04",
@@ -461,8 +487,8 @@
     "duration": 1,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null
+    "status": "thisweek",
+    "scheduledDate": "2026-07-05"
   },
   {
     "id": "mkt05",
@@ -472,8 +498,8 @@
     "duration": 1,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null
+    "status": "thisweek",
+    "scheduledDate": "2026-07-05"
   },
   {
     "id": "chr01",
@@ -483,8 +509,32 @@
     "duration": 0.5,
     "deadline": null,
     "notes": "Weekly",
-    "status": "backlog",
-    "scheduledDate": null
+    "status": "today",
+    "scheduledDate": "2026-06-29",
+    "scheduledDates": [
+      "2026-06-29",
+      "2026-06-30",
+      "2026-07-01",
+      "2026-07-02",
+      "2026-07-03",
+      "2026-07-06",
+      "2026-07-07",
+      "2026-07-08",
+      "2026-07-09",
+      "2026-07-10",
+      "2026-07-13",
+      "2026-07-14",
+      "2026-07-15",
+      "2026-07-16",
+      "2026-07-17",
+      "2026-07-20",
+      "2026-07-21",
+      "2026-07-22",
+      "2026-07-23",
+      "2026-07-24",
+      "2026-07-27",
+      "2026-07-28"
+    ]
   },
   {
     "id": "chr02",
@@ -494,8 +544,8 @@
     "duration": 1,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null
+    "status": "today",
+    "scheduledDate": "2026-06-29"
   },
   {
     "id": "chr03",
@@ -505,8 +555,11 @@
     "duration": 1,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null
+    "status": "today",
+    "scheduledDate": "2026-06-29",
+    "scheduledDates": [
+      "2026-06-29"
+    ]
   },
   {
     "id": "chr04",
@@ -516,8 +569,8 @@
     "duration": 0.5,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null
+    "status": "thisweek",
+    "scheduledDate": "2026-06-30"
   },
   {
     "id": "chr05",
@@ -527,8 +580,8 @@
     "duration": 0.5,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null
+    "status": "thisweek",
+    "scheduledDate": "2026-06-30"
   },
   {
     "id": "chr06",
@@ -538,8 +591,8 @@
     "duration": 1,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null
+    "status": "thisweek",
+    "scheduledDate": "2026-07-01"
   },
   {
     "id": "hlt01",
@@ -549,8 +602,38 @@
     "duration": 0.25,
     "deadline": null,
     "notes": "Daily",
-    "status": "backlog",
-    "scheduledDate": null
+    "status": "today",
+    "scheduledDate": "2026-06-29",
+    "scheduledDates": [
+      "2026-06-29",
+      "2026-06-30",
+      "2026-07-01",
+      "2026-07-02",
+      "2026-07-03",
+      "2026-07-06",
+      "2026-07-07",
+      "2026-07-08",
+      "2026-07-09",
+      "2026-07-10",
+      "2026-07-11",
+      "2026-07-12",
+      "2026-07-13",
+      "2026-07-14",
+      "2026-07-15",
+      "2026-07-16",
+      "2026-07-17",
+      "2026-07-18",
+      "2026-07-19",
+      "2026-07-20",
+      "2026-07-21",
+      "2026-07-22",
+      "2026-07-23",
+      "2026-07-24",
+      "2026-07-25",
+      "2026-07-26",
+      "2026-07-27",
+      "2026-07-28"
+    ]
   },
   {
     "id": "mkt06",
@@ -1650,8 +1733,8 @@
     "deadline": null,
     "notes": "",
     "workType": "Project Work",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-07-06",
     "subtasks": [
       {
         "id": "eng21s1",
@@ -1745,8 +1828,8 @@
     "deadline": "2026-06-22",
     "notes": "",
     "workType": "Project Work",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-06-30",
     "subtasks": [
       {
         "id": "eng22s1",
@@ -1777,8 +1860,8 @@
     "deadline": null,
     "notes": "",
     "workType": "Personal Dev",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-07-03",
     "subtasks": [
       {
         "id": "eng23s1",
@@ -1836,8 +1919,8 @@
     "deadline": null,
     "notes": "",
     "workType": "Personal Dev",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-07-03",
     "subtasks": [
       {
         "id": "eng24s1",
@@ -2009,11 +2092,15 @@
     "deadline": null,
     "notes": "",
     "workType": "Project Work",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-07-06",
     "subtasks": [],
     "totalHours": 0,
-    "hoursDone": 0
+    "hoursDone": 0,
+    "scheduledDates": [
+      "2026-07-06",
+      "2026-07-07"
+    ]
   },
   {
     "id": "mqxn5q60fsmaz",
@@ -2024,10 +2111,13 @@
     "deadline": null,
     "notes": "",
     "workType": "Project Work",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-06-30",
     "subtasks": [],
     "totalHours": 0,
-    "hoursDone": 0
+    "hoursDone": 0,
+    "scheduledDates": [
+      "2026-06-30"
+    ]
   }
 ]
