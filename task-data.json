@@ -2062,7 +2062,7 @@
   },
   {
     "id": "mr6mwh4gc8lfz",
-    "title": "New Task",
+    "title": "19:26 [c",
     "category": "Engineering",
     "priority": "Normal",
     "duration": 0,
@@ -2071,6 +2071,8 @@
     "workType": "Project Work",
     "status": "backlog",
     "scheduledDate": null,
-    "subtasks": []
+    "subtasks": [],
+    "totalHours": 0,
+    "hoursDone": 0
   }
 ]
