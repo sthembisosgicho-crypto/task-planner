@@ -2496,21 +2496,6 @@ document.getElementById('mHamGhSync').addEventListener('click', function(e) {
     var content = atob(data.content.replace(/\n/g, ''));
     var remoteTasks = JSON.parse(content);
     if (!Array.isArray(remoteTasks) || remoteTasks.length === 0) return;
-
-    // Only pull if remote commit is newer than our last push from this device.
-    // This prevents a phone push from overwriting PC data that was saved more recently.
-    var remoteCommitTime = data.commit && data.commit.committer && data.commit.committer.date
-      ? new Date(data.commit.committer.date).getTime() : 0;
-    var lastLocalPush = localStorage.getItem('ghLastSync')
-      ? new Date(localStorage.getItem('ghLastSync')).getTime() : 0;
-    if (lastLocalPush > 0 && lastLocalPush >= remoteCommitTime) {
-      // Our last push is at least as recent as the remote — local data wins, push to sync
-      var localJson2 = JSON.stringify(tasks);
-      var remoteJson2 = JSON.stringify(remoteTasks);
-      if (localJson2 !== remoteJson2) schedulePush();
-      return;
-    }
-
     var localJson = JSON.stringify(tasks);
     var remoteJson = JSON.stringify(remoteTasks);
     if (localJson !== remoteJson) {
