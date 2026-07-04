@@ -163,7 +163,8 @@
     "notes": "",
     "workType": "Project Work",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 6
   },
   {
     "id": "eng07",
@@ -204,7 +205,8 @@
         "deadline": null,
         "notes": ""
       }
-    ]
+    ],
+    "tierSortOrder": 1
   },
   {
     "id": "eng08",
@@ -216,7 +218,8 @@
     "notes": "",
     "workType": "Admin",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 0
   },
   {
     "id": "eng09",
@@ -248,7 +251,8 @@
         "deadline": null,
         "notes": ""
       }
-    ]
+    ],
+    "tierSortOrder": 2
   },
   {
     "id": "eng10",
@@ -1962,7 +1966,8 @@
     "notes": "",
     "workType": "Admin",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 4
   },
   {
     "id": "eng33",
@@ -1974,7 +1979,8 @@
     "notes": "",
     "workType": "Admin",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 5
   },
   {
     "id": "cd36",
@@ -2051,7 +2057,8 @@
     "notes": "Top soil stripped, Black turf to be tested for re-use only need phi and c prime, Clay to be removed on site and stockpile wasterock, 2-3 tests one is for VSR Norite remoulded, Enzo?, 1 page results interpretation",
     "workType": "Project Work",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 3
   },
   {
     "id": "eng35",
