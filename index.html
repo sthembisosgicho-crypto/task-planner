@@ -913,6 +913,8 @@ let calendarYear = new Date().getFullYear();
 
 function generateId() { return Date.now().toString(36) + Math.random().toString(36).substr(2,5); }
 function saveTasks() { localStorage.setItem('tasks', JSON.stringify(tasks)); }
+function getDeletedIds() { try { return new Set(JSON.parse(localStorage.getItem('deletedTaskIds') || '[]')); } catch(e) { return new Set(); } }
+function markDeleted(id) { var s = getDeletedIds(); s.add(id); localStorage.setItem('deletedTaskIds', JSON.stringify([...s])); }
 function exportData() {
   localStorage.setItem('taskDataJson', JSON.stringify(tasks));
   localStorage.setItem('taskDataJsonTime', new Date().toISOString());
@@ -1426,8 +1428,9 @@ document.getElementById('mSaveBtn').addEventListener('click', () => {
 document.getElementById('mDeleteBtn').addEventListener('click', () => {
   if (!editingTaskId) return;
   saveBackup('Before delete');
+  markDeleted(editingTaskId);
   tasks = tasks.filter(t => t.id !== editingTaskId);
-  saveTasks(); closeModal(); renderAll();
+  saveTasks(); exportData(); closeModal(); renderAll();
 });
 document.getElementById('mCancelBtn').addEventListener('click', closeModal);
 document.getElementById('taskModal').addEventListener('click', e => { if (e.target.id === 'taskModal') closeModal(); });
@@ -1815,6 +1818,7 @@ function restoreTask(id) {
 }
 
 function permanentDelete(id) {
+  markDeleted(id);
   tasks = tasks.filter(t => t.id !== id);
   saveTasks(); exportData(); renderAll();
   showStatus('Permanently deleted');
@@ -1892,6 +1896,7 @@ function incSkip(idx) {
 function incDelete(id, idx) {
   if (!confirm('Delete this task permanently?')) return;
   saveBackup('Before delete from needs-info');
+  markDeleted(id);
   tasks = tasks.filter(t => t.id !== id);
   saveTasks(); exportData();
   const rows = document.querySelectorAll('#incompleteModal .inc-row');
@@ -2542,6 +2547,8 @@ document.getElementById('mHamGhSync').addEventListener('click', function(e) {
     var content = atob(data.content.replace(/\n/g, ''));
     var remoteTasks = JSON.parse(content);
     if (!Array.isArray(remoteTasks) || remoteTasks.length === 0) return;
+    var deleted = getDeletedIds();
+    if (deleted.size) remoteTasks = remoteTasks.filter(t => !deleted.has(t.id));
     var localJson = JSON.stringify(tasks);
     var remoteJson = JSON.stringify(remoteTasks);
     if (localJson !== remoteJson) {
