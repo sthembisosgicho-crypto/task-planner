@@ -2473,19 +2473,7 @@ document.getElementById('ghPullNowBtn').addEventListener('click', async function
 });
 
 document.getElementById('ghSyncBtn').addEventListener('click', function() {
-  if (!getGhToken()) {
-    var t = prompt(
-      'Paste your GitHub Personal Access Token to enable sync.\n\n' +
-      'Create one at: github.com/settings/personal-access-tokens/new\n' +
-      '  • Fine-grained token\n' +
-      '  • Repository: task-planner\n' +
-      '  • Permission: Contents → Read and write'
-    );
-    if (!t || !t.trim()) return;
-    localStorage.setItem('ghToken', t.trim());
-    setGhSyncState('idle');
-  }
-  doPush(0);
+  openGhSyncModal();
 });
 document.getElementById('mHamGhSync').addEventListener('click', function(e) {
   e.stopPropagation();
