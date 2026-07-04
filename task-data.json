@@ -7,9 +7,14 @@
     "duration": 0.25,
     "deadline": "2026-06-22",
     "notes": "",
-    "workType": "Project Work",
+    "workType": "Admin",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "subtasks": [],
+    "totalHours": 0,
+    "hoursDone": 0,
+    "scheduledDates": [],
+    "sortOrder": -1
   },
   {
     "id": "eng02",
@@ -20,13 +25,13 @@
     "deadline": "2026-06-22",
     "notes": "",
     "workType": "Project Work",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "done",
+    "scheduledDate": "2026-06-29",
     "subtasks": [
       {
         "id": "eng02s1",
         "title": "Parameter selection",
-        "done": false,
+        "done": true,
         "duration": 0,
         "priority": "Normal",
         "deadline": null,
@@ -35,16 +40,7 @@
       {
         "id": "eng02s2",
         "title": "Kapa review and compare interpretation",
-        "done": false,
-        "duration": 0,
-        "priority": "Normal",
-        "deadline": null,
-        "notes": ""
-      },
-      {
-        "id": "eng02s3",
-        "title": "In CC template",
-        "done": false,
+        "done": true,
         "duration": 0,
         "priority": "Normal",
         "deadline": null,
@@ -53,16 +49,7 @@
       {
         "id": "eng02s4",
         "title": "Add Kat to do CPTu",
-        "done": false,
-        "duration": 0,
-        "priority": "Normal",
-        "deadline": null,
-        "notes": ""
-      },
-      {
-        "id": "eng02s5",
-        "title": "Talk about 10 rules for stability",
-        "done": false,
+        "done": true,
         "duration": 0,
         "priority": "Normal",
         "deadline": null,
@@ -71,7 +58,7 @@
       {
         "id": "eng02s6",
         "title": "Consider including stats analysis",
-        "done": false,
+        "done": true,
         "duration": 0,
         "priority": "Normal",
         "deadline": null,
@@ -80,22 +67,19 @@
       {
         "id": "eng02s7",
         "title": "Check slope stability against memo selected parameters",
-        "done": false,
-        "duration": 0,
-        "priority": "Normal",
-        "deadline": null,
-        "notes": ""
-      },
-      {
-        "id": "eng02s8",
-        "title": "Analyse seismic data",
-        "done": false,
+        "done": true,
         "duration": 0,
         "priority": "Normal",
         "deadline": null,
         "notes": ""
       }
-    ]
+    ],
+    "scheduledDates": [
+      "2026-06-29"
+    ],
+    "totalHours": 0,
+    "hoursDone": 0,
+    "completedDate": "2026-06-29T15:39:10.578Z"
   },
   {
     "id": "eng03",
@@ -107,7 +91,10 @@
     "notes": "",
     "workType": "Project Work",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "subtasks": [],
+    "scheduledDates": [],
+    "sortOrder": -1
   },
   {
     "id": "eng04",
@@ -130,7 +117,9 @@
         "deadline": null,
         "notes": ""
       }
-    ]
+    ],
+    "scheduledDates": [],
+    "sortOrder": -1
   },
   {
     "id": "eng05",
@@ -142,7 +131,9 @@
     "notes": "",
     "workType": "R&D",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "scheduledDates": [],
+    "sortOrder": -1
   },
   {
     "id": "eng06",
@@ -154,7 +145,9 @@
     "notes": "",
     "workType": "Project Work",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "scheduledDates": [],
+    "sortOrder": -1
   },
   {
     "id": "eng07",
@@ -195,7 +188,9 @@
         "deadline": null,
         "notes": ""
       }
-    ]
+    ],
+    "scheduledDates": [],
+    "sortOrder": -1
   },
   {
     "id": "eng08",
@@ -207,7 +202,9 @@
     "notes": "",
     "workType": "Admin",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "scheduledDates": [],
+    "sortOrder": -1
   },
   {
     "id": "eng09",
@@ -239,7 +236,9 @@
         "deadline": null,
         "notes": ""
       }
-    ]
+    ],
+    "scheduledDates": [],
+    "sortOrder": -1
   },
   {
     "id": "eng10",
@@ -298,7 +297,9 @@
         "deadline": null,
         "notes": ""
       }
-    ]
+    ],
+    "scheduledDates": [],
+    "sortOrder": -1
   },
   {
     "id": "eng11",
@@ -310,7 +311,9 @@
     "notes": "",
     "workType": "Admin",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "scheduledDates": [],
+    "sortOrder": -1
   },
   {
     "id": "eng12",
@@ -321,8 +324,8 @@
     "deadline": null,
     "notes": "",
     "workType": "Project Work",
-    "status": "backlog",
-    "scheduledDate": null
+    "status": "thisweek",
+    "scheduledDate": "2026-07-06"
   },
   {
     "id": "eng13",
@@ -333,8 +336,8 @@
     "deadline": null,
     "notes": "",
     "workType": "Admin",
-    "status": "backlog",
-    "scheduledDate": null
+    "status": "thisweek",
+    "scheduledDate": "2026-07-10"
   },
   {
     "id": "eng14",
@@ -345,8 +348,8 @@
     "deadline": null,
     "notes": "",
     "workType": "Project Work",
-    "status": "backlog",
-    "scheduledDate": null
+    "status": "thisweek",
+    "scheduledDate": "2026-07-06"
   },
   {
     "id": "eng15",
@@ -357,8 +360,8 @@
     "deadline": null,
     "notes": "",
     "workType": "Admin",
-    "status": "backlog",
-    "scheduledDate": null
+    "status": "thisweek",
+    "scheduledDate": "2026-07-10"
   },
   {
     "id": "eng16",
@@ -369,8 +372,8 @@
     "deadline": null,
     "notes": "",
     "workType": "Admin",
-    "status": "backlog",
-    "scheduledDate": null
+    "status": "thisweek",
+    "scheduledDate": "2026-07-10"
   },
   {
     "id": "eng17",
@@ -381,8 +384,8 @@
     "deadline": null,
     "notes": "",
     "workType": "Admin",
-    "status": "backlog",
-    "scheduledDate": null
+    "status": "thisweek",
+    "scheduledDate": "2026-07-10"
   },
   {
     "id": "eng18",
@@ -393,8 +396,13 @@
     "deadline": null,
     "notes": "Weekly",
     "workType": "Admin",
-    "status": "backlog",
-    "scheduledDate": null
+    "status": "thisweek",
+    "scheduledDate": "2026-07-10",
+    "scheduledDates": [
+      "2026-07-10",
+      "2026-07-17",
+      "2026-07-24"
+    ]
   },
   {
     "id": "eng19",
@@ -405,8 +413,13 @@
     "deadline": null,
     "notes": "Daily",
     "workType": "Admin",
-    "status": "backlog",
-    "scheduledDate": null
+    "status": "thisweek",
+    "scheduledDate": "2026-07-10",
+    "scheduledDates": [
+      "2026-07-10",
+      "2026-07-17",
+      "2026-07-24"
+    ]
   },
   {
     "id": "eng20",
@@ -417,8 +430,12 @@
     "deadline": null,
     "notes": "Weekly",
     "workType": "Admin",
-    "status": "backlog",
-    "scheduledDate": null
+    "status": "thisweek",
+    "scheduledDate": "2026-07-17",
+    "scheduledDates": [
+      "2026-07-17",
+      "2026-07-24"
+    ]
   },
   {
     "id": "mkt01",
@@ -428,8 +445,8 @@
     "duration": 3,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null
+    "status": "thisweek",
+    "scheduledDate": "2026-07-04"
   },
   {
     "id": "mkt02",
@@ -439,8 +456,11 @@
     "duration": 2,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null
+    "status": "thisweek",
+    "scheduledDate": "2026-07-04",
+    "scheduledDates": [
+      "2026-07-04"
+    ]
   },
   {
     "id": "mkt03",
@@ -450,8 +470,8 @@
     "duration": 1,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null
+    "status": "thisweek",
+    "scheduledDate": "2026-07-05"
   },
   {
     "id": "mkt04",
@@ -461,8 +481,8 @@
     "duration": 1,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null
+    "status": "thisweek",
+    "scheduledDate": "2026-07-05"
   },
   {
     "id": "mkt05",
@@ -472,8 +492,8 @@
     "duration": 1,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null
+    "status": "thisweek",
+    "scheduledDate": "2026-07-05"
   },
   {
     "id": "chr01",
@@ -484,7 +504,9 @@
     "deadline": null,
     "notes": "Weekly",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "scheduledDates": [],
+    "sortOrder": -1
   },
   {
     "id": "chr02",
@@ -495,7 +517,9 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "scheduledDates": [],
+    "sortOrder": -1
   },
   {
     "id": "chr03",
@@ -506,7 +530,9 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "scheduledDates": [],
+    "sortOrder": -1
   },
   {
     "id": "chr04",
@@ -517,7 +543,9 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "scheduledDates": [],
+    "sortOrder": -1
   },
   {
     "id": "chr05",
@@ -528,7 +556,9 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "scheduledDates": [],
+    "sortOrder": -1
   },
   {
     "id": "chr06",
@@ -539,7 +569,9 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "scheduledDates": [],
+    "sortOrder": -1
   },
   {
     "id": "hlt01",
@@ -550,14 +582,16 @@
     "deadline": null,
     "notes": "Daily",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "scheduledDates": [],
+    "sortOrder": -1
   },
   {
     "id": "mkt06",
     "title": "Bank holidays check",
     "category": "Markets",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 0.25,
     "deadline": null,
     "notes": "",
     "status": "backlog",
@@ -568,7 +602,7 @@
     "title": "Write code by hand for flow",
     "category": "Markets",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 1,
     "deadline": null,
     "notes": "",
     "status": "backlog",
@@ -579,7 +613,7 @@
     "title": "Run live CV",
     "category": "Markets",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 1,
     "deadline": null,
     "notes": "",
     "status": "backlog",
@@ -589,8 +623,8 @@
     "id": "mkt09",
     "title": "FSP registration",
     "category": "Markets",
-    "priority": "Normal",
-    "duration": 0,
+    "priority": "Recurring",
+    "duration": 4,
     "deadline": null,
     "notes": "",
     "status": "backlog",
@@ -601,7 +635,7 @@
     "title": "FX YouTube video",
     "category": "Markets",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 4,
     "deadline": null,
     "notes": "",
     "status": "backlog",
@@ -612,7 +646,7 @@
     "title": "Confirm range expanding FIB",
     "category": "Markets",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 0.5,
     "deadline": null,
     "notes": "",
     "status": "backlog",
@@ -623,7 +657,7 @@
     "title": "Check hour close vs wick breakout",
     "category": "Markets",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 0.5,
     "deadline": null,
     "notes": "",
     "status": "backlog",
@@ -634,7 +668,7 @@
     "title": "Performance coach",
     "category": "Markets",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 2,
     "deadline": null,
     "notes": "",
     "status": "backlog",
@@ -645,7 +679,7 @@
     "title": "Make notebook coding backtesting",
     "category": "Markets",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 3,
     "deadline": null,
     "notes": "",
     "status": "backlog",
@@ -656,7 +690,7 @@
     "title": "Do and dont video",
     "category": "Markets",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 4,
     "deadline": null,
     "notes": "",
     "status": "backlog",
@@ -667,7 +701,7 @@
     "title": "Video trading and multiverse",
     "category": "Markets",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 4,
     "deadline": null,
     "notes": "",
     "status": "backlog",
@@ -678,7 +712,7 @@
     "title": "Run Discord Telegram channel via agent",
     "category": "Markets",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 4,
     "deadline": null,
     "notes": "",
     "status": "backlog",
@@ -689,7 +723,7 @@
     "title": "Research facilitate payment increase views",
     "category": "Markets",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 1.5,
     "deadline": null,
     "notes": "",
     "status": "backlog",
@@ -700,7 +734,7 @@
     "title": "Budget to work with Mfene",
     "category": "Side Hustle",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 0.5,
     "deadline": null,
     "notes": "",
     "status": "backlog",
@@ -711,7 +745,7 @@
     "title": "Apply Majuba",
     "category": "Side Hustle",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 3,
     "deadline": null,
     "notes": "",
     "status": "backlog",
@@ -722,7 +756,7 @@
     "title": "Access to smart app",
     "category": "Side Hustle",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 1.25,
     "deadline": null,
     "notes": "",
     "status": "backlog",
@@ -733,7 +767,7 @@
     "title": "Job seeking group and shadow",
     "category": "Side Hustle",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 1.5,
     "deadline": null,
     "notes": "",
     "status": "backlog",
@@ -744,7 +778,7 @@
     "title": "Check with Zelle recommend job",
     "category": "Side Hustle",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 0.5,
     "deadline": null,
     "notes": "",
     "status": "backlog",
@@ -755,7 +789,7 @@
     "title": "Call Joe Ndeni",
     "category": "Side Hustle",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 0.75,
     "deadline": null,
     "notes": "",
     "status": "backlog",
@@ -766,7 +800,7 @@
     "title": "Chat to Madlebe",
     "category": "Chores Desk",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 0.5,
     "deadline": null,
     "notes": "",
     "status": "backlog",
@@ -777,7 +811,7 @@
     "title": "Find school appeal Sparko Entabeni",
     "category": "Chores Desk",
     "priority": "Soon",
-    "duration": 0,
+    "duration": 0.75,
     "deadline": null,
     "notes": "",
     "status": "backlog",
@@ -788,7 +822,7 @@
     "title": "Life book write",
     "category": "Chores Desk",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 0.75,
     "deadline": null,
     "notes": "",
     "status": "backlog",
@@ -799,7 +833,7 @@
     "title": "Risk benefit check",
     "category": "Chores Desk",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 0.5,
     "deadline": null,
     "notes": "",
     "status": "backlog",
@@ -810,7 +844,7 @@
     "title": "USB slide photos",
     "category": "Chores Desk",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 0.5,
     "deadline": null,
     "notes": "",
     "status": "backlog",
@@ -821,7 +855,7 @@
     "title": "Medical",
     "category": "Chores Desk",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 0.5,
     "deadline": null,
     "notes": "",
     "status": "backlog",
@@ -832,7 +866,7 @@
     "title": "SIM card",
     "category": "Chores Desk",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 0.5,
     "deadline": null,
     "notes": "",
     "status": "backlog",
@@ -843,7 +877,7 @@
     "title": "Send Munei KG number",
     "category": "Chores Desk",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 0.5,
     "deadline": null,
     "notes": "",
     "status": "backlog",
@@ -854,7 +888,7 @@
     "title": "Track suits price",
     "category": "Chores Desk",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 0.5,
     "deadline": null,
     "notes": "",
     "status": "backlog",
@@ -865,7 +899,7 @@
     "title": "Share photo gents",
     "category": "Chores Desk",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 0.5,
     "deadline": null,
     "notes": "",
     "status": "backlog",
@@ -876,7 +910,7 @@
     "title": "De removal",
     "category": "Chores Desk",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 0.5,
     "deadline": null,
     "notes": "",
     "status": "backlog",
@@ -887,7 +921,7 @@
     "title": "Vumani nonke bazalwane",
     "category": "Chores Desk",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 0.5,
     "deadline": null,
     "notes": "",
     "status": "backlog",
@@ -898,7 +932,7 @@
     "title": "Banking powder research",
     "category": "Chores Desk",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 0.25,
     "deadline": null,
     "notes": "",
     "status": "backlog",
@@ -909,7 +943,7 @@
     "title": "Phone photos",
     "category": "Chores Desk",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 0.25,
     "deadline": null,
     "notes": "",
     "status": "backlog",
@@ -920,7 +954,7 @@
     "title": "Find methods improve machine performance",
     "category": "Chores Desk",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 0.25,
     "deadline": null,
     "notes": "",
     "status": "backlog",
@@ -931,7 +965,7 @@
     "title": "Dent repair research",
     "category": "Chores Desk",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 0.25,
     "deadline": null,
     "notes": "",
     "status": "backlog",
@@ -942,7 +976,7 @@
     "title": "Imali yenkonzo",
     "category": "Chores Desk",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 0.25,
     "deadline": null,
     "notes": "",
     "status": "backlog",
@@ -953,7 +987,7 @@
     "title": "WorksheetCloud after Dojo",
     "category": "Chores Desk",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 0.25,
     "deadline": null,
     "notes": "",
     "status": "backlog",
@@ -964,7 +998,7 @@
     "title": "Change car insurance",
     "category": "Chores Desk",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 0.25,
     "deadline": null,
     "notes": "",
     "status": "backlog",
@@ -975,7 +1009,7 @@
     "title": "Check diary",
     "category": "Chores Desk",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 0.25,
     "deadline": null,
     "notes": "",
     "status": "backlog",
@@ -986,7 +1020,7 @@
     "title": "Dojo training",
     "category": "Chores Desk",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 0.25,
     "deadline": null,
     "notes": "",
     "status": "backlog",
@@ -997,7 +1031,7 @@
     "title": "Groceries list",
     "category": "Chores Desk",
     "priority": "Recurring",
-    "duration": 0,
+    "duration": 1,
     "deadline": null,
     "notes": "",
     "status": "backlog",
@@ -1008,7 +1042,7 @@
     "title": "Read Makro documents",
     "category": "Chores Desk",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 2,
     "deadline": null,
     "notes": "",
     "status": "backlog",
@@ -1019,7 +1053,7 @@
     "title": "Read understand Claude Code",
     "category": "Chores Desk",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 1.5,
     "deadline": null,
     "notes": "",
     "status": "backlog",
@@ -1030,7 +1064,7 @@
     "title": "Give Dojo points cleaning washing training",
     "category": "Chores Desk",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 0.75,
     "deadline": null,
     "notes": "",
     "status": "backlog",
@@ -1041,7 +1075,7 @@
     "title": "Moonskie clothes budget MAK MNR",
     "category": "Chores Desk",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 0.5,
     "deadline": null,
     "notes": "",
     "status": "backlog",
@@ -1052,7 +1086,7 @@
     "title": "Pots budget",
     "category": "Chores Desk",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 0.5,
     "deadline": null,
     "notes": "",
     "status": "backlog",
@@ -1063,7 +1097,7 @@
     "title": "Ext checks",
     "category": "Chores Desk",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 1.25,
     "deadline": null,
     "notes": "",
     "status": "backlog",
@@ -1074,7 +1108,7 @@
     "title": "Wash bag",
     "category": "Chores Desk",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 0.25,
     "deadline": null,
     "notes": "",
     "status": "backlog",
@@ -1085,7 +1119,7 @@
     "title": "Tokila hinda rights",
     "category": "Chores Desk",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 1.5,
     "deadline": null,
     "notes": "",
     "status": "backlog",
@@ -1096,7 +1130,7 @@
     "title": "Review vehicle contract",
     "category": "Chores Desk",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 4,
     "deadline": null,
     "notes": "",
     "status": "backlog",
@@ -1107,7 +1141,7 @@
     "title": "Lawto",
     "category": "Chores Desk",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 1.25,
     "deadline": null,
     "notes": "",
     "status": "backlog",
@@ -1118,7 +1152,7 @@
     "title": "Bike design MM PKT",
     "category": "Chores Desk",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 1.25,
     "deadline": null,
     "notes": "",
     "status": "backlog",
@@ -1129,7 +1163,7 @@
     "title": "Chat to Cristina",
     "category": "Chores Desk",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 0.75,
     "deadline": null,
     "notes": "",
     "status": "backlog",
@@ -1140,7 +1174,7 @@
     "title": "Research safety feature linking apps AI",
     "category": "Chores Desk",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 3,
     "deadline": null,
     "notes": "",
     "status": "backlog",
@@ -1151,7 +1185,7 @@
     "title": "Sort PC",
     "category": "House Chores",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 1,
     "deadline": null,
     "notes": "",
     "status": "backlog",
@@ -1162,7 +1196,7 @@
     "title": "Seal Bavu",
     "category": "House Chores",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 2.75,
     "deadline": null,
     "notes": "",
     "status": "backlog",
@@ -1173,7 +1207,7 @@
     "title": "Test blender burning smell",
     "category": "House Chores",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 1.25,
     "deadline": null,
     "notes": "",
     "status": "backlog",
@@ -1184,7 +1218,7 @@
     "title": "Wash shoes",
     "category": "House Chores",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 3,
     "deadline": null,
     "notes": "",
     "status": "backlog",
@@ -1195,7 +1229,7 @@
     "title": "Shower grain",
     "category": "House Chores",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 2.5,
     "deadline": null,
     "notes": "",
     "status": "backlog",
@@ -1206,7 +1240,7 @@
     "title": "Paint",
     "category": "House Chores",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 2.5,
     "deadline": null,
     "notes": "",
     "status": "backlog",
@@ -1217,7 +1251,7 @@
     "title": "Clean balcony",
     "category": "House Chores",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 1,
     "deadline": null,
     "notes": "",
     "status": "backlog",
@@ -1228,7 +1262,7 @@
     "title": "Fold and sort storage",
     "category": "House Chores",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 2.5,
     "deadline": null,
     "notes": "",
     "status": "backlog",
@@ -1239,7 +1273,7 @@
     "title": "Sort basic wardrobe",
     "category": "House Chores",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 1,
     "deadline": null,
     "notes": "",
     "status": "backlog",
@@ -1250,7 +1284,7 @@
     "title": "Move fridge and TV",
     "category": "House Chores",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 1,
     "deadline": null,
     "notes": "",
     "status": "backlog",
@@ -1261,7 +1295,7 @@
     "title": "Wash bin",
     "category": "House Chores",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 1,
     "deadline": null,
     "notes": "",
     "status": "backlog",
@@ -1272,7 +1306,7 @@
     "title": "Remove bucket",
     "category": "House Chores",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 2,
     "deadline": null,
     "notes": "",
     "status": "backlog",
@@ -1283,7 +1317,7 @@
     "title": "Swap heater reg with stove",
     "category": "House Chores",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 2.5,
     "deadline": null,
     "notes": "",
     "status": "backlog",
@@ -1503,7 +1537,7 @@
     "title": "Visit ABSA to update",
     "category": "Errands",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 2.75,
     "deadline": null,
     "notes": "",
     "status": "backlog",
@@ -1514,7 +1548,7 @@
     "title": "Tooth removal",
     "category": "Errands",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 2.5,
     "deadline": null,
     "notes": "",
     "status": "backlog",
@@ -1525,7 +1559,7 @@
     "title": "Thungisa",
     "category": "Errands",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 4,
     "deadline": null,
     "notes": "",
     "status": "backlog",
@@ -1536,7 +1570,7 @@
     "title": "Brake replace",
     "category": "Errands",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 4,
     "deadline": null,
     "notes": "",
     "status": "backlog",
@@ -1547,7 +1581,7 @@
     "title": "Laminate certificate",
     "category": "Errands",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 1,
     "deadline": null,
     "notes": "",
     "status": "backlog",
@@ -1558,7 +1592,7 @@
     "title": "Print photos get frames",
     "category": "Errands",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 3,
     "deadline": null,
     "notes": "",
     "status": "backlog",
@@ -1569,7 +1603,7 @@
     "title": "Dent repair",
     "category": "Errands",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 4,
     "deadline": null,
     "notes": "",
     "status": "backlog",
@@ -1580,7 +1614,7 @@
     "title": "Car servicing",
     "category": "Errands",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 4,
     "deadline": null,
     "notes": "",
     "status": "backlog",
@@ -1591,7 +1625,7 @@
     "title": "Fix heater",
     "category": "Errands",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 0.25,
     "deadline": null,
     "notes": "",
     "status": "backlog",
@@ -1602,7 +1636,7 @@
     "title": "Emvelweni",
     "category": "Errands",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 4,
     "deadline": null,
     "notes": "",
     "status": "backlog",
@@ -1613,7 +1647,7 @@
     "title": "Izitshalo",
     "category": "Errands",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 4,
     "deadline": null,
     "notes": "",
     "status": "backlog",
@@ -1624,7 +1658,7 @@
     "title": "Tow bar",
     "category": "Errands",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 4,
     "deadline": null,
     "notes": "",
     "status": "backlog",
@@ -1635,7 +1669,7 @@
     "title": "Large room construction",
     "category": "Errands",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 4,
     "deadline": null,
     "notes": "",
     "status": "backlog",
@@ -1650,8 +1684,8 @@
     "deadline": null,
     "notes": "",
     "workType": "Project Work",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-07-06",
     "subtasks": [
       {
         "id": "eng21s1",
@@ -1766,7 +1800,9 @@
         "deadline": null,
         "notes": ""
       }
-    ]
+    ],
+    "scheduledDates": [],
+    "sortOrder": -1
   },
   {
     "id": "eng23",
@@ -1825,7 +1861,9 @@
         "deadline": "2026-06-15",
         "notes": ""
       }
-    ]
+    ],
+    "scheduledDates": [],
+    "sortOrder": -1
   },
   {
     "id": "eng24",
@@ -1857,14 +1895,16 @@
         "deadline": null,
         "notes": ""
       }
-    ]
+    ],
+    "scheduledDates": [],
+    "sortOrder": -1
   },
   {
     "id": "eng25",
     "title": "Slip surface 20 rule check",
     "category": "Engineering",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 0.75,
     "deadline": null,
     "notes": "",
     "workType": "Project Work",
@@ -1876,7 +1916,7 @@
     "title": "Residual parameter updated",
     "category": "Engineering",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 0.75,
     "deadline": null,
     "notes": "",
     "workType": "Project Work",
@@ -1888,7 +1928,7 @@
     "title": "Invoicing boxes sampling box circulate email",
     "category": "Engineering",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 1,
     "deadline": null,
     "notes": "",
     "workType": "Project Work",
@@ -1900,7 +1940,7 @@
     "title": "SW3 1.4-3.4m starter wall toe missing sample",
     "category": "Engineering",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 0.5,
     "deadline": null,
     "notes": "note-only",
     "workType": "Project Work",
@@ -1912,7 +1952,7 @@
     "title": "Restore CPTu programme with AI assistance",
     "category": "Engineering",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 2,
     "deadline": null,
     "notes": "",
     "workType": "R&D",
@@ -1924,7 +1964,7 @@
     "title": "Eng PR note collusion detection systems",
     "category": "Engineering",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 0.75,
     "deadline": null,
     "notes": "",
     "workType": "R&D",
@@ -1936,7 +1976,7 @@
     "title": "Ask Fran for waste disposal procedure",
     "category": "Engineering",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 0.75,
     "deadline": null,
     "notes": "",
     "workType": "R&D",
@@ -1948,7 +1988,7 @@
     "title": "SSIM 2027 abstract",
     "category": "Engineering",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 0.75,
     "deadline": "2027-02-11",
     "notes": "",
     "workType": "Admin",
@@ -1960,7 +2000,7 @@
     "title": "ICSGE 2027 conference",
     "category": "Engineering",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 1,
     "deadline": "2027-06-28",
     "notes": "",
     "workType": "Admin",
@@ -1972,7 +2012,7 @@
     "title": "Clear Google space",
     "category": "Chores Desk",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 0.75,
     "deadline": null,
     "notes": "",
     "status": "backlog",
@@ -1983,7 +2023,7 @@
     "title": "Run Discord live trading Telegram channel website via agent",
     "category": "Markets",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 1,
     "deadline": null,
     "notes": "",
     "status": "backlog",
@@ -1994,10 +2034,100 @@
     "title": "Video trading and multiverse trading and obedience",
     "category": "Markets",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 1,
     "deadline": null,
     "notes": "",
     "status": "backlog",
     "scheduledDate": null
+  },
+  {
+    "id": "mqxlw6ho8g8zs",
+    "title": "Terry is going to",
+    "category": "Engineering",
+    "priority": "Normal",
+    "duration": 15.5,
+    "deadline": null,
+    "notes": "",
+    "workType": "Project Work",
+    "status": "thisweek",
+    "scheduledDate": "2026-07-06",
+    "subtasks": [],
+    "totalHours": 0,
+    "hoursDone": 0,
+    "scheduledDates": [
+      "2026-07-06",
+      "2026-07-07"
+    ]
+  },
+  {
+    "id": "mqxn5q60fsmaz",
+    "title": "test 1111",
+    "category": "Engineering",
+    "priority": "Urgent",
+    "duration": 8.75,
+    "deadline": null,
+    "notes": "",
+    "workType": "Project Work",
+    "status": "backlog",
+    "scheduledDate": null,
+    "subtasks": [],
+    "totalHours": 0,
+    "hoursDone": 0,
+    "scheduledDates": [],
+    "sortOrder": -1
+  },
+  {
+    "id": "mqzdus0g9tlhz",
+    "title": "Talk about 10 rules for stability",
+    "category": "Engineering",
+    "priority": "Normal",
+    "duration": 2,
+    "deadline": null,
+    "notes": "",
+    "workType": "Project Work",
+    "status": "backlog",
+    "scheduledDate": null,
+    "subtasks": []
+  },
+  {
+    "id": "mqzduu7s7sn4p",
+    "title": "Analyse seismic data",
+    "category": "Engineering",
+    "priority": "Normal",
+    "duration": 2,
+    "deadline": null,
+    "notes": "",
+    "workType": "Project Work",
+    "status": "backlog",
+    "scheduledDate": null,
+    "subtasks": []
+  },
+  {
+    "id": "mqzdux9iarn8d",
+    "title": "In CC template",
+    "category": "Engineering",
+    "priority": "Normal",
+    "duration": 1,
+    "deadline": null,
+    "notes": "",
+    "workType": "Project Work",
+    "status": "backlog",
+    "scheduledDate": null,
+    "subtasks": []
+  },
+  {
+    "id": "mr6jvwgahutnj",
+    "title": "tesssssd",
+    "category": "Engineering",
+    "priority": "Urgent",
+    "duration": 16,
+    "deadline": null,
+    "notes": "",
+    "workType": "Project Work",
+    "status": "backlog",
+    "scheduledDate": null,
+    "subtasks": [],
+    "totalHours": 0,
+    "hoursDone": 0
   }
 ]
