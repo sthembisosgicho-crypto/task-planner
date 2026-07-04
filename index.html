@@ -1547,7 +1547,7 @@ function autoSchedule() {
   showStatus(`Scheduled ${placed} tasks`);
 }
 
-document.getElementById('autoScheduleBtn').addEventListener('click', autoSchedule);
+document.getElementById('autoScheduleBtn').addEventListener('click', () => { checkIncompleteTasks(); autoSchedule(); });
 document.getElementById('undoBtn').addEventListener('click', () => {
   if (!preAutoScheduleSnapshot) return;
   tasks = preAutoScheduleSnapshot; preAutoScheduleSnapshot = null;
@@ -1906,7 +1906,6 @@ function closeIncompleteModal() {
 // ===== INIT =====
 importData();
 rolloverOverdueTasks();
-checkIncompleteTasks();
 exportData();
 renderAll();
 // Update time indicator every minute
