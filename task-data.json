@@ -2017,15 +2017,17 @@
   },
   {
     "id": "mr6mcb8vf756q",
-    "title": "New Task",
+    "title": "19:10 test",
     "category": "Engineering",
-    "priority": "Normal",
-    "duration": 0,
+    "priority": "Urgent",
+    "duration": 16,
     "deadline": null,
     "notes": "",
     "workType": "Project Work",
     "status": "backlog",
     "scheduledDate": null,
-    "subtasks": []
+    "subtasks": [],
+    "totalHours": 0,
+    "hoursDone": 0
   }
 ]
