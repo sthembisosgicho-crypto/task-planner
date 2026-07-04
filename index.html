@@ -1030,6 +1030,11 @@ function markDone(id) {
       t.status = 'backlog';
       showStatus(`Session done: ${t.hoursDone}/${t.totalHours}h — will reschedule`);
     }
+  } else if (t.priority === 'Recurring') {
+    t.scheduledDate = null;
+    t.scheduledDates = [];
+    t.status = 'backlog';
+    showStatus('Recurring task done — returned to pool for next cycle');
   } else {
     t.status = 'done';
     t.completedDate = new Date().toISOString();
@@ -1835,6 +1840,7 @@ function showIncompleteModal(items) {
         </select>
         <button onclick="incSave(${i},'${t.id}')" style="padding:4px 10px;border-radius:4px;font-size:0.7rem;background:rgba(16,185,129,0.25);color:#10b981;border:none;cursor:pointer;font-weight:600">Save</button>
         <button onclick="incSkip(${i})" style="padding:4px 10px;border-radius:4px;font-size:0.7rem;background:rgba(255,255,255,0.08);color:var(--text-dim);border:none;cursor:pointer">Skip</button>
+        <button onclick="incDelete('${t.id}',${i})" style="padding:4px 10px;border-radius:4px;font-size:0.7rem;background:rgba(233,69,96,0.2);color:var(--accent);border:none;cursor:pointer">Delete</button>
       </div>
     </div>`;
   });
@@ -1863,6 +1869,17 @@ function incSave(idx, id) {
 function incSkip(idx) {
   const rows = document.querySelectorAll('#incompleteModal .inc-row');
   if (rows[idx]) rows[idx].style.display = 'none';
+}
+
+function incDelete(id, idx) {
+  if (!confirm('Delete this task permanently?')) return;
+  saveBackup('Before delete from needs-info');
+  tasks = tasks.filter(t => t.id !== id);
+  saveTasks(); exportData();
+  const rows = document.querySelectorAll('#incompleteModal .inc-row');
+  if (rows[idx]) rows[idx].style.display = 'none';
+  const remaining = tasks.filter(t => t.status !== 'done' && (!t.duration || t.duration === 0) && !LIST_ONLY.includes(t.category));
+  if (remaining.length === 0) closeIncompleteModal();
 }
 
 function incSaveAll() {
@@ -2292,6 +2309,10 @@ async function doPush(retryCount) {
     var sha = null;
     if (getRes.ok) {
       sha = (await getRes.json()).sha;
+    } else if (getRes.status === 401 || getRes.status === 403) {
+      setGhSyncState('error', 'Token expired or invalid — open Sync to update');
+      showStatus('GitHub token expired. Open Sync to enter a new token.', 8000);
+      return;
     } else if (getRes.status !== 404) {
       var eg = await getRes.json().catch(function(){ return {}; });
       throw new Error(eg.message || 'GET failed: HTTP ' + getRes.status);
@@ -2313,6 +2334,11 @@ async function doPush(retryCount) {
     });
     if (!putRes.ok) {
       var ep = await putRes.json().catch(function(){ return {}; });
+      if (putRes.status === 401 || putRes.status === 403) {
+        setGhSyncState('error', 'Token expired or invalid — open Sync to update');
+        showStatus('GitHub token expired. Open Sync to enter a new token.', 8000);
+        return;
+      }
       if ((putRes.status === 409 || (ep.message || '').toLowerCase().indexOf('sha') !== -1) && retryCount < 2) {
         return doPush(retryCount + 1);
       }
