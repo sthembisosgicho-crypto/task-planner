@@ -2412,12 +2412,30 @@ document.getElementById('ghSyncModal').addEventListener('click', function(e) {
   if (e.target === document.getElementById('ghSyncModal') && Date.now() - (window._ghModalOpenedAt || 0) > 200) closeGhSyncModal();
 });
 
-document.getElementById('ghSyncSaveBtn').addEventListener('click', function() {
+document.getElementById('ghSyncSaveBtn').addEventListener('click', async function() {
   var val = document.getElementById('ghTokenInput').value.trim();
   if (!val) { showStatus('Please enter a token'); return; }
   localStorage.setItem('ghToken', val);
+  localStorage.removeItem('ghLastSync'); // clear so pull-on-load runs fresh
   closeGhSyncModal();
-  setGhSyncState('idle');
+  setGhSyncState('pushing');
+  // Pull first so we don't overwrite remote data with empty local data
+  try {
+    var res = await fetch(GH_API, { headers: {'Authorization':'Bearer '+val,'Accept':'application/vnd.github+json'}, cache:'no-store' });
+    if (res.ok) {
+      var data = await res.json();
+      var content = atob(data.content.replace(/\n/g,''));
+      var remoteTasks = JSON.parse(content);
+      if (Array.isArray(remoteTasks) && remoteTasks.length > 0) {
+        tasks = remoteTasks;
+        saveTasks();
+        localStorage.setItem('taskDataJson', JSON.stringify(remoteTasks));
+        localStorage.setItem('taskDataJsonTime', new Date().toISOString());
+        renderAll();
+        showStatus('Pulled latest tasks from GitHub');
+      }
+    }
+  } catch(e) {}
   doPush(0);
 });
 
