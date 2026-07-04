@@ -2114,20 +2114,5 @@
     "status": "backlog",
     "scheduledDate": null,
     "subtasks": []
-  },
-  {
-    "id": "mr6jvwgahutnj",
-    "title": "tesssssd",
-    "category": "Engineering",
-    "priority": "Urgent",
-    "duration": 16,
-    "deadline": null,
-    "notes": "",
-    "workType": "Project Work",
-    "status": "backlog",
-    "scheduledDate": null,
-    "subtasks": [],
-    "totalHours": 0,
-    "hoursDone": 0
   }
 ]
