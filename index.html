@@ -1911,6 +1911,26 @@ renderAll();
 // Update time indicator every minute
 setInterval(() => { if (document.getElementById('dayView').classList.contains('active')) renderDayView(); }, 60000);
 
+// Auto-pull from GitHub every 2 minutes
+setInterval(async function() {
+  var token = getGhToken();
+  if (!token || !navigator.onLine) return;
+  try {
+    var res = await fetch(GH_API, { headers: {'Authorization':'Bearer '+token,'Accept':'application/vnd.github+json'}, cache:'no-store' });
+    if (!res.ok) return;
+    var data = await res.json();
+    var remoteTasks = JSON.parse(atob(data.content.replace(/\n/g,'')));
+    if (!Array.isArray(remoteTasks) || remoteTasks.length === 0) return;
+    if (JSON.stringify(tasks) !== JSON.stringify(remoteTasks)) {
+      tasks = remoteTasks;
+      saveTasks();
+      localStorage.setItem('taskDataJson', JSON.stringify(remoteTasks));
+      renderAll();
+      showStatus('Auto-synced from GitHub');
+    }
+  } catch(e) {}
+}, 120000);
+
 // ===== MOBILE SUPPORT =====
 function isMobile() { return window.innerWidth <= 767; }
 
