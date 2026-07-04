@@ -129,6 +129,15 @@
         "priority": "Normal",
         "deadline": null,
         "notes": ""
+      },
+      {
+        "id": "eng04s2",
+        "title": "Fencing",
+        "done": false,
+        "duration": 0,
+        "priority": "Normal",
+        "deadline": null,
+        "notes": ""
       }
     ]
   },
@@ -2029,6 +2038,198 @@
     "subtasks": [],
     "totalHours": 0,
     "hoursDone": 0
+  },
+  {
+    "id": "eng34",
+    "title": "Fred TX results",
+    "category": "Engineering",
+    "priority": "Normal",
+    "duration": 0,
+    "deadline": "2026-07-18",
+    "notes": "Top soil stripped, Black turf to be tested for re-use only need phi and c prime, Clay to be removed on site and stockpile wasterock, 2-3 tests one is for VSR Norite remoulded, Enzo?, 1 page results interpretation",
+    "workType": "Project Work",
+    "status": "backlog",
+    "scheduledDate": null
+  },
+  {
+    "id": "eng35",
+    "title": "Timesheet and claims",
+    "category": "Engineering",
+    "priority": "Normal",
+    "duration": 0,
+    "deadline": null,
+    "notes": "",
+    "workType": "Project Work",
+    "status": "backlog",
+    "scheduledDate": null
+  },
+  {
+    "id": "eng36",
+    "title": "Restore CPTu Programme",
+    "category": "Engineering",
+    "priority": "Normal",
+    "duration": 0,
+    "deadline": null,
+    "notes": "",
+    "workType": "R&D",
+    "status": "backlog",
+    "scheduledDate": null
+  },
+  {
+    "id": "eng37",
+    "title": "Cut a key",
+    "category": "Engineering",
+    "priority": "Normal",
+    "duration": 0,
+    "deadline": null,
+    "notes": "",
+    "workType": "R&D",
+    "status": "backlog",
+    "scheduledDate": null
+  },
+  {
+    "id": "eng38",
+    "title": "Rewatch Bruce Lecture",
+    "category": "Engineering",
+    "priority": "Normal",
+    "duration": 0,
+    "deadline": null,
+    "notes": "",
+    "workType": "Admin",
+    "status": "backlog",
+    "scheduledDate": null
+  },
+  {
+    "id": "cd37",
+    "title": "Truworths",
+    "category": "Chores Desk",
+    "priority": "Normal",
+    "duration": 0,
+    "deadline": null,
+    "notes": "",
+    "status": "backlog",
+    "scheduledDate": null
+  },
+  {
+    "id": "cd38",
+    "title": "Power 1500",
+    "category": "Chores Desk",
+    "priority": "Normal",
+    "duration": 0,
+    "deadline": null,
+    "notes": "",
+    "status": "backlog",
+    "scheduledDate": null
+  },
+  {
+    "id": "cd39",
+    "title": "Trip plan",
+    "category": "Chores Desk",
+    "priority": "Normal",
+    "duration": 0,
+    "deadline": null,
+    "notes": "",
+    "status": "backlog",
+    "scheduledDate": null
+  },
+  {
+    "id": "cd40",
+    "title": "Session booking",
+    "category": "Chores Desk",
+    "priority": "Normal",
+    "duration": 0,
+    "deadline": null,
+    "notes": "",
+    "status": "backlog",
+    "scheduledDate": null
+  },
+  {
+    "id": "cd41",
+    "title": "Sessions payments",
+    "category": "Chores Desk",
+    "priority": "Normal",
+    "duration": 0,
+    "deadline": null,
+    "notes": "",
+    "status": "backlog",
+    "scheduledDate": null
+  },
+  {
+    "id": "cd42",
+    "title": "Data payment R600",
+    "category": "Chores Desk",
+    "priority": "Normal",
+    "duration": 0,
+    "deadline": null,
+    "notes": "",
+    "status": "backlog",
+    "scheduledDate": null
+  },
+  {
+    "id": "cd43",
+    "title": "Voucher R400-500",
+    "category": "Chores Desk",
+    "priority": "Normal",
+    "duration": 0,
+    "deadline": null,
+    "notes": "",
+    "status": "backlog",
+    "scheduledDate": null
+  },
+  {
+    "id": "cd44",
+    "title": "Eye appointment R600 book",
+    "category": "Chores Desk",
+    "priority": "Normal",
+    "duration": 0,
+    "deadline": null,
+    "notes": "",
+    "status": "backlog",
+    "scheduledDate": null
+  },
+  {
+    "id": "cd45",
+    "title": "Annekie",
+    "category": "Chores Desk",
+    "priority": "Normal",
+    "duration": 0,
+    "deadline": null,
+    "notes": "",
+    "status": "backlog",
+    "scheduledDate": null
+  },
+  {
+    "id": "cd46",
+    "title": "Chaimane",
+    "category": "Chores Desk",
+    "priority": "Normal",
+    "duration": 0,
+    "deadline": null,
+    "notes": "",
+    "status": "backlog",
+    "scheduledDate": null
+  },
+  {
+    "id": "cd47",
+    "title": "Amo",
+    "category": "Chores Desk",
+    "priority": "Normal",
+    "duration": 0,
+    "deadline": null,
+    "notes": "",
+    "status": "backlog",
+    "scheduledDate": null
+  },
+  {
+    "id": "cd48",
+    "title": "SAICE recording",
+    "category": "Chores Desk",
+    "priority": "Normal",
+    "duration": 0,
+    "deadline": null,
+    "notes": "",
+    "status": "backlog",
+    "scheduledDate": null
   },
   {
     "id": "mr6mhxhdh79fv",
