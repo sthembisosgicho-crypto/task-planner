@@ -2018,11 +2018,12 @@
     "deadline": "2026-07-04",
     "notes": "",
     "workType": "Project Work",
-    "status": "backlog",
+    "status": "done",
     "scheduledDate": null,
     "subtasks": [],
     "totalHours": 0,
-    "hoursDone": 0
+    "hoursDone": 0,
+    "completedDate": "2026-07-04T18:09:29.568Z"
   },
   {
     "id": "mr6mcb8vf756q",
@@ -2033,11 +2034,12 @@
     "deadline": null,
     "notes": "",
     "workType": "Project Work",
-    "status": "backlog",
+    "status": "done",
     "scheduledDate": null,
     "subtasks": [],
     "totalHours": 0,
-    "hoursDone": 0
+    "hoursDone": 0,
+    "completedDate": "2026-07-04T18:09:27.392Z"
   },
   {
     "id": "eng34",
@@ -2240,11 +2242,12 @@
     "deadline": null,
     "notes": "",
     "workType": "Project Work",
-    "status": "backlog",
+    "status": "done",
     "scheduledDate": null,
     "subtasks": [],
     "totalHours": 0,
-    "hoursDone": 0
+    "hoursDone": 0,
+    "completedDate": "2026-07-04T18:09:24.222Z"
   },
   {
     "id": "mr6moekxvsbnd",
@@ -2255,11 +2258,12 @@
     "deadline": null,
     "notes": "",
     "workType": "Project Work",
-    "status": "backlog",
+    "status": "done",
     "scheduledDate": null,
     "subtasks": [],
     "totalHours": 0,
-    "hoursDone": 0
+    "hoursDone": 0,
+    "completedDate": "2026-07-04T18:09:25.866Z"
   },
   {
     "id": "mr6mwh4gc8lfz",
