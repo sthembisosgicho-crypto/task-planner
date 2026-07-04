@@ -1,5 +1,5 @@
 // Task Planner Service Worker
-const CACHE_VERSION = 'v20';
+const CACHE_VERSION = 'v21';
 const CACHE_NAME = `task-planner-${CACHE_VERSION}`;
 
 const PRECACHE_ASSETS = [
