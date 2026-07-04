@@ -1999,5 +1999,20 @@
     "notes": "",
     "status": "backlog",
     "scheduledDate": null
+  },
+  {
+    "id": "mr6js7ky1ycna",
+    "title": "18:00tesy",
+    "category": "Engineering",
+    "priority": "Urgent",
+    "duration": 8.5,
+    "deadline": "2026-07-04",
+    "notes": "",
+    "workType": "Project Work",
+    "status": "backlog",
+    "scheduledDate": null,
+    "subtasks": [],
+    "totalHours": 0,
+    "hoursDone": 0
   }
 ]
