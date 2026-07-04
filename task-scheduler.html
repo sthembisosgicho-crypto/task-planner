@@ -477,7 +477,7 @@ input, select, textarea { font-family: inherit; }
 <!-- Main -->
 <div class="main-content">
   <div class="app-header">
-    <h1>Task Scheduler <span style="font-size:0.6rem;font-weight:400;color:var(--text-dim);vertical-align:middle">v25</span></h1>
+    <h1>Task Scheduler <span style="font-size:0.6rem;font-weight:400;color:var(--text-dim);vertical-align:middle">v26</span></h1>
     <div class="header-actions">
       <button class="btn-primary" id="addTaskBtn">+ Add Task</button>
       <button class="btn-secondary" id="autoScheduleBtn">Auto-Schedule</button>
@@ -2323,9 +2323,10 @@ function setGhSyncState(state, msg) {
 
 function schedulePush() {
   if (!getGhToken()) return;
+  localStorage.setItem('ghPushPending', '1');
   setGhSyncState('pending');
   clearTimeout(_ghSyncTimer);
-  _ghSyncTimer = setTimeout(function() { doPush(0); }, 8000);
+  _ghSyncTimer = setTimeout(function() { doPush(0); }, 2000);
 }
 
 function ghToBase64(str) {
@@ -2390,6 +2391,7 @@ async function doPush(retryCount) {
       throw new Error(ep.message || 'PUT failed: HTTP ' + putRes.status);
     }
     var timeStr = now.toLocaleTimeString('en-ZA', { hour: '2-digit', minute: '2-digit' });
+    localStorage.removeItem('ghPushPending');
     setGhSyncState('ok', 'Synced at ' + timeStr);
     localStorage.setItem('ghLastSync', now.toISOString());
     _ghUpdateStatusBox();
@@ -2536,10 +2538,23 @@ document.getElementById('mHamGhSync').addEventListener('click', function(e) {
   }
 })();
 
+// Warn before closing if data hasn't been pushed yet
+window.addEventListener('beforeunload', function(e) {
+  if (localStorage.getItem('ghPushPending') === '1') {
+    e.preventDefault();
+    e.returnValue = 'Your changes are still syncing — wait a moment before closing.';
+  }
+});
+
 // ── Pull latest from GitHub on load ──────────────────────────────────────────
 (async function ghPullOnLoad() {
   var token = getGhToken();
   if (!token || !navigator.onLine) return;
+  // If a push was pending when the page last closed, push our local data first
+  if (localStorage.getItem('ghPushPending') === '1') {
+    await doPush(0);
+    return;
+  }
   try {
     var res = await fetch(GH_API, {
       headers: { 'Authorization': 'Bearer ' + token, 'Accept': 'application/vnd.github+json' },
