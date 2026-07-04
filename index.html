@@ -477,7 +477,7 @@ input, select, textarea { font-family: inherit; }
 <!-- Main -->
 <div class="main-content">
   <div class="app-header">
-    <h1>Task Scheduler <span style="font-size:0.6rem;font-weight:400;color:var(--text-dim);vertical-align:middle">v24</span></h1>
+    <h1>Task Scheduler <span style="font-size:0.6rem;font-weight:400;color:var(--text-dim);vertical-align:middle">v25</span></h1>
     <div class="header-actions">
       <button class="btn-primary" id="addTaskBtn">+ Add Task</button>
       <button class="btn-secondary" id="autoScheduleBtn">Auto-Schedule</button>
@@ -1937,12 +1937,14 @@ setInterval(() => { if (document.getElementById('dayView').classList.contains('a
 setInterval(async function() {
   var token = getGhToken();
   if (!token || !navigator.onLine) return;
+  if (_ghSyncState === 'pending' || _ghSyncState === 'pushing') return; // local changes not yet pushed — don't overwrite
   try {
     var res = await fetch(GH_API, { headers: {'Authorization':'Bearer '+token,'Accept':'application/vnd.github+json'}, cache:'no-store' });
     if (!res.ok) return;
     var data = await res.json();
     var remoteTasks = JSON.parse(atob(data.content.replace(/\n/g,'')));
     if (!Array.isArray(remoteTasks) || remoteTasks.length === 0) return;
+    var deleted = getDeletedIds(); if (deleted.size) remoteTasks = remoteTasks.filter(t => !deleted.has(t.id));
     if (JSON.stringify(tasks) !== JSON.stringify(remoteTasks)) {
       tasks = remoteTasks;
       saveTasks();
