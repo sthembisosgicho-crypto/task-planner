@@ -2047,15 +2047,17 @@
   },
   {
     "id": "mr6moekxvsbnd",
-    "title": "New Task",
+    "title": "19 19 phone",
     "category": "Engineering",
-    "priority": "Normal",
-    "duration": 0,
+    "priority": "Urgent",
+    "duration": 16,
     "deadline": null,
     "notes": "",
     "workType": "Project Work",
     "status": "backlog",
     "scheduledDate": null,
-    "subtasks": []
+    "subtasks": [],
+    "totalHours": 0,
+    "hoursDone": 0
   }
 ]
