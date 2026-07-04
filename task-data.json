@@ -2032,15 +2032,17 @@
   },
   {
     "id": "mr6mhxhdh79fv",
-    "title": "New Task",
+    "title": "19:15 PC",
     "category": "Engineering",
-    "priority": "Normal",
-    "duration": 0,
+    "priority": "Urgent",
+    "duration": 4.5,
     "deadline": null,
     "notes": "",
     "workType": "Project Work",
     "status": "backlog",
     "scheduledDate": null,
-    "subtasks": []
+    "subtasks": [],
+    "totalHours": 0,
+    "hoursDone": 0
   }
 ]
