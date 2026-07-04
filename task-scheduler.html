@@ -684,8 +684,9 @@ input, select, textarea { font-family: inherit; }
     </div>
     <div class="modal-actions">
       <div><button class="btn-danger" id="ghDisconnectBtn">Disconnect</button></div>
-      <div style="display:flex;gap:8px">
-        <button class="btn-secondary" id="ghSyncNowBtn">Sync Now</button>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn-secondary" id="ghPullNowBtn">&#8595; Pull</button>
+        <button class="btn-secondary" id="ghSyncNowBtn">&#8593; Push</button>
         <button class="btn-secondary" id="ghSyncCancelBtn">Cancel</button>
         <button class="btn-primary" id="ghSyncSaveBtn">Connect</button>
       </div>
@@ -2448,6 +2449,27 @@ document.getElementById('ghDisconnectBtn').addEventListener('click', function() 
 document.getElementById('ghSyncNowBtn').addEventListener('click', function() {
   closeGhSyncModal();
   doPush(0);
+});
+
+document.getElementById('ghPullNowBtn').addEventListener('click', async function() {
+  var token = getGhToken();
+  if (!token) { showStatus('No token — connect first'); return; }
+  closeGhSyncModal();
+  setGhSyncState('pushing');
+  try {
+    var res = await fetch(GH_API, { headers: {'Authorization':'Bearer '+token,'Accept':'application/vnd.github+json'}, cache:'no-store' });
+    if (!res.ok) { setGhSyncState('error','Pull failed'); return; }
+    var data = await res.json();
+    var remoteTasks = JSON.parse(atob(data.content.replace(/\n/g,'')));
+    if (!Array.isArray(remoteTasks) || remoteTasks.length === 0) { showStatus('Nothing to pull'); return; }
+    tasks = remoteTasks;
+    saveTasks();
+    localStorage.setItem('taskDataJson', JSON.stringify(remoteTasks));
+    localStorage.setItem('taskDataJsonTime', new Date().toISOString());
+    renderAll();
+    setGhSyncState('ok','Pulled at '+new Date().toLocaleTimeString('en-ZA',{hour:'2-digit',minute:'2-digit'}));
+    showStatus('Pulled '+remoteTasks.length+' tasks from GitHub');
+  } catch(e) { setGhSyncState('error','Pull failed: '+e.message); }
 });
 
 document.getElementById('ghSyncBtn').addEventListener('click', function() {
