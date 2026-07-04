@@ -8,8 +8,8 @@
     "deadline": "2026-06-22",
     "notes": "",
     "workType": "Project Work",
-    "status": "backlog",
-    "scheduledDate": null
+    "status": "thisweek",
+    "scheduledDate": "2026-07-06"
   },
   {
     "id": "eng02",
@@ -20,8 +20,8 @@
     "deadline": "2026-06-22",
     "notes": "",
     "workType": "Project Work",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-07-06",
     "subtasks": [
       {
         "id": "eng02s1",
@@ -95,6 +95,9 @@
         "deadline": null,
         "notes": ""
       }
+    ],
+    "scheduledDates": [
+      "2026-07-06"
     ]
   },
   {
@@ -106,8 +109,8 @@
     "deadline": "2026-06-18",
     "notes": "",
     "workType": "Project Work",
-    "status": "backlog",
-    "scheduledDate": null
+    "status": "thisweek",
+    "scheduledDate": "2026-07-06"
   },
   {
     "id": "eng04",
@@ -118,8 +121,8 @@
     "deadline": "2026-06-23",
     "notes": "",
     "workType": "Project Work",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-07-07",
     "subtasks": [
       {
         "id": "eng04s1",
@@ -150,8 +153,8 @@
     "deadline": "2026-06-15",
     "notes": "",
     "workType": "R&D",
-    "status": "backlog",
-    "scheduledDate": null
+    "status": "thisweek",
+    "scheduledDate": "2026-07-08"
   },
   {
     "id": "eng06",
@@ -162,9 +165,8 @@
     "deadline": "2026-06-22",
     "notes": "",
     "workType": "Project Work",
-    "status": "backlog",
-    "scheduledDate": null,
-    "tierSortOrder": 6
+    "status": "thisweek",
+    "scheduledDate": "2026-07-07"
   },
   {
     "id": "eng07",
@@ -175,8 +177,8 @@
     "deadline": "2026-06-26",
     "notes": "",
     "workType": "Admin",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-07-10",
     "subtasks": [
       {
         "id": "eng07s1",
@@ -205,8 +207,7 @@
         "deadline": null,
         "notes": ""
       }
-    ],
-    "tierSortOrder": 1
+    ]
   },
   {
     "id": "eng08",
@@ -217,9 +218,8 @@
     "deadline": "2026-06-22",
     "notes": "",
     "workType": "Admin",
-    "status": "backlog",
-    "scheduledDate": null,
-    "tierSortOrder": 0
+    "status": "thisweek",
+    "scheduledDate": "2026-07-10"
   },
   {
     "id": "eng09",
@@ -230,8 +230,8 @@
     "deadline": "2026-06-26",
     "notes": "",
     "workType": "Admin",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-07-10",
     "subtasks": [
       {
         "id": "eng09s1",
@@ -251,8 +251,7 @@
         "deadline": null,
         "notes": ""
       }
-    ],
-    "tierSortOrder": 2
+    ]
   },
   {
     "id": "eng10",
@@ -263,8 +262,8 @@
     "deadline": null,
     "notes": "",
     "workType": "Project Work",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-07-07",
     "subtasks": [
       {
         "id": "eng10s1",
@@ -311,6 +310,9 @@
         "deadline": null,
         "notes": ""
       }
+    ],
+    "scheduledDates": [
+      "2026-07-07"
     ]
   },
   {
@@ -322,8 +324,11 @@
     "deadline": null,
     "notes": "",
     "workType": "Admin",
-    "status": "backlog",
-    "scheduledDate": null
+    "status": "thisweek",
+    "scheduledDate": "2026-07-10",
+    "scheduledDates": [
+      "2026-07-10"
+    ]
   },
   {
     "id": "eng12",
@@ -334,8 +339,8 @@
     "deadline": null,
     "notes": "",
     "workType": "Project Work",
-    "status": "backlog",
-    "scheduledDate": null
+    "status": "thisweek",
+    "scheduledDate": "2026-07-09"
   },
   {
     "id": "eng13",
@@ -346,8 +351,8 @@
     "deadline": null,
     "notes": "",
     "workType": "Admin",
-    "status": "backlog",
-    "scheduledDate": null
+    "status": "thisweek",
+    "scheduledDate": "2026-07-17"
   },
   {
     "id": "eng14",
@@ -358,8 +363,8 @@
     "deadline": null,
     "notes": "",
     "workType": "Project Work",
-    "status": "backlog",
-    "scheduledDate": null
+    "status": "thisweek",
+    "scheduledDate": "2026-07-09"
   },
   {
     "id": "eng15",
@@ -370,8 +375,8 @@
     "deadline": null,
     "notes": "",
     "workType": "Admin",
-    "status": "backlog",
-    "scheduledDate": null
+    "status": "thisweek",
+    "scheduledDate": "2026-07-17"
   },
   {
     "id": "eng16",
@@ -382,8 +387,8 @@
     "deadline": null,
     "notes": "",
     "workType": "Admin",
-    "status": "backlog",
-    "scheduledDate": null
+    "status": "thisweek",
+    "scheduledDate": "2026-07-17"
   },
   {
     "id": "eng17",
@@ -394,8 +399,8 @@
     "deadline": null,
     "notes": "",
     "workType": "Admin",
-    "status": "backlog",
-    "scheduledDate": null
+    "status": "thisweek",
+    "scheduledDate": "2026-07-17"
   },
   {
     "id": "eng18",
@@ -406,8 +411,13 @@
     "deadline": null,
     "notes": "Weekly",
     "workType": "Admin",
-    "status": "backlog",
-    "scheduledDate": null
+    "status": "thisweek",
+    "scheduledDate": "2026-07-17",
+    "scheduledDates": [
+      "2026-07-17",
+      "2026-07-24",
+      "2026-07-31"
+    ]
   },
   {
     "id": "eng19",
@@ -418,8 +428,13 @@
     "deadline": null,
     "notes": "Daily",
     "workType": "Admin",
-    "status": "backlog",
-    "scheduledDate": null
+    "status": "thisweek",
+    "scheduledDate": "2026-07-17",
+    "scheduledDates": [
+      "2026-07-17",
+      "2026-07-24",
+      "2026-07-31"
+    ]
   },
   {
     "id": "eng20",
@@ -430,8 +445,12 @@
     "deadline": null,
     "notes": "Weekly",
     "workType": "Admin",
-    "status": "backlog",
-    "scheduledDate": null
+    "status": "thisweek",
+    "scheduledDate": "2026-07-24",
+    "scheduledDates": [
+      "2026-07-24",
+      "2026-07-31"
+    ]
   },
   {
     "id": "mkt01",
@@ -441,8 +460,8 @@
     "duration": 3,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null
+    "status": "today",
+    "scheduledDate": "2026-07-04"
   },
   {
     "id": "mkt02",
@@ -452,8 +471,11 @@
     "duration": 2,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null
+    "status": "today",
+    "scheduledDate": "2026-07-04",
+    "scheduledDates": [
+      "2026-07-04"
+    ]
   },
   {
     "id": "mkt03",
@@ -463,8 +485,8 @@
     "duration": 1,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null
+    "status": "thisweek",
+    "scheduledDate": "2026-07-05"
   },
   {
     "id": "mkt04",
@@ -474,8 +496,8 @@
     "duration": 1,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null
+    "status": "thisweek",
+    "scheduledDate": "2026-07-05"
   },
   {
     "id": "mkt05",
@@ -485,8 +507,8 @@
     "duration": 1,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null
+    "status": "thisweek",
+    "scheduledDate": "2026-07-05"
   },
   {
     "id": "chr01",
@@ -496,8 +518,30 @@
     "duration": 0.5,
     "deadline": null,
     "notes": "Weekly",
-    "status": "backlog",
-    "scheduledDate": null
+    "status": "thisweek",
+    "scheduledDate": "2026-07-06",
+    "scheduledDates": [
+      "2026-07-06",
+      "2026-07-07",
+      "2026-07-08",
+      "2026-07-09",
+      "2026-07-10",
+      "2026-07-13",
+      "2026-07-14",
+      "2026-07-15",
+      "2026-07-16",
+      "2026-07-17",
+      "2026-07-20",
+      "2026-07-21",
+      "2026-07-22",
+      "2026-07-23",
+      "2026-07-24",
+      "2026-07-27",
+      "2026-07-28",
+      "2026-07-29",
+      "2026-07-30",
+      "2026-07-31"
+    ]
   },
   {
     "id": "chr02",
@@ -507,8 +551,8 @@
     "duration": 1,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null
+    "status": "thisweek",
+    "scheduledDate": "2026-07-06"
   },
   {
     "id": "chr03",
@@ -518,8 +562,11 @@
     "duration": 1,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null
+    "status": "thisweek",
+    "scheduledDate": "2026-07-06",
+    "scheduledDates": [
+      "2026-07-06"
+    ]
   },
   {
     "id": "chr04",
@@ -529,8 +576,8 @@
     "duration": 0.5,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null
+    "status": "thisweek",
+    "scheduledDate": "2026-07-07"
   },
   {
     "id": "chr05",
@@ -540,8 +587,8 @@
     "duration": 0.5,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null
+    "status": "thisweek",
+    "scheduledDate": "2026-07-07"
   },
   {
     "id": "chr06",
@@ -551,8 +598,8 @@
     "duration": 1,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null
+    "status": "thisweek",
+    "scheduledDate": "2026-07-08"
   },
   {
     "id": "hlt01",
@@ -562,8 +609,38 @@
     "duration": 0.25,
     "deadline": null,
     "notes": "Daily",
-    "status": "backlog",
-    "scheduledDate": null
+    "status": "thisweek",
+    "scheduledDate": "2026-07-06",
+    "scheduledDates": [
+      "2026-07-06",
+      "2026-07-07",
+      "2026-07-08",
+      "2026-07-09",
+      "2026-07-10",
+      "2026-07-11",
+      "2026-07-12",
+      "2026-07-13",
+      "2026-07-14",
+      "2026-07-15",
+      "2026-07-16",
+      "2026-07-17",
+      "2026-07-18",
+      "2026-07-19",
+      "2026-07-20",
+      "2026-07-21",
+      "2026-07-22",
+      "2026-07-23",
+      "2026-07-24",
+      "2026-07-25",
+      "2026-07-26",
+      "2026-07-27",
+      "2026-07-28",
+      "2026-07-29",
+      "2026-07-30",
+      "2026-07-31",
+      "2026-08-01",
+      "2026-08-02"
+    ]
   },
   {
     "id": "mkt06",
@@ -1663,8 +1740,8 @@
     "deadline": null,
     "notes": "",
     "workType": "Project Work",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-07-09",
     "subtasks": [
       {
         "id": "eng21s1",
@@ -1758,8 +1835,8 @@
     "deadline": "2026-06-22",
     "notes": "",
     "workType": "Project Work",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-07-07",
     "subtasks": [
       {
         "id": "eng22s1",
@@ -1790,8 +1867,8 @@
     "deadline": null,
     "notes": "",
     "workType": "Personal Dev",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-07-10",
     "subtasks": [
       {
         "id": "eng23s1",
@@ -1849,8 +1926,8 @@
     "deadline": null,
     "notes": "",
     "workType": "Personal Dev",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-07-10",
     "subtasks": [
       {
         "id": "eng24s1",
@@ -1966,8 +2043,7 @@
     "notes": "",
     "workType": "Admin",
     "status": "backlog",
-    "scheduledDate": null,
-    "tierSortOrder": 4
+    "scheduledDate": null
   },
   {
     "id": "eng33",
@@ -1979,8 +2055,7 @@
     "notes": "",
     "workType": "Admin",
     "status": "backlog",
-    "scheduledDate": null,
-    "tierSortOrder": 5
+    "scheduledDate": null
   },
   {
     "id": "cd36",
@@ -2057,8 +2132,7 @@
     "notes": "Top soil stripped, Black turf to be tested for re-use only need phi and c prime, Clay to be removed on site and stockpile wasterock, 2-3 tests one is for VSR Norite remoulded, Enzo?, 1 page results interpretation",
     "workType": "Project Work",
     "status": "backlog",
-    "scheduledDate": null,
-    "tierSortOrder": 3
+    "scheduledDate": null
   },
   {
     "id": "eng35",
