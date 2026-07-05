@@ -757,7 +757,7 @@
   {
     "id": "chr01",
     "title": "Withdraw",
-    "category": "Errands",
+    "category": "Chores",
     "priority": "Recurring",
     "duration": 0.5,
     "deadline": null,
@@ -900,9 +900,7 @@
       "2026-10-02": 0.5
     },
     "scheduledSlotName": "Homework",
-    "subtasks": [],
-    "totalHours": 0,
-    "hoursDone": 0
+    "subtasks": []
   },
   {
     "id": "chr02",
@@ -1212,13 +1210,12 @@
     "id": "mkt08",
     "title": "Run live CV",
     "category": "Markets",
-    "priority": "Normal",
+    "priority": "Urgent",
     "duration": 1,
     "deadline": null,
     "notes": "",
     "status": "thisweek",
     "scheduledDate": "2026-07-12",
-    "tierSortOrder": 25,
     "scheduledSessionHours": {
       "2026-07-12": 1
     },
