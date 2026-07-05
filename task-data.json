@@ -313,7 +313,8 @@
     ],
     "scheduledDates": [
       "2026-07-07"
-    ]
+    ],
+    "tierSortOrder": 0
   },
   {
     "id": "eng11",
@@ -328,7 +329,8 @@
     "scheduledDate": "2026-07-10",
     "scheduledDates": [
       "2026-07-10"
-    ]
+    ],
+    "tierSortOrder": 1
   },
   {
     "id": "eng12",
@@ -340,7 +342,8 @@
     "notes": "",
     "workType": "Project Work",
     "status": "thisweek",
-    "scheduledDate": "2026-07-09"
+    "scheduledDate": "2026-07-09",
+    "tierSortOrder": 2
   },
   {
     "id": "eng13",
@@ -352,7 +355,8 @@
     "notes": "",
     "workType": "Admin",
     "status": "thisweek",
-    "scheduledDate": "2026-07-17"
+    "scheduledDate": "2026-07-17",
+    "tierSortOrder": 3
   },
   {
     "id": "eng14",
@@ -364,7 +368,8 @@
     "notes": "",
     "workType": "Project Work",
     "status": "thisweek",
-    "scheduledDate": "2026-07-09"
+    "scheduledDate": "2026-07-09",
+    "tierSortOrder": 4
   },
   {
     "id": "eng15",
@@ -376,7 +381,8 @@
     "notes": "",
     "workType": "Admin",
     "status": "thisweek",
-    "scheduledDate": "2026-07-17"
+    "scheduledDate": "2026-07-17",
+    "tierSortOrder": 5
   },
   {
     "id": "eng16",
@@ -388,7 +394,8 @@
     "notes": "",
     "workType": "Admin",
     "status": "thisweek",
-    "scheduledDate": "2026-07-17"
+    "scheduledDate": "2026-07-17",
+    "tierSortOrder": 6
   },
   {
     "id": "eng17",
@@ -400,7 +407,8 @@
     "notes": "",
     "workType": "Admin",
     "status": "thisweek",
-    "scheduledDate": "2026-07-17"
+    "scheduledDate": "2026-07-17",
+    "tierSortOrder": 7
   },
   {
     "id": "eng18",
@@ -417,7 +425,8 @@
       "2026-07-17",
       "2026-07-24",
       "2026-07-31"
-    ]
+    ],
+    "tierSortOrder": 8
   },
   {
     "id": "eng19",
@@ -434,7 +443,8 @@
       "2026-07-17",
       "2026-07-24",
       "2026-07-31"
-    ]
+    ],
+    "tierSortOrder": 9
   },
   {
     "id": "eng20",
@@ -451,7 +461,8 @@
       "2026-07-17",
       "2026-07-24",
       "2026-07-31"
-    ]
+    ],
+    "tierSortOrder": 10
   },
   {
     "id": "mkt01",
@@ -462,7 +473,8 @@
     "deadline": null,
     "notes": "",
     "status": "today",
-    "scheduledDate": "2026-07-04"
+    "scheduledDate": "2026-07-04",
+    "tierSortOrder": 11
   },
   {
     "id": "mkt02",
@@ -476,7 +488,8 @@
     "scheduledDate": "2026-07-04",
     "scheduledDates": [
       "2026-07-04"
-    ]
+    ],
+    "tierSortOrder": 12
   },
   {
     "id": "mkt03",
@@ -487,7 +500,8 @@
     "deadline": null,
     "notes": "",
     "status": "thisweek",
-    "scheduledDate": "2026-07-05"
+    "scheduledDate": "2026-07-05",
+    "tierSortOrder": 13
   },
   {
     "id": "mkt04",
@@ -498,7 +512,8 @@
     "deadline": null,
     "notes": "",
     "status": "thisweek",
-    "scheduledDate": "2026-07-05"
+    "scheduledDate": "2026-07-05",
+    "tierSortOrder": 14
   },
   {
     "id": "mkt05",
@@ -509,7 +524,8 @@
     "deadline": null,
     "notes": "",
     "status": "thisweek",
-    "scheduledDate": "2026-07-05"
+    "scheduledDate": "2026-07-05",
+    "tierSortOrder": 15
   },
   {
     "id": "chr01",
@@ -542,7 +558,8 @@
       "2026-07-30",
       "2026-07-31",
       "2026-08-03"
-    ]
+    ],
+    "tierSortOrder": 16
   },
   {
     "id": "chr02",
@@ -553,7 +570,8 @@
     "deadline": null,
     "notes": "",
     "status": "thisweek",
-    "scheduledDate": "2026-07-06"
+    "scheduledDate": "2026-07-06",
+    "tierSortOrder": 17
   },
   {
     "id": "chr03",
@@ -567,7 +585,8 @@
     "scheduledDate": "2026-07-06",
     "scheduledDates": [
       "2026-07-06"
-    ]
+    ],
+    "tierSortOrder": 18
   },
   {
     "id": "chr04",
@@ -578,7 +597,8 @@
     "deadline": null,
     "notes": "",
     "status": "thisweek",
-    "scheduledDate": "2026-07-07"
+    "scheduledDate": "2026-07-07",
+    "tierSortOrder": 19
   },
   {
     "id": "chr05",
@@ -589,7 +609,8 @@
     "deadline": null,
     "notes": "",
     "status": "thisweek",
-    "scheduledDate": "2026-07-07"
+    "scheduledDate": "2026-07-07",
+    "tierSortOrder": 20
   },
   {
     "id": "chr06",
@@ -600,7 +621,8 @@
     "deadline": null,
     "notes": "",
     "status": "thisweek",
-    "scheduledDate": "2026-07-08"
+    "scheduledDate": "2026-07-08",
+    "tierSortOrder": 21
   },
   {
     "id": "hlt01",
@@ -643,7 +665,8 @@
       "2026-08-01",
       "2026-08-02",
       "2026-08-03"
-    ]
+    ],
+    "tierSortOrder": 22
   },
   {
     "id": "mkt06",
@@ -654,7 +677,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 23
   },
   {
     "id": "mkt07",
@@ -665,7 +689,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 24
   },
   {
     "id": "mkt08",
@@ -676,7 +701,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 25
   },
   {
     "id": "mkt09",
@@ -687,7 +713,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 26
   },
   {
     "id": "mkt10",
@@ -698,7 +725,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 27
   },
   {
     "id": "mkt11",
@@ -709,7 +737,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 28
   },
   {
     "id": "mkt12",
@@ -720,7 +749,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 29
   },
   {
     "id": "mkt13",
@@ -731,7 +761,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 30
   },
   {
     "id": "mkt14",
@@ -742,7 +773,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 31
   },
   {
     "id": "mkt15",
@@ -753,7 +785,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 32
   },
   {
     "id": "mkt16",
@@ -764,7 +797,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 33
   },
   {
     "id": "mkt17",
@@ -775,7 +809,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 34
   },
   {
     "id": "mkt18",
@@ -786,7 +821,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 35
   },
   {
     "id": "sh01",
@@ -797,7 +833,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 36
   },
   {
     "id": "sh02",
@@ -808,7 +845,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 37
   },
   {
     "id": "sh03",
@@ -819,7 +857,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 38
   },
   {
     "id": "sh04",
@@ -830,7 +869,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 39
   },
   {
     "id": "sh05",
@@ -841,7 +881,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 40
   },
   {
     "id": "sh06",
@@ -852,7 +893,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 41
   },
   {
     "id": "cd01",
@@ -863,7 +905,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 42
   },
   {
     "id": "cd02",
@@ -885,7 +928,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 43
   },
   {
     "id": "cd04",
@@ -896,7 +940,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 44
   },
   {
     "id": "cd05",
@@ -907,7 +952,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 45
   },
   {
     "id": "cd06",
@@ -918,7 +964,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 46
   },
   {
     "id": "cd07",
@@ -929,7 +976,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 47
   },
   {
     "id": "cd08",
@@ -940,7 +988,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 48
   },
   {
     "id": "cd09",
@@ -951,7 +1000,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 49
   },
   {
     "id": "cd10",
@@ -962,7 +1012,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 50
   },
   {
     "id": "cd11",
@@ -973,7 +1024,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 51
   },
   {
     "id": "cd12",
@@ -984,7 +1036,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 52
   },
   {
     "id": "cd13",
@@ -995,7 +1048,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 53
   },
   {
     "id": "cd14",
@@ -1006,7 +1060,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 54
   },
   {
     "id": "cd15",
@@ -1017,7 +1072,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 55
   },
   {
     "id": "cd16",
@@ -1028,7 +1084,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 56
   },
   {
     "id": "cd17",
@@ -1050,7 +1107,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 57
   },
   {
     "id": "cd19",
@@ -1061,7 +1119,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 58
   },
   {
     "id": "cd20",
@@ -1072,7 +1131,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 59
   },
   {
     "id": "cd21",
@@ -1083,7 +1143,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 60
   },
   {
     "id": "cd22",
@@ -1094,7 +1155,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 61
   },
   {
     "id": "cd23",
@@ -1105,7 +1167,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 62
   },
   {
     "id": "cd24",
@@ -1116,7 +1179,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 63
   },
   {
     "id": "cd25",
@@ -1127,7 +1191,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 64
   },
   {
     "id": "cd26",
@@ -1138,7 +1203,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 65
   },
   {
     "id": "cd27",
@@ -1149,7 +1215,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 66
   },
   {
     "id": "cd28",
@@ -1160,7 +1227,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 67
   },
   {
     "id": "cd29",
@@ -1171,7 +1239,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 68
   },
   {
     "id": "cd30",
@@ -1182,7 +1251,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 69
   },
   {
     "id": "cd31",
@@ -1193,7 +1263,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 70
   },
   {
     "id": "cd32",
@@ -1204,7 +1275,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 71
   },
   {
     "id": "cd33",
@@ -1215,7 +1287,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 72
   },
   {
     "id": "cd34",
@@ -1226,7 +1299,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 73
   },
   {
     "id": "cd35",
@@ -1237,7 +1311,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 74
   },
   {
     "id": "hc01",
@@ -1248,7 +1323,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 75
   },
   {
     "id": "hc02",
@@ -1259,7 +1335,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 76
   },
   {
     "id": "hc03",
@@ -1270,7 +1347,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 77
   },
   {
     "id": "hc04",
@@ -1281,7 +1359,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 78
   },
   {
     "id": "hc05",
@@ -1292,7 +1371,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 79
   },
   {
     "id": "hc06",
@@ -1303,7 +1383,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 80
   },
   {
     "id": "hc07",
@@ -1314,7 +1395,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 81
   },
   {
     "id": "hc08",
@@ -1325,7 +1407,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 82
   },
   {
     "id": "hc09",
@@ -1336,7 +1419,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 83
   },
   {
     "id": "hc10",
@@ -1347,7 +1431,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 84
   },
   {
     "id": "hc11",
@@ -1358,7 +1443,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 85
   },
   {
     "id": "hc12",
@@ -1369,7 +1455,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 86
   },
   {
     "id": "hc13",
@@ -1380,7 +1467,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 87
   },
   {
     "id": "sp01",
@@ -1391,7 +1479,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 88
   },
   {
     "id": "sp02",
@@ -1402,7 +1491,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 89
   },
   {
     "id": "sp03",
@@ -1413,7 +1503,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 90
   },
   {
     "id": "sp04",
@@ -1424,7 +1515,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 91
   },
   {
     "id": "sp05",
@@ -1435,7 +1527,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 92
   },
   {
     "id": "sp06",
@@ -1446,7 +1539,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 93
   },
   {
     "id": "sp07",
@@ -1457,7 +1551,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 94
   },
   {
     "id": "sp08",
@@ -1468,7 +1563,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 95
   },
   {
     "id": "sp09",
@@ -1479,7 +1575,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 96
   },
   {
     "id": "sp10",
@@ -1490,7 +1587,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 97
   },
   {
     "id": "sp11",
@@ -1501,7 +1599,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 98
   },
   {
     "id": "sp12",
@@ -1512,7 +1611,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 99
   },
   {
     "id": "sp13",
@@ -1523,7 +1623,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 100
   },
   {
     "id": "sp14",
@@ -1534,7 +1635,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 101
   },
   {
     "id": "sp15",
@@ -1545,7 +1647,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 102
   },
   {
     "id": "sp16",
@@ -1556,7 +1659,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 103
   },
   {
     "id": "sp17",
@@ -1567,7 +1671,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 104
   },
   {
     "id": "sp18",
@@ -1578,7 +1683,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 105
   },
   {
     "id": "sp19",
@@ -1589,7 +1695,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 106
   },
   {
     "id": "er01",
@@ -1600,7 +1707,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 107
   },
   {
     "id": "er02",
@@ -1611,7 +1719,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 108
   },
   {
     "id": "er03",
@@ -1622,7 +1731,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 109
   },
   {
     "id": "er04",
@@ -1633,7 +1743,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 110
   },
   {
     "id": "er05",
@@ -1644,7 +1755,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 111
   },
   {
     "id": "er06",
@@ -1655,7 +1767,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 112
   },
   {
     "id": "er07",
@@ -1666,7 +1779,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 113
   },
   {
     "id": "er08",
@@ -1677,7 +1791,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 114
   },
   {
     "id": "er09",
@@ -1688,7 +1803,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 115
   },
   {
     "id": "er10",
@@ -1699,7 +1815,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 116
   },
   {
     "id": "er11",
@@ -1710,7 +1827,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 117
   },
   {
     "id": "er12",
@@ -1721,7 +1839,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 118
   },
   {
     "id": "er13",
@@ -1732,7 +1851,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 119
   },
   {
     "id": "eng21",
@@ -1827,7 +1947,8 @@
         "deadline": null,
         "notes": ""
       }
-    ]
+    ],
+    "tierSortOrder": 120
   },
   {
     "id": "eng22",
@@ -1918,7 +2039,8 @@
         "deadline": "2026-06-15",
         "notes": ""
       }
-    ]
+    ],
+    "tierSortOrder": 121
   },
   {
     "id": "eng24",
@@ -1950,7 +2072,8 @@
         "deadline": null,
         "notes": ""
       }
-    ]
+    ],
+    "tierSortOrder": 122
   },
   {
     "id": "eng25",
@@ -1962,7 +2085,8 @@
     "notes": "",
     "workType": "Project Work",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 123
   },
   {
     "id": "eng26",
@@ -1974,7 +2098,8 @@
     "notes": "",
     "workType": "Project Work",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 124
   },
   {
     "id": "eng27",
@@ -1986,7 +2111,8 @@
     "notes": "",
     "workType": "Project Work",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 125
   },
   {
     "id": "eng28",
@@ -1998,7 +2124,8 @@
     "notes": "note-only",
     "workType": "Project Work",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 126
   },
   {
     "id": "eng29",
@@ -2010,7 +2137,8 @@
     "notes": "",
     "workType": "R&D",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 127
   },
   {
     "id": "eng30",
@@ -2022,7 +2150,8 @@
     "notes": "",
     "workType": "R&D",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 128
   },
   {
     "id": "eng31",
@@ -2034,7 +2163,8 @@
     "notes": "",
     "workType": "R&D",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 129
   },
   {
     "id": "eng32",
@@ -2069,7 +2199,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 130
   },
   {
     "id": "mkt19",
@@ -2080,7 +2211,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 131
   },
   {
     "id": "mkt20",
@@ -2091,7 +2223,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 132
   },
   {
     "id": "mr6js7ky1ycna",
@@ -2147,7 +2280,9 @@
     "notes": "",
     "workType": "Project Work",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "subtasks": [],
+    "tierSortOrder": 148
   },
   {
     "id": "eng36",
@@ -2159,7 +2294,8 @@
     "notes": "",
     "workType": "R&D",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 133
   },
   {
     "id": "eng37",
@@ -2171,7 +2307,8 @@
     "notes": "",
     "workType": "R&D",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 134
   },
   {
     "id": "eng38",
@@ -2183,7 +2320,8 @@
     "notes": "",
     "workType": "Admin",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 135
   },
   {
     "id": "cd37",
@@ -2194,7 +2332,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 136
   },
   {
     "id": "cd38",
@@ -2205,7 +2344,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 137
   },
   {
     "id": "cd39",
@@ -2216,7 +2356,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 138
   },
   {
     "id": "cd40",
@@ -2227,7 +2368,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 139
   },
   {
     "id": "cd41",
@@ -2238,7 +2380,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 140
   },
   {
     "id": "cd42",
@@ -2249,7 +2392,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 141
   },
   {
     "id": "cd43",
@@ -2260,7 +2404,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 142
   },
   {
     "id": "cd44",
@@ -2271,7 +2416,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 143
   },
   {
     "id": "cd45",
@@ -2282,7 +2428,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 144
   },
   {
     "id": "cd46",
@@ -2293,7 +2440,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 145
   },
   {
     "id": "cd47",
@@ -2304,7 +2452,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 146
   },
   {
     "id": "cd48",
@@ -2315,7 +2464,8 @@
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null
+    "scheduledDate": null,
+    "tierSortOrder": 147
   },
   {
     "id": "mr6mhxhdh79fv",
