@@ -477,7 +477,7 @@ input, select, textarea { font-family: inherit; }
 <!-- Main -->
 <div class="main-content">
   <div class="app-header">
-    <h1>Task Scheduler <span style="font-size:0.6rem;font-weight:400;color:var(--text-dim);vertical-align:middle">v34</span></h1>
+    <h1>Task Scheduler <span style="font-size:0.6rem;font-weight:400;color:var(--text-dim);vertical-align:middle">v35</span></h1>
     <div class="header-actions">
       <button class="btn-primary" id="addTaskBtn">+ Add Task</button>
       <button class="btn-secondary" id="autoScheduleBtn">Auto-Schedule</button>
@@ -705,17 +705,17 @@ const WEEKDAY_SLOTS = [
   { name: 'Day Start', start: 5, end: 6.5, categories: ['Health'] },
   { name: 'Washing', start: 6.5, end: 7, categories: [] },
   { name: 'Engineering', start: 8, end: 17, categories: ['Engineering'] },
-  { name: 'Homework', start: 17, end: 19, categories: ['Chores','Chores Desk'] },
+  { name: 'Homework', start: 17, end: 19, categories: ['Chores','House Chores','Chores Desk'] },
   { name: 'Supper Chill', start: 19, end: 20, categories: [] },
-  { name: 'Planning', start: 20, end: 21, categories: ['Chores Desk'] },
+  { name: 'Planning', start: 20, end: 21, categories: [] },
 ];
 const WEEKEND_SLOTS = [
   { name: 'Side Hustle', start: 5, end: 9, categories: ['Side Hustle','Markets','Health'] },
   { name: 'Washing', start: 9, end: 10, categories: [] },
-  { name: 'Shops Errands', start: 10, end: 16, categories: ['Shopping','Errands','House Chores'] },
-  { name: 'Weekend Duties', start: 16, end: 18, categories: ['House Chores','Chores Desk'] },
+  { name: 'Shops Errands', start: 10, end: 16, categories: ['Shopping','Errands'] },
+  { name: 'Weekend Duties', start: 16, end: 18, categories: [] },
   { name: 'Supper Chill', start: 18, end: 20, categories: [] },
-  { name: 'Planning', start: 20, end: 21, categories: ['Chores Desk'] },
+  { name: 'Planning', start: 20, end: 21, categories: [] },
 ];
 
 function getSlotsForDay(dayOfWeek) { return (dayOfWeek === 0 || dayOfWeek === 6) ? WEEKEND_SLOTS : WEEKDAY_SLOTS; }
