@@ -16,7 +16,7 @@
     "title": "Write memo stability at BR",
     "category": "Engineering",
     "priority": "Urgent",
-    "duration": 6,
+    "duration": 4,
     "deadline": "2026-06-22",
     "notes": "",
     "workType": "Project Work",
@@ -98,7 +98,9 @@
     ],
     "scheduledDates": [
       "2026-07-06"
-    ]
+    ],
+    "totalHours": 8,
+    "hoursDone": 0
   },
   {
     "id": "eng03",
