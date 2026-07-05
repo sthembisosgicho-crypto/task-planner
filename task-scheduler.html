@@ -477,7 +477,7 @@ input, select, textarea { font-family: inherit; }
 <!-- Main -->
 <div class="main-content">
   <div class="app-header">
-    <h1>Task Scheduler <span style="font-size:0.6rem;font-weight:400;color:var(--text-dim);vertical-align:middle">v35</span></h1>
+    <h1>Task Scheduler <span style="font-size:0.6rem;font-weight:400;color:var(--text-dim);vertical-align:middle">v36</span></h1>
     <div class="header-actions">
       <button class="btn-primary" id="addTaskBtn">+ Add Task</button>
       <button class="btn-secondary" id="autoScheduleBtn">Auto-Schedule</button>
@@ -2460,7 +2460,9 @@ async function doPush(retryCount) {
     });
     var sha = null;
     if (getRes.ok) {
-      sha = (await getRes.json()).sha;
+      var getJson = await getRes.json();
+      sha = getJson.sha;
+      localStorage.setItem('ghLastKnownSha', sha);
     } else if (getRes.status === 401 || getRes.status === 403) {
       setGhSyncState('error', 'Token expired — tap to update');
       openGhSyncModal();
@@ -2500,6 +2502,8 @@ async function doPush(retryCount) {
     }
     var timeStr = now.toLocaleTimeString('en-ZA', { hour: '2-digit', minute: '2-digit' });
     localStorage.removeItem('ghPushPending');
+    var putJson = await putRes.json().catch(function(){ return {}; });
+    if (putJson.content && putJson.content.sha) localStorage.setItem('ghLastKnownSha', putJson.content.sha);
     setGhSyncState('ok', 'Synced at ' + timeStr);
     localStorage.setItem('ghLastSync', now.toISOString());
     _ghUpdateStatusBox();
@@ -2658,8 +2662,36 @@ window.addEventListener('beforeunload', function(e) {
 (async function ghPullOnLoad() {
   var token = getGhToken();
   if (!token || !navigator.onLine) return;
-  // If a push was pending when the page last closed, push our local data first
+  // If a push was pending when the page last closed, check remote first
   if (localStorage.getItem('ghPushPending') === '1') {
+    try {
+      var chkRes = await fetch(GH_API, {
+        headers: { 'Authorization': 'Bearer ' + token, 'Accept': 'application/vnd.github+json' },
+        cache: 'no-store'
+      });
+      if (chkRes.ok) {
+        var chkData = await chkRes.json();
+        var remoteSha = chkData.sha;
+        var lastKnownSha = localStorage.getItem('ghLastKnownSha');
+        if (lastKnownSha && remoteSha !== lastKnownSha) {
+          var chkContent = atob(chkData.content.replace(/\n/g, ''));
+          var chkTasks = JSON.parse(chkContent);
+          if (Array.isArray(chkTasks) && chkTasks.length > 0) {
+            var chkDeleted = getDeletedIds();
+            if (chkDeleted.size) chkTasks = chkTasks.filter(t => !chkDeleted.has(t.id));
+            tasks = chkTasks;
+            saveTasks();
+            localStorage.setItem('taskDataJson', JSON.stringify(chkTasks));
+            localStorage.setItem('taskDataJsonTime', new Date().toISOString());
+            localStorage.setItem('ghLastKnownSha', remoteSha);
+            localStorage.removeItem('ghPushPending');
+            renderAll();
+            showStatus('Another device synced first — pulled their version');
+            return;
+          }
+        }
+      }
+    } catch (e) { /* fall through to push */ }
     await doPush(0);
     return;
   }
@@ -2674,6 +2706,7 @@ window.addEventListener('beforeunload', function(e) {
     var remoteTasks = JSON.parse(content);
     if (!Array.isArray(remoteTasks) || remoteTasks.length === 0) return;
     var deleted = getDeletedIds(); if (deleted.size) remoteTasks = remoteTasks.filter(t => !deleted.has(t.id));
+    localStorage.setItem('ghLastKnownSha', data.sha);
     var localJson = JSON.stringify(tasks);
     var remoteJson = JSON.stringify(remoteTasks);
     if (localJson !== remoteJson) {
