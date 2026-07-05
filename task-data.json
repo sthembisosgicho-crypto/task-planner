@@ -137,7 +137,9 @@
     "workType": "Project Work",
     "status": "thisweek",
     "scheduledDate": "2026-07-06",
-    "subtasks": []
+    "subtasks": [],
+    "totalHours": 6,
+    "hoursDone": 0
   },
   {
     "id": "eng04",
