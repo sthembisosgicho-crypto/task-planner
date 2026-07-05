@@ -170,10 +170,7 @@
     "notes": "",
     "workType": "Project Work",
     "status": "thisweek",
-    "scheduledDate": "2026-07-07",
-    "subtasks": [],
-    "totalHours": 80,
-    "hoursDone": 0
+    "scheduledDate": "2026-07-07"
   },
   {
     "id": "eng07",
@@ -1864,7 +1861,7 @@
   },
   {
     "id": "eng21",
-    "title": "Lab in-house",
+    "title": "Lab testif",
     "category": "Engineering",
     "priority": "Normal",
     "duration": 2,
