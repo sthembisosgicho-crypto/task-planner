@@ -952,7 +952,7 @@
   {
     "id": "chr04",
     "title": "Chat to Madlebe",
-    "category": "Chores",
+    "category": "Chores Desk",
     "priority": "Normal",
     "duration": 0.5,
     "deadline": null,
@@ -967,7 +967,9 @@
     "scheduledDates": [
       "2026-07-08"
     ],
-    "subtasks": []
+    "subtasks": [],
+    "totalHours": 0,
+    "hoursDone": 0
   },
   {
     "id": "chr05",
@@ -986,7 +988,8 @@
     "scheduledSlotName": "Homework",
     "scheduledDates": [
       "2026-07-08"
-    ]
+    ],
+    "subtasks": []
   },
   {
     "id": "chr06",
