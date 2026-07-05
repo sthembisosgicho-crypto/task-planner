@@ -477,7 +477,7 @@ input, select, textarea { font-family: inherit; }
 <!-- Main -->
 <div class="main-content">
   <div class="app-header">
-    <h1>Task Scheduler <span style="font-size:0.6rem;font-weight:400;color:var(--text-dim);vertical-align:middle">v27</span></h1>
+    <h1>Task Scheduler <span style="font-size:0.6rem;font-weight:400;color:var(--text-dim);vertical-align:middle">v28</span></h1>
     <div class="header-actions">
       <button class="btn-primary" id="addTaskBtn">+ Add Task</button>
       <button class="btn-secondary" id="autoScheduleBtn">Auto-Schedule</button>
@@ -991,7 +991,7 @@ function renderDayView() {
     matching.forEach(t => shownIds.add(t.id || t._parentId + t.title));
     const activeTasks = matching.filter(t => t.status !== 'done');
     const doneTasks = matching.filter(t => t.status === 'done');
-    const used = activeTasks.reduce((s,t) => s + (t.duration || 0), 0);
+    const used = activeTasks.reduce((s,t) => s + (t.scheduledSessionHours?.[dateStr] || t.duration || 0), 0);
     const over = used > cap;
     const slotHeight = Math.max(60, cap * 40);
     const hasNowLine = isToday && currentHour >= slot.start && currentHour < slot.end;
@@ -1563,17 +1563,17 @@ function autoSchedule() {
         if (!isRecur) remaining[task.id] -= sessionHrs;
         placedThisDay = true;
 
+        // Store session hours per date so day view shows correct partial hours
+        if (!task.scheduledSessionHours) task.scheduledSessionHours = {};
+        task.scheduledSessionHours[dateStr] = (task.scheduledSessionHours[dateStr] || 0) + sessionHrs;
+
         if (!task.scheduledDate) {
           task.scheduledDate = dateStr;
           task.status = (dateStr === todayStr) ? 'today' : 'thisweek';
         }
-        if (isRecur) {
-          if (!task.scheduledDates) task.scheduledDates = [];
-          if (!task.scheduledDates.includes(dateStr)) task.scheduledDates.push(dateStr);
-        } else if (remaining[task.id] > 0) {
-          if (!task.scheduledDates) task.scheduledDates = [task.scheduledDate];
-          if (!task.scheduledDates.includes(dateStr)) task.scheduledDates.push(dateStr);
-        }
+        // Always track all dates (including the final day where remaining hits 0)
+        if (!task.scheduledDates) task.scheduledDates = [];
+        if (!task.scheduledDates.includes(dateStr)) task.scheduledDates.push(dateStr);
         break; // one slot per day per task
       }
     }
