@@ -620,7 +620,7 @@
   {
     "id": "chr05",
     "title": "Chat to Cristina",
-    "category": "Chores",
+    "category": "Chores Desk",
     "priority": "Normal",
     "duration": 0.5,
     "deadline": null,
@@ -628,7 +628,9 @@
     "status": "thisweek",
     "scheduledDate": "2026-07-07",
     "tierSortOrder": 20,
-    "subtasks": []
+    "subtasks": [],
+    "totalHours": 0,
+    "hoursDone": 0
   },
   {
     "id": "chr06",
@@ -640,7 +642,8 @@
     "notes": "",
     "status": "thisweek",
     "scheduledDate": "2026-07-08",
-    "tierSortOrder": 21
+    "tierSortOrder": 21,
+    "subtasks": []
   },
   {
     "id": "hlt01",
