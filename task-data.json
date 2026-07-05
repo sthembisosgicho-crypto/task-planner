@@ -757,7 +757,7 @@
   {
     "id": "chr01",
     "title": "Withdraw",
-    "category": "Chores",
+    "category": "Errands",
     "priority": "Recurring",
     "duration": 0.5,
     "deadline": null,
@@ -900,7 +900,9 @@
       "2026-10-02": 0.5
     },
     "scheduledSlotName": "Homework",
-    "subtasks": []
+    "subtasks": [],
+    "totalHours": 0,
+    "hoursDone": 0
   },
   {
     "id": "chr02",
