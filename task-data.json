@@ -587,7 +587,7 @@
   {
     "id": "chr03",
     "title": "Medical",
-    "category": "Chores",
+    "category": "Chores Desk",
     "priority": "Normal",
     "duration": 1,
     "deadline": null,
@@ -598,7 +598,9 @@
       "2026-07-06"
     ],
     "tierSortOrder": 18,
-    "subtasks": []
+    "subtasks": [],
+    "totalHours": 0,
+    "hoursDone": 0
   },
   {
     "id": "chr04",
@@ -610,7 +612,8 @@
     "notes": "",
     "status": "thisweek",
     "scheduledDate": "2026-07-07",
-    "tierSortOrder": 19
+    "tierSortOrder": 19,
+    "subtasks": []
   },
   {
     "id": "chr05",
