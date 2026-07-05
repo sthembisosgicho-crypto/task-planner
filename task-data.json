@@ -3708,7 +3708,7 @@
     "id": "eng35",
     "title": "Timesheet and claims",
     "category": "Engineering",
-    "priority": "Normal",
+    "priority": "Recurring",
     "duration": 1,
     "deadline": null,
     "notes": "",
@@ -3716,7 +3716,6 @@
     "status": "thisweek",
     "scheduledDate": "2026-07-14",
     "subtasks": [],
-    "tierSortOrder": 148,
     "scheduledSessionHours": {
       "2026-07-14": 1
     },
