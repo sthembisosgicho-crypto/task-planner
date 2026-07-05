@@ -572,7 +572,7 @@
   {
     "id": "chr02",
     "title": "Find school Sparko Entabeni",
-    "category": "Chores",
+    "category": "Chores Desk",
     "priority": "Normal",
     "duration": 1,
     "deadline": null,
@@ -580,7 +580,9 @@
     "status": "thisweek",
     "scheduledDate": "2026-07-06",
     "tierSortOrder": 17,
-    "subtasks": []
+    "subtasks": [],
+    "totalHours": 0,
+    "hoursDone": 0
   },
   {
     "id": "chr03",
@@ -595,7 +597,8 @@
     "scheduledDates": [
       "2026-07-06"
     ],
-    "tierSortOrder": 18
+    "tierSortOrder": 18,
+    "subtasks": []
   },
   {
     "id": "chr04",
