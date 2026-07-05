@@ -156,7 +156,7 @@
     "duration": 2,
     "deadline": "2026-06-15",
     "notes": "",
-    "workType": "R&D",
+    "workType": "Personal Dev",
     "status": "thisweek",
     "scheduledDate": "2026-07-08"
   },
@@ -2141,7 +2141,7 @@
     "duration": 2,
     "deadline": null,
     "notes": "",
-    "workType": "R&D",
+    "workType": "Project Work",
     "status": "backlog",
     "scheduledDate": null,
     "tierSortOrder": 127
