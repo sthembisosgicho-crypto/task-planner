@@ -2180,7 +2180,7 @@
     "duration": 1,
     "deadline": "2027-02-11",
     "notes": "",
-    "workType": "Admin",
+    "workType": "Personal Dev",
     "status": "backlog",
     "scheduledDate": null
   },
@@ -2192,7 +2192,7 @@
     "duration": 1,
     "deadline": "2027-06-28",
     "notes": "",
-    "workType": "Admin",
+    "workType": "Personal Dev",
     "status": "backlog",
     "scheduledDate": null
   },
