@@ -724,7 +724,7 @@
     "duration": 1,
     "deadline": null,
     "notes": "",
-    "status": "thisweek",
+    "status": "done",
     "scheduledDate": "2026-07-11",
     "tierSortOrder": 14,
     "scheduledSessionHours": {
@@ -733,7 +733,8 @@
     "scheduledSlotName": "Side Hustle",
     "scheduledDates": [
       "2026-07-11"
-    ]
+    ],
+    "completedDate": "2026-07-05T16:59:02.707Z"
   },
   {
     "id": "mkt05",
