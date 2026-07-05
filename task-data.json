@@ -105,87 +105,13 @@
     ],
     "scheduledDates": [
       "2026-07-06",
-      "2026-07-07",
-      "2026-07-09",
-      "2026-07-13",
-      "2026-07-14",
-      "2026-07-16",
-      "2026-07-20",
-      "2026-07-21",
-      "2026-07-23",
-      "2026-07-27",
-      "2026-07-28",
-      "2026-07-30",
-      "2026-08-03",
-      "2026-08-04",
-      "2026-08-06",
-      "2026-08-10",
-      "2026-08-11",
-      "2026-08-13",
-      "2026-08-17",
-      "2026-08-18",
-      "2026-08-20",
-      "2026-08-24",
-      "2026-08-25",
-      "2026-08-27",
-      "2026-08-31",
-      "2026-09-01",
-      "2026-09-03",
-      "2026-09-07",
-      "2026-09-08",
-      "2026-09-10",
-      "2026-09-14",
-      "2026-09-15",
-      "2026-09-17",
-      "2026-09-21",
-      "2026-09-22",
-      "2026-09-24",
-      "2026-09-28",
-      "2026-09-29",
-      "2026-10-01"
+      "2026-07-07"
     ],
     "totalHours": 12,
     "hoursDone": 0,
     "scheduledSessionHours": {
       "2026-07-06": 6,
-      "2026-07-07": 6,
-      "2026-07-09": 6,
-      "2026-07-13": 6,
-      "2026-07-14": 6,
-      "2026-07-16": 6,
-      "2026-07-20": 6,
-      "2026-07-21": 6,
-      "2026-07-23": 6,
-      "2026-07-27": 6,
-      "2026-07-28": 6,
-      "2026-07-30": 6,
-      "2026-08-03": 6,
-      "2026-08-04": 6,
-      "2026-08-06": 6,
-      "2026-08-10": 6,
-      "2026-08-11": 6,
-      "2026-08-13": 6,
-      "2026-08-17": 6,
-      "2026-08-18": 6,
-      "2026-08-20": 6,
-      "2026-08-24": 6,
-      "2026-08-25": 6,
-      "2026-08-27": 6,
-      "2026-08-31": 6,
-      "2026-09-01": 6,
-      "2026-09-03": 6,
-      "2026-09-07": 6,
-      "2026-09-08": 6,
-      "2026-09-10": 6,
-      "2026-09-14": 6,
-      "2026-09-15": 6,
-      "2026-09-17": 6,
-      "2026-09-21": 6,
-      "2026-09-22": 6,
-      "2026-09-24": 6,
-      "2026-09-28": 6,
-      "2026-09-29": 6,
-      "2026-10-01": 6
+      "2026-07-07": 6
     },
     "scheduledSlotName": "Engineering"
   },
@@ -205,86 +131,12 @@
     "hoursDone": 0,
     "scheduledSessionHours": {
       "2026-07-06": 3,
-      "2026-07-07": 3,
-      "2026-07-09": 3,
-      "2026-07-13": 3,
-      "2026-07-14": 3,
-      "2026-07-16": 3,
-      "2026-07-20": 3,
-      "2026-07-21": 3,
-      "2026-07-23": 3,
-      "2026-07-27": 3,
-      "2026-07-28": 3,
-      "2026-07-30": 3,
-      "2026-08-03": 3,
-      "2026-08-04": 3,
-      "2026-08-06": 3,
-      "2026-08-10": 3,
-      "2026-08-11": 3,
-      "2026-08-13": 3,
-      "2026-08-17": 3,
-      "2026-08-18": 3,
-      "2026-08-20": 3,
-      "2026-08-24": 3,
-      "2026-08-25": 3,
-      "2026-08-27": 3,
-      "2026-08-31": 3,
-      "2026-09-01": 3,
-      "2026-09-03": 3,
-      "2026-09-07": 3,
-      "2026-09-08": 3,
-      "2026-09-10": 3,
-      "2026-09-14": 3,
-      "2026-09-15": 3,
-      "2026-09-17": 3,
-      "2026-09-21": 3,
-      "2026-09-22": 3,
-      "2026-09-24": 3,
-      "2026-09-28": 3,
-      "2026-09-29": 3,
-      "2026-10-01": 3
+      "2026-07-07": 3
     },
     "scheduledSlotName": "Engineering",
     "scheduledDates": [
       "2026-07-06",
-      "2026-07-07",
-      "2026-07-09",
-      "2026-07-13",
-      "2026-07-14",
-      "2026-07-16",
-      "2026-07-20",
-      "2026-07-21",
-      "2026-07-23",
-      "2026-07-27",
-      "2026-07-28",
-      "2026-07-30",
-      "2026-08-03",
-      "2026-08-04",
-      "2026-08-06",
-      "2026-08-10",
-      "2026-08-11",
-      "2026-08-13",
-      "2026-08-17",
-      "2026-08-18",
-      "2026-08-20",
-      "2026-08-24",
-      "2026-08-25",
-      "2026-08-27",
-      "2026-08-31",
-      "2026-09-01",
-      "2026-09-03",
-      "2026-09-07",
-      "2026-09-08",
-      "2026-09-10",
-      "2026-09-14",
-      "2026-09-15",
-      "2026-09-17",
-      "2026-09-21",
-      "2026-09-22",
-      "2026-09-24",
-      "2026-09-28",
-      "2026-09-29",
-      "2026-10-01"
+      "2026-07-07"
     ]
   },
   {
@@ -296,8 +148,8 @@
     "deadline": "2026-06-23",
     "notes": "",
     "workType": "Project Work",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-07-09",
     "subtasks": [
       {
         "id": "eng04s1",
@@ -318,9 +170,13 @@
         "notes": ""
       }
     ],
-    "scheduledSessionHours": {},
-    "scheduledSlotName": null,
-    "scheduledDates": []
+    "scheduledSessionHours": {
+      "2026-07-09": 2
+    },
+    "scheduledSlotName": "Engineering",
+    "scheduledDates": [
+      "2026-07-09"
+    ]
   },
   {
     "id": "eng05",
@@ -350,11 +206,15 @@
     "deadline": "2026-06-22",
     "notes": "",
     "workType": "Project Work",
-    "status": "backlog",
-    "scheduledDate": null,
-    "scheduledSessionHours": {},
-    "scheduledSlotName": null,
-    "scheduledDates": []
+    "status": "thisweek",
+    "scheduledDate": "2026-07-09",
+    "scheduledSessionHours": {
+      "2026-07-09": 4
+    },
+    "scheduledSlotName": "Engineering",
+    "scheduledDates": [
+      "2026-07-09"
+    ]
   },
   {
     "id": "eng07",
@@ -471,8 +331,8 @@
     "deadline": null,
     "notes": "",
     "workType": "Project Work",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-07-13",
     "subtasks": [
       {
         "id": "eng10s1",
@@ -520,10 +380,14 @@
         "notes": ""
       }
     ],
-    "scheduledDates": [],
+    "scheduledDates": [
+      "2026-07-13"
+    ],
     "tierSortOrder": 0,
-    "scheduledSessionHours": {},
-    "scheduledSlotName": null
+    "scheduledSessionHours": {
+      "2026-07-13": 2
+    },
+    "scheduledSlotName": "Engineering"
   },
   {
     "id": "eng11",
@@ -554,12 +418,16 @@
     "deadline": null,
     "notes": "",
     "workType": "Project Work",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-07-13",
     "tierSortOrder": 2,
-    "scheduledSessionHours": {},
-    "scheduledSlotName": null,
-    "scheduledDates": []
+    "scheduledSessionHours": {
+      "2026-07-13": 1
+    },
+    "scheduledSlotName": "Engineering",
+    "scheduledDates": [
+      "2026-07-13"
+    ]
   },
   {
     "id": "eng13",
@@ -590,12 +458,16 @@
     "deadline": null,
     "notes": "",
     "workType": "Project Work",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-07-13",
     "tierSortOrder": 4,
-    "scheduledSessionHours": {},
-    "scheduledSlotName": null,
-    "scheduledDates": []
+    "scheduledSessionHours": {
+      "2026-07-13": 1
+    },
+    "scheduledSlotName": "Engineering",
+    "scheduledDates": [
+      "2026-07-13"
+    ]
   },
   {
     "id": "eng15",
@@ -3302,8 +3174,8 @@
     "deadline": null,
     "notes": "",
     "workType": "Project Work",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-07-14",
     "subtasks": [
       {
         "id": "eng21s1",
@@ -3388,9 +3260,13 @@
       }
     ],
     "tierSortOrder": 120,
-    "scheduledSessionHours": {},
-    "scheduledSlotName": null,
-    "scheduledDates": []
+    "scheduledSessionHours": {
+      "2026-07-14": 2
+    },
+    "scheduledSlotName": "Engineering",
+    "scheduledDates": [
+      "2026-07-14"
+    ]
   },
   {
     "id": "eng22",
@@ -3401,8 +3277,8 @@
     "deadline": "2026-06-22",
     "notes": "",
     "workType": "Project Work",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-07-09",
     "subtasks": [
       {
         "id": "eng22s1",
@@ -3423,9 +3299,13 @@
         "notes": ""
       }
     ],
-    "scheduledSessionHours": {},
-    "scheduledSlotName": null,
-    "scheduledDates": []
+    "scheduledSessionHours": {
+      "2026-07-09": 2
+    },
+    "scheduledSlotName": "Engineering",
+    "scheduledDates": [
+      "2026-07-09"
+    ]
   },
   {
     "id": "eng23",
@@ -3543,12 +3423,16 @@
     "deadline": null,
     "notes": "",
     "workType": "Project Work",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-07-14",
     "tierSortOrder": 123,
-    "scheduledSessionHours": {},
-    "scheduledSlotName": null,
-    "scheduledDates": []
+    "scheduledSessionHours": {
+      "2026-07-14": 1
+    },
+    "scheduledSlotName": "Engineering",
+    "scheduledDates": [
+      "2026-07-14"
+    ]
   },
   {
     "id": "eng26",
@@ -3559,12 +3443,16 @@
     "deadline": null,
     "notes": "",
     "workType": "Project Work",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-07-14",
     "tierSortOrder": 124,
-    "scheduledSessionHours": {},
-    "scheduledSlotName": null,
-    "scheduledDates": []
+    "scheduledSessionHours": {
+      "2026-07-14": 2
+    },
+    "scheduledSlotName": "Engineering",
+    "scheduledDates": [
+      "2026-07-14"
+    ]
   },
   {
     "id": "eng27",
@@ -3575,12 +3463,16 @@
     "deadline": null,
     "notes": "",
     "workType": "Project Work",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-07-14",
     "tierSortOrder": 125,
-    "scheduledSessionHours": {},
-    "scheduledSlotName": null,
-    "scheduledDates": []
+    "scheduledSessionHours": {
+      "2026-07-14": 1
+    },
+    "scheduledSlotName": "Engineering",
+    "scheduledDates": [
+      "2026-07-14"
+    ]
   },
   {
     "id": "eng28",
@@ -3591,12 +3483,16 @@
     "deadline": null,
     "notes": "note-only",
     "workType": "Project Work",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-07-14",
     "tierSortOrder": 126,
-    "scheduledSessionHours": {},
-    "scheduledSlotName": null,
-    "scheduledDates": []
+    "scheduledSessionHours": {
+      "2026-07-14": 1
+    },
+    "scheduledSlotName": "Engineering",
+    "scheduledDates": [
+      "2026-07-14"
+    ]
   },
   {
     "id": "eng29",
@@ -3796,11 +3692,17 @@
     "deadline": "2026-07-18",
     "notes": "Top soil stripped, Black turf to be tested for re-use only need phi and c prime, Clay to be removed on site and stockpile wasterock, 2-3 tests one is for VSR Norite remoulded, Enzo?, 1 page results interpretation",
     "workType": "Project Work",
-    "status": "backlog",
-    "scheduledDate": null,
-    "scheduledDates": [],
-    "scheduledSessionHours": {},
-    "scheduledSlotName": null
+    "status": "thisweek",
+    "scheduledDate": "2026-07-09",
+    "scheduledDates": [
+      "2026-07-09",
+      "2026-07-13"
+    ],
+    "scheduledSessionHours": {
+      "2026-07-09": 1,
+      "2026-07-13": 5
+    },
+    "scheduledSlotName": "Engineering"
   },
   {
     "id": "eng35",
@@ -3811,13 +3713,17 @@
     "deadline": null,
     "notes": "",
     "workType": "Project Work",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-07-14",
     "subtasks": [],
     "tierSortOrder": 148,
-    "scheduledSessionHours": {},
-    "scheduledSlotName": null,
-    "scheduledDates": []
+    "scheduledSessionHours": {
+      "2026-07-14": 1
+    },
+    "scheduledSlotName": "Engineering",
+    "scheduledDates": [
+      "2026-07-14"
+    ]
   },
   {
     "id": "eng36",
