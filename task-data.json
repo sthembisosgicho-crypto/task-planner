@@ -4031,5 +4031,18 @@
     "subtasks": [],
     "totalHours": 1,
     "hoursDone": 0
+  },
+  {
+    "id": "mr81gi2f2r63k",
+    "title": "New Task",
+    "category": "Engineering",
+    "priority": "Normal",
+    "duration": 0,
+    "deadline": null,
+    "notes": "",
+    "workType": "Project Work",
+    "status": "backlog",
+    "scheduledDate": null,
+    "subtasks": []
   }
 ]
