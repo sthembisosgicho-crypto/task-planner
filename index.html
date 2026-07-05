@@ -477,7 +477,7 @@ input, select, textarea { font-family: inherit; }
 <!-- Main -->
 <div class="main-content">
   <div class="app-header">
-    <h1>Task Scheduler <span style="font-size:0.6rem;font-weight:400;color:var(--text-dim);vertical-align:middle">v29</span></h1>
+    <h1>Task Scheduler <span style="font-size:0.6rem;font-weight:400;color:var(--text-dim);vertical-align:middle">v30</span></h1>
     <div class="header-actions">
       <button class="btn-primary" id="addTaskBtn">+ Add Task</button>
       <button class="btn-secondary" id="autoScheduleBtn">Auto-Schedule</button>
@@ -1535,8 +1535,8 @@ function autoSchedule() {
       let placedThisDay = false;
 
       for (const slot of slots) {
+        if (placedThisDay) break;
         if (!taskFitsSlot(task, slot, dow)) continue;
-        if (!isRecur && remaining[task.id] <= 0) break;
 
         let wt = null;
         if (task.category === 'Engineering') {
@@ -1573,8 +1573,7 @@ function autoSchedule() {
         }
         if (!task.scheduledDates) task.scheduledDates = [];
         if (!task.scheduledDates.includes(dateStr)) task.scheduledDates.push(dateStr);
-        if (isRecur) break; // recurring: one slot per day
-        // non-recurring: continue to next slot on same day if hours remain
+        break; // one slot per day — spillover goes to same slot next day
       }
     }
   });
