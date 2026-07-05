@@ -477,7 +477,7 @@ input, select, textarea { font-family: inherit; }
 <!-- Main -->
 <div class="main-content">
   <div class="app-header">
-    <h1>Task Scheduler <span style="font-size:0.6rem;font-weight:400;color:var(--text-dim);vertical-align:middle">v33</span></h1>
+    <h1>Task Scheduler <span style="font-size:0.6rem;font-weight:400;color:var(--text-dim);vertical-align:middle">v34</span></h1>
     <div class="header-actions">
       <button class="btn-primary" id="addTaskBtn">+ Add Task</button>
       <button class="btn-secondary" id="autoScheduleBtn">Auto-Schedule</button>
@@ -1507,7 +1507,17 @@ function autoSchedule() {
   // Split tasks carry their remaining hours to the next eligible day in the same slot.
   const slotUsage = {};
   const remaining = {};
-  schedulable.forEach(t => { if (!isRecurringTask(t)) remaining[t.id] = t.duration || 0; });
+  // isTrulyRecurring: daily recurring (no budget limit)
+  // isBudget: has totalHours — schedule fixed session per day until budget used
+  // otherwise: one-off, schedule until duration used
+  function isTrulyRecurring(t) { return t.priority === 'Recurring'; }
+  function isBudgetTask(t) { return !isTrulyRecurring(t) && t.totalHours && t.totalHours > (t.hoursDone || 0); }
+  schedulable.forEach(t => {
+    if (isTrulyRecurring(t)) return; // no remaining tracking needed
+    remaining[t.id] = isBudgetTask(t)
+      ? (t.totalHours - (t.hoursDone || 0))
+      : (t.duration || 0);
+  });
 
   for (let off = 0; off < 90; off++) {
     const dateStr = addDays(todayStr, off);
@@ -1519,8 +1529,10 @@ function autoSchedule() {
       const queue = slotQueues[slot.name] || [];
 
       for (const task of queue) {
-        const isRecur = isRecurringTask(task);
-        if (!isRecur && (remaining[task.id] || 0) <= 0) continue;
+        const isRecur = isTrulyRecurring(task);
+        const isBudget = isBudgetTask(task);
+        const hasRemaining = isRecur || (remaining[task.id] || 0) > 0;
+        if (!hasRemaining) continue;
         if (!isRecur && placedThisDay.has(task.id)) continue;
         if (!taskFitsSlot(task, slot, dow)) continue;
 
@@ -1531,9 +1543,15 @@ function autoSchedule() {
         const avail = cap - used;
         if (avail <= 0) continue;
 
-        const sessionHrs = isRecur
-          ? Math.min(task.duration || avail, avail)
-          : Math.min(remaining[task.id], avail);
+        let sessionHrs;
+        if (isRecur) {
+          sessionHrs = Math.min(task.duration || avail, avail);
+        } else if (isBudget) {
+          // Fixed session length per day (t.duration), capped by availability and remaining budget
+          sessionHrs = Math.min(task.duration || avail, avail, remaining[task.id]);
+        } else {
+          sessionHrs = Math.min(remaining[task.id], avail);
+        }
         if (sessionHrs <= 0) continue;
 
         slotUsage[k] = used + sessionHrs;
