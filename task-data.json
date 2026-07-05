@@ -1243,7 +1243,10 @@
       "2026-07-12": 1,
       "2026-07-18": 3
     },
-    "scheduledSlotName": "Side Hustle"
+    "scheduledSlotName": "Side Hustle",
+    "subtasks": [],
+    "totalHours": 80,
+    "hoursDone": 0
   },
   {
     "id": "mkt10",
