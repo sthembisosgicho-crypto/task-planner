@@ -477,7 +477,7 @@ input, select, textarea { font-family: inherit; }
 <!-- Main -->
 <div class="main-content">
   <div class="app-header">
-    <h1>Task Scheduler <span style="font-size:0.6rem;font-weight:400;color:var(--text-dim);vertical-align:middle">v28</span></h1>
+    <h1>Task Scheduler <span style="font-size:0.6rem;font-weight:400;color:var(--text-dim);vertical-align:middle">v29</span></h1>
     <div class="header-actions">
       <button class="btn-primary" id="addTaskBtn">+ Add Task</button>
       <button class="btn-secondary" id="autoScheduleBtn">Auto-Schedule</button>
@@ -991,7 +991,7 @@ function renderDayView() {
     matching.forEach(t => shownIds.add(t.id || t._parentId + t.title));
     const activeTasks = matching.filter(t => t.status !== 'done');
     const doneTasks = matching.filter(t => t.status === 'done');
-    const used = activeTasks.reduce((s,t) => s + (t.scheduledSessionHours?.[dateStr] || t.duration || 0), 0);
+    const used = activeTasks.reduce((s,t) => s + (t.scheduledSessionHours?.[dateStr] ?? Math.min(t.duration || 0, cap)), 0);
     const over = used > cap;
     const slotHeight = Math.max(60, cap * 40);
     const hasNowLine = isToday && currentHour >= slot.start && currentHour < slot.end;
@@ -1534,8 +1534,8 @@ function autoSchedule() {
       let placedThisDay = false;
 
       for (const slot of slots) {
-        if (placedThisDay && !isRecur) break;
         if (!taskFitsSlot(task, slot, dow)) continue;
+        if (!isRecur && remaining[task.id] <= 0) break;
 
         let wt = null;
         if (task.category === 'Engineering') {
@@ -1571,7 +1571,7 @@ function autoSchedule() {
         }
         if (!task.scheduledDates) task.scheduledDates = [];
         if (!task.scheduledDates.includes(dateStr)) task.scheduledDates.push(dateStr);
-        break; // one slot per day per task
+        if (isRecur) break; // recurring: one slot per day
       }
     }
   });
