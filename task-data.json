@@ -422,7 +422,6 @@
     "status": "thisweek",
     "scheduledDate": "2026-07-17",
     "scheduledDates": [
-      "2026-07-17",
       "2026-07-24",
       "2026-07-31"
     ],
@@ -440,7 +439,6 @@
     "status": "thisweek",
     "scheduledDate": "2026-07-17",
     "scheduledDates": [
-      "2026-07-17",
       "2026-07-24",
       "2026-07-31"
     ],
@@ -458,7 +456,6 @@
     "status": "thisweek",
     "scheduledDate": "2026-07-24",
     "scheduledDates": [
-      "2026-07-17",
       "2026-07-24",
       "2026-07-31"
     ],
@@ -472,10 +469,12 @@
     "duration": 3,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "today",
+    "scheduledDate": "2026-07-05",
     "tierSortOrder": -1,
-    "scheduledDates": []
+    "scheduledDates": [
+      "2026-07-05"
+    ]
   },
   {
     "id": "mkt02",
@@ -485,8 +484,8 @@
     "duration": 2,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-07-11",
     "scheduledDates": [],
     "tierSortOrder": -1
   },
@@ -634,13 +633,11 @@
     "status": "thisweek",
     "scheduledDate": "2026-07-06",
     "scheduledDates": [
-      "2026-07-05",
       "2026-07-06",
       "2026-07-07",
       "2026-07-08",
       "2026-07-09",
       "2026-07-10",
-      "2026-07-11",
       "2026-07-12",
       "2026-07-13",
       "2026-07-14",
@@ -675,8 +672,8 @@
     "duration": 0.5,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-07-12",
     "tierSortOrder": 23
   },
   {
@@ -687,8 +684,8 @@
     "duration": 1.5,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-07-12",
     "tierSortOrder": 24
   },
   {
@@ -699,8 +696,8 @@
     "duration": 1,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-07-12",
     "tierSortOrder": 25
   },
   {
@@ -711,9 +708,12 @@
     "duration": 4,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
-    "tierSortOrder": 26
+    "status": "thisweek",
+    "scheduledDate": "2026-07-12",
+    "tierSortOrder": 26,
+    "scheduledDates": [
+      "2026-07-12"
+    ]
   },
   {
     "id": "mkt10",
@@ -723,9 +723,12 @@
     "duration": 4,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
-    "tierSortOrder": 27
+    "status": "thisweek",
+    "scheduledDate": "2026-07-18",
+    "tierSortOrder": 27,
+    "scheduledDates": [
+      "2026-07-18"
+    ]
   },
   {
     "id": "mkt11",
@@ -735,9 +738,12 @@
     "duration": 4,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
-    "tierSortOrder": 28
+    "status": "thisweek",
+    "scheduledDate": "2026-07-19",
+    "tierSortOrder": 28,
+    "scheduledDates": [
+      "2026-07-19"
+    ]
   },
   {
     "id": "mkt12",
@@ -747,9 +753,12 @@
     "duration": 4,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
-    "tierSortOrder": 29
+    "status": "thisweek",
+    "scheduledDate": "2026-07-26",
+    "tierSortOrder": 29,
+    "scheduledDates": [
+      "2026-07-26"
+    ]
   },
   {
     "id": "mkt13",
@@ -759,9 +768,12 @@
     "duration": 4,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
-    "tierSortOrder": 30
+    "status": "thisweek",
+    "scheduledDate": "2026-08-01",
+    "tierSortOrder": 30,
+    "scheduledDates": [
+      "2026-08-01"
+    ]
   },
   {
     "id": "mkt14",
@@ -771,9 +783,12 @@
     "duration": 4,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
-    "tierSortOrder": 31
+    "status": "thisweek",
+    "scheduledDate": "2026-08-02",
+    "tierSortOrder": 31,
+    "scheduledDates": [
+      "2026-08-02"
+    ]
   },
   {
     "id": "mkt15",
@@ -903,9 +918,12 @@
     "duration": 1,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
-    "tierSortOrder": 42
+    "status": "today",
+    "scheduledDate": "2026-07-05",
+    "tierSortOrder": 42,
+    "scheduledDates": [
+      "2026-07-05"
+    ]
   },
   {
     "id": "cd02",
@@ -915,8 +933,8 @@
     "duration": 1,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null
+    "status": "today",
+    "scheduledDate": "2026-07-05"
   },
   {
     "id": "cd03",
@@ -926,9 +944,15 @@
     "duration": 4,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
-    "tierSortOrder": 43
+    "status": "today",
+    "scheduledDate": "2026-07-05",
+    "tierSortOrder": 43,
+    "scheduledDates": [
+      "2026-07-05",
+      "2026-07-06",
+      "2026-07-07",
+      "2026-07-08"
+    ]
   },
   {
     "id": "cd04",
@@ -938,9 +962,14 @@
     "duration": 3,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
-    "tierSortOrder": 44
+    "status": "thisweek",
+    "scheduledDate": "2026-07-07",
+    "tierSortOrder": 44,
+    "scheduledDates": [
+      "2026-07-07",
+      "2026-07-08",
+      "2026-07-09"
+    ]
   },
   {
     "id": "cd05",
@@ -950,9 +979,13 @@
     "duration": 2,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
-    "tierSortOrder": 45
+    "status": "thisweek",
+    "scheduledDate": "2026-07-09",
+    "tierSortOrder": 45,
+    "scheduledDates": [
+      "2026-07-09",
+      "2026-07-10"
+    ]
   },
   {
     "id": "cd06",
@@ -962,9 +995,12 @@
     "duration": 2,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
-    "tierSortOrder": 46
+    "status": "thisweek",
+    "scheduledDate": "2026-07-10",
+    "tierSortOrder": 46,
+    "scheduledDates": [
+      "2026-07-10"
+    ]
   },
   {
     "id": "cd07",
@@ -974,9 +1010,12 @@
     "duration": 1,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
-    "tierSortOrder": 47
+    "status": "thisweek",
+    "scheduledDate": "2026-07-11",
+    "tierSortOrder": 47,
+    "scheduledDates": [
+      "2026-07-11"
+    ]
   },
   {
     "id": "cd08",
@@ -986,8 +1025,8 @@
     "duration": 0.5,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-07-11",
     "tierSortOrder": 48
   },
   {
@@ -998,8 +1037,8 @@
     "duration": 0.25,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-07-11",
     "tierSortOrder": 49
   },
   {
@@ -1010,9 +1049,12 @@
     "duration": 0.5,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
-    "tierSortOrder": 50
+    "status": "thisweek",
+    "scheduledDate": "2026-07-11",
+    "tierSortOrder": 50,
+    "scheduledDates": [
+      "2026-07-11"
+    ]
   },
   {
     "id": "cd11",
@@ -1022,9 +1064,13 @@
     "duration": 4,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
-    "tierSortOrder": 51
+    "status": "thisweek",
+    "scheduledDate": "2026-07-12",
+    "tierSortOrder": 51,
+    "scheduledDates": [
+      "2026-07-12",
+      "2026-07-13"
+    ]
   },
   {
     "id": "cd12",
@@ -1034,9 +1080,14 @@
     "duration": 3,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
-    "tierSortOrder": 52
+    "status": "thisweek",
+    "scheduledDate": "2026-07-12",
+    "tierSortOrder": 52,
+    "scheduledDates": [
+      "2026-07-12",
+      "2026-07-13",
+      "2026-07-14"
+    ]
   },
   {
     "id": "cd13",
@@ -1046,8 +1097,8 @@
     "duration": 1,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-07-14",
     "tierSortOrder": 53
   },
   {
@@ -1058,8 +1109,8 @@
     "duration": 1,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-07-15",
     "tierSortOrder": 54
   },
   {
@@ -1070,8 +1121,8 @@
     "duration": 1,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-07-15",
     "tierSortOrder": 55
   },
   {
@@ -1082,9 +1133,12 @@
     "duration": 2,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
-    "tierSortOrder": 56
+    "status": "thisweek",
+    "scheduledDate": "2026-07-16",
+    "tierSortOrder": 56,
+    "scheduledDates": [
+      "2026-07-16"
+    ]
   },
   {
     "id": "cd17",
@@ -1094,8 +1148,8 @@
     "duration": 0.25,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null
+    "status": "today",
+    "scheduledDate": "2026-07-05"
   },
   {
     "id": "cd18",
@@ -1105,9 +1159,12 @@
     "duration": 2,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
-    "tierSortOrder": 57
+    "status": "thisweek",
+    "scheduledDate": "2026-07-16",
+    "tierSortOrder": 57,
+    "scheduledDates": [
+      "2026-07-16"
+    ]
   },
   {
     "id": "cd19",
@@ -1117,8 +1174,8 @@
     "duration": 1,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-07-17",
     "tierSortOrder": 58
   },
   {
@@ -1129,8 +1186,8 @@
     "duration": 1,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-07-18",
     "tierSortOrder": 59
   },
   {
@@ -1141,9 +1198,28 @@
     "duration": 1,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
-    "tierSortOrder": 60
+    "status": "thisweek",
+    "scheduledDate": "2026-07-18",
+    "tierSortOrder": 60,
+    "scheduledDates": [
+      "2026-07-18",
+      "2026-07-19",
+      "2026-07-20",
+      "2026-07-21",
+      "2026-07-22",
+      "2026-07-23",
+      "2026-07-24",
+      "2026-07-25",
+      "2026-07-26",
+      "2026-07-27",
+      "2026-07-28",
+      "2026-07-29",
+      "2026-07-30",
+      "2026-07-31",
+      "2026-08-01",
+      "2026-08-02",
+      "2026-08-03"
+    ]
   },
   {
     "id": "cd22",
@@ -1153,9 +1229,28 @@
     "duration": 0.25,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
-    "tierSortOrder": 61
+    "status": "thisweek",
+    "scheduledDate": "2026-07-18",
+    "tierSortOrder": 61,
+    "scheduledDates": [
+      "2026-07-18",
+      "2026-07-19",
+      "2026-07-20",
+      "2026-07-21",
+      "2026-07-22",
+      "2026-07-23",
+      "2026-07-24",
+      "2026-07-25",
+      "2026-07-26",
+      "2026-07-27",
+      "2026-07-28",
+      "2026-07-29",
+      "2026-07-30",
+      "2026-07-31",
+      "2026-08-01",
+      "2026-08-02",
+      "2026-08-03"
+    ]
   },
   {
     "id": "cd23",
@@ -1165,9 +1260,14 @@
     "duration": 2,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
-    "tierSortOrder": 62
+    "status": "thisweek",
+    "scheduledDate": "2026-07-18",
+    "tierSortOrder": 62,
+    "scheduledDates": [
+      "2026-07-18",
+      "2026-07-19",
+      "2026-07-20"
+    ]
   },
   {
     "id": "cd24",
@@ -1177,8 +1277,8 @@
     "duration": 1,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-07-19",
     "tierSortOrder": 63
   },
   {
@@ -1189,8 +1289,8 @@
     "duration": 1,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-07-20",
     "tierSortOrder": 64
   },
   {
@@ -1201,8 +1301,8 @@
     "duration": 1,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-07-21",
     "tierSortOrder": 65
   },
   {
@@ -1213,9 +1313,14 @@
     "duration": 1,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
-    "tierSortOrder": 66
+    "status": "thisweek",
+    "scheduledDate": "2026-07-22",
+    "tierSortOrder": 66,
+    "scheduledDates": [
+      "2026-07-22",
+      "2026-07-23",
+      "2026-07-24"
+    ]
   },
   {
     "id": "cd28",
@@ -1225,8 +1330,8 @@
     "duration": 0.5,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-07-22",
     "tierSortOrder": 67
   },
   {
@@ -1237,8 +1342,8 @@
     "duration": 0.25,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-07-22",
     "tierSortOrder": 68
   },
   {
@@ -1249,9 +1354,13 @@
     "duration": 2,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
-    "tierSortOrder": 69
+    "status": "thisweek",
+    "scheduledDate": "2026-07-22",
+    "tierSortOrder": 69,
+    "scheduledDates": [
+      "2026-07-22",
+      "2026-07-23"
+    ]
   },
   {
     "id": "cd31",
@@ -1261,9 +1370,19 @@
     "duration": 3,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
-    "tierSortOrder": 70
+    "status": "thisweek",
+    "scheduledDate": "2026-07-24",
+    "tierSortOrder": 70,
+    "scheduledDates": [
+      "2026-07-24",
+      "2026-07-25",
+      "2026-07-26",
+      "2026-07-27",
+      "2026-07-28",
+      "2026-07-29",
+      "2026-07-30",
+      "2026-07-31"
+    ]
   },
   {
     "id": "cd32",
@@ -1273,9 +1392,21 @@
     "duration": 0.25,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
-    "tierSortOrder": 71
+    "status": "thisweek",
+    "scheduledDate": "2026-07-25",
+    "tierSortOrder": 71,
+    "scheduledDates": [
+      "2026-07-25",
+      "2026-07-26",
+      "2026-07-27",
+      "2026-07-28",
+      "2026-07-29",
+      "2026-07-30",
+      "2026-07-31",
+      "2026-08-01",
+      "2026-08-02",
+      "2026-08-03"
+    ]
   },
   {
     "id": "cd33",
@@ -1285,8 +1416,8 @@
     "duration": 0.5,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-07-25",
     "tierSortOrder": 72
   },
   {
@@ -1297,8 +1428,8 @@
     "duration": 0.25,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-07-25",
     "tierSortOrder": 73
   },
   {
@@ -1309,8 +1440,8 @@
     "duration": 0.25,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-07-26",
     "tierSortOrder": 74
   },
   {
@@ -1321,8 +1452,8 @@
     "duration": 1,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "today",
+    "scheduledDate": "2026-07-05",
     "tierSortOrder": 75
   },
   {
@@ -1333,8 +1464,8 @@
     "duration": 1,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "today",
+    "scheduledDate": "2026-07-05",
     "tierSortOrder": 76
   },
   {
@@ -1345,8 +1476,8 @@
     "duration": 1.5,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "today",
+    "scheduledDate": "2026-07-05",
     "tierSortOrder": 77
   },
   {
@@ -1357,8 +1488,8 @@
     "duration": 2,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "today",
+    "scheduledDate": "2026-07-05",
     "tierSortOrder": 78
   },
   {
@@ -1369,9 +1500,12 @@
     "duration": 3,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
-    "tierSortOrder": 79
+    "status": "today",
+    "scheduledDate": "2026-07-05",
+    "tierSortOrder": 79,
+    "scheduledDates": [
+      "2026-07-05"
+    ]
   },
   {
     "id": "hc06",
@@ -1381,8 +1515,8 @@
     "duration": 3,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-07-11",
     "tierSortOrder": 80
   },
   {
@@ -1393,9 +1527,12 @@
     "duration": 1,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
-    "tierSortOrder": 81
+    "status": "thisweek",
+    "scheduledDate": "2026-07-11",
+    "tierSortOrder": 81,
+    "scheduledDates": [
+      "2026-07-11"
+    ]
   },
   {
     "id": "hc08",
@@ -1405,8 +1542,8 @@
     "duration": 1,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-07-12",
     "tierSortOrder": 82
   },
   {
@@ -1417,8 +1554,8 @@
     "duration": 1,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-07-12",
     "tierSortOrder": 83
   },
   {
@@ -1429,8 +1566,8 @@
     "duration": 1,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-07-12",
     "tierSortOrder": 84
   },
   {
@@ -1441,8 +1578,8 @@
     "duration": 1,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-07-12",
     "tierSortOrder": 85
   },
   {
@@ -1453,8 +1590,8 @@
     "duration": 0.25,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-07-12",
     "tierSortOrder": 86
   },
   {
@@ -1465,8 +1602,8 @@
     "duration": 0.25,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-07-12",
     "tierSortOrder": 87
   },
   {
@@ -1705,9 +1842,12 @@
     "duration": 4,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
-    "tierSortOrder": 107
+    "status": "thisweek",
+    "scheduledDate": "2026-07-12",
+    "tierSortOrder": 107,
+    "scheduledDates": [
+      "2026-07-12"
+    ]
   },
   {
     "id": "er02",
@@ -1717,8 +1857,8 @@
     "duration": 3,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-07-18",
     "tierSortOrder": 108
   },
   {
@@ -1729,8 +1869,8 @@
     "duration": 3,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-07-19",
     "tierSortOrder": 109
   },
   {
@@ -1741,9 +1881,12 @@
     "duration": 4,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
-    "tierSortOrder": 110
+    "status": "thisweek",
+    "scheduledDate": "2026-07-19",
+    "tierSortOrder": 110,
+    "scheduledDates": [
+      "2026-07-19"
+    ]
   },
   {
     "id": "er05",
@@ -1753,8 +1896,8 @@
     "duration": 2,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-07-25",
     "tierSortOrder": 111
   },
   {
@@ -1765,8 +1908,8 @@
     "duration": 0.5,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-07-25",
     "tierSortOrder": 112
   },
   {
@@ -1777,8 +1920,8 @@
     "duration": 1,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-07-25",
     "tierSortOrder": 113
   },
   {
@@ -1789,9 +1932,12 @@
     "duration": 4,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
-    "tierSortOrder": 114
+    "status": "thisweek",
+    "scheduledDate": "2026-07-25",
+    "tierSortOrder": 114,
+    "scheduledDates": [
+      "2026-07-25"
+    ]
   },
   {
     "id": "er09",
@@ -1801,9 +1947,12 @@
     "duration": 4,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
-    "tierSortOrder": 115
+    "status": "thisweek",
+    "scheduledDate": "2026-07-26",
+    "tierSortOrder": 115,
+    "scheduledDates": [
+      "2026-07-26"
+    ]
   },
   {
     "id": "er10",
@@ -1813,8 +1962,8 @@
     "duration": 1,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-08-01",
     "tierSortOrder": 116
   },
   {
@@ -1825,8 +1974,8 @@
     "duration": 1,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-08-01",
     "tierSortOrder": 117
   },
   {
@@ -1837,8 +1986,8 @@
     "duration": 0.5,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-08-01",
     "tierSortOrder": 118
   },
   {
@@ -1849,8 +1998,8 @@
     "duration": 0.75,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-08-01",
     "tierSortOrder": 119
   },
   {
@@ -2083,8 +2232,8 @@
     "deadline": null,
     "notes": "",
     "workType": "Project Work",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-07-13",
     "tierSortOrder": 123
   },
   {
@@ -2096,8 +2245,8 @@
     "deadline": null,
     "notes": "",
     "workType": "Project Work",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-07-13",
     "tierSortOrder": 124
   },
   {
@@ -2109,8 +2258,8 @@
     "deadline": null,
     "notes": "",
     "workType": "Project Work",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-07-13",
     "tierSortOrder": 125
   },
   {
@@ -2122,8 +2271,8 @@
     "deadline": null,
     "notes": "note-only",
     "workType": "Project Work",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-07-13",
     "tierSortOrder": 126
   },
   {
@@ -2135,8 +2284,8 @@
     "deadline": null,
     "notes": "",
     "workType": "R&D",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-07-08",
     "tierSortOrder": 127
   },
   {
@@ -2148,8 +2297,8 @@
     "deadline": null,
     "notes": "",
     "workType": "R&D",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-07-08",
     "tierSortOrder": 128
   },
   {
@@ -2161,8 +2310,8 @@
     "deadline": null,
     "notes": "",
     "workType": "R&D",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-07-08",
     "tierSortOrder": 129
   },
   {
@@ -2174,8 +2323,8 @@
     "deadline": "2027-02-11",
     "notes": "",
     "workType": "Admin",
-    "status": "backlog",
-    "scheduledDate": null
+    "status": "thisweek",
+    "scheduledDate": "2026-07-17"
   },
   {
     "id": "eng33",
@@ -2186,8 +2335,11 @@
     "deadline": "2027-06-28",
     "notes": "",
     "workType": "Admin",
-    "status": "backlog",
-    "scheduledDate": null
+    "status": "thisweek",
+    "scheduledDate": "2026-07-17",
+    "scheduledDates": [
+      "2026-07-17"
+    ]
   },
   {
     "id": "cd36",
@@ -2197,9 +2349,12 @@
     "duration": 1,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
-    "tierSortOrder": 130
+    "status": "thisweek",
+    "scheduledDate": "2026-07-26",
+    "tierSortOrder": 130,
+    "scheduledDates": [
+      "2026-07-26"
+    ]
   },
   {
     "id": "mkt19",
@@ -2266,8 +2421,11 @@
     "deadline": "2026-07-18",
     "notes": "Top soil stripped, Black turf to be tested for re-use only need phi and c prime, Clay to be removed on site and stockpile wasterock, 2-3 tests one is for VSR Norite remoulded, Enzo?, 1 page results interpretation",
     "workType": "Project Work",
-    "status": "backlog",
-    "scheduledDate": null
+    "status": "thisweek",
+    "scheduledDate": "2026-07-09",
+    "scheduledDates": [
+      "2026-07-09"
+    ]
   },
   {
     "id": "eng35",
@@ -2278,8 +2436,8 @@
     "deadline": null,
     "notes": "",
     "workType": "Project Work",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-07-13",
     "subtasks": [],
     "tierSortOrder": 148
   },
@@ -2292,8 +2450,8 @@
     "deadline": null,
     "notes": "",
     "workType": "R&D",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-07-08",
     "tierSortOrder": 133
   },
   {
@@ -2305,8 +2463,8 @@
     "deadline": null,
     "notes": "",
     "workType": "R&D",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-07-08",
     "tierSortOrder": 134
   },
   {
@@ -2318,8 +2476,8 @@
     "deadline": null,
     "notes": "",
     "workType": "Admin",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-07-24",
     "tierSortOrder": 135
   },
   {
@@ -2330,8 +2488,8 @@
     "duration": 0.25,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-07-27",
     "tierSortOrder": 136
   },
   {
@@ -2342,9 +2500,18 @@
     "duration": 0.25,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
-    "tierSortOrder": 137
+    "status": "thisweek",
+    "scheduledDate": "2026-07-28",
+    "tierSortOrder": 137,
+    "scheduledDates": [
+      "2026-07-28",
+      "2026-07-29",
+      "2026-07-30",
+      "2026-07-31",
+      "2026-08-01",
+      "2026-08-02",
+      "2026-08-03"
+    ]
   },
   {
     "id": "cd39",
@@ -2354,8 +2521,8 @@
     "duration": 0.5,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-07-28",
     "tierSortOrder": 138
   },
   {
@@ -2366,8 +2533,8 @@
     "duration": 0.25,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-07-29",
     "tierSortOrder": 139
   },
   {
@@ -2378,8 +2545,8 @@
     "duration": 0.25,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-07-29",
     "tierSortOrder": 140
   },
   {
@@ -2390,8 +2557,8 @@
     "duration": 0.25,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-07-30",
     "tierSortOrder": 141
   },
   {
@@ -2402,9 +2569,12 @@
     "duration": 0.5,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
-    "tierSortOrder": 142
+    "status": "thisweek",
+    "scheduledDate": "2026-07-30",
+    "tierSortOrder": 142,
+    "scheduledDates": [
+      "2026-07-30"
+    ]
   },
   {
     "id": "cd44",
@@ -2414,9 +2584,12 @@
     "duration": 0.5,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
-    "tierSortOrder": 143
+    "status": "thisweek",
+    "scheduledDate": "2026-07-31",
+    "tierSortOrder": 143,
+    "scheduledDates": [
+      "2026-07-31"
+    ]
   },
   {
     "id": "cd45",
@@ -2426,8 +2599,8 @@
     "duration": 0.25,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-08-01",
     "tierSortOrder": 144
   },
   {
@@ -2438,8 +2611,8 @@
     "duration": 0.25,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-08-01",
     "tierSortOrder": 145
   },
   {
@@ -2450,8 +2623,8 @@
     "duration": 0.25,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-08-01",
     "tierSortOrder": 146
   },
   {
@@ -2462,9 +2635,12 @@
     "duration": 1,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
-    "tierSortOrder": 147
+    "status": "thisweek",
+    "scheduledDate": "2026-08-02",
+    "tierSortOrder": 147,
+    "scheduledDates": [
+      "2026-08-02"
+    ]
   },
   {
     "id": "mr6mhxhdh79fv",
@@ -2522,10 +2698,13 @@
     "duration": 0.25,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-08-02",
     "subtasks": [],
     "totalHours": 1,
-    "hoursDone": 0
+    "hoursDone": 0,
+    "scheduledDates": [
+      "2026-08-02"
+    ]
   }
 ]
