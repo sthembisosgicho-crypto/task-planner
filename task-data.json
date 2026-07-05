@@ -3981,7 +3981,7 @@
     "title": "New Task",
     "category": "Engineering",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 0.25,
     "deadline": null,
     "notes": "",
     "workType": "Project Work",
