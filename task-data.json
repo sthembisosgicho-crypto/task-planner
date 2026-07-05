@@ -4017,5 +4017,19 @@
     "scheduledDates": [],
     "scheduledSessionHours": {},
     "scheduledSlotName": null
+  },
+  {
+    "id": "mr81fxf2sflc9",
+    "title": "washing machine",
+    "category": "House Chores",
+    "priority": "Urgent",
+    "duration": 0,
+    "deadline": null,
+    "notes": "",
+    "status": "backlog",
+    "scheduledDate": null,
+    "subtasks": [],
+    "totalHours": 1,
+    "hoursDone": 0
   }
 ]
