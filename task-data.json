@@ -3981,5 +3981,18 @@
     "totalHours": 0,
     "hoursDone": 0,
     "completedDate": "2026-07-04T18:09:14.028Z"
+  },
+  {
+    "id": "mr82b1833e98i",
+    "title": "New Task",
+    "category": "Engineering",
+    "priority": "Normal",
+    "duration": 0,
+    "deadline": null,
+    "notes": "",
+    "workType": "Project Work",
+    "status": "backlog",
+    "scheduledDate": null,
+    "subtasks": []
   }
 ]
