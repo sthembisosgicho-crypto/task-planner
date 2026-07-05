@@ -1163,7 +1163,10 @@
       "2026-10-01": 0.25,
       "2026-10-02": 0.25
     },
-    "scheduledSlotName": "Day Start"
+    "scheduledSlotName": "Day Start",
+    "subtasks": [],
+    "totalHours": 0,
+    "hoursDone": 0
   },
   {
     "id": "mkt06",
