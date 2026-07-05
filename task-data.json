@@ -3998,15 +3998,16 @@
   },
   {
     "id": "mr84frdfea3sc",
-    "title": "New Task",
-    "category": "Engineering",
-    "priority": "Normal",
-    "duration": 0,
+    "title": "Pay Nicole",
+    "category": "Chores Desk",
+    "priority": "Urgent",
+    "duration": 0.25,
     "deadline": null,
     "notes": "",
-    "workType": "Project Work",
     "status": "backlog",
     "scheduledDate": null,
-    "subtasks": []
+    "subtasks": [],
+    "totalHours": 0,
+    "hoursDone": 0
   }
 ]
