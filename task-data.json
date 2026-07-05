@@ -928,7 +928,7 @@
   {
     "id": "chr03",
     "title": "Medical",
-    "category": "Chores",
+    "category": "Chores Desk",
     "priority": "Normal",
     "duration": 1,
     "deadline": null,
@@ -945,7 +945,9 @@
       "2026-07-08": 0.25
     },
     "scheduledSlotName": "Homework",
-    "subtasks": []
+    "subtasks": [],
+    "totalHours": 0,
+    "hoursDone": 0
   },
   {
     "id": "chr04",
@@ -964,7 +966,8 @@
     "scheduledSlotName": "Homework",
     "scheduledDates": [
       "2026-07-08"
-    ]
+    ],
+    "subtasks": []
   },
   {
     "id": "chr05",
