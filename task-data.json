@@ -2325,7 +2325,7 @@
     "duration": 0.25,
     "deadline": null,
     "notes": "",
-    "status": "thisweek",
+    "status": "done",
     "scheduledDate": "2026-09-14",
     "tierSortOrder": 68,
     "scheduledSessionHours": {
@@ -2334,7 +2334,8 @@
     "scheduledSlotName": "Homework",
     "scheduledDates": [
       "2026-09-14"
-    ]
+    ],
+    "completedDate": "2026-07-05T17:00:12.399Z"
   },
   {
     "id": "cd30",
