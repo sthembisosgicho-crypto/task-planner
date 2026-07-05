@@ -477,7 +477,7 @@ input, select, textarea { font-family: inherit; }
 <!-- Main -->
 <div class="main-content">
   <div class="app-header">
-    <h1>Task Scheduler <span style="font-size:0.6rem;font-weight:400;color:var(--text-dim);vertical-align:middle">v26</span></h1>
+    <h1>Task Scheduler <span style="font-size:0.6rem;font-weight:400;color:var(--text-dim);vertical-align:middle">v27</span></h1>
     <div class="header-actions">
       <button class="btn-primary" id="addTaskBtn">+ Add Task</button>
       <button class="btn-secondary" id="autoScheduleBtn">Auto-Schedule</button>
@@ -1157,27 +1157,43 @@ function autoScheduleQuiet(taskList) {
   function usageKey(ds, sn, wt) { return wt ? `${ds}_${sn}_${wt}` : `${ds}_${sn}`; }
   function addDays(dateStr, n) { const d = new Date(dateStr + 'T12:00:00Z'); d.setUTCDate(d.getUTCDate() + n); return d.toISOString().split('T')[0]; }
   function getDow(dateStr) { return new Date(dateStr + 'T12:00:00Z').getUTCDay(); }
+  // Pre-fill: only charge the FIRST matching slot per day; use scheduledDates for multi-day tasks
   tasks.filter(t => t.scheduledDate && t.status !== 'done').forEach(t => {
-    const dow = getDow(t.scheduledDate);
-    const slots = getSlotsForDay(dow);
-    const wt = (t.category === 'Engineering') ? t.workType : null;
-    slots.forEach(slot => { if (taskFitsSlot(t, slot, dow)) { const k = usageKey(t.scheduledDate, slot.name, wt); slotUsage[k] = (slotUsage[k]||0) + t.duration; } });
+    const dates = t.scheduledDates || [t.scheduledDate];
+    dates.forEach(ds => {
+      const dow = getDow(ds);
+      const slots = getSlotsForDay(dow);
+      const wt = (t.category === 'Engineering') ? t.workType : null;
+      const firstSlot = slots.find(slot => taskFitsSlot(t, slot, dow));
+      if (firstSlot) {
+        const k = usageKey(ds, firstSlot.name, wt);
+        const cap = (wt && ENG_WORKTYPE_HOURS[wt]) ? ENG_WORKTYPE_HOURS[wt] : slotCapacity(firstSlot);
+        slotUsage[k] = (slotUsage[k] || 0) + Math.min(t.duration || 0, cap);
+      }
+    });
   });
   taskList.forEach(task => {
     if (!task.duration || task.duration === 0) return;
+    let remaining = task.duration;
     for (let off = 0; off < 90; off++) {
+      if (remaining <= 0) break;
       const ds = addDays(todayStr, off);
       const dow = getDow(ds);
       const slots = getSlotsForDay(dow);
       for (const slot of slots) {
         if (!taskFitsSlot(task, slot, dow)) continue;
-        if (task.category === 'Engineering') { const ad = ENG_WORKTYPE_DAYS[task.workType]||[1,2,3,4,5]; if (!ad.includes(dow)) continue; }
         const wt = (task.category === 'Engineering') ? task.workType : null;
         const k = usageKey(ds, slot.name, wt); const used = slotUsage[k]||0;
         const cap = (task.category === 'Engineering' && task.workType && ENG_WORKTYPE_HOURS[task.workType]) ? ENG_WORKTYPE_HOURS[task.workType] : slotCapacity(slot);
-        if (used + task.duration <= cap) { task.scheduledDate = ds; task.status = 'thisweek'; slotUsage[k] = used + task.duration; break; }
+        const available = cap - used;
+        if (available <= 0) continue;
+        const sessionHrs = Math.min(remaining, available);
+        slotUsage[k] = used + sessionHrs;
+        remaining -= sessionHrs;
+        if (!task.scheduledDate) { task.scheduledDate = ds; task.status = 'thisweek'; }
+        break;
       }
-      if (task.scheduledDate) break;
+      if (task.scheduledDate && remaining <= 0) break;
     }
   });
   saveTasks();
@@ -1461,20 +1477,19 @@ function autoSchedule() {
   }
 
   // Pre-fill usage from already-scheduled tasks (only those NOT being rescheduled)
+  // Only charge the FIRST matching slot per day — charging all eligible slots overstates usage
   tasks.filter(t => t.status !== 'done' && t.scheduledDate && !unscheduled.includes(t)).forEach(t => {
     const dates = t.scheduledDates || [t.scheduledDate];
     dates.forEach(ds => {
       const dow = new Date(ds + 'T12:00:00Z').getUTCDay();
       const slots = getSlotsForDay(dow);
-      slots.forEach(slot => {
-        if (taskFitsSlot(t, slot, dow)) {
-          const wt = (t.category === 'Engineering') ? t.workType : null;
-          const k = usageKey(ds, slot.name, wt);
-          const cap = (wt && ENG_WORKTYPE_HOURS[wt]) ? ENG_WORKTYPE_HOURS[wt] : slotCapacity(slot);
-          const sessionHrs = Math.min(t.duration || 0, cap);
-          slotUsage[k] = (slotUsage[k] || 0) + sessionHrs;
-        }
-      });
+      const wt = (t.category === 'Engineering') ? t.workType : null;
+      const firstSlot = slots.find(slot => taskFitsSlot(t, slot, dow));
+      if (firstSlot) {
+        const k = usageKey(ds, firstSlot.name, wt);
+        const cap = (wt && ENG_WORKTYPE_HOURS[wt]) ? ENG_WORKTYPE_HOURS[wt] : slotCapacity(firstSlot);
+        slotUsage[k] = (slotUsage[k] || 0) + Math.min(t.duration || 0, cap);
+      }
     });
   });
 
