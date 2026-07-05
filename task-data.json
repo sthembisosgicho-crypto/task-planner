@@ -3984,11 +3984,18 @@
     "duration": 0.25,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-07-06",
     "subtasks": [],
     "totalHours": 0,
-    "hoursDone": 0
+    "hoursDone": 0,
+    "scheduledDates": [
+      "2026-07-06"
+    ],
+    "scheduledSessionHours": {
+      "2026-07-06": 0.25
+    },
+    "scheduledSlotName": "Day Start"
   },
   {
     "id": "mr82dbu9x4gq5",
