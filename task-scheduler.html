@@ -477,7 +477,7 @@ input, select, textarea { font-family: inherit; }
 <!-- Main -->
 <div class="main-content">
   <div class="app-header">
-    <h1>Task Scheduler <span style="font-size:0.6rem;font-weight:400;color:var(--text-dim);vertical-align:middle">v32</span></h1>
+    <h1>Task Scheduler <span style="font-size:0.6rem;font-weight:400;color:var(--text-dim);vertical-align:middle">v33</span></h1>
     <div class="header-actions">
       <button class="btn-primary" id="addTaskBtn">+ Add Task</button>
       <button class="btn-secondary" id="autoScheduleBtn">Auto-Schedule</button>
@@ -1462,10 +1462,73 @@ function autoSchedule() {
   preAutoScheduleSnapshot = JSON.parse(JSON.stringify(tasks));
   document.getElementById('undoBtn').classList.remove('disabled');
 
-  // Recurring tasks are always eligible (they fill every slot); one-offs only if unscheduled
-  const allActive = tasks.filter(t => t.status !== 'done' && t.duration > 0);
-  const unscheduled = allActive.filter(t => !t.scheduledDate || isRecurringTask(t));
-  unscheduled.sort((a,b) => {
+  const todayStr = getLocalDateStr();
+  function addDays(ds, n) { const d = new Date(ds+'T12:00:00Z'); d.setUTCDate(d.getUTCDate()+n); return d.toISOString().split('T')[0]; }
+  function getDow(ds) { return new Date(ds+'T12:00:00Z').getUTCDay(); }
+  function usageKey(ds, sn, wt) { return wt ? `${ds}_${sn}_${wt}` : `${ds}_${sn}`; }
+
+  const schedulable = tasks.filter(t => t.status !== 'done' && (t.duration || 0) > 0);
+  schedulable.forEach(t => {
+    t.scheduledDate = null; t.scheduledDates = []; t.scheduledSessionHours = {}; t.scheduledSlotName = null;
+    if (!isRecurringTask(t)) t.status = 'backlog';
+  });
+
+  const allSlotDefs = [...WEEKDAY_SLOTS, ...WEEKEND_SLOTS];
+  const slotQueues = {};
+  allSlotDefs.forEach(s => { if (!slotQueues[s.name]) slotQueues[s.name] = []; });
+  schedulable.forEach(t => {
+    if (t.category === 'Engineering') { slotQueues['Engineering'].push(t); return; }
+    for (const s of allSlotDefs) { if (s.categories.includes(t.category)) { slotQueues[s.name].push(t); return; } }
+  });
+  Object.values(slotQueues).forEach(q => q.sort((a, b) => {
+    const ta = getTaskTier(a), tb = getTaskTier(b);
+    if (ta !== tb) return ta - tb;
+    return getTierSortKey(a, ta) - getTierSortKey(b, tb);
+  }));
+
+  const slotUsage = {};
+  const remaining = {};
+  schedulable.forEach(t => { if (!isRecurringTask(t)) remaining[t.id] = t.duration || 0; });
+
+  for (let off = 0; off < 90; off++) {
+    const dateStr = addDays(todayStr, off);
+    const dow = getDow(dateStr);
+    const daySlots = getSlotsForDay(dow);
+    const placedThisDay = new Set();
+    for (const slot of daySlots) {
+      const queue = slotQueues[slot.name] || [];
+      for (const task of queue) {
+        const isRecur = isRecurringTask(task);
+        if (!isRecur && (remaining[task.id] || 0) <= 0) continue;
+        if (!isRecur && placedThisDay.has(task.id)) continue;
+        if (!taskFitsSlot(task, slot, dow)) continue;
+        const wt = task.category === 'Engineering' ? (task.workType || 'Project Work') : null;
+        const k = usageKey(dateStr, slot.name, wt);
+        const cap = (wt && ENG_WORKTYPE_HOURS[wt]) ? ENG_WORKTYPE_HOURS[wt] : slotCapacity(slot);
+        const used = slotUsage[k] || 0;
+        const avail = cap - used;
+        if (avail <= 0) continue;
+        const sessionHrs = isRecur ? Math.min(task.duration || avail, avail) : Math.min(remaining[task.id], avail);
+        if (sessionHrs <= 0) continue;
+        slotUsage[k] = used + sessionHrs;
+        if (!isRecur) { remaining[task.id] -= sessionHrs; placedThisDay.add(task.id); }
+        if (!task.scheduledSessionHours) task.scheduledSessionHours = {};
+        task.scheduledSessionHours[dateStr] = (task.scheduledSessionHours[dateStr] || 0) + sessionHrs;
+        if (!task.scheduledSlotName) task.scheduledSlotName = slot.name;
+        if (!task.scheduledDate) { task.scheduledDate = dateStr; task.status = dateStr === todayStr ? 'today' : 'thisweek'; }
+        if (!task.scheduledDates) task.scheduledDates = [];
+        if (!task.scheduledDates.includes(dateStr)) task.scheduledDates.push(dateStr);
+      }
+    }
+  }
+
+  saveTasks(); exportData(); renderAll();
+  const placed = schedulable.filter(t => t.scheduledDate).length;
+  showStatus(`Scheduled ${placed} tasks`);
+}
+
+// _OLD autoSchedule body removed
+if (false) { const unscheduled = null; unscheduled.sort((a,b) => {
     const ta = getTaskTier(a), tb = getTaskTier(b);
     if (ta !== tb) return ta - tb;
     return getTierSortKey(a, ta) - getTierSortKey(b, tb);
