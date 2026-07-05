@@ -4012,15 +4012,16 @@
   },
   {
     "id": "mr82eqt5o4ajr",
-    "title": "New Task",
-    "category": "Engineering",
-    "priority": "Normal",
-    "duration": 0,
+    "title": "Check Washing Machine Progress",
+    "category": "House Chores",
+    "priority": "Urgent",
+    "duration": 1,
     "deadline": null,
     "notes": "",
-    "workType": "Project Work",
     "status": "backlog",
     "scheduledDate": null,
-    "subtasks": []
+    "subtasks": [],
+    "totalHours": 0,
+    "hoursDone": 0
   }
 ]
