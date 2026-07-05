@@ -4034,15 +4034,16 @@
   },
   {
     "id": "mr81gi2f2r63k",
-    "title": "New Task",
-    "category": "Engineering",
+    "title": "Cut nails",
+    "category": "Health",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 0.25,
     "deadline": null,
     "notes": "",
-    "workType": "Project Work",
     "status": "backlog",
     "scheduledDate": null,
-    "subtasks": []
+    "subtasks": [],
+    "totalHours": 0,
+    "hoursDone": 0
   }
 ]
