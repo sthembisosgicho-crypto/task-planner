@@ -486,12 +486,11 @@
     "duration": 2,
     "deadline": null,
     "notes": "",
-    "status": "today",
-    "scheduledDate": "2026-07-04",
-    "scheduledDates": [
-      "2026-07-04"
-    ],
-    "tierSortOrder": 12
+    "status": "backlog",
+    "scheduledDate": null,
+    "scheduledDates": [],
+    "tierSortOrder": 12,
+    "sortOrder": -1
   },
   {
     "id": "mkt03",
