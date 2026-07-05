@@ -3173,7 +3173,7 @@
     "duration": 2,
     "deadline": null,
     "notes": "",
-    "workType": "Project Work",
+    "workType": "R&D",
     "status": "thisweek",
     "scheduledDate": "2026-07-14",
     "subtasks": [
@@ -3462,7 +3462,7 @@
     "duration": 1,
     "deadline": null,
     "notes": "",
-    "workType": "Project Work",
+    "workType": "Admin",
     "status": "thisweek",
     "scheduledDate": "2026-07-14",
     "tierSortOrder": 125,
