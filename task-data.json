@@ -3984,15 +3984,16 @@
   },
   {
     "id": "mr832jadukv0q",
-    "title": "New Task",
-    "category": "Engineering",
-    "priority": "Normal",
-    "duration": 0,
+    "title": "SARS",
+    "category": "Chores Desk",
+    "priority": "Soon",
+    "duration": 2,
     "deadline": null,
     "notes": "",
-    "workType": "Project Work",
     "status": "backlog",
     "scheduledDate": null,
-    "subtasks": []
+    "subtasks": [],
+    "totalHours": 0,
+    "hoursDone": 0
   }
 ]
