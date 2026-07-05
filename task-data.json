@@ -1222,19 +1222,19 @@
     "scheduledSlotName": "Side Hustle",
     "scheduledDates": [
       "2026-07-12"
-    ]
+    ],
+    "subtasks": []
   },
   {
     "id": "mkt09",
     "title": "FSP registration",
     "category": "Markets",
-    "priority": "Normal",
+    "priority": "Urgent",
     "duration": 4,
     "deadline": null,
     "notes": "",
     "status": "thisweek",
     "scheduledDate": "2026-07-12",
-    "tierSortOrder": 26,
     "scheduledDates": [
       "2026-07-12",
       "2026-07-18"
