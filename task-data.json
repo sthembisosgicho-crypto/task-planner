@@ -472,9 +472,10 @@
     "duration": 3,
     "deadline": null,
     "notes": "",
-    "status": "today",
-    "scheduledDate": "2026-07-04",
-    "tierSortOrder": 11
+    "status": "backlog",
+    "scheduledDate": null,
+    "tierSortOrder": -1,
+    "scheduledDates": []
   },
   {
     "id": "mkt02",
@@ -484,12 +485,10 @@
     "duration": 2,
     "deadline": null,
     "notes": "",
-    "status": "today",
-    "scheduledDate": "2026-07-04",
-    "scheduledDates": [
-      "2026-07-04"
-    ],
-    "tierSortOrder": 12
+    "status": "backlog",
+    "scheduledDate": null,
+    "scheduledDates": [],
+    "tierSortOrder": -1
   },
   {
     "id": "mkt03",
