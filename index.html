@@ -477,7 +477,7 @@ input, select, textarea { font-family: inherit; }
 <!-- Main -->
 <div class="main-content">
   <div class="app-header">
-    <h1>Task Scheduler <span style="font-size:0.6rem;font-weight:400;color:var(--text-dim);vertical-align:middle">v30</span></h1>
+    <h1>Task Scheduler <span style="font-size:0.6rem;font-weight:400;color:var(--text-dim);vertical-align:middle">v31</span></h1>
     <div class="header-actions">
       <button class="btn-primary" id="addTaskBtn">+ Add Task</button>
       <button class="btn-secondary" id="autoScheduleBtn">Auto-Schedule</button>
@@ -987,7 +987,11 @@ function renderDayView() {
   const shownIds = new Set();
   slots.forEach(slot => {
     const cap = slotCapacity(slot);
-    const matching = dayTasks.filter(t => taskFitsSlot(t, slot, dow) && !shownIds.has(t.id || t._parentId + t.title));
+    const matching = dayTasks.filter(t => {
+      if (shownIds.has(t.id || t._parentId + t.title)) return false;
+      if (t.scheduledSlotName) return t.scheduledSlotName === slot.name;
+      return taskFitsSlot(t, slot, dow);
+    });
     matching.forEach(t => shownIds.add(t.id || t._parentId + t.title));
     const activeTasks = matching.filter(t => t.status !== 'done');
     const doneTasks = matching.filter(t => t.status === 'done');
@@ -1505,7 +1509,8 @@ function autoSchedule() {
     return new Date(dateStr + 'T12:00:00Z').getUTCDay();
   }
 
-  // Clear scheduledDates for recurring tasks
+  // Clear scheduling state for all tasks being rescheduled
+  unscheduled.forEach(t => { t.scheduledSessionHours = {}; t.scheduledSlotName = null; });
   unscheduled.filter(t => isRecurringTask(t)).forEach(t => { t.scheduledDates = []; });
 
   // Sort by 4-tier system, then by manual tierSortOrder within each tier
@@ -1563,9 +1568,9 @@ function autoSchedule() {
         if (!isRecur) remaining[task.id] -= sessionHrs;
         placedThisDay = true;
 
-        // Store session hours per date so day view shows correct partial hours
         if (!task.scheduledSessionHours) task.scheduledSessionHours = {};
         task.scheduledSessionHours[dateStr] = (task.scheduledSessionHours[dateStr] || 0) + sessionHrs;
+        if (!task.scheduledSlotName) task.scheduledSlotName = slot.name;
 
         if (!task.scheduledDate) {
           task.scheduledDate = dateStr;
