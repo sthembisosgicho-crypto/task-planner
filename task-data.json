@@ -3984,15 +3984,17 @@
   },
   {
     "id": "mr82b1833e98i",
-    "title": "New Task",
+    "title": "Dipping machine",
     "category": "Engineering",
-    "priority": "Normal",
-    "duration": 0,
+    "priority": "Urgent",
+    "duration": 0.25,
     "deadline": null,
     "notes": "",
-    "workType": "Project Work",
+    "workType": "Admin",
     "status": "backlog",
     "scheduledDate": null,
-    "subtasks": []
+    "subtasks": [],
+    "totalHours": 0,
+    "hoursDone": 0
   }
 ]
