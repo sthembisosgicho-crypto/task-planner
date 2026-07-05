@@ -1131,13 +1131,12 @@
     "id": "cd20",
     "title": "Check diary",
     "category": "Chores Desk",
-    "priority": "Normal",
+    "priority": "Recurring",
     "duration": 1,
     "deadline": null,
     "notes": "",
     "status": "backlog",
-    "scheduledDate": null,
-    "tierSortOrder": 59
+    "scheduledDate": null
   },
   {
     "id": "cd21",
@@ -2324,7 +2323,7 @@
     "duration": 2,
     "deadline": null,
     "notes": "",
-    "workType": "Project Work",
+    "workType": "Admin",
     "status": "backlog",
     "scheduledDate": null,
     "tierSortOrder": 135
