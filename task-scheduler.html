@@ -477,7 +477,7 @@ input, select, textarea { font-family: inherit; }
 <!-- Main -->
 <div class="main-content">
   <div class="app-header">
-    <h1>Task Scheduler <span style="font-size:0.6rem;font-weight:400;color:var(--text-dim);vertical-align:middle">v31</span></h1>
+    <h1>Task Scheduler <span style="font-size:0.6rem;font-weight:400;color:var(--text-dim);vertical-align:middle">v32</span></h1>
     <div class="header-actions">
       <button class="btn-primary" id="addTaskBtn">+ Add Task</button>
       <button class="btn-secondary" id="autoScheduleBtn">Auto-Schedule</button>
@@ -1480,19 +1480,36 @@ function autoSchedule() {
     return slotCapacity(slot);
   }
 
-  // Pre-fill usage from already-scheduled tasks (only those NOT being rescheduled)
-  // Only charge the FIRST matching slot per day — charging all eligible slots overstates usage
+  // Clear stale session tracking for already-scheduled tasks so pre-fill can recompute accurately
+  tasks.filter(t => t.status !== 'done' && t.scheduledDate && !unscheduled.includes(t)).forEach(t => {
+    t.scheduledSessionHours = {};
+    t.scheduledSlotName = null;
+  });
+
+  // Pre-fill: charge slot usage from already-scheduled tasks AND update their session tracking
+  // Respects cumulative usage so slots don't appear overcounted in the day view
   tasks.filter(t => t.status !== 'done' && t.scheduledDate && !unscheduled.includes(t)).forEach(t => {
     const dates = t.scheduledDates || [t.scheduledDate];
+    const wt = (t.category === 'Engineering') ? t.workType : null;
+    let taskRemaining = t.duration || 0;
     dates.forEach(ds => {
+      if (taskRemaining <= 0) return;
       const dow = new Date(ds + 'T12:00:00Z').getUTCDay();
       const slots = getSlotsForDay(dow);
-      const wt = (t.category === 'Engineering') ? t.workType : null;
       const firstSlot = slots.find(slot => taskFitsSlot(t, slot, dow));
       if (firstSlot) {
         const k = usageKey(ds, firstSlot.name, wt);
         const cap = (wt && ENG_WORKTYPE_HOURS[wt]) ? ENG_WORKTYPE_HOURS[wt] : slotCapacity(firstSlot);
-        slotUsage[k] = (slotUsage[k] || 0) + Math.min(t.duration || 0, cap);
+        const used = slotUsage[k] || 0;
+        const available = cap - used;
+        if (available > 0) {
+          const sessionHrs = Math.min(taskRemaining, available);
+          slotUsage[k] = used + sessionHrs;
+          taskRemaining -= sessionHrs;
+          if (!t.scheduledSessionHours) t.scheduledSessionHours = {};
+          t.scheduledSessionHours[ds] = sessionHrs;
+          if (!t.scheduledSlotName) t.scheduledSlotName = firstSlot.name;
+        }
       }
     });
   });
