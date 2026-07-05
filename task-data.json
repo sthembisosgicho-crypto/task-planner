@@ -2516,15 +2516,16 @@
   },
   {
     "id": "mr7s7g6uirtwa",
-    "title": "New Task",
-    "category": "Engineering",
+    "title": "Plak thol",
+    "category": "Chores Desk",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 0.25,
     "deadline": null,
     "notes": "",
-    "workType": "Project Work",
     "status": "backlog",
     "scheduledDate": null,
-    "subtasks": []
+    "subtasks": [],
+    "totalHours": 1,
+    "hoursDone": 0
   }
 ]
