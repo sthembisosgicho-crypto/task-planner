@@ -2278,7 +2278,7 @@
     "duration": 1,
     "deadline": null,
     "notes": "",
-    "status": "thisweek",
+    "status": "done",
     "scheduledDate": "2026-09-04",
     "tierSortOrder": 66,
     "scheduledDates": [
@@ -2293,7 +2293,8 @@
       "2026-09-08": 0.25,
       "2026-09-09": 0.25
     },
-    "scheduledSlotName": "Homework"
+    "scheduledSlotName": "Homework",
+    "completedDate": "2026-07-05T17:00:08.474Z"
   },
   {
     "id": "cd28",
