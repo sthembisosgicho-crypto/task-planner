@@ -2099,14 +2099,13 @@
     "id": "eng26",
     "title": "Residual parameter updated",
     "category": "Engineering",
-    "priority": "Normal",
+    "priority": "Urgent",
     "duration": 2,
     "deadline": null,
     "notes": "",
     "workType": "Project Work",
     "status": "backlog",
-    "scheduledDate": null,
-    "tierSortOrder": 124
+    "scheduledDate": null
   },
   {
     "id": "eng27",
