@@ -1983,7 +1983,9 @@
         "deadline": null,
         "notes": ""
       }
-    ]
+    ],
+    "totalHours": 0,
+    "hoursDone": 0
   },
   {
     "id": "eng23",
