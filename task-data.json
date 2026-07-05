@@ -1809,13 +1809,12 @@
     "id": "cd13",
     "title": "Banking powder research",
     "category": "Chores Desk",
-    "priority": "Normal",
+    "priority": "Soon",
     "duration": 1,
     "deadline": null,
     "notes": "",
     "status": "thisweek",
     "scheduledDate": "2026-07-29",
-    "tierSortOrder": 53,
     "scheduledSessionHours": {
       "2026-07-29": 0.5,
       "2026-07-30": 0.5
