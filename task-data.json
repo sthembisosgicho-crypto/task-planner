@@ -1191,13 +1191,12 @@
     "id": "mkt07",
     "title": "Write code by hand for flow",
     "category": "Markets",
-    "priority": "Normal",
+    "priority": "Urgent",
     "duration": 1.5,
     "deadline": null,
     "notes": "",
     "status": "thisweek",
     "scheduledDate": "2026-07-12",
-    "tierSortOrder": 24,
     "scheduledSessionHours": {
       "2026-07-12": 1.5
     },
