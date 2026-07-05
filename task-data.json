@@ -3997,15 +3997,17 @@
   },
   {
     "id": "mr82dbu9x4gq5",
-    "title": "New Task",
+    "title": "FIX PTA window",
     "category": "Engineering",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 0.25,
     "deadline": null,
     "notes": "",
-    "workType": "Project Work",
+    "workType": "Admin",
     "status": "backlog",
     "scheduledDate": null,
-    "subtasks": []
+    "subtasks": [],
+    "totalHours": 0,
+    "hoursDone": 0
   }
 ]
