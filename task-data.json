@@ -3989,15 +3989,17 @@
   },
   {
     "id": "mr8sr7vo7rlkb",
-    "title": "New Task",
+    "title": "Move Office",
     "category": "Engineering",
-    "priority": "Normal",
-    "duration": 0,
+    "priority": "Soon",
+    "duration": 1,
     "deadline": null,
     "notes": "",
-    "workType": "Project Work",
+    "workType": "Admin",
     "status": "backlog",
     "scheduledDate": null,
-    "subtasks": []
+    "subtasks": [],
+    "totalHours": 0,
+    "hoursDone": 0
   }
 ]
