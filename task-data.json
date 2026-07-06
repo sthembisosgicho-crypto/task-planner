@@ -4004,15 +4004,16 @@
   },
   {
     "id": "mr8t28tjp1oai",
-    "title": "New Task",
-    "category": "Engineering",
+    "title": "HL 46 BH",
+    "category": "Chores Desk",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 1,
     "deadline": null,
     "notes": "",
-    "workType": "Project Work",
     "status": "backlog",
     "scheduledDate": null,
-    "subtasks": []
+    "subtasks": [],
+    "totalHours": 0,
+    "hoursDone": 0
   }
 ]
