@@ -4001,19 +4001,5 @@
     "subtasks": [],
     "totalHours": 0,
     "hoursDone": 0
-  },
-  {
-    "id": "mr8t28tjp1oai",
-    "title": "HL 46 BH",
-    "category": "Chores Desk",
-    "priority": "Normal",
-    "duration": 1,
-    "deadline": null,
-    "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
-    "subtasks": [],
-    "totalHours": 0,
-    "hoursDone": 0
   }
 ]
