@@ -4018,15 +4018,17 @@
   },
   {
     "id": "mr949w3bnqpd9",
-    "title": "New Task",
+    "title": "Respond to ITRB and GISTM audits",
     "category": "Engineering",
     "priority": "Normal",
-    "duration": 0,
-    "deadline": null,
+    "duration": 1.5,
+    "deadline": "2026-07-09",
     "notes": "",
     "workType": "Project Work",
     "status": "backlog",
     "scheduledDate": null,
-    "subtasks": []
+    "subtasks": [],
+    "totalHours": 0,
+    "hoursDone": 0
   }
 ]
