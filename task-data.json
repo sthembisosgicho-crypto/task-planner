@@ -4001,5 +4001,19 @@
     "subtasks": [],
     "totalHours": 0,
     "hoursDone": 0
+  },
+  {
+    "id": "mr8zjq08ky9pi",
+    "title": "Data recovery plan",
+    "category": "Chores Desk",
+    "priority": "Urgent",
+    "duration": 1.25,
+    "deadline": null,
+    "notes": "",
+    "status": "backlog",
+    "scheduledDate": null,
+    "subtasks": [],
+    "totalHours": 0,
+    "hoursDone": 0
   }
 ]
