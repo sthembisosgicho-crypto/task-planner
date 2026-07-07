@@ -756,7 +756,7 @@
     "duration": 0.5,
     "deadline": null,
     "notes": "Weekly",
-    "status": "thisweek",
+    "status": "done",
     "scheduledDate": "2026-07-06",
     "scheduledDates": [
       "2026-07-06",
@@ -896,7 +896,8 @@
       "2026-10-01": 0.5,
       "2026-10-02": 0.5
     },
-    "scheduledSlotName": "Homework"
+    "scheduledSlotName": "Homework",
+    "completedDate": "2026-07-07T16:29:17.147Z"
   },
   {
     "id": "chr02",
