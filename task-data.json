@@ -3236,8 +3236,8 @@
     "deadline": "2026-06-22",
     "notes": "",
     "workType": "Project Work",
-    "status": "thisweek",
-    "scheduledDate": "2026-07-06",
+    "status": "backlog",
+    "scheduledDate": null,
     "subtasks": [
       {
         "id": "eng22s1",
@@ -3260,13 +3260,12 @@
     ],
     "totalHours": 0,
     "hoursDone": 0,
-    "scheduledDates": [
-      "2026-07-06"
-    ],
+    "scheduledDates": [],
     "scheduledSessionHours": {
       "2026-07-06": 2
     },
-    "scheduledSlotName": "Engineering"
+    "scheduledSlotName": "Engineering",
+    "sortOrder": -1
   },
   {
     "id": "eng23",
