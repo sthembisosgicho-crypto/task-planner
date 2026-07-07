@@ -1504,14 +1504,15 @@
     "duration": 1,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
-    "scheduledDates": [],
+    "status": "thisweek",
+    "scheduledDate": "2026-07-06",
+    "scheduledDates": [
+      "2026-07-06"
+    ],
     "scheduledSessionHours": {
       "2026-07-06": 1
     },
-    "scheduledSlotName": "Homework",
-    "sortOrder": -1
+    "scheduledSlotName": "Homework"
   },
   {
     "id": "cd03",
@@ -1815,14 +1816,15 @@
     "duration": 0.25,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
-    "scheduledDates": [],
+    "status": "thisweek",
+    "scheduledDate": "2026-07-06",
+    "scheduledDates": [
+      "2026-07-06"
+    ],
     "scheduledSessionHours": {
       "2026-07-06": 0.25
     },
-    "scheduledSlotName": "Homework",
-    "sortOrder": -1
+    "scheduledSlotName": "Homework"
   },
   {
     "id": "cd18",
@@ -3975,7 +3977,7 @@
     "subtasks": []
   },
   {
-    "id": "mraw4937ldu19",
+    "id": "mraw6zqfqtlde",
     "title": "New Task",
     "category": "Engineering",
     "priority": "Normal",
