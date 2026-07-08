@@ -3638,7 +3638,7 @@
     "deadline": null,
     "notes": "",
     "workType": "R&D",
-    "status": "today",
+    "status": "done",
     "scheduledDate": "2026-07-08",
     "tierSortOrder": 129,
     "scheduledDates": [
@@ -3647,7 +3647,8 @@
     "scheduledSessionHours": {
       "2026-07-08": 0.25
     },
-    "scheduledSlotName": "Engineering"
+    "scheduledSlotName": "Engineering",
+    "completedDate": "2026-07-08T18:28:33.203Z"
   },
   {
     "id": "eng32",
