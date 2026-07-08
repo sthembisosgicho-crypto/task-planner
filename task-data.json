@@ -4452,5 +4452,18 @@
     "status": "backlog",
     "scheduledDate": null,
     "subtasks": []
+  },
+  {
+    "id": "mrcfhtb5v87i6",
+    "title": "New Task",
+    "category": "Engineering",
+    "priority": "Normal",
+    "duration": 0,
+    "deadline": null,
+    "notes": "",
+    "workType": "Project Work",
+    "status": "backlog",
+    "scheduledDate": null,
+    "subtasks": []
   }
 ]
