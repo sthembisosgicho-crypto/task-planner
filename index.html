@@ -2316,9 +2316,13 @@ if ('serviceWorker' in navigator) {
           if (!nw) return;
           nw.addEventListener('statechange', () => {
             if (nw.state === 'installed' && navigator.serviceWorker.controller) {
-              showStatus('App updated — refresh to apply');
+              showStatus('App updated — reloading…');
+              setTimeout(() => window.location.reload(), 800);
             }
           });
+        });
+        navigator.serviceWorker.addEventListener('controllerchange', () => {
+          window.location.reload();
         });
       })
       .catch(() => {
