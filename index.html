@@ -2324,6 +2324,8 @@ if ('serviceWorker' in navigator) {
         navigator.serviceWorker.addEventListener('controllerchange', () => {
           window.location.reload();
         });
+        // Force an immediate update check on every page load
+        reg.update().catch(() => {});
       })
       .catch(() => {
         // SW registration fails on file:// — app still works via localStorage
