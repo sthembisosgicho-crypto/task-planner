@@ -2707,14 +2707,22 @@ window.addEventListener('beforeunload', function(e) {
           if (Array.isArray(chkTasks) && chkTasks.length > 0) {
             var chkDeleted = getDeletedIds();
             if (chkDeleted.size) chkTasks = chkTasks.filter(t => !chkDeleted.has(t.id));
-            tasks = chkTasks;
+            // Preserve local tasks not yet on remote (added since last push)
+            var remoteIds = new Set(chkTasks.map(function(t){ return t.id; }));
+            var localOnly = tasks.filter(function(t){ return !remoteIds.has(t.id); });
+            tasks = chkTasks.concat(localOnly);
             saveTasks();
-            localStorage.setItem('taskDataJson', JSON.stringify(chkTasks));
+            localStorage.setItem('taskDataJson', JSON.stringify(tasks));
             localStorage.setItem('taskDataJsonTime', new Date().toISOString());
             localStorage.setItem('ghLastKnownSha', remoteSha);
-            localStorage.removeItem('ghPushPending');
             renderAll();
-            showStatus('Another device synced first — pulled their version');
+            if (localOnly.length > 0) {
+              showStatus('Merged with remote — pushing local changes…');
+              await doPush(0);
+            } else {
+              localStorage.removeItem('ghPushPending');
+              showStatus('Synced from remote');
+            }
             return;
           }
         }
