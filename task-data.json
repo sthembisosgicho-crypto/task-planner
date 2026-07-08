@@ -1576,7 +1576,7 @@
     "duration": 1,
     "deadline": null,
     "notes": "",
-    "status": "today",
+    "status": "done",
     "scheduledDate": "2026-07-08",
     "scheduledDates": [
       "2026-07-08",
@@ -1587,7 +1587,8 @@
       "2026-07-09": 0.75
     },
     "scheduledSlotName": "Homework",
-    "sortOrder": -1
+    "sortOrder": -1,
+    "completedDate": "2026-07-08T16:25:36.187Z"
   },
   {
     "id": "cd03",
