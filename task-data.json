@@ -4211,32 +4211,6 @@
     "scheduledSlotName": "Engineering"
   },
   {
-    "id": "mr94r5lk5qk4z",
-    "title": "New Task",
-    "category": "Engineering",
-    "priority": "Normal",
-    "duration": 0,
-    "deadline": null,
-    "notes": "",
-    "workType": "Project Work",
-    "status": "backlog",
-    "scheduledDate": null,
-    "subtasks": []
-  },
-  {
-    "id": "mraw4937ldu19",
-    "title": "New Task",
-    "category": "Engineering",
-    "priority": "Normal",
-    "duration": 0,
-    "deadline": null,
-    "notes": "",
-    "workType": "Project Work",
-    "status": "backlog",
-    "scheduledDate": null,
-    "subtasks": []
-  },
-  {
     "id": "mraw798uvfxjr",
     "title": "ask for proof of work address",
     "category": "Chores Desk",
@@ -4262,7 +4236,7 @@
     "title": "Call Luk on spar",
     "category": "Chores Desk",
     "priority": "Urgent",
-    "duration": 0,
+    "duration": 0.25,
     "deadline": null,
     "notes": "",
     "status": "backlog",
