@@ -923,12 +923,9 @@
     "duration": 1,
     "deadline": null,
     "notes": "",
-    "status": "thisweek",
-    "scheduledDate": "2026-07-07",
-    "scheduledDates": [
-      "2026-07-07",
-      "2026-07-08"
-    ],
+    "status": "backlog",
+    "scheduledDate": null,
+    "scheduledDates": [],
     "tierSortOrder": 18,
     "subtasks": [],
     "totalHours": 0,
@@ -937,7 +934,8 @@
       "2026-07-07": 0.75,
       "2026-07-08": 0.25
     },
-    "scheduledSlotName": "Homework"
+    "scheduledSlotName": "Homework",
+    "sortOrder": -1
   },
   {
     "id": "chr04",
