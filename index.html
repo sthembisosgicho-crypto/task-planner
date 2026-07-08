@@ -1432,8 +1432,12 @@ document.getElementById('mCategory').addEventListener('change', toggleWorkType);
 
 document.getElementById('mSaveBtn').addEventListener('click', () => {
   if (!editingTaskId) return;
-  const t = tasks.find(x => x.id === editingTaskId);
-  if (!t) return;
+  let t = tasks.find(x => x.id === editingTaskId);
+  if (!t) {
+    // Task was removed by a background sync — re-add it so the edit is not lost
+    t = { id: editingTaskId, status: 'backlog', scheduledDate: null, subtasks: [] };
+    tasks.push(t);
+  }
   t.title = document.getElementById('mTitle').value.trim() || t.title;
   t.category = document.getElementById('mCategory').value;
   t.priority = document.getElementById('mPriority').value;
@@ -2086,7 +2090,8 @@ setInterval(() => { if (document.getElementById('dayView').classList.contains('a
 setInterval(async function() {
   var token = getGhToken();
   if (!token || !navigator.onLine) return;
-  if (_ghSyncState === 'pending' || _ghSyncState === 'pushing') return; // local changes not yet pushed — don't overwrite
+  if (_ghSyncState === 'pending' || _ghSyncState === 'pushing') return;
+  if (editingTaskId) return; // modal open — don't replace tasks mid-edit
   try {
     var res = await fetch(GH_API, { headers: {'Authorization':'Bearer '+token,'Accept':'application/vnd.github+json'}, cache:'no-store' });
     if (!res.ok) return;
@@ -2542,7 +2547,23 @@ async function doPush(retryCount) {
         setTimeout(function(){ var inp = document.getElementById('ghTokenInput'); if(inp){inp.focus();inp.scrollIntoView({behavior:'smooth'});} }, 300);
         return;
       }
-      if ((putRes.status === 409 || (ep.message || '').toLowerCase().indexOf('sha') !== -1) && retryCount < 2) {
+      if ((putRes.status === 409 || (ep.message || '').toLowerCase().indexOf('sha') !== -1) && retryCount < 3) {
+        // Pull remote, merge local-only tasks in, then retry with fresh SHA
+        try {
+          var mRes = await fetch(GH_API, { headers: {'Authorization':'Bearer '+token,'Accept':'application/vnd.github+json'}, cache:'no-store' });
+          if (mRes.ok) {
+            var mData = await mRes.json();
+            var mTasks = JSON.parse(atob(mData.content.replace(/\n/g,'')));
+            if (Array.isArray(mTasks) && mTasks.length > 0) {
+              var remoteIds = new Set(mTasks.map(function(t){ return t.id; }));
+              var localOnly = tasks.filter(function(t){ return !remoteIds.has(t.id); });
+              tasks = mTasks.concat(localOnly);
+              saveTasks();
+              localStorage.setItem('taskDataJson', JSON.stringify(tasks));
+              localStorage.setItem('ghLastKnownSha', mData.sha);
+            }
+          }
+        } catch(me) {}
         return doPush(retryCount + 1);
       }
       throw new Error(ep.message || 'PUT failed: HTTP ' + putRes.status);
