@@ -4517,5 +4517,20 @@
     "status": "backlog",
     "scheduledDate": null,
     "subtasks": []
+  },
+  {
+    "id": "mrcgguczycsij",
+    "title": "add sections to eng book",
+    "category": "Engineering",
+    "priority": "Normal",
+    "duration": 2.25,
+    "deadline": null,
+    "notes": "",
+    "workType": "Admin",
+    "status": "backlog",
+    "scheduledDate": null,
+    "subtasks": [],
+    "totalHours": 40,
+    "hoursDone": 0
   }
 ]
