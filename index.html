@@ -2486,7 +2486,11 @@ function schedulePush() {
   localStorage.setItem('ghPushPending', '1');
   setGhSyncState('pending');
   clearTimeout(_ghSyncTimer);
-  _ghSyncTimer = setTimeout(function() { doPush(0); }, 2000);
+  // Wait 10s and skip if modal is still open — push after user finishes editing
+  _ghSyncTimer = setTimeout(function() {
+    if (editingTaskId) { schedulePush(); return; }
+    doPush(0);
+  }, 10000);
 }
 
 function ghToBase64(str) {
