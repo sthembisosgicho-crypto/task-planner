@@ -4492,5 +4492,20 @@
     "subtasks": [],
     "totalHours": 0,
     "hoursDone": 0
+  },
+  {
+    "id": "mrdqb6at262wo",
+    "title": "CV Update",
+    "category": "Engineering",
+    "priority": "Urgent",
+    "duration": 1.5,
+    "deadline": "2026-07-10",
+    "notes": "",
+    "workType": "Admin",
+    "status": "backlog",
+    "scheduledDate": null,
+    "subtasks": [],
+    "totalHours": 0,
+    "hoursDone": 0
   }
 ]
