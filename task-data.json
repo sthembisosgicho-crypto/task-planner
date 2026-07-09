@@ -4522,5 +4522,20 @@
     "subtasks": [],
     "totalHours": 0,
     "hoursDone": 0
+  },
+  {
+    "id": "mrdqeokr8kkck",
+    "title": "Load engineering books (CPTu etc)",
+    "category": "Engineering",
+    "priority": "Normal",
+    "duration": 1,
+    "deadline": null,
+    "notes": "",
+    "workType": "Admin",
+    "status": "backlog",
+    "scheduledDate": null,
+    "subtasks": [],
+    "totalHours": 0,
+    "hoursDone": 0
   }
 ]
