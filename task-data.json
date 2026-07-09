@@ -4477,5 +4477,20 @@
     "subtasks": [],
     "totalHours": 0,
     "hoursDone": 0
+  },
+  {
+    "id": "mrdq8sdt9prdp",
+    "title": "Viva Learning Check",
+    "category": "Engineering",
+    "priority": "Normal",
+    "duration": 1,
+    "deadline": null,
+    "notes": "If nothing consider AI certification",
+    "workType": "Admin",
+    "status": "backlog",
+    "scheduledDate": null,
+    "subtasks": [],
+    "totalHours": 0,
+    "hoursDone": 0
   }
 ]
