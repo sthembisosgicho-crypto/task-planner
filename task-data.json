@@ -4697,20 +4697,5 @@
     "subtasks": [],
     "totalHours": 0,
     "hoursDone": 0
-  },
-  {
-    "id": "mrdty3mz7w2hu",
-    "title": "Write session on guide",
-    "category": "Engineering",
-    "priority": "Normal",
-    "duration": 2,
-    "deadline": null,
-    "notes": "",
-    "workType": "Admin",
-    "status": "backlog",
-    "scheduledDate": null,
-    "subtasks": [],
-    "totalHours": 80,
-    "hoursDone": 0
   }
 ]
