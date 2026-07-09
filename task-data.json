@@ -4582,5 +4582,19 @@
     "subtasks": [],
     "totalHours": 0,
     "hoursDone": 0
+  },
+  {
+    "id": "mrdqmxbsceqgd",
+    "title": "Find earphones for home use",
+    "category": "Chores Desk",
+    "priority": "Normal",
+    "duration": 0.25,
+    "deadline": null,
+    "notes": "",
+    "status": "backlog",
+    "scheduledDate": null,
+    "subtasks": [],
+    "totalHours": 0,
+    "hoursDone": 0
   }
 ]
