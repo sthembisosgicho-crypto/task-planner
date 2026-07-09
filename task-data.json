@@ -4699,33 +4699,18 @@
     "hoursDone": 0
   },
   {
-    "id": "mrdty3mz7w2hu",
-    "title": "Write session on guide",
+    "id": "mrdu4x3irxzop",
+    "title": "Add search button to app",
     "category": "Engineering",
     "priority": "Normal",
-    "duration": 2,
+    "duration": 0.25,
     "deadline": null,
     "notes": "",
-    "workType": "Admin",
+    "workType": "Project Work",
     "status": "backlog",
     "scheduledDate": null,
     "subtasks": [],
-    "totalHours": 80,
-    "hoursDone": 0
-  },
-  {
-    "id": "mrdu22ptpnh7u",
-    "title": "write section on guide",
-    "category": "Engineering",
-    "priority": "Recurring",
-    "duration": 2,
-    "deadline": null,
-    "notes": "",
-    "workType": "R&D",
-    "status": "backlog",
-    "scheduledDate": null,
-    "subtasks": [],
-    "totalHours": 40,
+    "totalHours": 0,
     "hoursDone": 0
   }
 ]
