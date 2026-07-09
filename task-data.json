@@ -4537,5 +4537,20 @@
     "subtasks": [],
     "totalHours": 0,
     "hoursDone": 0
+  },
+  {
+    "id": "mrdqh6astttsu",
+    "title": "Set coordinates or arrange for VWP position survey",
+    "category": "Engineering",
+    "priority": "Normal",
+    "duration": 4,
+    "deadline": null,
+    "notes": "",
+    "workType": "Project Work",
+    "status": "backlog",
+    "scheduledDate": null,
+    "subtasks": [],
+    "totalHours": 0,
+    "hoursDone": 0
   }
 ]
