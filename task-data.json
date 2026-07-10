@@ -27,8 +27,8 @@
     "deadline": "2026-06-22",
     "notes": "",
     "workType": "Project Work",
-    "status": "thisweek",
-    "scheduledDate": "2026-07-09",
+    "status": "backlog",
+    "scheduledDate": null,
     "subtasks": [
       {
         "id": "eng02s1",
@@ -103,10 +103,7 @@
         "notes": ""
       }
     ],
-    "scheduledDates": [
-      "2026-07-09",
-      "2026-07-13"
-    ],
+    "scheduledDates": [],
     "totalHours": 8,
     "hoursDone": 0,
     "scheduledSessionHours": {
@@ -125,11 +122,9 @@
     "deadline": "2026-06-18",
     "notes": "",
     "workType": "Project Work",
-    "status": "thisweek",
-    "scheduledDate": "2026-07-09",
-    "scheduledDates": [
-      "2026-07-09"
-    ],
+    "status": "backlog",
+    "scheduledDate": null,
+    "scheduledDates": [],
     "scheduledSessionHours": {
       "2026-07-09": 3
     },
@@ -912,15 +907,13 @@
     "duration": 1,
     "deadline": null,
     "notes": "",
-    "status": "thisweek",
-    "scheduledDate": "2026-07-09",
+    "status": "backlog",
+    "scheduledDate": null,
     "tierSortOrder": 17,
     "subtasks": [],
     "totalHours": 0,
     "hoursDone": 0,
-    "scheduledDates": [
-      "2026-07-09"
-    ],
+    "scheduledDates": [],
     "scheduledSessionHours": {
       "2026-07-09": 1
     },
@@ -935,12 +928,9 @@
     "duration": 1,
     "deadline": null,
     "notes": "",
-    "status": "thisweek",
-    "scheduledDate": "2026-07-09",
-    "scheduledDates": [
-      "2026-07-09",
-      "2026-07-10"
-    ],
+    "status": "backlog",
+    "scheduledDate": null,
+    "scheduledDates": [],
     "tierSortOrder": 18,
     "subtasks": [],
     "totalHours": 0,
@@ -3299,8 +3289,8 @@
     "deadline": "2026-06-22",
     "notes": "",
     "workType": "Project Work",
-    "status": "thisweek",
-    "scheduledDate": "2026-07-09",
+    "status": "backlog",
+    "scheduledDate": null,
     "subtasks": [
       {
         "id": "eng22s1",
@@ -3323,9 +3313,7 @@
     ],
     "totalHours": 0,
     "hoursDone": 0,
-    "scheduledDates": [
-      "2026-07-09"
-    ],
+    "scheduledDates": [],
     "scheduledSessionHours": {
       "2026-07-09": 2
     },
