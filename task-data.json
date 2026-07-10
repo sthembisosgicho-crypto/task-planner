@@ -4712,5 +4712,47 @@
     "subtasks": [],
     "totalHours": 0,
     "hoursDone": 0
+  },
+  {
+    "id": "mrfl9100uwuez",
+    "title": "Linkedin application",
+    "category": "Markets",
+    "priority": "Soon",
+    "duration": 0,
+    "deadline": null,
+    "notes": "",
+    "status": "backlog",
+    "scheduledDate": null,
+    "subtasks": [],
+    "totalHours": 0,
+    "hoursDone": 0
+  },
+  {
+    "id": "mrfl9nsspelwx",
+    "title": "Add predicesors to app",
+    "category": "Chores Desk",
+    "priority": "Normal",
+    "duration": 1.75,
+    "deadline": null,
+    "notes": "",
+    "status": "backlog",
+    "scheduledDate": null,
+    "subtasks": [],
+    "totalHours": 0,
+    "hoursDone": 0
+  },
+  {
+    "id": "mrfladdsdi8an",
+    "title": "Allow app to make the tree/ maping(add app group/chore group with more subgroups)",
+    "category": "Chores Desk",
+    "priority": "Normal",
+    "duration": 1,
+    "deadline": null,
+    "notes": "",
+    "status": "backlog",
+    "scheduledDate": null,
+    "subtasks": [],
+    "totalHours": 0,
+    "hoursDone": 0
   }
 ]
