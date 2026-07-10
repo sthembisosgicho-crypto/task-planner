@@ -8,15 +8,14 @@
     "deadline": "2026-06-22",
     "notes": "",
     "workType": "Admin",
-    "status": "thisweek",
-    "scheduledDate": "2026-07-10",
-    "scheduledDates": [
-      "2026-07-10"
-    ],
+    "status": "backlog",
+    "scheduledDate": null,
+    "scheduledDates": [],
     "scheduledSessionHours": {
       "2026-07-10": 0.25
     },
-    "scheduledSlotName": "Engineering"
+    "scheduledSlotName": "Engineering",
+    "sortOrder": -1
   },
   {
     "id": "eng02",
@@ -182,15 +181,14 @@
     "deadline": "2026-06-15",
     "notes": "",
     "workType": "Personal Dev",
-    "status": "thisweek",
-    "scheduledDate": "2026-07-10",
-    "scheduledDates": [
-      "2026-07-10"
-    ],
+    "status": "backlog",
+    "scheduledDate": null,
+    "scheduledDates": [],
     "scheduledSessionHours": {
       "2026-07-10": 2
     },
-    "scheduledSlotName": "Engineering"
+    "scheduledSlotName": "Engineering",
+    "sortOrder": -1
   },
   {
     "id": "eng06",
@@ -223,8 +221,8 @@
     "deadline": "2026-06-26",
     "notes": "",
     "workType": "Admin",
-    "status": "thisweek",
-    "scheduledDate": "2026-07-10",
+    "status": "backlog",
+    "scheduledDate": null,
     "subtasks": [
       {
         "id": "eng07s1",
@@ -254,13 +252,12 @@
         "notes": ""
       }
     ],
-    "scheduledDates": [
-      "2026-07-10"
-    ],
+    "scheduledDates": [],
     "scheduledSessionHours": {
       "2026-07-10": 1.5
     },
-    "scheduledSlotName": "Engineering"
+    "scheduledSlotName": "Engineering",
+    "sortOrder": -1
   },
   {
     "id": "eng08",
@@ -271,15 +268,14 @@
     "deadline": "2026-06-22",
     "notes": "",
     "workType": "Admin",
-    "status": "thisweek",
-    "scheduledDate": "2026-07-10",
-    "scheduledDates": [
-      "2026-07-10"
-    ],
+    "status": "backlog",
+    "scheduledDate": null,
+    "scheduledDates": [],
     "scheduledSessionHours": {
       "2026-07-10": 1
     },
-    "scheduledSlotName": "Engineering"
+    "scheduledSlotName": "Engineering",
+    "sortOrder": -1
   },
   {
     "id": "eng09",
@@ -290,8 +286,8 @@
     "deadline": "2026-06-26",
     "notes": "",
     "workType": "Admin",
-    "status": "thisweek",
-    "scheduledDate": "2026-07-10",
+    "status": "backlog",
+    "scheduledDate": null,
     "subtasks": [
       {
         "id": "eng09s1",
@@ -312,13 +308,12 @@
         "notes": ""
       }
     ],
-    "scheduledDates": [
-      "2026-07-10"
-    ],
+    "scheduledDates": [],
     "scheduledSessionHours": {
       "2026-07-10": 1
     },
-    "scheduledSlotName": "Engineering"
+    "scheduledSlotName": "Engineering",
+    "sortOrder": -1
   },
   {
     "id": "eng10",
@@ -950,19 +945,18 @@
     "duration": 0.5,
     "deadline": null,
     "notes": "",
-    "status": "thisweek",
-    "scheduledDate": "2026-07-10",
+    "status": "backlog",
+    "scheduledDate": null,
     "tierSortOrder": 19,
     "subtasks": [],
     "totalHours": 0,
     "hoursDone": 0,
-    "scheduledDates": [
-      "2026-07-10"
-    ],
+    "scheduledDates": [],
     "scheduledSessionHours": {
       "2026-07-10": 0.5
     },
-    "scheduledSlotName": "Homework"
+    "scheduledSlotName": "Homework",
+    "sortOrder": -1
   },
   {
     "id": "chr05",
@@ -972,19 +966,18 @@
     "duration": 0.5,
     "deadline": null,
     "notes": "",
-    "status": "thisweek",
-    "scheduledDate": "2026-07-10",
+    "status": "backlog",
+    "scheduledDate": null,
     "tierSortOrder": 20,
     "subtasks": [],
     "totalHours": 0,
     "hoursDone": 0,
-    "scheduledDates": [
-      "2026-07-10"
-    ],
+    "scheduledDates": [],
     "scheduledSessionHours": {
       "2026-07-10": 0.5
     },
-    "scheduledSlotName": "Homework"
+    "scheduledSlotName": "Homework",
+    "sortOrder": -1
   },
   {
     "id": "chr06",
@@ -994,21 +987,19 @@
     "duration": 1,
     "deadline": null,
     "notes": "",
-    "status": "thisweek",
-    "scheduledDate": "2026-07-10",
+    "status": "backlog",
+    "scheduledDate": null,
     "tierSortOrder": 21,
     "subtasks": [],
     "totalHours": 0,
     "hoursDone": 0,
-    "scheduledDates": [
-      "2026-07-10",
-      "2026-07-13"
-    ],
+    "scheduledDates": [],
     "scheduledSessionHours": {
       "2026-07-10": 0.25,
       "2026-07-13": 0.75
     },
-    "scheduledSlotName": "Homework"
+    "scheduledSlotName": "Homework",
+    "sortOrder": -1
   },
   {
     "id": "hlt01",
@@ -3329,8 +3320,8 @@
     "deadline": null,
     "notes": "",
     "workType": "Personal Dev",
-    "status": "thisweek",
-    "scheduledDate": "2026-07-10",
+    "status": "backlog",
+    "scheduledDate": null,
     "subtasks": [
       {
         "id": "eng23s1",
@@ -3379,15 +3370,13 @@
       }
     ],
     "tierSortOrder": 121,
-    "scheduledDates": [
-      "2026-07-10",
-      "2026-07-17"
-    ],
+    "scheduledDates": [],
     "scheduledSessionHours": {
       "2026-07-10": 1,
       "2026-07-17": 1
     },
-    "scheduledSlotName": "Engineering"
+    "scheduledSlotName": "Engineering",
+    "sortOrder": -1
   },
   {
     "id": "eng24",
@@ -3580,15 +3569,14 @@
     "deadline": "2027-02-11",
     "notes": "",
     "workType": "Personal Dev",
-    "status": "thisweek",
-    "scheduledDate": "2026-07-10",
-    "scheduledDates": [
-      "2026-07-10"
-    ],
+    "status": "backlog",
+    "scheduledDate": null,
+    "scheduledDates": [],
     "scheduledSessionHours": {
       "2026-07-10": 1
     },
-    "scheduledSlotName": "Engineering"
+    "scheduledSlotName": "Engineering",
+    "sortOrder": -1
   },
   {
     "id": "eng33",
@@ -3599,15 +3587,14 @@
     "deadline": "2027-06-28",
     "notes": "",
     "workType": "Personal Dev",
-    "status": "thisweek",
-    "scheduledDate": "2026-07-10",
-    "scheduledDates": [
-      "2026-07-10"
-    ],
+    "status": "backlog",
+    "scheduledDate": null,
+    "scheduledDates": [],
     "scheduledSessionHours": {
       "2026-07-10": 1
     },
-    "scheduledSlotName": "Engineering"
+    "scheduledSlotName": "Engineering",
+    "sortOrder": -1
   },
   {
     "id": "cd36",
@@ -4074,20 +4061,18 @@
     "deadline": null,
     "notes": "",
     "workType": "Admin",
-    "status": "thisweek",
-    "scheduledDate": "2026-07-10",
+    "status": "backlog",
+    "scheduledDate": null,
     "subtasks": [],
     "totalHours": 0,
     "hoursDone": 0,
-    "scheduledDates": [
-      "2026-07-10",
-      "2026-07-17"
-    ],
+    "scheduledDates": [],
     "scheduledSessionHours": {
       "2026-07-10": 0.25,
       "2026-07-17": 0.75
     },
-    "scheduledSlotName": "Engineering"
+    "scheduledSlotName": "Engineering",
+    "sortOrder": -1
   },
   {
     "id": "mr8zjq08ky9pi",
