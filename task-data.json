@@ -2848,9 +2848,9 @@
   {
     "id": "er13",
     "title": "Large room construction",
-    "category": "Errands",
+    "category": "Chores Desk",
     "priority": "Normal",
-    "duration": 0.75,
+    "duration": 1,
     "deadline": null,
     "notes": "",
     "status": "thisweek",
@@ -2862,7 +2862,10 @@
     "scheduledSessionHours": {
       "2026-07-25": 0.75
     },
-    "scheduledSlotName": "Shops Errands"
+    "scheduledSlotName": "Shops Errands",
+    "subtasks": [],
+    "totalHours": 0,
+    "hoursDone": 0
   },
   {
     "id": "eng21",
