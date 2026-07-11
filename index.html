@@ -477,7 +477,7 @@ input, select, textarea { font-family: inherit; }
 <!-- Main -->
 <div class="main-content">
   <div class="app-header">
-    <h1>Task Scheduler <span style="font-size:0.6rem;font-weight:400;color:var(--text-dim);vertical-align:middle">v53</span></h1>
+    <h1>Task Scheduler <span style="font-size:0.6rem;font-weight:400;color:var(--text-dim);vertical-align:middle">v54</span></h1>
     <div class="header-actions">
       <button class="btn-primary" id="addTaskBtn">+ Add Task</button>
       <button class="btn-secondary" id="autoScheduleBtn">Auto-Schedule</button>
@@ -508,10 +508,12 @@ input, select, textarea { font-family: inherit; }
   </div>
 
   <div class="view" id="tasklistView">
-    <div class="prio-controls" style="margin-bottom:12px">
+    <div class="prio-controls" style="margin-bottom:12px;display:flex;gap:8px;flex-wrap:wrap;align-items:center">
       <select id="tasklistFilter" onchange="renderTaskList()" style="padding:7px 12px;border-radius:var(--radius);border:1px solid rgba(255,255,255,0.1);background:var(--surface);color:var(--text);font-size:0.82rem">
         <option value="all">All Groups</option>
       </select>
+      <input type="text" id="tasklistSearch" placeholder="Search tasks..." oninput="renderTaskList()" style="flex:1;min-width:140px;padding:7px 12px;border-radius:var(--radius);border:1px solid rgba(255,255,255,0.1);background:var(--surface);color:var(--text);font-size:0.82rem">
+      <button onclick="openSlotSettings()" style="padding:7px 12px;border-radius:var(--radius);border:1px solid rgba(255,255,255,0.1);background:var(--surface);color:var(--text);font-size:0.82rem;cursor:pointer;white-space:nowrap">&#9881; Slots</button>
     </div>
     <div id="tasklistContent"></div>
   </div>
@@ -640,6 +642,23 @@ input, select, textarea { font-family: inherit; }
   </div>
 </div>
 
+<!-- Slot Settings Modal -->
+<div class="modal-overlay" id="slotSettingsModal">
+  <div class="modal" style="max-width:600px;max-height:85vh;overflow-y:auto">
+    <h2 style="font-size:1rem;margin-bottom:12px">&#9881; Slot Settings</h2>
+    <div style="display:flex;gap:8px;margin-bottom:14px">
+      <button id="slotTabWeekday" onclick="slotTab('weekday')" class="btn-primary" style="font-size:0.8rem;padding:5px 14px">Weekdays</button>
+      <button id="slotTabWeekend" onclick="slotTab('weekend')" class="btn-secondary" style="font-size:0.8rem;padding:5px 14px">Weekends</button>
+      <button onclick="resetSlots()" class="btn-secondary" style="font-size:0.8rem;padding:5px 14px;margin-left:auto;color:#f87171;border-color:#f87171">Reset Defaults</button>
+    </div>
+    <div id="slotSettingsList"></div>
+    <button onclick="addSlot()" class="btn-secondary" style="margin-top:10px;font-size:0.8rem;width:100%">+ Add Slot</button>
+    <div class="modal-actions" style="margin-top:14px">
+      <button class="btn-secondary" onclick="closeSlotSettings()">Close</button>
+    </div>
+  </div>
+</div>
+
 <!-- Backups Modal -->
 <div class="modal-overlay" id="backupsModal">
   <div class="modal">
@@ -754,7 +773,7 @@ const LIST_ONLY = ['Shopping'];
 const ENG_WORKTYPE_DAYS = { 'Project Work': [1,2,4], 'R&D': [3], 'Admin': [5], 'Personal Dev': [5] };
 const ENG_WORKTYPE_HOURS = { 'Project Work': 9, 'R&D': 9, 'Admin': 4, 'Personal Dev': 5 };
 
-const WEEKDAY_SLOTS = [
+const DEFAULT_WEEKDAY_SLOTS = [
   { name: 'Day Start', start: 5, end: 6.5, categories: ['Health'] },
   { name: 'Washing', start: 6.5, end: 7, categories: [] },
   { name: 'Engineering', start: 8, end: 17, categories: ['Engineering'] },
@@ -762,7 +781,7 @@ const WEEKDAY_SLOTS = [
   { name: 'Supper Chill', start: 19, end: 20, categories: [] },
   { name: 'Planning', start: 20, end: 21, categories: [] },
 ];
-const WEEKEND_SLOTS = [
+const DEFAULT_WEEKEND_SLOTS = [
   { name: 'Side Hustle', start: 5, end: 9, categories: ['Side Hustle','Markets','Health'] },
   { name: 'Washing', start: 9, end: 10, categories: [] },
   { name: 'Shops Errands', start: 10, end: 16, categories: ['Shopping','Errands'] },
@@ -770,6 +789,12 @@ const WEEKEND_SLOTS = [
   { name: 'Supper Chill', start: 18, end: 20, categories: [] },
   { name: 'Planning', start: 20, end: 21, categories: [] },
 ];
+let WEEKDAY_SLOTS = JSON.parse(localStorage.getItem('weekdaySlots')) || JSON.parse(JSON.stringify(DEFAULT_WEEKDAY_SLOTS));
+let WEEKEND_SLOTS = JSON.parse(localStorage.getItem('weekendSlots')) || JSON.parse(JSON.stringify(DEFAULT_WEEKEND_SLOTS));
+function saveSlotSettings() {
+  localStorage.setItem('weekdaySlots', JSON.stringify(WEEKDAY_SLOTS));
+  localStorage.setItem('weekendSlots', JSON.stringify(WEEKEND_SLOTS));
+}
 
 function getSlotsForDay(dayOfWeek) { return (dayOfWeek === 0 || dayOfWeek === 6) ? WEEKEND_SLOTS : WEEKDAY_SLOTS; }
 function slotCapacity(slot) { return slot.end - slot.start; }
@@ -1678,7 +1703,7 @@ document.getElementById('mDeleteBtn').addEventListener('click', () => {
 });
 document.getElementById('mCancelBtn').addEventListener('click', closeModal);
 document.getElementById('taskModal').addEventListener('click', e => { if (e.target.id === 'taskModal') closeModal(); });
-document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeModal(); closeBackups(); } });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeModal(); closeBackups(); closeSlotSettings(); } });
 
 // ===== AUTO-SCHEDULE =====
 function autoSchedule() {
@@ -2092,9 +2117,10 @@ function renderTaskList() {
   const TIER_CLASS = ['','tier-1','tier-2','tier-3','tier-4'];
   const TIER_DESC  = ['','Deadline + Urgent/Soon (schedules first)','Deadline, Normal/Recurring','Urgent/Soon, no deadline','Normal/Recurring, no deadline'];
 
-  // Populate filter dropdown, preserving current selection
+  // Search + filter
   const filterSel = document.getElementById('tasklistFilter');
   const filterVal = filterSel ? filterSel.value : 'all';
+  const searchQ = (document.getElementById('tasklistSearch') ? document.getElementById('tasklistSearch').value : '').toLowerCase().trim();
   if (filterSel) {
     const prevVal = filterSel.value;
     filterSel.innerHTML = '<option value="all">All Groups</option>' + POOL_GROUPS.map(g => `<option value="${g}"${g===prevVal?' selected':''}>${g}</option>`).join('');
@@ -2146,7 +2172,8 @@ ${hrsCell}
   }
 
   visibleGroups.forEach(key => {
-    const items = (groups[key] || []).slice();
+    let items = (groups[key] || []).slice();
+    if (searchQ) items = items.filter(t => t.title.toLowerCase().includes(searchQ) || (t.notes||'').toLowerCase().includes(searchQ) || t.category.toLowerCase().includes(searchQ));
     if (items.length === 0) return;
     const regularItems = items.filter(t => !isRecurringTask(t) || (t.totalHours && t.totalHours > 0));
     const recurringItems = items.filter(t => isRecurringTask(t) && !(t.totalHours && t.totalHours > 0));
@@ -2275,6 +2302,70 @@ document.getElementById('clearDoneBtn').addEventListener('click', () => {
 });
 
 function renderAll() { renderPool(); renderDayView(); renderKanban(); renderCalendar(); renderTaskList(); renderDone(); }
+
+// ===== SLOT SETTINGS =====
+let _slotTab = 'weekday';
+function openSlotSettings() { renderSlotSettings(); document.getElementById('slotSettingsModal').classList.add('active'); }
+function closeSlotSettings() { document.getElementById('slotSettingsModal').classList.remove('active'); }
+function slotTab(tab) {
+  _slotTab = tab;
+  document.getElementById('slotTabWeekday').className = tab === 'weekday' ? 'btn-primary' : 'btn-secondary';
+  document.getElementById('slotTabWeekend').className = tab === 'weekend' ? 'btn-primary' : 'btn-secondary';
+  renderSlotSettings();
+}
+function renderSlotSettings() {
+  const slots = _slotTab === 'weekday' ? WEEKDAY_SLOTS : WEEKEND_SLOTS;
+  const list = document.getElementById('slotSettingsList');
+  list.innerHTML = slots.map((slot, i) => `
+    <div style="background:var(--surface2);border-radius:var(--radius);padding:10px 12px;margin-bottom:8px">
+      <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px;flex-wrap:wrap">
+        <input value="${slot.name}" placeholder="Slot name" style="flex:1;min-width:100px;font-weight:600"
+          onchange="slotUpdate(${i},'name',this.value)">
+        <label style="font-size:0.75rem;color:var(--text-dim)">From</label>
+        <input type="number" value="${slot.start}" min="0" max="24" step="0.5" style="width:60px"
+          onchange="slotUpdate(${i},'start',parseFloat(this.value))">
+        <label style="font-size:0.75rem;color:var(--text-dim)">To</label>
+        <input type="number" value="${slot.end}" min="0" max="24" step="0.5" style="width:60px"
+          onchange="slotUpdate(${i},'end',parseFloat(this.value))">
+        <button onclick="deleteSlot(${i})" style="background:none;border:none;color:#f87171;cursor:pointer;font-size:1rem;padding:0 4px" title="Delete slot">&#10005;</button>
+      </div>
+      <div style="font-size:0.72rem;color:var(--text-dim);margin-bottom:4px">Categories</div>
+      <div style="display:flex;flex-wrap:wrap;gap:6px">
+        ${CATEGORIES.map(cat => `<label style="font-size:0.75rem;display:flex;align-items:center;gap:3px">
+          <input type="checkbox" ${slot.categories.includes(cat) ? 'checked' : ''}
+            onchange="slotToggleCat(${i},'${cat}',this.checked)"> ${cat}
+        </label>`).join('')}
+      </div>
+    </div>`).join('');
+}
+function slotUpdate(i, field, value) {
+  const slots = _slotTab === 'weekday' ? WEEKDAY_SLOTS : WEEKEND_SLOTS;
+  slots[i][field] = value;
+  saveSlotSettings();
+}
+function slotToggleCat(i, cat, checked) {
+  const slots = _slotTab === 'weekday' ? WEEKDAY_SLOTS : WEEKEND_SLOTS;
+  if (checked) { if (!slots[i].categories.includes(cat)) slots[i].categories.push(cat); }
+  else { slots[i].categories = slots[i].categories.filter(c => c !== cat); }
+  saveSlotSettings();
+}
+function addSlot() {
+  const slots = _slotTab === 'weekday' ? WEEKDAY_SLOTS : WEEKEND_SLOTS;
+  slots.push({ name: 'New Slot', start: 12, end: 13, categories: [] });
+  saveSlotSettings(); renderSlotSettings();
+}
+function deleteSlot(i) {
+  const slots = _slotTab === 'weekday' ? WEEKDAY_SLOTS : WEEKEND_SLOTS;
+  slots.splice(i, 1);
+  saveSlotSettings(); renderSlotSettings();
+}
+function resetSlots() {
+  if (!confirm('Reset all slots to defaults? This cannot be undone.')) return;
+  WEEKDAY_SLOTS = JSON.parse(JSON.stringify(DEFAULT_WEEKDAY_SLOTS));
+  WEEKEND_SLOTS = JSON.parse(JSON.stringify(DEFAULT_WEEKEND_SLOTS));
+  saveSlotSettings(); renderSlotSettings();
+}
+document.getElementById('slotSettingsModal').addEventListener('click', e => { if (e.target.id === 'slotSettingsModal') closeSlotSettings(); });
 
 // ===== INCOMPLETE TASKS PROMPT =====
 function checkIncompleteTasks() {
