@@ -4744,5 +4744,19 @@
     "recurrence": {
       "type": "daily"
     }
+  },
+  {
+    "id": "mrg4aq5wusnp7",
+    "title": "Put pack with plastic cups, plate and scoops",
+    "category": "House Chores",
+    "priority": "Normal",
+    "duration": 0.5,
+    "deadline": null,
+    "notes": "Include wipes etc.",
+    "status": "backlog",
+    "scheduledDate": null,
+    "subtasks": [],
+    "totalHours": 0,
+    "hoursDone": 0
   }
 ]
