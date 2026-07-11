@@ -1798,7 +1798,7 @@
     "id": "cd17",
     "title": "Imali yenkonzo",
     "category": "Chores Desk",
-    "priority": "Urgent",
+    "priority": "Normal",
     "duration": 0.25,
     "deadline": null,
     "notes": "",
