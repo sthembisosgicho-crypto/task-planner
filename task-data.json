@@ -1144,7 +1144,13 @@
     "scheduledSessionHours": {
       "2026-07-18": 1
     },
-    "scheduledSlotName": "Side Hustle"
+    "scheduledSlotName": "Side Hustle",
+    "subtasks": [],
+    "predecessors": [
+      "mkt05"
+    ],
+    "totalHours": 0,
+    "hoursDone": 0
   },
   {
     "id": "mkt09",
