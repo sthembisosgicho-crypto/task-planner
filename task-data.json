@@ -902,7 +902,7 @@
     "duration": 1,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
+    "status": "done",
     "scheduledDate": null,
     "tierSortOrder": 17,
     "subtasks": [],
@@ -913,7 +913,9 @@
       "2026-07-09": 1
     },
     "scheduledSlotName": "Homework",
-    "sortOrder": -1
+    "sortOrder": -1,
+    "completedDate": "2026-07-09T10:00:00.000Z",
+    "actualHours": 1
   },
   {
     "id": "chr03",
@@ -945,7 +947,7 @@
     "duration": 0.5,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
+    "status": "done",
     "scheduledDate": null,
     "tierSortOrder": 19,
     "subtasks": [],
@@ -956,7 +958,9 @@
       "2026-07-10": 0.5
     },
     "scheduledSlotName": "Homework",
-    "sortOrder": -1
+    "sortOrder": -1,
+    "completedDate": "2026-07-08T10:00:00.000Z",
+    "actualHours": 0.5
   },
   {
     "id": "chr05",
