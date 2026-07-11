@@ -1805,10 +1805,8 @@
     "status": "backlog",
     "scheduledDate": null,
     "scheduledDates": [],
-    "scheduledSessionHours": {
-      "2026-07-08": 0.25
-    },
-    "scheduledSlotName": "Homework",
+    "scheduledSessionHours": {},
+    "scheduledSlotName": null,
     "sortOrder": -1,
     "subtasks": [],
     "totalHours": 0,
@@ -1816,7 +1814,8 @@
     "recurrence": {
       "type": "monthly-date",
       "date": 26
-    }
+    },
+    "lastCompletedDate": "2026-07-11"
   },
   {
     "id": "cd18",
