@@ -477,7 +477,7 @@ input, select, textarea { font-family: inherit; }
 <!-- Main -->
 <div class="main-content">
   <div class="app-header">
-    <h1>Task Scheduler <span style="font-size:0.6rem;font-weight:400;color:var(--text-dim);vertical-align:middle">v56</span></h1>
+    <h1>Task Scheduler <span style="font-size:0.6rem;font-weight:400;color:var(--text-dim);vertical-align:middle">v57</span></h1>
     <div class="header-actions">
       <button class="btn-primary" id="addTaskBtn">+ Add Task</button>
       <button class="btn-secondary" id="autoScheduleBtn">Auto-Schedule</button>
@@ -616,6 +616,23 @@ input, select, textarea { font-family: inherit; }
     <div class="modal-actions" style="justify-content:space-between">
       <div><button class="btn-danger" id="mDeleteBtn">Delete</button></div>
       <div style="display:flex;gap:8px"><button class="btn-secondary" id="mPromoteBtn" title="Promote to standalone task">&#8593; Promote</button><button class="btn-secondary" id="mCancelBtn">Cancel</button><button class="btn-primary" id="mSaveBtn">Save</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- Budget Complete Prompt -->
+<div class="modal-overlay" id="budgetCompleteModal">
+  <div class="modal" style="max-width:340px">
+    <h2 style="font-size:1rem;margin-bottom:6px">Budget Complete</h2>
+    <p id="budgetCompleteTitle" style="font-size:0.85rem;color:var(--text-dim);margin-bottom:6px;font-style:italic"></p>
+    <p id="budgetCompleteInfo" style="font-size:0.8rem;margin-bottom:14px;color:var(--text-dim)"></p>
+    <div class="form-group" style="margin-bottom:14px">
+      <label>Top up by (hours)</label>
+      <input type="number" id="budgetTopUpHours" min="0.25" step="0.25" value="1" style="width:100px">
+    </div>
+    <div class="modal-actions" style="margin-top:0">
+      <button class="btn-secondary" id="budgetMarkDoneBtn">Mark Done</button>
+      <button class="btn-primary" id="budgetTopUpBtn">Top Up</button>
     </div>
   </div>
 </div>
@@ -1140,10 +1157,19 @@ function confirmDone(id) {
       showStatus(`${incomplete} sub-task(s) still incomplete — check them off first`); return;
     }
   }
-  // Budget task mid-progress: log session, no dialog needed
+  // Budget task: check if session finishes the budget
   if (t.totalHours && t.totalHours > 0) {
     const after = (t.hoursDone || 0) + (t.duration || 0);
     if (after < t.totalHours) { markDone(id); return; }
+    // Budget exhausted — prompt top up or done
+    _completingTaskId = id;
+    document.getElementById('budgetCompleteTitle').textContent = t.title;
+    const used = Math.round(after * 100) / 100;
+    document.getElementById('budgetCompleteInfo').textContent =
+      `${used} of ${t.totalHours} hrs used — budget reached. Top up to keep scheduling, or mark as done.`;
+    document.getElementById('budgetTopUpHours').value = t.duration || 1;
+    document.getElementById('budgetCompleteModal').classList.add('active');
+    return;
   }
   _completingTaskId = id;
   document.getElementById('completionTaskTitle').textContent = t.title;
@@ -1151,6 +1177,39 @@ function confirmDone(id) {
   document.getElementById('completionDate').value = getLocalDateStr();
   document.getElementById('completionModal').classList.add('active');
 }
+
+function closeBudgetComplete() {
+  document.getElementById('budgetCompleteModal').classList.remove('active');
+  _completingTaskId = null;
+}
+
+document.getElementById('budgetTopUpBtn').addEventListener('click', () => {
+  if (!_completingTaskId) return;
+  const t = tasks.find(x => x.id === _completingTaskId);
+  if (!t) { closeBudgetComplete(); return; }
+  const extra = parseFloat(document.getElementById('budgetTopUpHours').value) || 1;
+  t.totalHours = (t.totalHours || 0) + extra;
+  markDone(_completingTaskId);
+  closeBudgetComplete();
+  showStatus(`Budget topped up by ${extra}h`);
+});
+
+document.getElementById('budgetMarkDoneBtn').addEventListener('click', () => {
+  if (!_completingTaskId) return;
+  const id = _completingTaskId;
+  const t = tasks.find(x => x.id === id);
+  closeBudgetComplete();
+  // Open completion dialog to log actual hours
+  _completingTaskId = id;
+  document.getElementById('completionTaskTitle').textContent = t.title;
+  document.getElementById('completionActualHours').value = t.duration || 0;
+  document.getElementById('completionDate').value = getLocalDateStr();
+  document.getElementById('completionModal').classList.add('active');
+});
+
+document.getElementById('budgetCompleteModal').addEventListener('click', e => {
+  if (e.target.id === 'budgetCompleteModal') closeBudgetComplete();
+});
 
 function markDone(id, actualHours, completedDateStr) {
   const t = tasks.find(x => x.id === id);
@@ -1701,7 +1760,7 @@ document.getElementById('mDeleteBtn').addEventListener('click', () => {
 });
 document.getElementById('mCancelBtn').addEventListener('click', closeModal);
 document.getElementById('taskModal').addEventListener('click', e => { if (e.target.id === 'taskModal') closeModal(); });
-document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeModal(); closeBackups(); closeSlotSettings(); } });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeModal(); closeBackups(); closeSlotSettings(); closeBudgetComplete(); } });
 
 // ===== AUTO-SCHEDULE =====
 function autoSchedule() {
