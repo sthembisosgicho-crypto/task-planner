@@ -477,7 +477,7 @@ input, select, textarea { font-family: inherit; }
 <!-- Main -->
 <div class="main-content">
   <div class="app-header">
-    <h1>Task Scheduler <span style="font-size:0.6rem;font-weight:400;color:var(--text-dim);vertical-align:middle">v58</span></h1>
+    <h1>Task Scheduler <span style="font-size:0.6rem;font-weight:400;color:var(--text-dim);vertical-align:middle">v59</span></h1>
     <div class="header-actions">
       <button class="btn-primary" id="addTaskBtn">+ Add Task</button>
       <button class="btn-secondary" id="autoScheduleBtn">Auto-Schedule</button>
@@ -1798,7 +1798,7 @@ function autoSchedule() {
   allSlotDefs.forEach(s => { if (!slotQueues[s.name]) slotQueues[s.name] = []; });
   schedulable.forEach(t => {
     if (t.category === 'Engineering') { slotQueues['Engineering'].push(t); return; }
-    for (const s of allSlotDefs) { if (s.categories.includes(t.category)) { slotQueues[s.name].push(t); return; } }
+    for (const s of allSlotDefs) { if (s.categories.includes(t.category)) slotQueues[s.name].push(t); }
   });
   Object.values(slotQueues).forEach(q => q.sort((a, b) => {
     const ta = getTaskTier(a), tb = getTaskTier(b);
