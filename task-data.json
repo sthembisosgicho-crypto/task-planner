@@ -1810,7 +1810,13 @@
     },
     "scheduledSlotName": "Homework",
     "sortOrder": -1,
-    "subtasks": []
+    "subtasks": [],
+    "totalHours": 0,
+    "hoursDone": 0,
+    "recurrence": {
+      "type": "monthly-date",
+      "date": 26
+    }
   },
   {
     "id": "cd18",
