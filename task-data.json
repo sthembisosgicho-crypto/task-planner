@@ -5017,5 +5017,19 @@
       "2026-08-08": 0.5
     },
     "scheduledSlotName": "Weekend Duties"
+  },
+  {
+    "id": "mrgnk7oxv5v98",
+    "title": "Plant Read",
+    "category": "Chores Desk",
+    "priority": "Normal",
+    "duration": 0.5,
+    "deadline": null,
+    "notes": "",
+    "status": "backlog",
+    "scheduledDate": null,
+    "subtasks": [],
+    "totalHours": 0,
+    "hoursDone": 0
   }
 ]
