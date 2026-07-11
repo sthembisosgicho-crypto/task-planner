@@ -1809,7 +1809,8 @@
       "2026-07-08": 0.25
     },
     "scheduledSlotName": "Homework",
-    "sortOrder": -1
+    "sortOrder": -1,
+    "subtasks": []
   },
   {
     "id": "cd18",
