@@ -477,7 +477,7 @@ input, select, textarea { font-family: inherit; }
 <!-- Main -->
 <div class="main-content">
   <div class="app-header">
-    <h1>Task Scheduler <span style="font-size:0.6rem;font-weight:400;color:var(--text-dim);vertical-align:middle">v52</span></h1>
+    <h1>Task Scheduler <span style="font-size:0.6rem;font-weight:400;color:var(--text-dim);vertical-align:middle">v53</span></h1>
     <div class="header-actions">
       <button class="btn-primary" id="addTaskBtn">+ Add Task</button>
       <button class="btn-secondary" id="autoScheduleBtn">Auto-Schedule</button>
@@ -2120,35 +2120,22 @@ function renderTaskList() {
   const visibleGroups = filterVal && filterVal !== 'all' ? [filterVal] : POOL_GROUPS;
 
   let html = '';
-  visibleGroups.forEach(key => {
-    const items = (groups[key] || []).slice();
-    if (items.length === 0) return;
-    // Sort within group by tier then tierSortKey
-    items.sort((a,b) => {
-      const ta = getTaskTier(a), tb = getTaskTier(b);
-      if (ta !== tb) return ta - tb;
-      return getTierSortKey(a, ta) - getTierSortKey(b, tb);
-    });
-    const totalHrs = items.reduce((s,t) => s + (t.duration||0), 0);
-    html += `<div class="tl-group">
-<div class="tl-group-header"><span>${key}</span><span class="lg-count">${items.length} tasks &bull; ${totalHrs}h</span></div>
-<table class="tl-table"><thead><tr><th></th><th>Tier</th><th>#</th><th style="min-width:160px">Title</th><th style="width:90px">Priority</th><th style="width:90px">Type</th><th style="width:55px">Hrs</th><th style="width:105px">Deadline</th><th style="width:36px">&#10003;</th><th style="width:44px">&#8943;</th></tr></thead><tbody>`;
-    items.forEach(t => {
-      const tp = tierPositions[t.id] || { tier:4, pos:'?', total:0 };
-      const isListOnly = LIST_ONLY.includes(t.category);
-      const noHrs = (!isListOnly && (!t.duration || t.duration === 0)) ? ' no-hrs-row' : '';
-      const priOpts = ['Normal','Urgent','Soon','Recurring'].map(p => `<option${p===t.priority?' selected':''}>${p}</option>`).join('');
-      const isEng = t.category === 'Engineering';
-      const wtOpts = isEng ? ['Project Work','R&D','Admin','Personal Dev'].map(w => `<option${w===t.workType?' selected':''}>${w}</option>`).join('') : '';
-      const hrsCell = isListOnly ? '<td style="color:var(--text-dim);font-size:0.65rem">&#8211;</td>' : `<td><input type="number" value="${t.duration||0}" min="0" step="0.25" onchange="listUpdate('${t.id}','duration',parseFloat(this.value)||0)"></td>`;
-      const subCount = (t.subtasks && t.subtasks.length) ? `<span style="font-size:0.6rem;color:var(--text-dim);margin-left:2px">${t.subtasks.filter(s=>s.done).length}/${t.subtasks.length}</span>` : '';
-      const tlBlockers = isTaskBlocked(t);
-      const tlBlockedHtml = tlBlockers ? `<div style="font-size:0.65rem;color:#f59e0b;margin-top:2px">&#128274; ${tlBlockers.map(b=>b.title).join(', ')}</div>` : '';
-      html += `<tr class="tl-row${noHrs}" data-id="${t.id}" style="border-left:3px solid var(--${catColor(t.category)})" draggable="true" ondragstart="tlDragStart(event,'${t.id}')" ondragend="tlDragEnd(event)" ondragover="tlDragOver(event,'${t.id}')" ondrop="tlDrop(event,'${t.id}')">
+  function renderTaskRow(t, tp) {
+    const isListOnly = LIST_ONLY.includes(t.category);
+    const noHrs = (!isListOnly && (!t.duration || t.duration === 0)) ? ' no-hrs-row' : '';
+    const priOpts = ['Normal','Urgent','Soon','Recurring'].map(p => `<option${p===t.priority?' selected':''}>${p}</option>`).join('');
+    const isEng = t.category === 'Engineering';
+    const wtOpts = isEng ? ['Project Work','R&D','Admin','Personal Dev'].map(w => `<option${w===t.workType?' selected':''}>${w}</option>`).join('') : '';
+    const hrsCell = isListOnly ? '<td style="color:var(--text-dim);font-size:0.65rem">&#8211;</td>' : `<td><input type="number" value="${t.duration||0}" min="0" step="0.25" onchange="listUpdate('${t.id}','duration',parseFloat(this.value)||0)"></td>`;
+    const subCount = (t.subtasks && t.subtasks.length) ? `<span style="font-size:0.6rem;color:var(--text-dim);margin-left:2px">${t.subtasks.filter(s=>s.done).length}/${t.subtasks.length}</span>` : '';
+    const tlBlockers = isTaskBlocked(t);
+    const tlBlockedHtml = tlBlockers ? `<div style="font-size:0.65rem;color:#f59e0b;margin-top:2px">&#128274; ${tlBlockers.map(b=>b.title).join(', ')}</div>` : '';
+    const recurBadge = t.recurrence ? `<span style="font-size:0.6rem;color:var(--text-dim);margin-left:4px">${t.recurrence.type === 'daily' ? 'daily' : t.recurrence.type === 'weekly' ? 'wkly' : 'mo'}</span>` : '';
+    return `<tr class="tl-row${noHrs}" data-id="${t.id}" style="border-left:3px solid var(--${catColor(t.category)})" draggable="true" ondragstart="tlDragStart(event,'${t.id}')" ondragend="tlDragEnd(event)" ondragover="tlDragOver(event,'${t.id}')" ondrop="tlDrop(event,'${t.id}')">
 <td><span class="tl-drag">&#8285;</span></td>
 <td><span class="tier-badge ${TIER_CLASS[tp.tier]}" title="${TIER_DESC[tp.tier]}">${TIER_LABEL[tp.tier]}</span></td>
 <td><span class="tier-pos">${tp.pos}</span></td>
-<td><input value="${t.title.replace(/"/g,'&quot;').replace(/</g,'&lt;')}" onchange="listUpdate('${t.id}','title',this.value)">${tlBlockedHtml}</td>
+<td><input value="${t.title.replace(/"/g,'&quot;').replace(/</g,'&lt;')}" onchange="listUpdate('${t.id}','title',this.value)">${recurBadge}${tlBlockedHtml}</td>
 <td><select onchange="listUpdate('${t.id}','priority',this.value)">${priOpts}</select></td>
 <td>${isEng ? `<select onchange="listUpdate('${t.id}','workType',this.value)">${wtOpts}</select>` : `<span style="color:var(--text-dim);font-size:0.65rem">${t.category}</span>`}</td>
 ${hrsCell}
@@ -2156,7 +2143,30 @@ ${hrsCell}
 <td style="text-align:center"><button class="lt-done-btn" onclick="confirmDone('${t.id}')">&#10003;</button></td>
 <td style="text-align:center"><button class="lt-more-btn" onclick="openModal('${t.id}')" title="Notes &amp; sub-tasks">&#8943;</button>${subCount}</td>
 </tr>`;
+  }
+
+  visibleGroups.forEach(key => {
+    const items = (groups[key] || []).slice();
+    if (items.length === 0) return;
+    const regularItems = items.filter(t => !isRecurringTask(t) || (t.totalHours && t.totalHours > 0));
+    const recurringItems = items.filter(t => isRecurringTask(t) && !(t.totalHours && t.totalHours > 0));
+    // Sort regular by tier
+    regularItems.sort((a,b) => {
+      const ta = getTaskTier(a), tb = getTaskTier(b);
+      if (ta !== tb) return ta - tb;
+      return getTierSortKey(a, ta) - getTierSortKey(b, tb);
     });
+    // Sort recurring by title
+    recurringItems.sort((a,b) => a.title.localeCompare(b.title));
+    const totalHrs = items.reduce((s,t) => s + (t.duration||0), 0);
+    html += `<div class="tl-group">
+<div class="tl-group-header"><span>${key}</span><span class="lg-count">${items.length} tasks &bull; ${totalHrs}h</span></div>
+<table class="tl-table"><thead><tr><th></th><th>Tier</th><th>#</th><th style="min-width:160px">Title</th><th style="width:90px">Priority</th><th style="width:90px">Type</th><th style="width:55px">Hrs</th><th style="width:105px">Deadline</th><th style="width:36px">&#10003;</th><th style="width:44px">&#8943;</th></tr></thead><tbody>`;
+    regularItems.forEach(t => { html += renderTaskRow(t, tierPositions[t.id] || { tier:4, pos:'?', total:0 }); });
+    if (recurringItems.length > 0) {
+      html += `<tr><td colspan="10" style="padding:4px 8px;background:var(--surface2);font-size:0.65rem;color:var(--text-dim);letter-spacing:0.05em;border-top:1px solid var(--border)">RECURRING</td></tr>`;
+      recurringItems.forEach(t => { html += renderTaskRow(t, tierPositions[t.id] || { tier:4, pos:'?', total:0 }); });
+    }
     html += '</tbody></table></div>';
   });
 
