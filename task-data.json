@@ -2301,7 +2301,7 @@
     "id": "cd32",
     "title": "Lawto",
     "category": "Chores Desk",
-    "priority": "Recurring",
+    "priority": "Normal",
     "duration": 0.25,
     "deadline": null,
     "notes": "",
@@ -2374,7 +2374,17 @@
       "2026-10-02": 0.25,
       "2026-10-05": 0.25
     },
-    "scheduledSlotName": "Homework"
+    "scheduledSlotName": "Homework",
+    "subtasks": [],
+    "totalHours": 0,
+    "hoursDone": 0,
+    "recurrence": {
+      "type": "weekly",
+      "days": [
+        3,
+        6
+      ]
+    }
   },
   {
     "id": "cd33",
