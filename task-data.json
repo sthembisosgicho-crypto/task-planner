@@ -4153,11 +4153,13 @@
     "duration": 0.25,
     "deadline": null,
     "notes": "",
-    "status": "backlog",
+    "status": "done",
     "scheduledDate": null,
     "subtasks": [],
     "totalHours": 0,
-    "hoursDone": 0
+    "hoursDone": 0,
+    "completedDate": "2026-07-09T10:00:00.000Z",
+    "actualHours": 0.25
   },
   {
     "id": "eng34",
