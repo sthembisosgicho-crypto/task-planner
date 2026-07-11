@@ -477,7 +477,7 @@ input, select, textarea { font-family: inherit; }
 <!-- Main -->
 <div class="main-content">
   <div class="app-header">
-    <h1>Task Scheduler <span style="font-size:0.6rem;font-weight:400;color:var(--text-dim);vertical-align:middle">v51</span></h1>
+    <h1>Task Scheduler <span style="font-size:0.6rem;font-weight:400;color:var(--text-dim);vertical-align:middle">v52</span></h1>
     <div class="header-actions">
       <button class="btn-primary" id="addTaskBtn">+ Add Task</button>
       <button class="btn-secondary" id="autoScheduleBtn">Auto-Schedule</button>
@@ -614,6 +614,28 @@ input, select, textarea { font-family: inherit; }
     <div class="modal-actions" style="justify-content:space-between">
       <div><button class="btn-danger" id="mDeleteBtn">Delete</button></div>
       <div style="display:flex;gap:8px"><button class="btn-secondary" id="mPromoteBtn" title="Promote to standalone task">&#8593; Promote</button><button class="btn-secondary" id="mCancelBtn">Cancel</button><button class="btn-primary" id="mSaveBtn">Save</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- Completion Dialog -->
+<div class="modal-overlay" id="completionModal">
+  <div class="modal" style="max-width:340px">
+    <h2 style="font-size:1rem;margin-bottom:6px">Mark as Done</h2>
+    <p id="completionTaskTitle" style="font-size:0.85rem;color:var(--text-dim);margin-bottom:14px;font-style:italic"></p>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Actual hours</label>
+        <input type="number" id="completionActualHours" min="0" step="0.25" value="0">
+      </div>
+      <div class="form-group">
+        <label>Date completed</label>
+        <input type="date" id="completionDate">
+      </div>
+    </div>
+    <div class="modal-actions" style="margin-top:12px">
+      <button class="btn-secondary" id="completionCancelBtn">Cancel</button>
+      <button class="btn-primary" id="completionConfirmBtn">Mark Done</button>
     </div>
   </div>
 </div>
@@ -1061,7 +1083,7 @@ function renderDayView() {
       const subInfo = (t.subtasks && t.subtasks.length) ? ` (${t.subtasks.filter(s=>s.done).length}/${t.subtasks.length})` : '';
       const isRecurT = isRecurringTask(t);
       const btnLabel = t.totalHours ? 'Session Done' : (isRecurT ? 'Done Today' : 'Done');
-      const doneAction = (isRecurT && !t.totalHours) ? `markDoneToday('${t._isSubtask ? t._parentId : t.id}')` : `markDone('${t._isSubtask ? t._parentId : t.id}')`;
+      const doneAction = (isRecurT && !t.totalHours) ? `markDoneToday('${t._isSubtask ? t._parentId : t.id}')` : `confirmDone('${t._isSubtask ? t._parentId : t.id}')`;
       const stLabel = t._isSubtask ? `<span style="font-size:0.6rem;opacity:0.6">&#8627; ${t._parentTitle}</span> ` : '';
       const clickId = t._isSubtask ? t._parentId : t.id;
       const doneId = t._isSubtask ? t._parentId : t.id;
@@ -1079,7 +1101,35 @@ function renderDayView() {
   document.getElementById('daySlots').innerHTML = html;
 }
 
-function markDone(id) {
+let _completingTaskId = null;
+
+function confirmDone(id) {
+  const t = tasks.find(x => x.id === id);
+  if (!t) return;
+  // Recurring tasks without budget: use markDoneToday directly (no logging needed)
+  if ((t.recurrence || t.priority === 'Recurring') && !(t.totalHours && t.totalHours > 0)) {
+    markDoneToday(id); return;
+  }
+  // Check subtasks first
+  if (t.subtasks && t.subtasks.length > 0) {
+    const incomplete = t.subtasks.filter(s => !s.done).length;
+    if (incomplete > 0 && !(t.totalHours && t.totalHours > 0)) {
+      showStatus(`${incomplete} sub-task(s) still incomplete — check them off first`); return;
+    }
+  }
+  // Budget task mid-progress: log session, no dialog needed
+  if (t.totalHours && t.totalHours > 0) {
+    const after = (t.hoursDone || 0) + (t.duration || 0);
+    if (after < t.totalHours) { markDone(id); return; }
+  }
+  _completingTaskId = id;
+  document.getElementById('completionTaskTitle').textContent = t.title;
+  document.getElementById('completionActualHours').value = t.duration || 0;
+  document.getElementById('completionDate').value = getLocalDateStr();
+  document.getElementById('completionModal').classList.add('active');
+}
+
+function markDone(id, actualHours, completedDateStr) {
   const t = tasks.find(x => x.id === id);
   if (!t) return;
 
@@ -1096,7 +1146,8 @@ function markDone(id) {
     t.hoursDone = (t.hoursDone || 0) + (t.duration || 0);
     if (t.hoursDone >= t.totalHours) {
       t.status = 'done';
-      t.completedDate = new Date().toISOString();
+      t.completedDate = completedDateStr ? new Date(completedDateStr + 'T12:00:00').toISOString() : new Date().toISOString();
+      if (actualHours != null) t.actualHours = actualHours;
       showStatus(`Completed! ${t.hoursDone}/${t.totalHours}h done`);
     } else {
       t.scheduledDate = null;
@@ -1113,11 +1164,26 @@ function markDone(id) {
     showStatus('Done for today — will reappear on next occurrence');
   } else {
     t.status = 'done';
-    t.completedDate = new Date().toISOString();
+    t.completedDate = completedDateStr ? new Date(completedDateStr + 'T12:00:00').toISOString() : new Date().toISOString();
+    if (actualHours != null) t.actualHours = actualHours;
     showStatus('Task completed!');
   }
   saveTasks(); exportData(); renderAll();
 }
+
+document.getElementById('completionConfirmBtn').addEventListener('click', () => {
+  const actualHours = parseFloat(document.getElementById('completionActualHours').value) || 0;
+  const dateStr = document.getElementById('completionDate').value || getLocalDateStr();
+  document.getElementById('completionModal').classList.remove('active');
+  if (_completingTaskId) { markDone(_completingTaskId, actualHours, dateStr); _completingTaskId = null; }
+});
+document.getElementById('completionCancelBtn').addEventListener('click', () => {
+  document.getElementById('completionModal').classList.remove('active');
+  _completingTaskId = null;
+});
+document.getElementById('completionModal').addEventListener('click', e => {
+  if (e.target.id === 'completionModal') { document.getElementById('completionModal').classList.remove('active'); _completingTaskId = null; }
+});
 
 function markDoneToday(id) {
   const t = tasks.find(x => x.id === id);
@@ -2087,7 +2153,7 @@ function renderTaskList() {
 <td>${isEng ? `<select onchange="listUpdate('${t.id}','workType',this.value)">${wtOpts}</select>` : `<span style="color:var(--text-dim);font-size:0.65rem">${t.category}</span>`}</td>
 ${hrsCell}
 <td><input type="date" value="${t.deadline||''}" onchange="listUpdate('${t.id}','deadline',this.value||null)"></td>
-<td style="text-align:center"><button class="lt-done-btn" onclick="markDone('${t.id}')">&#10003;</button></td>
+<td style="text-align:center"><button class="lt-done-btn" onclick="confirmDone('${t.id}')">&#10003;</button></td>
 <td style="text-align:center"><button class="lt-more-btn" onclick="openModal('${t.id}')" title="Notes &amp; sub-tasks">&#8943;</button>${subCount}</td>
 </tr>`;
     });
@@ -2114,7 +2180,7 @@ ${hrsCell}
 <td style="color:var(--text-dim);font-size:0.65rem">${t.category}</td>
 <td><input type="number" value="${t.duration||0}" min="0" step="0.25" onchange="listUpdate('${t.id}','duration',parseFloat(this.value)||0)"></td>
 <td><input type="date" value="${t.deadline||''}" onchange="listUpdate('${t.id}','deadline',this.value||null)"></td>
-<td><button class="lt-done-btn" onclick="markDone('${t.id}')">&#10003;</button></td>
+<td><button class="lt-done-btn" onclick="confirmDone('${t.id}')">&#10003;</button></td>
 <td><button class="lt-more-btn" onclick="openModal('${t.id}')">&#8943;</button></td>
 </tr>`;
     });
@@ -2135,10 +2201,41 @@ function renderDone() {
     container.innerHTML = '<p style="padding:20px;color:var(--text-dim);font-size:0.85rem">No completed tasks yet.</p>';
     return;
   }
-  container.innerHTML = doneTasks.map(t => {
-    const dateStr = t.completedDate ? new Date(t.completedDate).toLocaleDateString('en-ZA',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'}) : '';
-    return `<div class="done-item"><span class="di-title">${t.title}</span><span class="di-date">${dateStr}</span><button class="di-restore" onclick="restoreTask('${t.id}')">Restore</button><button class="di-delete" onclick="permanentDelete('${t.id}')">Delete</button></div>`;
-  }).join('');
+  container.innerHTML = `<table style="width:100%;border-collapse:collapse;font-size:0.8rem">
+<thead><tr style="color:var(--text-dim);font-size:0.7rem;border-bottom:1px solid var(--border)">
+<th style="text-align:left;padding:6px 8px;font-weight:500">Task</th>
+<th style="text-align:left;padding:6px 8px;font-weight:500;width:80px">Est.</th>
+<th style="text-align:left;padding:6px 8px;font-weight:500;width:80px">Actual</th>
+<th style="text-align:left;padding:6px 8px;font-weight:500;width:130px">Date Done</th>
+<th style="width:120px"></th>
+</tr></thead><tbody>` +
+  doneTasks.map(t => {
+    const isoDate = t.completedDate ? new Date(t.completedDate).toISOString().split('T')[0] : getLocalDateStr();
+    const estHrs = t.duration || 0;
+    const actHrs = t.actualHours != null ? t.actualHours : estHrs;
+    const variance = actHrs - estHrs;
+    const varHtml = t.actualHours != null
+      ? `<span style="font-size:0.65rem;color:${variance > 0 ? '#f87171' : variance < 0 ? '#34d399' : 'var(--text-dim)'};margin-left:4px">${variance > 0 ? '+' : ''}${variance}h</span>`
+      : '';
+    return `<tr style="border-bottom:1px solid var(--border)">
+<td style="padding:7px 8px">${t.title}<span style="display:block;font-size:0.65rem;color:var(--text-dim)">${t.category}</span></td>
+<td style="padding:7px 8px;color:var(--text-dim)">${estHrs}h</td>
+<td style="padding:7px 8px"><input type="number" value="${actHrs}" min="0" step="0.25" style="width:58px" onchange="doneUpdate('${t.id}','actualHours',parseFloat(this.value)||0)">${varHtml}</td>
+<td style="padding:7px 8px"><input type="date" value="${isoDate}" onchange="doneUpdate('${t.id}','completedDate',this.value)"></td>
+<td style="padding:7px 8px;text-align:right"><button class="di-restore" onclick="restoreTask('${t.id}')">Restore</button><button class="di-delete" onclick="permanentDelete('${t.id}')" style="margin-left:4px">Delete</button></td>
+</tr>`;
+  }).join('') + '</tbody></table>';
+}
+
+function doneUpdate(id, field, value) {
+  const t = tasks.find(x => x.id === id);
+  if (!t) return;
+  if (field === 'completedDate') {
+    t.completedDate = value ? new Date(value + 'T12:00:00').toISOString() : t.completedDate;
+  } else {
+    t[field] = value;
+  }
+  saveTasks(); exportData(); renderDone();
 }
 
 function restoreTask(id) {
