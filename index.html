@@ -477,7 +477,7 @@ input, select, textarea { font-family: inherit; }
 <!-- Main -->
 <div class="main-content">
   <div class="app-header">
-    <h1>Task Scheduler <span style="font-size:0.6rem;font-weight:400;color:var(--text-dim);vertical-align:middle">v57</span></h1>
+    <h1>Task Scheduler <span style="font-size:0.6rem;font-weight:400;color:var(--text-dim);vertical-align:middle">v58</span></h1>
     <div class="header-actions">
       <button class="btn-primary" id="addTaskBtn">+ Add Task</button>
       <button class="btn-secondary" id="autoScheduleBtn">Auto-Schedule</button>
@@ -562,7 +562,7 @@ input, select, textarea { font-family: inherit; }
       <div class="form-group"><label>Category</label><select id="mCategory"><option value="Engineering">Engineering</option><option value="Markets">Markets</option><option value="Chores">Chores</option><option value="Chores Desk">Chores Desk</option><option value="House Chores">House Chores</option><option value="Shopping">Shopping</option><option value="Errands">Errands</option><option value="Side Hustle">Side Hustle</option><option value="Health">Health</option></select></div>
       <div class="form-group"><label>Priority</label><select id="mPriority"><option value="Normal">Normal</option><option value="Urgent">Urgent</option><option value="Soon">Soon</option></select></div>
     </div>
-    <div class="form-group" id="mWorkTypeGroup"><label>Work Type</label><select id="mWorkType"><option value="Project Work">Project Work (Mon/Tue/Thu)</option><option value="R&D">R&D (Wednesday)</option><option value="Admin">Admin (Fri 4h)</option><option value="Personal Dev">Personal Dev (Fri 5h)</option></select></div>
+    <div class="form-group" id="mWorkTypeGroup" style="display:none"><label id="mWorkTypeLabel">Subgroup</label><select id="mWorkType"></select></div>
     <div class="form-group">
       <label>Duration <span id="mDurVal" style="color:var(--accent);font-weight:600">0h</span></label>
       <input type="range" id="mDuration" min="0" max="16" step="0.25" value="0" style="width:100%;accent-color:var(--accent);margin-top:4px">
@@ -666,10 +666,11 @@ input, select, textarea { font-family: inherit; }
     <div style="display:flex;gap:8px;margin-bottom:14px">
       <button id="slotTabWeekday" onclick="slotTab('weekday')" class="btn-primary" style="font-size:0.8rem;padding:5px 14px">Weekdays</button>
       <button id="slotTabWeekend" onclick="slotTab('weekend')" class="btn-secondary" style="font-size:0.8rem;padding:5px 14px">Weekends</button>
+      <button id="slotTabSubgroups" onclick="slotTab('subgroups')" class="btn-secondary" style="font-size:0.8rem;padding:5px 14px">Subgroups</button>
       <button onclick="resetSlots()" class="btn-secondary" style="font-size:0.8rem;padding:5px 14px;margin-left:auto;color:#f87171;border-color:#f87171">Reset Defaults</button>
     </div>
     <div id="slotSettingsList"></div>
-    <button onclick="addSlot()" class="btn-secondary" style="margin-top:10px;font-size:0.8rem;width:100%">+ Add Slot</button>
+    <button id="addSlotBtn" onclick="addSlot()" class="btn-secondary" style="margin-top:10px;font-size:0.8rem;width:100%">+ Add Slot</button>
     <div class="modal-actions" style="margin-top:14px">
       <button class="btn-secondary" onclick="closeSlotSettings()">Close</button>
     </div>
@@ -809,6 +810,9 @@ const DEFAULT_WEEKEND_SLOTS = [
 ];
 let WEEKDAY_SLOTS = JSON.parse(localStorage.getItem('weekdaySlots')) || JSON.parse(JSON.stringify(DEFAULT_WEEKDAY_SLOTS));
 let WEEKEND_SLOTS = JSON.parse(localStorage.getItem('weekendSlots')) || JSON.parse(JSON.stringify(DEFAULT_WEEKEND_SLOTS));
+const DEFAULT_SUBGROUPS = { Engineering: { label: 'Work Type', values: ['Project Work', 'R&D', 'Admin', 'Personal Dev'] } };
+let CATEGORY_SUBGROUPS = JSON.parse(localStorage.getItem('categorySubgroups') || 'null') || JSON.parse(JSON.stringify(DEFAULT_SUBGROUPS));
+function saveSubgroups() { localStorage.setItem('categorySubgroups', JSON.stringify(CATEGORY_SUBGROUPS)); }
 function saveSlotSettings() {
   localStorage.setItem('weekdaySlots', JSON.stringify(WEEKDAY_SLOTS));
   localStorage.setItem('weekendSlots', JSON.stringify(WEEKEND_SLOTS));
@@ -1033,7 +1037,8 @@ function importData() {
 
 // ===== POOL GROUPS =====
 function getPoolGroupKey(t) {
-  if (t.category === 'Engineering') return `Engineering-${t.workType || 'Project Work'}`;
+  const def = CATEGORY_SUBGROUPS[t.category];
+  if (def && t.workType) return `${t.category}-${t.workType}`;
   return t.category;
 }
 const POOL_GROUPS = ['Engineering-Project Work','Engineering-R&D','Engineering-Admin','Engineering-Personal Dev','Markets','Side Hustle','Chores Desk','House Chores','Shopping','Errands','Health','Chores'];
@@ -1482,7 +1487,8 @@ function openModal(id) {
   document.getElementById('mTitle').value = t.title;
   document.getElementById('mCategory').value = t.category;
   document.getElementById('mPriority').value = t.priority;
-  document.getElementById('mWorkType').value = t.workType || 'Project Work';
+  toggleSubgroup();
+  if (t.workType) document.getElementById('mWorkType').value = t.workType;
   document.getElementById('mDuration').value = t.duration || 0;
   document.getElementById('mDurVal').textContent = (t.duration || 0) + 'h';
   document.getElementById('mDeadline').value = t.deadline || '';
@@ -1710,7 +1716,7 @@ document.getElementById('addTaskBtn').addEventListener('click', () => {
     duration: 0,
     deadline: null,
     notes: '',
-    workType: 'Project Work',
+    workType: (CATEGORY_SUBGROUPS[document.getElementById('mCategory').value]?.values[0]) || undefined,
     status: 'backlog',
     scheduledDate: null,
     subtasks: []
@@ -1720,8 +1726,19 @@ document.getElementById('addTaskBtn').addEventListener('click', () => {
   openModal(newTask.id);
   document.getElementById('mTitle').select();
 });
-function toggleWorkType() { document.getElementById('mWorkTypeGroup').style.display = document.getElementById('mCategory').value === 'Engineering' ? 'block' : 'none'; }
-document.getElementById('mCategory').addEventListener('change', toggleWorkType);
+function toggleSubgroup() {
+  const cat = document.getElementById('mCategory').value;
+  const def = CATEGORY_SUBGROUPS[cat];
+  const grp = document.getElementById('mWorkTypeGroup');
+  if (def) {
+    document.getElementById('mWorkTypeLabel').textContent = def.label;
+    document.getElementById('mWorkType').innerHTML = def.values.map(v => `<option>${v}</option>`).join('');
+    grp.style.display = 'block';
+  } else {
+    grp.style.display = 'none';
+  }
+}
+document.getElementById('mCategory').addEventListener('change', toggleSubgroup);
 
 document.getElementById('mSaveBtn').addEventListener('click', () => {
   if (!editingTaskId) return;
@@ -1739,7 +1756,7 @@ document.getElementById('mSaveBtn').addEventListener('click', () => {
   t.notes = document.getElementById('mNotes').value.trim();
   t.totalHours = parseFloat(document.getElementById('mTotalHours').value) || 0;
   t.hoursDone = parseFloat(document.getElementById('mHoursDone').value) || 0;
-  if (t.category === 'Engineering') t.workType = document.getElementById('mWorkType').value;
+  if (CATEGORY_SUBGROUPS[t.category]) t.workType = document.getElementById('mWorkType').value;
   else delete t.workType;
   const rType = document.getElementById('mRecurType').value;
   if (rType) {
@@ -2207,8 +2224,8 @@ function renderTaskList() {
     const isListOnly = LIST_ONLY.includes(t.category);
     const noHrs = (!isListOnly && (!t.duration || t.duration === 0)) ? ' no-hrs-row' : '';
     const priOpts = ['Normal','Urgent','Soon'].map(p => `<option${p===t.priority?' selected':''}>${p}</option>`).join('');
-    const isEng = t.category === 'Engineering';
-    const wtOpts = isEng ? ['Project Work','R&D','Admin','Personal Dev'].map(w => `<option${w===t.workType?' selected':''}>${w}</option>`).join('') : '';
+    const sgDef = CATEGORY_SUBGROUPS[t.category];
+    const wtOpts = sgDef ? sgDef.values.map(w => `<option${w===t.workType?' selected':''}>${w}</option>`).join('') : '';
     const hrsCell = isListOnly ? '<td style="color:var(--text-dim);font-size:0.65rem">&#8211;</td>' : `<td><input type="number" value="${t.duration||0}" min="0" step="0.25" onchange="listUpdate('${t.id}','duration',parseFloat(this.value)||0)"></td>`;
     const subCount = (t.subtasks && t.subtasks.length) ? `<span style="font-size:0.6rem;color:var(--text-dim);margin-left:2px">${t.subtasks.filter(s=>s.done).length}/${t.subtasks.length}</span>` : '';
     const tlBlockers = isTaskBlocked(t);
@@ -2220,7 +2237,7 @@ function renderTaskList() {
 <td><span class="tier-pos">${tp.pos}</span></td>
 <td><input value="${t.title.replace(/"/g,'&quot;').replace(/</g,'&lt;')}" onchange="listUpdate('${t.id}','title',this.value)">${recurBadge}${tlBlockedHtml}</td>
 <td><select onchange="listUpdate('${t.id}','priority',this.value)">${priOpts}</select></td>
-<td>${isEng ? `<select onchange="listUpdate('${t.id}','workType',this.value)">${wtOpts}</select>` : `<span style="color:var(--text-dim);font-size:0.65rem">${t.category}</span>`}</td>
+<td>${sgDef ? `<select onchange="listUpdate('${t.id}','workType',this.value)">${wtOpts}</select>` : `<span style="color:var(--text-dim);font-size:0.65rem">${t.category}</span>`}</td>
 ${hrsCell}
 <td><input type="date" value="${t.deadline||''}" onchange="listUpdate('${t.id}','deadline',this.value||null)"></td>
 <td style="text-align:center"><button class="lt-done-btn" onclick="confirmDone('${t.id}')">&#10003;</button></td>
@@ -2368,9 +2385,12 @@ function slotTab(tab) {
   _slotTab = tab;
   document.getElementById('slotTabWeekday').className = tab === 'weekday' ? 'btn-primary' : 'btn-secondary';
   document.getElementById('slotTabWeekend').className = tab === 'weekend' ? 'btn-primary' : 'btn-secondary';
+  document.getElementById('slotTabSubgroups').className = tab === 'subgroups' ? 'btn-primary' : 'btn-secondary';
+  document.getElementById('addSlotBtn').style.display = tab === 'subgroups' ? 'none' : '';
   renderSlotSettings();
 }
 function renderSlotSettings() {
+  if (_slotTab === 'subgroups') { renderSubgroupSettings(); return; }
   const slots = _slotTab === 'weekday' ? WEEKDAY_SLOTS : WEEKEND_SLOTS;
   const list = document.getElementById('slotSettingsList');
   list.innerHTML = slots.map((slot, i) => `
@@ -2430,6 +2450,66 @@ function resetSlots() {
   saveSlotSettings(); renderSlotSettings();
 }
 document.getElementById('slotSettingsModal').addEventListener('click', e => { if (e.target.id === 'slotSettingsModal') closeSlotSettings(); });
+
+// ===== SUBGROUP SETTINGS =====
+function renderSubgroupSettings() {
+  const list = document.getElementById('slotSettingsList');
+  const defined = CATEGORIES.filter(c => CATEGORY_SUBGROUPS[c]);
+  let html = defined.map(cat => {
+    const def = CATEGORY_SUBGROUPS[cat];
+    return `<div style="background:var(--surface2);border-radius:var(--radius);padding:12px;margin-bottom:8px">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap">
+        <span style="font-weight:600;flex:1;font-size:0.9rem">${cat}</span>
+        <label style="font-size:0.75rem;color:var(--text-dim);white-space:nowrap">Label</label>
+        <input value="${def.label}" style="width:130px;padding:7px 9px;min-height:38px;font-size:0.85rem"
+          onchange="sgUpdateLabel('${cat}',this.value)">
+        <button onclick="sgDelete('${cat}')" style="background:none;border:1px solid #f87171;border-radius:var(--radius);color:#f87171;cursor:pointer;font-size:0.8rem;padding:7px 11px;min-height:38px;white-space:nowrap">&#10005; Remove</button>
+      </div>
+      <div style="font-size:0.72rem;color:var(--text-dim);margin-bottom:6px">Values</div>
+      <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px">
+        ${def.values.map((v,i) => `<span style="display:inline-flex;align-items:center;gap:4px;background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:3px 8px;font-size:0.8rem">${v}<button onclick="sgRemoveValue('${cat}',${i})" style="background:none;border:none;color:#f87171;cursor:pointer;font-size:0.75rem;padding:0 2px;line-height:1">&#10005;</button></span>`).join('')}
+      </div>
+      <div style="display:flex;gap:6px">
+        <input type="text" placeholder="Add value..." id="sgVal_${cat}" style="flex:1;padding:7px 9px;min-height:38px;font-size:0.85rem"
+          onkeydown="if(event.key==='Enter')sgAddValue('${cat}')">
+        <button onclick="sgAddValue('${cat}')" class="btn-secondary" style="padding:7px 12px;min-height:38px;white-space:nowrap;font-size:0.85rem">+ Add</button>
+      </div>
+    </div>`;
+  }).join('');
+  const available = CATEGORIES.filter(c => !CATEGORY_SUBGROUPS[c]);
+  html += `<div style="background:var(--surface2);border-radius:var(--radius);padding:12px;margin-top:4px">
+    <div style="font-size:0.75rem;color:var(--text-dim);margin-bottom:8px;font-weight:600">Add subgroup to category</div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap">
+      <select id="sgNewCat" style="flex:1;padding:7px 9px;min-height:38px;font-size:0.85rem">
+        ${available.map(c => `<option>${c}</option>`).join('')}
+      </select>
+      <input type="text" placeholder="Label (e.g. Work Type)" id="sgNewLabel" style="flex:1;min-width:120px;padding:7px 9px;min-height:38px;font-size:0.85rem">
+      <button onclick="sgAdd()" class="btn-secondary" style="padding:7px 12px;min-height:38px;white-space:nowrap;font-size:0.85rem">+ Add</button>
+    </div>
+  </div>`;
+  list.innerHTML = html;
+}
+function sgUpdateLabel(cat, label) { CATEGORY_SUBGROUPS[cat].label = label; saveSubgroups(); }
+function sgRemoveValue(cat, i) { CATEGORY_SUBGROUPS[cat].values.splice(i, 1); saveSubgroups(); renderSubgroupSettings(); }
+function sgAddValue(cat) {
+  const inp = document.getElementById(`sgVal_${cat}`);
+  const v = (inp.value || '').trim();
+  if (!v || CATEGORY_SUBGROUPS[cat].values.includes(v)) return;
+  CATEGORY_SUBGROUPS[cat].values.push(v);
+  saveSubgroups(); renderSubgroupSettings();
+}
+function sgDelete(cat) {
+  if (!confirm(`Remove subgroup from ${cat}? Existing task values are kept but won't show in dropdowns.`)) return;
+  delete CATEGORY_SUBGROUPS[cat];
+  saveSubgroups(); renderSubgroupSettings();
+}
+function sgAdd() {
+  const cat = document.getElementById('sgNewCat').value;
+  const label = (document.getElementById('sgNewLabel').value || '').trim() || 'Type';
+  if (!cat || CATEGORY_SUBGROUPS[cat]) return;
+  CATEGORY_SUBGROUPS[cat] = { label, values: [] };
+  saveSubgroups(); renderSubgroupSettings();
+}
 
 // ===== INCOMPLETE TASKS PROMPT =====
 function checkIncompleteTasks() {
