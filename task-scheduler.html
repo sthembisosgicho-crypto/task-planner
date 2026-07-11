@@ -477,7 +477,7 @@ input, select, textarea { font-family: inherit; }
 <!-- Main -->
 <div class="main-content">
   <div class="app-header">
-    <h1>Task Scheduler <span style="font-size:0.6rem;font-weight:400;color:var(--text-dim);vertical-align:middle">v50</span></h1>
+    <h1>Task Scheduler <span style="font-size:0.6rem;font-weight:400;color:var(--text-dim);vertical-align:middle">v51</span></h1>
     <div class="header-actions">
       <button class="btn-primary" id="addTaskBtn">+ Add Task</button>
       <button class="btn-secondary" id="autoScheduleBtn">Auto-Schedule</button>
@@ -600,6 +600,12 @@ input, select, textarea { font-family: inherit; }
       <div style="font-size:0.7rem;color:var(--text-dim);margin-top:4px" id="mRecurInfo"></div>
     </div>
     <div class="form-group"><label>Notes</label><textarea id="mNotes" placeholder="Optional notes..."></textarea></div>
+    <div class="form-group" id="mPredGroup">
+      <label>Predecessors <span style="font-size:0.7rem;font-weight:400;color:var(--text-dim)">(must complete before this)</span></label>
+      <div id="mPredChips" style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:6px;min-height:4px"></div>
+      <input type="text" id="mPredSearch" placeholder="Search tasks to add as predecessor..." autocomplete="off" oninput="filterPredecessors()" style="width:100%;margin-bottom:0">
+      <div id="mPredResults" style="max-height:140px;overflow-y:auto;background:var(--surface);border:1px solid var(--border);border-radius:0 0 var(--radius) var(--radius);display:none"></div>
+    </div>
     <div class="form-group" id="mChecklistGroup">
       <label>Sub-tasks <span id="mChecklistInfo" style="font-size:0.7rem;color:var(--text-dim)"></span></label>
       <div id="mChecklistItems"></div>
@@ -1060,7 +1066,9 @@ function renderDayView() {
       const clickId = t._isSubtask ? t._parentId : t.id;
       const doneId = t._isSubtask ? t._parentId : t.id;
       const notDoneBtn = (isPast && !t._isSubtask) ? `<span class="st-notdone" onclick="event.stopPropagation();notDone('${doneId}')">Not Done</span>` : '';
-      html += `<div class="slot-task" data-cat="${t.category}" style="min-height:${heightPx}px" onclick="openModal('${clickId}')"><span class="st-title">${stLabel}${t.title}${progress}${subInfo}</span><span class="st-dur">${formatTime(taskStart)}-${formatTime(taskEnd)} (${t.duration}h)</span>${!t._isSubtask ? `<span class="st-done" onclick="event.stopPropagation();${doneAction}">${btnLabel}</span>` : ''}${notDoneBtn}</div>`;
+      const blockers = isTaskBlocked(t);
+      const blockedBadge = blockers ? `<span style="font-size:0.65rem;color:#f59e0b;margin-left:4px" title="Blocked by: ${blockers.map(b=>b.title).join(', ')}">&#128274; Blocked</span>` : '';
+      html += `<div class="slot-task" data-cat="${t.category}" style="min-height:${heightPx}px${blockers?';opacity:0.7':''}" onclick="openModal('${clickId}')"><span class="st-title">${stLabel}${t.title}${progress}${subInfo}${blockedBadge}</span><span class="st-dur">${formatTime(taskStart)}-${formatTime(taskEnd)} (${t.duration}h)</span>${!t._isSubtask ? `<span class="st-done" onclick="event.stopPropagation();${doneAction}">${btnLabel}</span>` : ''}${notDoneBtn}</div>`;
     });
     doneTasks.forEach(t => {
       html += `<div class="slot-task completed" data-cat="${t.category}" onclick="openModal('${t.id}')"><span class="st-check">&#10003;</span><span class="st-title">${t.title}</span><span class="st-dur">${t.completedDate ? t.completedDate.split('T')[0] : ''}</span></div>`;
@@ -1345,12 +1353,73 @@ function openModal(id) {
     document.getElementById('mRecurDate').value = (t.recurrence && t.recurrence.date) || 1;
   }
   document.getElementById('mNewSubtask').value = '';
+  document.getElementById('mPredSearch').value = '';
+  document.getElementById('mPredResults').style.display = 'none';
+  renderPredChips();
   // Show promote button only if task is a sub-task (has parentId)
   document.getElementById('mPromoteBtn').style.display = t.parentId ? 'inline-block' : 'none';
   updateRecurInfo();
   toggleWorkType();
   renderChecklist();
   document.getElementById('taskModal').classList.add('active');
+}
+
+function isTaskBlocked(t) {
+  if (!t.predecessors || t.predecessors.length === 0) return null;
+  const blockers = t.predecessors.map(pid => tasks.find(x => x.id === pid)).filter(p => p && p.status !== 'done');
+  return blockers.length > 0 ? blockers : null;
+}
+function wouldCreateCycle(taskId, newPredId) {
+  const visited = new Set();
+  function dfs(id) {
+    if (id === taskId) return true;
+    if (visited.has(id)) return false;
+    visited.add(id);
+    const node = tasks.find(x => x.id === id);
+    if (!node || !node.predecessors) return false;
+    return node.predecessors.some(pid => dfs(pid));
+  }
+  return dfs(newPredId);
+}
+function renderPredChips() {
+  const t = tasks.find(x => x.id === editingTaskId);
+  if (!t) return;
+  const preds = t.predecessors || [];
+  document.getElementById('mPredChips').innerHTML = preds.map(pid => {
+    const pred = tasks.find(x => x.id === pid);
+    const name = pred ? pred.title : '(deleted)';
+    return `<span style="background:var(--surface2);border-radius:12px;padding:3px 10px;font-size:0.75rem;display:inline-flex;align-items:center;gap:6px">${name}<span onclick="removePredecessor('${pid}')" style="cursor:pointer;color:var(--text-dim);font-size:1rem;line-height:1">&times;</span></span>`;
+  }).join('');
+}
+function filterPredecessors() {
+  const q = document.getElementById('mPredSearch').value.toLowerCase().trim();
+  const t = tasks.find(x => x.id === editingTaskId);
+  const existing = new Set(t ? (t.predecessors || []) : []);
+  const results = document.getElementById('mPredResults');
+  if (!q) { results.style.display = 'none'; return; }
+  const matches = tasks.filter(x => x.id !== editingTaskId && !existing.has(x.id) && x.status !== 'done' && x.title.toLowerCase().includes(q)).slice(0, 8);
+  if (matches.length === 0) { results.style.display = 'none'; return; }
+  results.style.display = '';
+  results.innerHTML = matches.map(x => `<div onclick="addPredecessor('${x.id}')" style="padding:7px 10px;cursor:pointer;font-size:0.8rem;border-bottom:1px solid var(--border)" onmouseover="this.style.background='var(--surface2)'" onmouseout="this.style.background=''">${x.title} <span style="color:var(--text-dim);font-size:0.7rem">${x.category}</span></div>`).join('');
+}
+function addPredecessor(predId) {
+  const t = tasks.find(x => x.id === editingTaskId);
+  if (!t) return;
+  if (!t.predecessors) t.predecessors = [];
+  if (t.predecessors.includes(predId)) return;
+  if (wouldCreateCycle(editingTaskId, predId)) { showStatus('Cannot add — would create a circular dependency'); return; }
+  t.predecessors.push(predId);
+  document.getElementById('mPredSearch').value = '';
+  document.getElementById('mPredResults').style.display = 'none';
+  renderPredChips();
+  saveTasks(); exportData();
+}
+function removePredecessor(predId) {
+  const t = tasks.find(x => x.id === editingTaskId);
+  if (!t || !t.predecessors) return;
+  t.predecessors = t.predecessors.filter(id => id !== predId);
+  renderPredChips();
+  saveTasks(); exportData();
 }
 
 function renderChecklist() {
@@ -1582,6 +1651,28 @@ function autoSchedule() {
     remaining[t.id] = isBudgetTask(t) ? (t.totalHours - (t.hoursDone || 0)) : (t.duration || 0);
   });
 
+  // ── Predecessor: track projected completion date per task ──────────────────
+  const projectedDoneDate = {};
+  tasks.filter(t => t.status === 'done').forEach(t => {
+    projectedDoneDate[t.id] = t.completedDate ? t.completedDate.split('T')[0] : todayStr;
+  });
+  function getEarliestStart(task) {
+    if (!task.predecessors || task.predecessors.length === 0) return todayStr;
+    let latest = '0000-00-00';
+    for (const pid of task.predecessors) {
+      const pred = tasks.find(x => x.id === pid);
+      if (!pred || pred.status === 'done') {
+        const d = projectedDoneDate[pid] || todayStr;
+        if (d > latest) latest = d;
+        continue;
+      }
+      const projected = projectedDoneDate[pid];
+      if (!projected) return null;
+      if (projected > latest) latest = projected;
+    }
+    return latest === '0000-00-00' ? todayStr : addDays(latest, 1);
+  }
+
   for (let off = 0; off < 90; off++) {
     const dateStr = addDays(todayStr, off);
     const dow = getDow(dateStr);
@@ -1595,6 +1686,10 @@ function autoSchedule() {
         if (!isRecur && (remaining[task.id] || 0) <= 0) continue;
         if (isRecur && !matchesRecurrence(task, dateStr)) continue;
         if (isRecur && task.lastCompletedDate && dateStr <= task.lastCompletedDate) continue;
+        if (!isRecur) {
+          const es = getEarliestStart(task);
+          if (es === null || dateStr < es) continue;
+        }
         if (!isRecur && placedThisDay.has(task.id)) continue;
         if (!taskFitsSlot(task, slot, dow)) continue;
         const wt = task.category === 'Engineering' ? (task.workType || 'Project Work') : null;
@@ -1609,7 +1704,11 @@ function autoSchedule() {
         else sessionHrs = Math.min(remaining[task.id], avail);
         if (sessionHrs <= 0) continue;
         slotUsage[k] = used + sessionHrs;
-        if (!isRecur) { remaining[task.id] -= sessionHrs; placedThisDay.add(task.id); }
+        if (!isRecur) {
+          remaining[task.id] -= sessionHrs;
+          placedThisDay.add(task.id);
+          if (remaining[task.id] <= 0) projectedDoneDate[task.id] = dateStr;
+        }
         if (!task.scheduledSessionHours) task.scheduledSessionHours = {};
         task.scheduledSessionHours[dateStr] = (task.scheduledSessionHours[dateStr] || 0) + sessionHrs;
         if (!task.scheduledSlotName) task.scheduledSlotName = slot.name;
@@ -1941,11 +2040,13 @@ function renderTaskList() {
       const wtOpts = isEng ? ['Project Work','R&D','Admin','Personal Dev'].map(w => `<option${w===t.workType?' selected':''}>${w}</option>`).join('') : '';
       const hrsCell = isListOnly ? '<td style="color:var(--text-dim);font-size:0.65rem">&#8211;</td>' : `<td><input type="number" value="${t.duration||0}" min="0" step="0.25" onchange="listUpdate('${t.id}','duration',parseFloat(this.value)||0)"></td>`;
       const subCount = (t.subtasks && t.subtasks.length) ? `<span style="font-size:0.6rem;color:var(--text-dim);margin-left:2px">${t.subtasks.filter(s=>s.done).length}/${t.subtasks.length}</span>` : '';
+      const tlBlockers = isTaskBlocked(t);
+      const tlBlockedHtml = tlBlockers ? `<div style="font-size:0.65rem;color:#f59e0b;margin-top:2px">&#128274; ${tlBlockers.map(b=>b.title).join(', ')}</div>` : '';
       html += `<tr class="tl-row${noHrs}" data-id="${t.id}" style="border-left:3px solid var(--${catColor(t.category)})" draggable="true" ondragstart="tlDragStart(event,'${t.id}')" ondragend="tlDragEnd(event)" ondragover="tlDragOver(event,'${t.id}')" ondrop="tlDrop(event,'${t.id}')">
 <td><span class="tl-drag">&#8285;</span></td>
 <td><span class="tier-badge ${TIER_CLASS[tp.tier]}" title="${TIER_DESC[tp.tier]}">${TIER_LABEL[tp.tier]}</span></td>
 <td><span class="tier-pos">${tp.pos}</span></td>
-<td><input value="${t.title.replace(/"/g,'&quot;').replace(/</g,'&lt;')}" onchange="listUpdate('${t.id}','title',this.value)"></td>
+<td><input value="${t.title.replace(/"/g,'&quot;').replace(/</g,'&lt;')}" onchange="listUpdate('${t.id}','title',this.value)">${tlBlockedHtml}</td>
 <td><select onchange="listUpdate('${t.id}','priority',this.value)">${priOpts}</select></td>
 <td>${isEng ? `<select onchange="listUpdate('${t.id}','workType',this.value)">${wtOpts}</select>` : `<span style="color:var(--text-dim);font-size:0.65rem">${t.category}</span>`}</td>
 ${hrsCell}
