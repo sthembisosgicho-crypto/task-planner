@@ -477,7 +477,7 @@ input, select, textarea { font-family: inherit; }
 <!-- Main -->
 <div class="main-content">
   <div class="app-header">
-    <h1>Task Scheduler <span style="font-size:0.6rem;font-weight:400;color:var(--text-dim);vertical-align:middle">v49</span></h1>
+    <h1>Task Scheduler <span style="font-size:0.6rem;font-weight:400;color:var(--text-dim);vertical-align:middle">v50</span></h1>
     <div class="header-actions">
       <button class="btn-primary" id="addTaskBtn">+ Add Task</button>
       <button class="btn-secondary" id="autoScheduleBtn">Auto-Schedule</button>
@@ -567,10 +567,35 @@ input, select, textarea { font-family: inherit; }
     </div>
     <div class="form-group"><label>Deadline</label><input type="date" id="mDeadline"></div>
     <div class="form-group" id="mRecurGroup" style="background:var(--surface2);padding:10px 12px;border-radius:var(--radius)">
-      <label style="margin-bottom:6px;display:block">Recurring Budget</label>
-      <div class="form-row">
-        <div class="form-group"><label>Total hours</label><input type="number" id="mTotalHours" min="0" step="0.5" value="0"></div>
-        <div class="form-group"><label>Done</label><input type="number" id="mHoursDone" min="0" step="0.25" value="0"></div>
+      <label style="margin-bottom:6px;display:block">Recurrence</label>
+      <select id="mRecurType" style="width:100%;margin-bottom:8px">
+        <option value="">None (one-off)</option>
+        <option value="daily">Daily</option>
+        <option value="weekly">Weekly</option>
+        <option value="monthly-date">Monthly (fixed date)</option>
+      </select>
+      <div id="mRecurWeekly" style="display:none;margin-bottom:8px">
+        <div style="font-size:0.75rem;color:var(--text-dim);margin-bottom:4px">Days of week</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <label style="font-size:0.8rem"><input type="checkbox" id="mRecurD0"> Sun</label>
+          <label style="font-size:0.8rem"><input type="checkbox" id="mRecurD1"> Mon</label>
+          <label style="font-size:0.8rem"><input type="checkbox" id="mRecurD2"> Tue</label>
+          <label style="font-size:0.8rem"><input type="checkbox" id="mRecurD3"> Wed</label>
+          <label style="font-size:0.8rem"><input type="checkbox" id="mRecurD4"> Thu</label>
+          <label style="font-size:0.8rem"><input type="checkbox" id="mRecurD5"> Fri</label>
+          <label style="font-size:0.8rem"><input type="checkbox" id="mRecurD6"> Sat</label>
+        </div>
+      </div>
+      <div id="mRecurMonthly" style="display:none;margin-bottom:8px">
+        <div style="font-size:0.75rem;color:var(--text-dim);margin-bottom:4px">Day of month</div>
+        <input type="number" id="mRecurDate" min="1" max="31" value="1" style="width:70px">
+      </div>
+      <div id="mBudgetSection" style="display:none">
+        <div style="font-size:0.75rem;color:var(--text-dim);margin-bottom:4px">Budget (optional)</div>
+        <div class="form-row">
+          <div class="form-group"><label>Total hours</label><input type="number" id="mTotalHours" min="0" step="0.5" value="0"></div>
+          <div class="form-group"><label>Done</label><input type="number" id="mHoursDone" min="0" step="0.25" value="0"></div>
+        </div>
       </div>
       <div style="font-size:0.7rem;color:var(--text-dim);margin-top:4px" id="mRecurInfo"></div>
     </div>
@@ -725,9 +750,22 @@ function formatTime(h) { const hh = Math.floor(h); const mm = Math.round((h % 1)
 // GMT+2 (SAST) — use browser local time directly
 function getLocalNow() { return new Date(); }
 function isRecurringTask(t) {
+  if (t.recurrence) return true;
   if (t.priority === 'Recurring') return true;
   if (t.totalHours && t.totalHours > (t.hoursDone || 0)) return true;
   return false;
+}
+function matchesRecurrence(task, dateStr) {
+  const r = task.recurrence;
+  if (!r) return true;
+  const d = new Date(dateStr + 'T12:00:00');
+  const dow = d.getDay(), dom = d.getDate();
+  switch (r.type) {
+    case 'daily': return true;
+    case 'weekly': return (r.days || []).includes(dow);
+    case 'monthly-date': return dom === (r.date || 1);
+    default: return false;
+  }
 }
 function getLocalDateStr() {
   const d = new Date();
@@ -904,6 +942,7 @@ const DEFAULT_TASKS = [
 
 let tasks = JSON.parse(localStorage.getItem('taskDataJson') || 'null') || JSON.parse(localStorage.getItem('tasks') || 'null');
 if (!tasks || tasks.length === 0) { tasks = DEFAULT_TASKS; }
+tasks.forEach(t => { if (t.priority === 'Recurring' && !t.recurrence) t.recurrence = { type: 'daily' }; });
 localStorage.setItem('tasks', JSON.stringify(tasks));
 let editingTaskId = null;
 let preAutoScheduleSnapshot = null;
@@ -1014,12 +1053,14 @@ function renderDayView() {
       const heightPx = Math.max(32, (t.duration / cap) * slotHeight * 0.8);
       const progress = t.totalHours ? ` [${t.hoursDone||0}/${t.totalHours}h]` : '';
       const subInfo = (t.subtasks && t.subtasks.length) ? ` (${t.subtasks.filter(s=>s.done).length}/${t.subtasks.length})` : '';
-      const btnLabel = t.totalHours ? 'Session Done' : 'Done';
+      const isRecurT = isRecurringTask(t);
+      const btnLabel = t.totalHours ? 'Session Done' : (isRecurT ? 'Done Today' : 'Done');
+      const doneAction = (isRecurT && !t.totalHours) ? `markDoneToday('${t._isSubtask ? t._parentId : t.id}')` : `markDone('${t._isSubtask ? t._parentId : t.id}')`;
       const stLabel = t._isSubtask ? `<span style="font-size:0.6rem;opacity:0.6">&#8627; ${t._parentTitle}</span> ` : '';
       const clickId = t._isSubtask ? t._parentId : t.id;
       const doneId = t._isSubtask ? t._parentId : t.id;
       const notDoneBtn = (isPast && !t._isSubtask) ? `<span class="st-notdone" onclick="event.stopPropagation();notDone('${doneId}')">Not Done</span>` : '';
-      html += `<div class="slot-task" data-cat="${t.category}" style="min-height:${heightPx}px" onclick="openModal('${clickId}')"><span class="st-title">${stLabel}${t.title}${progress}${subInfo}</span><span class="st-dur">${formatTime(taskStart)}-${formatTime(taskEnd)} (${t.duration}h)</span>${!t._isSubtask ? `<span class="st-done" onclick="event.stopPropagation();markDone('${doneId}')">${btnLabel}</span>` : ''}${notDoneBtn}</div>`;
+      html += `<div class="slot-task" data-cat="${t.category}" style="min-height:${heightPx}px" onclick="openModal('${clickId}')"><span class="st-title">${stLabel}${t.title}${progress}${subInfo}</span><span class="st-dur">${formatTime(taskStart)}-${formatTime(taskEnd)} (${t.duration}h)</span>${!t._isSubtask ? `<span class="st-done" onclick="event.stopPropagation();${doneAction}">${btnLabel}</span>` : ''}${notDoneBtn}</div>`;
     });
     doneTasks.forEach(t => {
       html += `<div class="slot-task completed" data-cat="${t.category}" onclick="openModal('${t.id}')"><span class="st-check">&#10003;</span><span class="st-title">${t.title}</span><span class="st-dur">${t.completedDate ? t.completedDate.split('T')[0] : ''}</span></div>`;
@@ -1054,17 +1095,33 @@ function markDone(id) {
       t.status = 'backlog';
       showStatus(`Session done: ${t.hoursDone}/${t.totalHours}h — will reschedule`);
     }
-  } else if (t.priority === 'Recurring') {
+  } else if (t.recurrence || t.priority === 'Recurring') {
+    t.lastCompletedDate = getLocalDateStr();
     t.scheduledDate = null;
     t.scheduledDates = [];
+    t.scheduledSessionHours = {};
+    t.scheduledSlotName = null;
     t.status = 'backlog';
-    showStatus('Recurring task done — returned to pool for next cycle');
+    showStatus('Done for today — will reappear on next occurrence');
   } else {
     t.status = 'done';
     t.completedDate = new Date().toISOString();
     showStatus('Task completed!');
   }
   saveTasks(); exportData(); renderAll();
+}
+
+function markDoneToday(id) {
+  const t = tasks.find(x => x.id === id);
+  if (!t) return;
+  t.lastCompletedDate = getLocalDateStr();
+  t.scheduledDate = null;
+  t.scheduledDates = [];
+  t.scheduledSessionHours = {};
+  t.scheduledSlotName = null;
+  t.status = 'backlog';
+  saveTasks(); exportData(); renderAll();
+  showStatus('Done for today — will reappear on next occurrence');
 }
 
 function notDone(id) {
@@ -1275,6 +1332,18 @@ function openModal(id) {
   document.getElementById('mNotes').value = t.notes || '';
   document.getElementById('mTotalHours').value = t.totalHours || 0;
   document.getElementById('mHoursDone').value = t.hoursDone || 0;
+  const recurType = (t.recurrence && t.recurrence.type) || '';
+  document.getElementById('mRecurType').value = recurType;
+  document.getElementById('mRecurWeekly').style.display = recurType === 'weekly' ? '' : 'none';
+  document.getElementById('mRecurMonthly').style.display = recurType === 'monthly-date' ? '' : 'none';
+  document.getElementById('mBudgetSection').style.display = recurType ? '' : 'none';
+  if (recurType === 'weekly') {
+    const days = (t.recurrence && t.recurrence.days) || [];
+    [0,1,2,3,4,5,6].forEach(i => { document.getElementById('mRecurD' + i).checked = days.includes(i); });
+  }
+  if (recurType === 'monthly-date') {
+    document.getElementById('mRecurDate').value = (t.recurrence && t.recurrence.date) || 1;
+  }
   document.getElementById('mNewSubtask').value = '';
   // Show promote button only if task is a sub-task (has parentId)
   document.getElementById('mPromoteBtn').style.display = t.parentId ? 'inline-block' : 'none';
@@ -1400,6 +1469,13 @@ function updateRecurInfo() {
 }
 document.getElementById('mTotalHours').addEventListener('input', updateRecurInfo);
 document.getElementById('mHoursDone').addEventListener('input', updateRecurInfo);
+document.getElementById('mRecurType').addEventListener('change', function() {
+  const v = this.value;
+  document.getElementById('mRecurWeekly').style.display = v === 'weekly' ? '' : 'none';
+  document.getElementById('mRecurMonthly').style.display = v === 'monthly-date' ? '' : 'none';
+  document.getElementById('mBudgetSection').style.display = v ? '' : 'none';
+  updateRecurInfo();
+});
 document.getElementById('mDuration').addEventListener('input', () => {
   document.getElementById('mDurVal').textContent = document.getElementById('mDuration').value + 'h';
   updateRecurInfo();
@@ -1446,6 +1522,14 @@ document.getElementById('mSaveBtn').addEventListener('click', () => {
   t.hoursDone = parseFloat(document.getElementById('mHoursDone').value) || 0;
   if (t.category === 'Engineering') t.workType = document.getElementById('mWorkType').value;
   else delete t.workType;
+  const rType = document.getElementById('mRecurType').value;
+  if (rType) {
+    t.recurrence = { type: rType };
+    if (rType === 'weekly') t.recurrence.days = [0,1,2,3,4,5,6].filter(i => document.getElementById('mRecurD' + i).checked);
+    else if (rType === 'monthly-date') t.recurrence.date = parseInt(document.getElementById('mRecurDate').value) || 1;
+  } else {
+    delete t.recurrence;
+  }
   saveTasks(); exportData(); closeModal(); renderAll();
 });
 document.getElementById('mDeleteBtn').addEventListener('click', () => {
@@ -1491,7 +1575,7 @@ function autoSchedule() {
 
   const slotUsage = {};
   const remaining = {};
-  function isTrulyRecurring(t) { return t.priority === 'Recurring'; }
+  function isTrulyRecurring(t) { return !!(t.recurrence) || t.priority === 'Recurring'; }
   function isBudgetTask(t) { return !isTrulyRecurring(t) && t.totalHours && t.totalHours > (t.hoursDone || 0); }
   schedulable.forEach(t => {
     if (isTrulyRecurring(t)) return;
@@ -1509,6 +1593,8 @@ function autoSchedule() {
         const isRecur = isTrulyRecurring(task);
         const isBudget = isBudgetTask(task);
         if (!isRecur && (remaining[task.id] || 0) <= 0) continue;
+        if (isRecur && !matchesRecurrence(task, dateStr)) continue;
+        if (isRecur && task.lastCompletedDate && dateStr <= task.lastCompletedDate) continue;
         if (!isRecur && placedThisDay.has(task.id)) continue;
         if (!taskFitsSlot(task, slot, dow)) continue;
         const wt = task.category === 'Engineering' ? (task.workType || 'Project Work') : null;
