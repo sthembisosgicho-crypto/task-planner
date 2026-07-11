@@ -1789,12 +1789,12 @@
     "deadline": null,
     "notes": "",
     "status": "thisweek",
-    "scheduledDate": "2026-09-02",
+    "scheduledDate": "2026-08-20",
     "scheduledDates": [
-      "2026-09-02"
+      "2026-08-20"
     ],
     "scheduledSessionHours": {
-      "2026-09-02": 1
+      "2026-08-20": 1
     },
     "scheduledSlotName": "Homework"
   },
@@ -2132,18 +2132,16 @@
     "duration": 1,
     "deadline": null,
     "notes": "",
-    "status": "thisweek",
-    "scheduledDate": "2026-08-14",
+    "status": "today",
+    "scheduledDate": "2026-07-11",
     "tierSortOrder": 75,
     "scheduledDates": [
-      "2026-08-14",
-      "2026-08-17"
+      "2026-07-11"
     ],
     "scheduledSessionHours": {
-      "2026-08-14": 0.75,
-      "2026-08-17": 0.25
+      "2026-07-11": 1
     },
-    "scheduledSlotName": "Homework"
+    "scheduledSlotName": "Weekend Duties"
   },
   {
     "id": "hc02",
@@ -2153,16 +2151,16 @@
     "duration": 1,
     "deadline": null,
     "notes": "",
-    "status": "thisweek",
-    "scheduledDate": "2026-08-17",
+    "status": "today",
+    "scheduledDate": "2026-07-11",
     "tierSortOrder": 76,
     "scheduledDates": [
-      "2026-08-17"
+      "2026-07-11"
     ],
     "scheduledSessionHours": {
-      "2026-08-17": 1
+      "2026-07-11": 1
     },
-    "scheduledSlotName": "Homework"
+    "scheduledSlotName": "Weekend Duties"
   },
   {
     "id": "hc03",
@@ -2173,17 +2171,15 @@
     "deadline": null,
     "notes": "",
     "status": "thisweek",
-    "scheduledDate": "2026-08-17",
+    "scheduledDate": "2026-07-12",
     "tierSortOrder": 77,
     "scheduledDates": [
-      "2026-08-17",
-      "2026-08-18"
+      "2026-07-12"
     ],
     "scheduledSessionHours": {
-      "2026-08-17": 0.75,
-      "2026-08-18": 0.75
+      "2026-07-12": 1.5
     },
-    "scheduledSlotName": "Homework"
+    "scheduledSlotName": "Weekend Duties"
   },
   {
     "id": "hc04",
@@ -2194,17 +2190,17 @@
     "deadline": null,
     "notes": "",
     "status": "thisweek",
-    "scheduledDate": "2026-08-18",
+    "scheduledDate": "2026-07-12",
     "tierSortOrder": 78,
     "scheduledDates": [
-      "2026-08-18",
-      "2026-08-19"
+      "2026-07-12",
+      "2026-07-18"
     ],
     "scheduledSessionHours": {
-      "2026-08-18": 1.25,
-      "2026-08-19": 0.75
+      "2026-07-12": 0.5,
+      "2026-07-18": 1.5
     },
-    "scheduledSlotName": "Homework"
+    "scheduledSlotName": "Weekend Duties"
   },
   {
     "id": "hc05",
@@ -2215,17 +2211,19 @@
     "deadline": null,
     "notes": "",
     "status": "thisweek",
-    "scheduledDate": "2026-08-19",
+    "scheduledDate": "2026-07-18",
     "tierSortOrder": 79,
     "scheduledDates": [
-      "2026-08-19",
-      "2026-08-20"
+      "2026-07-18",
+      "2026-07-19",
+      "2026-07-25"
     ],
     "scheduledSessionHours": {
-      "2026-08-19": 1,
-      "2026-08-20": 2
+      "2026-07-18": 0.5,
+      "2026-07-19": 2,
+      "2026-07-25": 0.5
     },
-    "scheduledSlotName": "Homework"
+    "scheduledSlotName": "Weekend Duties"
   },
   {
     "id": "hc06",
@@ -2236,17 +2234,17 @@
     "deadline": null,
     "notes": "",
     "status": "thisweek",
-    "scheduledDate": "2026-08-21",
+    "scheduledDate": "2026-07-25",
     "tierSortOrder": 80,
     "scheduledDates": [
-      "2026-08-21",
-      "2026-08-24"
+      "2026-07-25",
+      "2026-07-26"
     ],
     "scheduledSessionHours": {
-      "2026-08-21": 2,
-      "2026-08-24": 1
+      "2026-07-25": 1.5,
+      "2026-07-26": 1.5
     },
-    "scheduledSlotName": "Homework"
+    "scheduledSlotName": "Weekend Duties"
   },
   {
     "id": "hc07",
@@ -2257,15 +2255,17 @@
     "deadline": null,
     "notes": "",
     "status": "thisweek",
-    "scheduledDate": "2026-08-24",
+    "scheduledDate": "2026-07-26",
     "tierSortOrder": 81,
     "scheduledDates": [
-      "2026-08-24"
+      "2026-07-26",
+      "2026-08-01"
     ],
     "scheduledSessionHours": {
-      "2026-08-24": 1
+      "2026-07-26": 0.5,
+      "2026-08-01": 0.5
     },
-    "scheduledSlotName": "Homework"
+    "scheduledSlotName": "Weekend Duties"
   },
   {
     "id": "hc08",
@@ -2276,15 +2276,15 @@
     "deadline": null,
     "notes": "",
     "status": "thisweek",
-    "scheduledDate": "2026-08-25",
+    "scheduledDate": "2026-08-01",
     "tierSortOrder": 82,
     "scheduledDates": [
-      "2026-08-25"
+      "2026-08-01"
     ],
     "scheduledSessionHours": {
-      "2026-08-25": 1
+      "2026-08-01": 1
     },
-    "scheduledSlotName": "Homework"
+    "scheduledSlotName": "Weekend Duties"
   },
   {
     "id": "hc09",
@@ -2295,15 +2295,17 @@
     "deadline": null,
     "notes": "",
     "status": "thisweek",
-    "scheduledDate": "2026-08-25",
+    "scheduledDate": "2026-08-01",
     "tierSortOrder": 83,
     "scheduledDates": [
-      "2026-08-25"
+      "2026-08-01",
+      "2026-08-02"
     ],
     "scheduledSessionHours": {
-      "2026-08-25": 1
+      "2026-08-01": 0.5,
+      "2026-08-02": 0.5
     },
-    "scheduledSlotName": "Homework"
+    "scheduledSlotName": "Weekend Duties"
   },
   {
     "id": "hc10",
@@ -2314,15 +2316,15 @@
     "deadline": null,
     "notes": "",
     "status": "thisweek",
-    "scheduledDate": "2026-08-26",
+    "scheduledDate": "2026-08-02",
     "tierSortOrder": 84,
     "scheduledDates": [
-      "2026-08-26"
+      "2026-08-02"
     ],
     "scheduledSessionHours": {
-      "2026-08-26": 1
+      "2026-08-02": 1
     },
-    "scheduledSlotName": "Homework"
+    "scheduledSlotName": "Weekend Duties"
   },
   {
     "id": "hc11",
@@ -2333,17 +2335,17 @@
     "deadline": null,
     "notes": "",
     "status": "thisweek",
-    "scheduledDate": "2026-08-26",
+    "scheduledDate": "2026-08-02",
     "tierSortOrder": 85,
     "scheduledDates": [
-      "2026-08-26",
-      "2026-08-27"
+      "2026-08-02",
+      "2026-08-08"
     ],
     "scheduledSessionHours": {
-      "2026-08-26": 0.5,
-      "2026-08-27": 0.5
+      "2026-08-02": 0.5,
+      "2026-08-08": 0.5
     },
-    "scheduledSlotName": "Homework"
+    "scheduledSlotName": "Weekend Duties"
   },
   {
     "id": "hc12",
@@ -2354,15 +2356,15 @@
     "deadline": null,
     "notes": "",
     "status": "thisweek",
-    "scheduledDate": "2026-08-27",
+    "scheduledDate": "2026-08-08",
     "tierSortOrder": 86,
     "scheduledDates": [
-      "2026-08-27"
+      "2026-08-08"
     ],
     "scheduledSessionHours": {
-      "2026-08-27": 0.25
+      "2026-08-08": 0.25
     },
-    "scheduledSlotName": "Homework"
+    "scheduledSlotName": "Weekend Duties"
   },
   {
     "id": "hc13",
@@ -2373,15 +2375,15 @@
     "deadline": null,
     "notes": "",
     "status": "thisweek",
-    "scheduledDate": "2026-08-27",
+    "scheduledDate": "2026-08-08",
     "tierSortOrder": 87,
     "scheduledDates": [
-      "2026-08-27"
+      "2026-08-08"
     ],
     "scheduledSessionHours": {
-      "2026-08-27": 0.25
+      "2026-08-08": 0.25
     },
-    "scheduledSlotName": "Homework"
+    "scheduledSlotName": "Weekend Duties"
   },
   {
     "id": "sp01",
@@ -2858,13 +2860,15 @@
     "deadline": null,
     "notes": "",
     "status": "thisweek",
-    "scheduledDate": "2026-08-27",
+    "scheduledDate": "2026-08-14",
     "tierSortOrder": 119,
     "scheduledDates": [
-      "2026-08-27"
+      "2026-08-14",
+      "2026-08-17"
     ],
     "scheduledSessionHours": {
-      "2026-08-27": 1
+      "2026-08-14": 0.75,
+      "2026-08-17": 0.25
     },
     "scheduledSlotName": "Homework",
     "subtasks": [],
@@ -3315,13 +3319,13 @@
     "deadline": null,
     "notes": "",
     "status": "thisweek",
-    "scheduledDate": "2026-08-28",
+    "scheduledDate": "2026-08-17",
     "tierSortOrder": 130,
     "scheduledDates": [
-      "2026-08-28"
+      "2026-08-17"
     ],
     "scheduledSessionHours": {
-      "2026-08-28": 1
+      "2026-08-17": 1
     },
     "scheduledSlotName": "Homework"
   },
@@ -3520,13 +3524,13 @@
     "deadline": null,
     "notes": "",
     "status": "thisweek",
-    "scheduledDate": "2026-08-28",
+    "scheduledDate": "2026-08-17",
     "tierSortOrder": 137,
     "scheduledDates": [
-      "2026-08-28"
+      "2026-08-17"
     ],
     "scheduledSessionHours": {
-      "2026-08-28": 0.25
+      "2026-08-17": 0.25
     },
     "scheduledSlotName": "Homework"
   },
@@ -3539,13 +3543,13 @@
     "deadline": null,
     "notes": "",
     "status": "thisweek",
-    "scheduledDate": "2026-08-28",
+    "scheduledDate": "2026-08-17",
     "tierSortOrder": 138,
     "scheduledDates": [
-      "2026-08-28"
+      "2026-08-17"
     ],
     "scheduledSessionHours": {
-      "2026-08-28": 0.25
+      "2026-08-17": 0.25
     },
     "scheduledSlotName": "Homework"
   },
@@ -3558,13 +3562,13 @@
     "deadline": null,
     "notes": "",
     "status": "thisweek",
-    "scheduledDate": "2026-08-28",
+    "scheduledDate": "2026-08-17",
     "tierSortOrder": 139,
     "scheduledDates": [
-      "2026-08-28"
+      "2026-08-17"
     ],
     "scheduledSessionHours": {
-      "2026-08-28": 0.25
+      "2026-08-17": 0.25
     },
     "scheduledSlotName": "Homework"
   },
@@ -3577,13 +3581,13 @@
     "deadline": null,
     "notes": "",
     "status": "thisweek",
-    "scheduledDate": "2026-08-28",
+    "scheduledDate": "2026-08-18",
     "tierSortOrder": 140,
     "scheduledDates": [
-      "2026-08-28"
+      "2026-08-18"
     ],
     "scheduledSessionHours": {
-      "2026-08-28": 0.25
+      "2026-08-18": 0.25
     },
     "scheduledSlotName": "Homework"
   },
@@ -3613,13 +3617,13 @@
     "deadline": null,
     "notes": "",
     "status": "thisweek",
-    "scheduledDate": "2026-08-31",
+    "scheduledDate": "2026-08-18",
     "tierSortOrder": 142,
     "scheduledDates": [
-      "2026-08-31"
+      "2026-08-18"
     ],
     "scheduledSessionHours": {
-      "2026-08-31": 0.25
+      "2026-08-18": 0.25
     },
     "scheduledSlotName": "Homework"
   },
@@ -3632,13 +3636,13 @@
     "deadline": null,
     "notes": "",
     "status": "thisweek",
-    "scheduledDate": "2026-08-31",
+    "scheduledDate": "2026-08-18",
     "tierSortOrder": 143,
     "scheduledDates": [
-      "2026-08-31"
+      "2026-08-18"
     ],
     "scheduledSessionHours": {
-      "2026-08-31": 0.25
+      "2026-08-18": 0.25
     },
     "scheduledSlotName": "Homework"
   },
@@ -3651,15 +3655,15 @@
     "deadline": null,
     "notes": "",
     "status": "thisweek",
-    "scheduledDate": "2026-08-31",
+    "scheduledDate": "2026-08-18",
     "tierSortOrder": 144,
     "scheduledDates": [
-      "2026-08-31",
-      "2026-09-01"
+      "2026-08-18",
+      "2026-08-19"
     ],
     "scheduledSessionHours": {
-      "2026-08-31": 1.5,
-      "2026-09-01": 0.5
+      "2026-08-18": 1.25,
+      "2026-08-19": 0.75
     },
     "scheduledSlotName": "Homework"
   },
@@ -3672,13 +3676,13 @@
     "deadline": null,
     "notes": "",
     "status": "thisweek",
-    "scheduledDate": "2026-09-01",
+    "scheduledDate": "2026-08-19",
     "tierSortOrder": 145,
     "scheduledDates": [
-      "2026-09-01"
+      "2026-08-19"
     ],
     "scheduledSessionHours": {
-      "2026-09-01": 0.25
+      "2026-08-19": 0.25
     },
     "scheduledSlotName": "Homework"
   },
@@ -3691,13 +3695,13 @@
     "deadline": null,
     "notes": "",
     "status": "thisweek",
-    "scheduledDate": "2026-09-01",
+    "scheduledDate": "2026-08-19",
     "tierSortOrder": 146,
     "scheduledDates": [
-      "2026-09-01"
+      "2026-08-19"
     ],
     "scheduledSessionHours": {
-      "2026-09-01": 0.25
+      "2026-08-19": 0.25
     },
     "scheduledSlotName": "Homework"
   },
@@ -3710,13 +3714,15 @@
     "deadline": null,
     "notes": "",
     "status": "thisweek",
-    "scheduledDate": "2026-09-01",
+    "scheduledDate": "2026-08-19",
     "tierSortOrder": 147,
     "scheduledDates": [
-      "2026-09-01"
+      "2026-08-19",
+      "2026-08-20"
     ],
     "scheduledSessionHours": {
-      "2026-09-01": 1
+      "2026-08-19": 0.5,
+      "2026-08-20": 0.5
     },
     "scheduledSlotName": "Homework"
   },
@@ -4005,12 +4011,12 @@
     "deadline": null,
     "notes": "",
     "status": "thisweek",
-    "scheduledDate": "2026-09-02",
+    "scheduledDate": "2026-08-20",
     "scheduledDates": [
-      "2026-09-02"
+      "2026-08-20"
     ],
     "scheduledSessionHours": {
-      "2026-09-02": 0.25
+      "2026-08-20": 0.25
     },
     "scheduledSlotName": "Homework"
   },
@@ -4079,12 +4085,12 @@
     "deadline": null,
     "notes": "",
     "status": "thisweek",
-    "scheduledDate": "2026-09-02",
+    "scheduledDate": "2026-08-20",
     "scheduledDates": [
-      "2026-09-02"
+      "2026-08-20"
     ],
     "scheduledSessionHours": {
-      "2026-09-02": 0.25
+      "2026-08-20": 0.25
     },
     "scheduledSlotName": "Homework"
   },
@@ -4217,15 +4223,15 @@
     "deadline": null,
     "notes": "",
     "status": "thisweek",
-    "scheduledDate": "2026-09-02",
+    "scheduledDate": "2026-08-21",
     "subtasks": [],
     "totalHours": 0,
     "hoursDone": 0,
     "scheduledDates": [
-      "2026-09-02"
+      "2026-08-21"
     ],
     "scheduledSessionHours": {
-      "2026-09-02": 0.25
+      "2026-08-21": 0.25
     },
     "scheduledSlotName": "Homework"
   },
@@ -4394,15 +4400,15 @@
     "deadline": null,
     "notes": "",
     "status": "thisweek",
-    "scheduledDate": "2026-09-03",
+    "scheduledDate": "2026-08-21",
     "subtasks": [],
     "totalHours": 0,
     "hoursDone": 0,
     "scheduledDates": [
-      "2026-09-03"
+      "2026-08-21"
     ],
     "scheduledSessionHours": {
-      "2026-09-03": 0.25
+      "2026-08-21": 0.25
     },
     "scheduledSlotName": "Homework"
   },
@@ -4526,15 +4532,15 @@
     "deadline": null,
     "notes": "",
     "status": "thisweek",
-    "scheduledDate": "2026-09-03",
+    "scheduledDate": "2026-08-21",
     "subtasks": [],
     "totalHours": 0,
     "hoursDone": 0,
     "scheduledDates": [
-      "2026-09-03"
+      "2026-08-21"
     ],
     "scheduledSessionHours": {
-      "2026-09-03": 0.75
+      "2026-08-21": 0.75
     },
     "scheduledSlotName": "Homework"
   },
@@ -4547,15 +4553,15 @@
     "deadline": null,
     "notes": "",
     "status": "thisweek",
-    "scheduledDate": "2026-09-03",
+    "scheduledDate": "2026-08-21",
     "subtasks": [],
     "totalHours": 0,
     "hoursDone": 0,
     "scheduledDates": [
-      "2026-09-03"
+      "2026-08-21"
     ],
     "scheduledSessionHours": {
-      "2026-09-03": 0.25
+      "2026-08-21": 0.25
     },
     "scheduledSlotName": "Homework"
   },
@@ -4568,17 +4574,17 @@
     "deadline": null,
     "notes": "",
     "status": "thisweek",
-    "scheduledDate": "2026-09-03",
+    "scheduledDate": "2026-08-21",
     "subtasks": [],
     "totalHours": 0,
     "hoursDone": 0,
     "scheduledDates": [
-      "2026-09-03",
-      "2026-09-04"
+      "2026-08-21",
+      "2026-08-24"
     ],
     "scheduledSessionHours": {
-      "2026-09-03": 0.75,
-      "2026-09-04": 0.25
+      "2026-08-21": 0.5,
+      "2026-08-24": 0.5
     },
     "scheduledSlotName": "Homework"
   },
@@ -4591,15 +4597,15 @@
     "deadline": null,
     "notes": "",
     "status": "thisweek",
-    "scheduledDate": "2026-09-04",
+    "scheduledDate": "2026-08-24",
     "subtasks": [],
     "totalHours": 0,
     "hoursDone": 0,
     "scheduledDates": [
-      "2026-09-04"
+      "2026-08-24"
     ],
     "scheduledSessionHours": {
-      "2026-09-04": 0.5
+      "2026-08-24": 0.5
     },
     "scheduledSlotName": "Homework"
   },
@@ -4636,17 +4642,17 @@
     "deadline": null,
     "notes": "",
     "status": "thisweek",
-    "scheduledDate": "2026-09-04",
+    "scheduledDate": "2026-08-24",
     "subtasks": [],
     "totalHours": 0,
     "hoursDone": 0,
     "scheduledDates": [
-      "2026-09-04",
-      "2026-09-07"
+      "2026-08-24",
+      "2026-08-25"
     ],
     "scheduledSessionHours": {
-      "2026-09-04": 1.25,
-      "2026-09-07": 0.5
+      "2026-08-24": 1,
+      "2026-08-25": 0.75
     },
     "scheduledSlotName": "Homework"
   },
@@ -4659,15 +4665,15 @@
     "deadline": null,
     "notes": "",
     "status": "thisweek",
-    "scheduledDate": "2026-09-07",
+    "scheduledDate": "2026-08-25",
     "subtasks": [],
     "totalHours": 0,
     "hoursDone": 0,
     "scheduledDates": [
-      "2026-09-07"
+      "2026-08-25"
     ],
     "scheduledSessionHours": {
-      "2026-09-07": 1
+      "2026-08-25": 1
     },
     "scheduledSlotName": "Homework"
   },
@@ -4768,15 +4774,15 @@
     "deadline": null,
     "notes": "",
     "status": "thisweek",
-    "scheduledDate": "2026-09-07",
+    "scheduledDate": "2026-08-25",
     "subtasks": [],
     "totalHours": 0,
     "hoursDone": 0,
     "scheduledDates": [
-      "2026-09-07"
+      "2026-08-25"
     ],
     "scheduledSessionHours": {
-      "2026-09-07": 0.25
+      "2026-08-25": 0.25
     },
     "scheduledSlotName": "Homework"
   },
@@ -4809,17 +4815,17 @@
     "deadline": null,
     "notes": "",
     "status": "thisweek",
-    "scheduledDate": "2026-09-07",
+    "scheduledDate": "2026-08-08",
     "subtasks": [],
     "totalHours": 0,
     "hoursDone": 0,
     "scheduledDates": [
-      "2026-09-07"
+      "2026-08-08"
     ],
     "scheduledSessionHours": {
-      "2026-09-07": 0.25
+      "2026-08-08": 0.25
     },
-    "scheduledSlotName": "Homework"
+    "scheduledSlotName": "Weekend Duties"
   },
   {
     "id": "mrfso47ncvpc8",
@@ -4878,26 +4884,36 @@
       "2026-09-02",
       "2026-09-03",
       "2026-09-04",
+      "2026-09-05",
+      "2026-09-06",
       "2026-09-07",
       "2026-09-08",
       "2026-09-09",
       "2026-09-10",
       "2026-09-11",
+      "2026-09-12",
+      "2026-09-13",
       "2026-09-14",
       "2026-09-15",
       "2026-09-16",
       "2026-09-17",
       "2026-09-18",
+      "2026-09-19",
+      "2026-09-20",
       "2026-09-21",
       "2026-09-22",
       "2026-09-23",
       "2026-09-24",
       "2026-09-25",
+      "2026-09-26",
+      "2026-09-27",
       "2026-09-28",
       "2026-09-29",
       "2026-09-30",
       "2026-10-01",
       "2026-10-02",
+      "2026-10-03",
+      "2026-10-04",
       "2026-10-05",
       "2026-10-06",
       "2026-10-07",
@@ -4944,26 +4960,36 @@
       "2026-09-02": 0.25,
       "2026-09-03": 0.25,
       "2026-09-04": 0.25,
+      "2026-09-05": 0.25,
+      "2026-09-06": 0.25,
       "2026-09-07": 0.25,
       "2026-09-08": 0.25,
       "2026-09-09": 0.25,
       "2026-09-10": 0.25,
       "2026-09-11": 0.25,
+      "2026-09-12": 0.25,
+      "2026-09-13": 0.25,
       "2026-09-14": 0.25,
       "2026-09-15": 0.25,
       "2026-09-16": 0.25,
       "2026-09-17": 0.25,
       "2026-09-18": 0.25,
+      "2026-09-19": 0.25,
+      "2026-09-20": 0.25,
       "2026-09-21": 0.25,
       "2026-09-22": 0.25,
       "2026-09-23": 0.25,
       "2026-09-24": 0.25,
       "2026-09-25": 0.25,
+      "2026-09-26": 0.25,
+      "2026-09-27": 0.25,
       "2026-09-28": 0.25,
       "2026-09-29": 0.25,
       "2026-09-30": 0.25,
       "2026-10-01": 0.25,
       "2026-10-02": 0.25,
+      "2026-10-03": 0.25,
+      "2026-10-04": 0.25,
       "2026-10-05": 0.25,
       "2026-10-06": 0.25,
       "2026-10-07": 0.25,
@@ -4980,16 +5006,16 @@
     "deadline": null,
     "notes": "Include wipes etc.",
     "status": "thisweek",
-    "scheduledDate": "2026-09-08",
+    "scheduledDate": "2026-08-08",
     "subtasks": [],
     "totalHours": 0,
     "hoursDone": 0,
     "scheduledDates": [
-      "2026-09-08"
+      "2026-08-08"
     ],
     "scheduledSessionHours": {
-      "2026-09-08": 0.5
+      "2026-08-08": 0.5
     },
-    "scheduledSlotName": "Homework"
+    "scheduledSlotName": "Weekend Duties"
   }
 ]
