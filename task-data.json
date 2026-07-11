@@ -4742,5 +4742,19 @@
     "subtasks": [],
     "totalHours": 0,
     "hoursDone": 0
+  },
+  {
+    "id": "mrfo7s5tz00e5",
+    "title": "Reoccurring task name change to long term",
+    "category": "Chores Desk",
+    "priority": "Urgent",
+    "duration": 0.25,
+    "deadline": null,
+    "notes": "Also where is mapping settings?",
+    "status": "backlog",
+    "scheduledDate": null,
+    "subtasks": [],
+    "totalHours": 0,
+    "hoursDone": 0
   }
 ]
