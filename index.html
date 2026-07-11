@@ -477,7 +477,7 @@ input, select, textarea { font-family: inherit; }
 <!-- Main -->
 <div class="main-content">
   <div class="app-header">
-    <h1>Task Scheduler <span style="font-size:0.6rem;font-weight:400;color:var(--text-dim);vertical-align:middle">v55</span></h1>
+    <h1>Task Scheduler <span style="font-size:0.6rem;font-weight:400;color:var(--text-dim);vertical-align:middle">v56</span></h1>
     <div class="header-actions">
       <button class="btn-primary" id="addTaskBtn">+ Add Task</button>
       <button class="btn-secondary" id="autoScheduleBtn">Auto-Schedule</button>
@@ -560,7 +560,7 @@ input, select, textarea { font-family: inherit; }
     <div class="form-group"><label>Title</label><input type="text" id="mTitle" style="font-size:1rem;padding:12px"></div>
     <div class="form-row">
       <div class="form-group"><label>Category</label><select id="mCategory"><option value="Engineering">Engineering</option><option value="Markets">Markets</option><option value="Chores">Chores</option><option value="Chores Desk">Chores Desk</option><option value="House Chores">House Chores</option><option value="Shopping">Shopping</option><option value="Errands">Errands</option><option value="Side Hustle">Side Hustle</option><option value="Health">Health</option></select></div>
-      <div class="form-group"><label>Priority</label><select id="mPriority"><option value="Normal">Normal</option><option value="Urgent">Urgent</option><option value="Soon">Soon</option><option value="Recurring">Recurring</option></select></div>
+      <div class="form-group"><label>Priority</label><select id="mPriority"><option value="Normal">Normal</option><option value="Urgent">Urgent</option><option value="Soon">Soon</option></select></div>
     </div>
     <div class="form-group" id="mWorkTypeGroup"><label>Work Type</label><select id="mWorkType"><option value="Project Work">Project Work (Mon/Tue/Thu)</option><option value="R&D">R&D (Wednesday)</option><option value="Admin">Admin (Fri 4h)</option><option value="Personal Dev">Personal Dev (Fri 5h)</option></select></div>
     <div class="form-group">
@@ -804,10 +804,7 @@ function formatTime(h) { const hh = Math.floor(h); const mm = Math.round((h % 1)
 // GMT+2 (SAST) — use browser local time directly
 function getLocalNow() { return new Date(); }
 function isRecurringTask(t) {
-  if (t.recurrence) return true;
-  if (t.priority === 'Recurring') return true;
-  if (t.totalHours && t.totalHours > (t.hoursDone || 0)) return true;
-  return false;
+  return !!(t.recurrence);
 }
 function matchesRecurrence(task, dateStr) {
   const r = task.recurrence;
@@ -845,21 +842,21 @@ const DEFAULT_TASKS = [
   {id:'eng15',title:'Enquire for Candice',category:'Engineering',priority:'Normal',duration:0.5,deadline:null,notes:'',workType:'Admin',status:'backlog',scheduledDate:null},
   {id:'eng16',title:'Update Mkhaya',category:'Engineering',priority:'Normal',duration:0.5,deadline:null,notes:'',workType:'Admin',status:'backlog',scheduledDate:null},
   {id:'eng17',title:'Medical update',category:'Engineering',priority:'Normal',duration:1,deadline:null,notes:'',workType:'Admin',status:'backlog',scheduledDate:null},
-  {id:'eng18',title:'Time sheets',category:'Engineering',priority:'Recurring',duration:0.5,deadline:null,notes:'Weekly',workType:'Admin',status:'backlog',scheduledDate:null},
-  {id:'eng19',title:'En T folder attend',category:'Engineering',priority:'Recurring',duration:0.5,deadline:null,notes:'Daily',workType:'Admin',status:'backlog',scheduledDate:null},
-  {id:'eng20',title:'USB organise',category:'Engineering',priority:'Recurring',duration:0.5,deadline:null,notes:'Weekly',workType:'Admin',status:'backlog',scheduledDate:null},
+  {id:'eng18',title:'Time sheets',category:'Engineering',priority:'Normal',duration:0.5,deadline:null,notes:'',workType:'Admin',status:'backlog',scheduledDate:null,recurrence:{type:'weekly',days:[5]}},
+  {id:'eng19',title:'En T folder attend',category:'Engineering',priority:'Normal',duration:0.5,deadline:null,notes:'',workType:'Admin',status:'backlog',scheduledDate:null,recurrence:{type:'daily'}},
+  {id:'eng20',title:'USB organise',category:'Engineering',priority:'Normal',duration:0.5,deadline:null,notes:'',workType:'Admin',status:'backlog',scheduledDate:null,recurrence:{type:'weekly',days:[5]}},
   {id:'mkt01',title:'Recode FIB',category:'Markets',priority:'Normal',duration:3,deadline:null,notes:'',status:'backlog',scheduledDate:null},
   {id:'mkt02',title:'Pine script indicator',category:'Markets',priority:'Normal',duration:2,deadline:null,notes:'',status:'backlog',scheduledDate:null},
   {id:'mkt03',title:'Prop check TopStep GFT',category:'Markets',priority:'Normal',duration:1,deadline:null,notes:'',status:'backlog',scheduledDate:null},
   {id:'mkt04',title:'FSP registration',category:'Markets',priority:'Normal',duration:1,deadline:null,notes:'',status:'backlog',scheduledDate:null},
   {id:'mkt05',title:'Update CV via AE Support',category:'Markets',priority:'Normal',duration:1,deadline:null,notes:'',status:'backlog',scheduledDate:null},
-  {id:'chr01',title:'Withdraw',category:'Chores',priority:'Recurring',duration:0.5,deadline:null,notes:'Weekly',status:'backlog',scheduledDate:null},
+  {id:'chr01',title:'Withdraw',category:'Chores',priority:'Normal',duration:0.5,deadline:null,notes:'',status:'backlog',scheduledDate:null,recurrence:{type:'weekly',days:[5]}},
   {id:'chr02',title:'Find school Sparko Entabeni',category:'Chores',priority:'Normal',duration:1,deadline:null,notes:'',status:'backlog',scheduledDate:null},
   {id:'chr03',title:'Medical',category:'Chores',priority:'Normal',duration:1,deadline:null,notes:'',status:'backlog',scheduledDate:null},
   {id:'chr04',title:'Chat to Madlebe',category:'Chores',priority:'Normal',duration:0.5,deadline:null,notes:'',status:'backlog',scheduledDate:null},
   {id:'chr05',title:'Chat to Cristina',category:'Chores',priority:'Normal',duration:0.5,deadline:null,notes:'',status:'backlog',scheduledDate:null},
   {id:'chr06',title:'Change car insurance',category:'Chores',priority:'Normal',duration:1,deadline:null,notes:'',status:'backlog',scheduledDate:null},
-  {id:'hlt01',title:'Castor oil honey lemon',category:'Health',priority:'Recurring',duration:0.25,deadline:null,notes:'Daily',status:'backlog',scheduledDate:null},
+  {id:'hlt01',title:'Castor oil honey lemon',category:'Health',priority:'Normal',duration:0.25,deadline:null,notes:'',status:'backlog',scheduledDate:null,recurrence:{type:'daily'}},
   {id:'mkt06',title:'Bank holidays check',category:'Markets',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
   {id:'mkt07',title:'Write code by hand for flow',category:'Markets',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
   {id:'mkt08',title:'Run live CV',category:'Markets',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
@@ -900,7 +897,7 @@ const DEFAULT_TASKS = [
   {id:'cd19',title:'Change car insurance',category:'Chores Desk',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
   {id:'cd20',title:'Check diary',category:'Chores Desk',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
   {id:'cd21',title:'Dojo training',category:'Chores Desk',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
-  {id:'cd22',title:'Groceries list',category:'Chores Desk',priority:'Recurring',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
+  {id:'cd22',title:'Groceries list',category:'Chores Desk',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null,recurrence:{type:'weekly',days:[5]}},
   {id:'cd23',title:'Read Makro documents',category:'Chores Desk',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
   {id:'cd24',title:'Read understand Claude Code',category:'Chores Desk',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
   {id:'cd25',title:'Give Dojo points cleaning washing training',category:'Chores Desk',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
@@ -996,7 +993,7 @@ const DEFAULT_TASKS = [
 
 let tasks = JSON.parse(localStorage.getItem('taskDataJson') || 'null') || JSON.parse(localStorage.getItem('tasks') || 'null');
 if (!tasks || tasks.length === 0) { tasks = DEFAULT_TASKS; }
-tasks.forEach(t => { if (t.priority === 'Recurring' && !t.recurrence) t.recurrence = { type: 'daily' }; });
+tasks.forEach(t => { if (t.priority === 'Recurring') { if (!t.recurrence) t.recurrence = { type: 'daily' }; t.priority = 'Normal'; } });
 localStorage.setItem('tasks', JSON.stringify(tasks));
 let editingTaskId = null;
 let preAutoScheduleSnapshot = null;
@@ -1133,7 +1130,7 @@ function confirmDone(id) {
   const t = tasks.find(x => x.id === id);
   if (!t) return;
   // Recurring tasks without budget: use markDoneToday directly (no logging needed)
-  if ((t.recurrence || t.priority === 'Recurring') && !(t.totalHours && t.totalHours > 0)) {
+  if (t.recurrence && !(t.totalHours && t.totalHours > 0)) {
     markDoneToday(id); return;
   }
   // Check subtasks first
@@ -1180,7 +1177,7 @@ function markDone(id, actualHours, completedDateStr) {
       t.status = 'backlog';
       showStatus(`Session done: ${t.hoursDone}/${t.totalHours}h — will reschedule`);
     }
-  } else if (t.recurrence || t.priority === 'Recurring') {
+  } else if (t.recurrence) {
     t.lastCompletedDate = getLocalDateStr();
     t.scheduledDate = null;
     t.scheduledDates = [];
@@ -1756,7 +1753,7 @@ function autoSchedule() {
   // Split tasks carry their remaining hours to the next eligible day in the same slot.
   const slotUsage = {};
   const remaining = {};
-  function isTrulyRecurring(t) { return !!(t.recurrence) || t.priority === 'Recurring'; }
+  function isTrulyRecurring(t) { return !!(t.recurrence); }
   function isBudgetTask(t) { return !isTrulyRecurring(t) && t.totalHours && t.totalHours > (t.hoursDone || 0); }
   schedulable.forEach(t => {
     if (isTrulyRecurring(t)) return;
@@ -2116,7 +2113,7 @@ function tlDrop(e, targetId) {
 function renderTaskList() {
   const TIER_LABEL = ['','T1','T2','T3','T4'];
   const TIER_CLASS = ['','tier-1','tier-2','tier-3','tier-4'];
-  const TIER_DESC  = ['','Deadline + Urgent/Soon (schedules first)','Deadline, Normal/Recurring','Urgent/Soon, no deadline','Normal/Recurring, no deadline'];
+  const TIER_DESC  = ['','Deadline + Urgent/Soon (schedules first)','Deadline, Normal','Urgent/Soon, no deadline','Normal, no deadline'];
 
   // Search + filter
   const filterSel = document.getElementById('tasklistFilter');
@@ -2150,7 +2147,7 @@ function renderTaskList() {
   function renderTaskRow(t, tp) {
     const isListOnly = LIST_ONLY.includes(t.category);
     const noHrs = (!isListOnly && (!t.duration || t.duration === 0)) ? ' no-hrs-row' : '';
-    const priOpts = ['Normal','Urgent','Soon','Recurring'].map(p => `<option${p===t.priority?' selected':''}>${p}</option>`).join('');
+    const priOpts = ['Normal','Urgent','Soon'].map(p => `<option${p===t.priority?' selected':''}>${p}</option>`).join('');
     const isEng = t.category === 'Engineering';
     const wtOpts = isEng ? ['Project Work','R&D','Admin','Personal Dev'].map(w => `<option${w===t.workType?' selected':''}>${w}</option>`).join('') : '';
     const hrsCell = isListOnly ? '<td style="color:var(--text-dim);font-size:0.65rem">&#8211;</td>' : `<td><input type="number" value="${t.duration||0}" min="0" step="0.25" onchange="listUpdate('${t.id}','duration',parseFloat(this.value)||0)"></td>`;
@@ -2214,7 +2211,7 @@ ${hrsCell}
 <td><span class="tier-badge ${TIER_CLASS2[tp.tier]}">${TIER_LABEL[tp.tier]}</span></td>
 <td><span class="tier-pos">${tp.pos}</span></td>
 <td><input value="${t.title.replace(/"/g,'&quot;').replace(/</g,'&lt;')}" onchange="listUpdate('${t.id}','title',this.value)"></td>
-<td><select onchange="listUpdate('${t.id}','priority',this.value)">${['Normal','Urgent','Soon','Recurring'].map(p=>`<option${p===t.priority?' selected':''}>${p}</option>`).join('')}</select></td>
+<td><select onchange="listUpdate('${t.id}','priority',this.value)">${['Normal','Urgent','Soon'].map(p=>`<option${p===t.priority?' selected':''}>${p}</option>`).join('')}</select></td>
 <td style="color:var(--text-dim);font-size:0.65rem">${t.category}</td>
 <td><input type="number" value="${t.duration||0}" min="0" step="0.25" onchange="listUpdate('${t.id}','duration',parseFloat(this.value)||0)"></td>
 <td><input type="date" value="${t.deadline||''}" onchange="listUpdate('${t.id}','deadline',this.value||null)"></td>
@@ -2398,7 +2395,7 @@ function showIncompleteModal(items) {
         <input type="number" min="0.25" step="0.25" value="" placeholder="0" style="width:60px;padding:4px 6px;border-radius:4px;border:1px solid rgba(255,255,255,0.15);background:var(--surface);color:var(--text);font-size:0.8rem" id="incDur${i}">
         <label style="font-size:0.7rem;color:var(--text-dim)">Priority:</label>
         <select style="padding:4px 6px;border-radius:4px;border:1px solid rgba(255,255,255,0.15);background:var(--surface);color:var(--text);font-size:0.75rem" id="incPri${i}">
-          <option${t.priority==='Normal'?' selected':''}>Normal</option><option${t.priority==='Urgent'?' selected':''}>Urgent</option><option${t.priority==='Soon'?' selected':''}>Soon</option><option${t.priority==='Recurring'?' selected':''}>Recurring</option>
+          <option${t.priority==='Normal'?' selected':''}>Normal</option><option${t.priority==='Urgent'?' selected':''}>Urgent</option><option${t.priority==='Soon'?' selected':''}>Soon</option>
         </select>
         <button onclick="incSave(${i},'${t.id}')" style="padding:4px 10px;border-radius:4px;font-size:0.7rem;background:rgba(16,185,129,0.25);color:#10b981;border:none;cursor:pointer;font-weight:600">Save</button>
         <button onclick="incSkip(${i})" style="padding:4px 10px;border-radius:4px;font-size:0.7rem;background:rgba(255,255,255,0.08);color:var(--text-dim);border:none;cursor:pointer">Skip</button>
