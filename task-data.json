@@ -128,7 +128,10 @@
       "2026-07-09": 3
     },
     "scheduledSlotName": "Engineering",
-    "sortOrder": -1
+    "sortOrder": -1,
+    "subtasks": [],
+    "totalHours": 0,
+    "hoursDone": 0
   },
   {
     "id": "eng04",
