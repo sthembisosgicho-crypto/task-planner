@@ -477,7 +477,7 @@ input, select, textarea { font-family: inherit; }
 <!-- Main -->
 <div class="main-content">
   <div class="app-header">
-    <h1>Task Scheduler <span style="font-size:0.6rem;font-weight:400;color:var(--text-dim);vertical-align:middle">v54</span></h1>
+    <h1>Task Scheduler <span style="font-size:0.6rem;font-weight:400;color:var(--text-dim);vertical-align:middle">v55</span></h1>
     <div class="header-actions">
       <button class="btn-primary" id="addTaskBtn">+ Add Task</button>
       <button class="btn-secondary" id="autoScheduleBtn">Auto-Schedule</button>
@@ -675,6 +675,7 @@ input, select, textarea { font-family: inherit; }
   <button id="mHamAutoSchedule">&#9654; Auto-Schedule</button>
   <button id="mHamUndo">&#8635; Undo</button>
   <button id="mHamBackups">&#128190; Backups</button>
+  <button id="mHamSlots">&#9881; Slot Settings</button>
   <button id="mHamExport">&#8595; Export JSON</button>
   <button id="mHamGhSync">&#8635; GitHub Sync</button>
   <button id="mHamInstall" style="display:none;color:#a78bfa">&#8659; Install App</button>
@@ -2317,22 +2318,29 @@ function renderSlotSettings() {
   const slots = _slotTab === 'weekday' ? WEEKDAY_SLOTS : WEEKEND_SLOTS;
   const list = document.getElementById('slotSettingsList');
   list.innerHTML = slots.map((slot, i) => `
-    <div style="background:var(--surface2);border-radius:var(--radius);padding:10px 12px;margin-bottom:8px">
-      <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px;flex-wrap:wrap">
-        <input value="${slot.name}" placeholder="Slot name" style="flex:1;min-width:100px;font-weight:600"
+    <div style="background:var(--surface2);border-radius:var(--radius);padding:12px;margin-bottom:8px">
+      <div style="display:flex;gap:8px;align-items:center;margin-bottom:10px;flex-wrap:wrap">
+        <input value="${slot.name}" placeholder="Slot name" style="flex:1;min-width:120px;font-weight:600;font-size:0.9rem;padding:8px 10px;min-height:40px"
           onchange="slotUpdate(${i},'name',this.value)">
-        <label style="font-size:0.75rem;color:var(--text-dim)">From</label>
-        <input type="number" value="${slot.start}" min="0" max="24" step="0.5" style="width:60px"
-          onchange="slotUpdate(${i},'start',parseFloat(this.value))">
-        <label style="font-size:0.75rem;color:var(--text-dim)">To</label>
-        <input type="number" value="${slot.end}" min="0" max="24" step="0.5" style="width:60px"
-          onchange="slotUpdate(${i},'end',parseFloat(this.value))">
-        <button onclick="deleteSlot(${i})" style="background:none;border:none;color:#f87171;cursor:pointer;font-size:1rem;padding:0 4px" title="Delete slot">&#10005;</button>
+        <button onclick="deleteSlot(${i})" style="background:none;border:1px solid #f87171;border-radius:var(--radius);color:#f87171;cursor:pointer;font-size:0.85rem;padding:8px 12px;min-height:40px;white-space:nowrap">&#10005; Delete</button>
       </div>
-      <div style="font-size:0.72rem;color:var(--text-dim);margin-bottom:4px">Categories</div>
-      <div style="display:flex;flex-wrap:wrap;gap:6px">
-        ${CATEGORIES.map(cat => `<label style="font-size:0.75rem;display:flex;align-items:center;gap:3px">
-          <input type="checkbox" ${slot.categories.includes(cat) ? 'checked' : ''}
+      <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:10px">
+        <div style="display:flex;align-items:center;gap:6px">
+          <label style="font-size:0.75rem;color:var(--text-dim);white-space:nowrap">From (h)</label>
+          <input type="number" value="${slot.start}" min="0" max="24" step="0.5" style="width:70px;padding:8px;min-height:40px;font-size:0.9rem"
+            onchange="slotUpdate(${i},'start',parseFloat(this.value))">
+        </div>
+        <div style="display:flex;align-items:center;gap:6px">
+          <label style="font-size:0.75rem;color:var(--text-dim);white-space:nowrap">To (h)</label>
+          <input type="number" value="${slot.end}" min="0" max="24" step="0.5" style="width:70px;padding:8px;min-height:40px;font-size:0.9rem"
+            onchange="slotUpdate(${i},'end',parseFloat(this.value))">
+        </div>
+        <span style="font-size:0.72rem;color:var(--text-dim)">${formatTime(slot.start)} – ${formatTime(slot.end)}</span>
+      </div>
+      <div style="font-size:0.72rem;color:var(--text-dim);margin-bottom:6px">Categories</div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px">
+        ${CATEGORIES.map(cat => `<label style="font-size:0.8rem;display:flex;align-items:center;gap:5px;min-height:32px;padding:2px 0">
+          <input type="checkbox" style="width:18px;height:18px" ${slot.categories.includes(cat) ? 'checked' : ''}
             onchange="slotToggleCat(${i},'${cat}',this.checked)"> ${cat}
         </label>`).join('')}
       </div>
@@ -2676,6 +2684,7 @@ document.getElementById('mHamUndo').addEventListener('click', () => _hamDo(() =>
   saveTasks(); renderAll(); showStatus('Schedule undone');
 }));
 document.getElementById('mHamBackups').addEventListener('click', () => _hamDo(openBackups));
+document.getElementById('mHamSlots').addEventListener('click', () => _hamDo(openSlotSettings));
 document.getElementById('mHamExport').addEventListener('click', () => _hamDo(() => document.getElementById('exportBtn').click()));
 
 // Re-render on resize to swap between mobile/desktop modes
