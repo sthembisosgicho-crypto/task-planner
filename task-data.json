@@ -4665,14 +4665,17 @@
     "title": "Linkedin application",
     "category": "Markets",
     "priority": "Soon",
-    "duration": 0,
+    "duration": 2,
     "deadline": null,
     "notes": "",
     "status": "backlog",
     "scheduledDate": null,
     "subtasks": [],
     "totalHours": 0,
-    "hoursDone": 0
+    "hoursDone": 0,
+    "predecessors": [
+      "mkt05"
+    ]
   },
   {
     "id": "mrfl9nsspelwx",
