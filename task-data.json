@@ -2142,7 +2142,7 @@
     "title": "Give Dojo points cleaning washing training",
     "category": "Chores Desk",
     "priority": "Normal",
-    "duration": 1,
+    "duration": 0.25,
     "deadline": null,
     "notes": "",
     "status": "thisweek",
@@ -2156,7 +2156,16 @@
       "2026-08-07": 0.75,
       "2026-08-10": 0.25
     },
-    "scheduledSlotName": "Homework"
+    "scheduledSlotName": "Homework",
+    "subtasks": [],
+    "totalHours": 0,
+    "hoursDone": 0,
+    "recurrence": {
+      "type": "weekly",
+      "days": [
+        6
+      ]
+    }
   },
   {
     "id": "cd26",
