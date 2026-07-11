@@ -1513,7 +1513,6 @@ function openModal(id) {
   // Show promote button only if task is a sub-task (has parentId)
   document.getElementById('mPromoteBtn').style.display = t.parentId ? 'inline-block' : 'none';
   updateRecurInfo();
-  toggleWorkType();
   renderChecklist();
   document.getElementById('taskModal').classList.add('active');
 }
