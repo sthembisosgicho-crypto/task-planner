@@ -5032,5 +5032,33 @@
       "2026-08-26": 0.5
     },
     "scheduledSlotName": "Homework"
+  },
+  {
+    "id": "mrjitnxy785tn",
+    "title": "New Task",
+    "category": "Engineering",
+    "priority": "Normal",
+    "duration": 0,
+    "deadline": null,
+    "notes": "",
+    "workType": "Project Work",
+    "status": "backlog",
+    "scheduledDate": null,
+    "subtasks": []
+  },
+  {
+    "id": "mrjiuowrzjzh3",
+    "title": "QA/QC Memo sort",
+    "category": "Engineering",
+    "priority": "Normal",
+    "duration": 0.5,
+    "deadline": "2026-07-16",
+    "notes": "",
+    "workType": "Project Work",
+    "status": "backlog",
+    "scheduledDate": null,
+    "subtasks": [],
+    "totalHours": 0,
+    "hoursDone": 0
   }
 ]
