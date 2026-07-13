@@ -4477,7 +4477,7 @@
     "deadline": null,
     "notes": "",
     "workType": "Project Work",
-    "status": "thisweek",
+    "status": "done",
     "scheduledDate": "2026-07-23",
     "subtasks": [],
     "totalHours": 0,
@@ -4488,7 +4488,9 @@
     "scheduledSessionHours": {
       "2026-07-23": 0.25
     },
-    "scheduledSlotName": "Engineering"
+    "scheduledSlotName": "Engineering",
+    "completedDate": "2026-07-09T10:00:00.000Z",
+    "actualHours": 0.25
   },
   {
     "id": "mrdqs6qr6sl8z",
@@ -4715,12 +4717,11 @@
   {
     "id": "mrflpdxzropaz",
     "title": "Respond and apply to save jobs and linkedin msg respond",
-    "category": "Engineering",
+    "category": "Chores Desk",
     "priority": "Normal",
     "duration": 1,
     "deadline": null,
     "notes": "",
-    "workType": "Project Work",
     "status": "thisweek",
     "scheduledDate": "2026-07-23",
     "subtasks": [],
@@ -4796,26 +4797,6 @@
       "2026-08-26": 0.25
     },
     "scheduledSlotName": "Homework"
-  },
-  {
-    "id": "mrfrnh6tjsc0f",
-    "title": "New Task",
-    "category": "Engineering",
-    "priority": "Normal",
-    "duration": 1,
-    "deadline": null,
-    "notes": "",
-    "workType": "Project Work",
-    "status": "thisweek",
-    "scheduledDate": "2026-07-23",
-    "subtasks": [],
-    "scheduledDates": [
-      "2026-07-23"
-    ],
-    "scheduledSessionHours": {
-      "2026-07-23": 1
-    },
-    "scheduledSlotName": "Engineering"
   },
   {
     "id": "mrfsetvtshrcs",
