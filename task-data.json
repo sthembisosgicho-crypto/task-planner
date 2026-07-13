@@ -4323,7 +4323,7 @@
     "deadline": null,
     "notes": "",
     "workType": "Admin",
-    "status": "thisweek",
+    "status": "done",
     "scheduledDate": "2026-08-21",
     "subtasks": [],
     "totalHours": 0,
@@ -4334,7 +4334,9 @@
     "scheduledSessionHours": {
       "2026-08-21": 1
     },
-    "scheduledSlotName": "Engineering"
+    "scheduledSlotName": "Engineering",
+    "completedDate": "2026-07-10T10:00:00.000Z",
+    "actualHours": 1
   },
   {
     "id": "mrdqh6astttsu",
