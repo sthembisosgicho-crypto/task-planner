@@ -28,8 +28,8 @@
     "deadline": "2026-06-22",
     "notes": "",
     "workType": "Project Work",
-    "status": "thisweek",
-    "scheduledDate": "2026-07-13",
+    "status": "backlog",
+    "scheduledDate": null,
     "subtasks": [
       {
         "id": "eng02s1",
@@ -109,7 +109,7 @@
       "2026-07-14"
     ],
     "totalHours": 8,
-    "hoursDone": 0,
+    "hoursDone": 4,
     "scheduledSessionHours": {
       "2026-07-13": 4,
       "2026-07-14": 4
@@ -4710,7 +4710,7 @@
     "duration": 1,
     "deadline": "2026-07-11",
     "notes": "",
-    "status": "done",
+    "status": "thisweek",
     "scheduledDate": "2026-07-13",
     "subtasks": [],
     "totalHours": 0,
@@ -4721,9 +4721,7 @@
     "scheduledSessionHours": {
       "2026-07-13": 1
     },
-    "scheduledSlotName": "Homework",
-    "completedDate": "2026-07-13T10:00:00.000Z",
-    "actualHours": 0.5
+    "scheduledSlotName": "Homework"
   },
   {
     "id": "mrfo7s5tz00e5",
