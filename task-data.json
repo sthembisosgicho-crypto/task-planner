@@ -2974,7 +2974,7 @@
       {
         "id": "eng22s1",
         "title": "Budget tracker for personal hours",
-        "done": false,
+        "done": true,
         "duration": 0,
         "priority": "Normal",
         "deadline": "2026-06-22",
@@ -2983,7 +2983,7 @@
       {
         "id": "eng22s2",
         "title": "SW3 1.4-3.4m starter wall toe missing sample",
-        "done": false,
+        "done": true,
         "duration": 0,
         "priority": "Normal",
         "deadline": null,
