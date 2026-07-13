@@ -612,12 +612,10 @@
     "duration": 3,
     "deadline": null,
     "notes": "",
-    "status": "today",
-    "scheduledDate": "2026-07-11",
+    "status": "backlog",
+    "scheduledDate": null,
     "tierSortOrder": 11,
-    "scheduledDates": [
-      "2026-07-11"
-    ],
+    "scheduledDates": [],
     "sortOrder": -1,
     "scheduledSessionHours": {
       "2026-07-11": 3
@@ -632,12 +630,9 @@
     "duration": 2,
     "deadline": null,
     "notes": "",
-    "status": "today",
-    "scheduledDate": "2026-07-11",
-    "scheduledDates": [
-      "2026-07-11",
-      "2026-07-12"
-    ],
+    "status": "backlog",
+    "scheduledDate": null,
+    "scheduledDates": [],
     "tierSortOrder": 12,
     "sortOrder": -1,
     "scheduledSessionHours": {
@@ -654,16 +649,15 @@
     "duration": 1,
     "deadline": null,
     "notes": "",
-    "status": "thisweek",
-    "scheduledDate": "2026-07-12",
+    "status": "backlog",
+    "scheduledDate": null,
     "tierSortOrder": 13,
-    "scheduledDates": [
-      "2026-07-12"
-    ],
+    "scheduledDates": [],
     "scheduledSessionHours": {
       "2026-07-12": 1
     },
-    "scheduledSlotName": "Side Hustle"
+    "scheduledSlotName": "Side Hustle",
+    "sortOrder": -1
   },
   {
     "id": "mkt04",
@@ -673,16 +667,15 @@
     "duration": 1,
     "deadline": null,
     "notes": "",
-    "status": "thisweek",
-    "scheduledDate": "2026-07-12",
+    "status": "backlog",
+    "scheduledDate": null,
     "tierSortOrder": 14,
-    "scheduledDates": [
-      "2026-07-12"
-    ],
+    "scheduledDates": [],
     "scheduledSessionHours": {
       "2026-07-12": 1
     },
-    "scheduledSlotName": "Side Hustle"
+    "scheduledSlotName": "Side Hustle",
+    "sortOrder": -1
   },
   {
     "id": "mkt05",
@@ -692,16 +685,15 @@
     "duration": 1,
     "deadline": null,
     "notes": "",
-    "status": "thisweek",
-    "scheduledDate": "2026-07-12",
+    "status": "backlog",
+    "scheduledDate": null,
     "tierSortOrder": 15,
-    "scheduledDates": [
-      "2026-07-12"
-    ],
+    "scheduledDates": [],
     "scheduledSessionHours": {
       "2026-07-12": 1
     },
-    "scheduledSlotName": "Side Hustle"
+    "scheduledSlotName": "Side Hustle",
+    "sortOrder": -1
   },
   {
     "id": "chr01",
@@ -2132,16 +2124,15 @@
     "duration": 1,
     "deadline": null,
     "notes": "",
-    "status": "today",
-    "scheduledDate": "2026-07-11",
+    "status": "backlog",
+    "scheduledDate": null,
     "tierSortOrder": 75,
-    "scheduledDates": [
-      "2026-07-11"
-    ],
+    "scheduledDates": [],
     "scheduledSessionHours": {
       "2026-07-11": 1
     },
-    "scheduledSlotName": "Weekend Duties"
+    "scheduledSlotName": "Weekend Duties",
+    "sortOrder": -1
   },
   {
     "id": "hc02",
@@ -2151,16 +2142,15 @@
     "duration": 1,
     "deadline": null,
     "notes": "",
-    "status": "today",
-    "scheduledDate": "2026-07-11",
+    "status": "backlog",
+    "scheduledDate": null,
     "tierSortOrder": 76,
-    "scheduledDates": [
-      "2026-07-11"
-    ],
+    "scheduledDates": [],
     "scheduledSessionHours": {
       "2026-07-11": 1
     },
-    "scheduledSlotName": "Weekend Duties"
+    "scheduledSlotName": "Weekend Duties",
+    "sortOrder": -1
   },
   {
     "id": "hc03",
@@ -2170,16 +2160,15 @@
     "duration": 1.5,
     "deadline": null,
     "notes": "",
-    "status": "thisweek",
-    "scheduledDate": "2026-07-12",
+    "status": "backlog",
+    "scheduledDate": null,
     "tierSortOrder": 77,
-    "scheduledDates": [
-      "2026-07-12"
-    ],
+    "scheduledDates": [],
     "scheduledSessionHours": {
       "2026-07-12": 1.5
     },
-    "scheduledSlotName": "Weekend Duties"
+    "scheduledSlotName": "Weekend Duties",
+    "sortOrder": -1
   },
   {
     "id": "hc04",
@@ -2189,18 +2178,16 @@
     "duration": 2,
     "deadline": null,
     "notes": "",
-    "status": "thisweek",
-    "scheduledDate": "2026-07-12",
+    "status": "backlog",
+    "scheduledDate": null,
     "tierSortOrder": 78,
-    "scheduledDates": [
-      "2026-07-12",
-      "2026-07-18"
-    ],
+    "scheduledDates": [],
     "scheduledSessionHours": {
       "2026-07-12": 0.5,
       "2026-07-18": 1.5
     },
-    "scheduledSlotName": "Weekend Duties"
+    "scheduledSlotName": "Weekend Duties",
+    "sortOrder": -1
   },
   {
     "id": "hc05",
@@ -2621,12 +2608,10 @@
     "duration": 4,
     "deadline": null,
     "notes": "",
-    "status": "today",
-    "scheduledDate": "2026-07-11",
+    "status": "backlog",
+    "scheduledDate": null,
     "tierSortOrder": 107,
-    "scheduledDates": [
-      "2026-07-11"
-    ],
+    "scheduledDates": [],
     "scheduledSessionHours": {
       "2026-07-11": 4
     },
@@ -2641,13 +2626,10 @@
     "duration": 3,
     "deadline": null,
     "notes": "",
-    "status": "today",
-    "scheduledDate": "2026-07-11",
+    "status": "backlog",
+    "scheduledDate": null,
     "tierSortOrder": 108,
-    "scheduledDates": [
-      "2026-07-11",
-      "2026-07-12"
-    ],
+    "scheduledDates": [],
     "scheduledSessionHours": {
       "2026-07-11": 2,
       "2026-07-12": 1
@@ -2663,16 +2645,15 @@
     "duration": 3,
     "deadline": null,
     "notes": "",
-    "status": "thisweek",
-    "scheduledDate": "2026-07-12",
+    "status": "backlog",
+    "scheduledDate": null,
     "tierSortOrder": 109,
-    "scheduledDates": [
-      "2026-07-12"
-    ],
+    "scheduledDates": [],
     "scheduledSessionHours": {
       "2026-07-12": 3
     },
-    "scheduledSlotName": "Shops Errands"
+    "scheduledSlotName": "Shops Errands",
+    "sortOrder": -1
   },
   {
     "id": "er04",
@@ -2682,18 +2663,16 @@
     "duration": 4,
     "deadline": null,
     "notes": "",
-    "status": "thisweek",
-    "scheduledDate": "2026-07-12",
+    "status": "backlog",
+    "scheduledDate": null,
     "tierSortOrder": 110,
-    "scheduledDates": [
-      "2026-07-12",
-      "2026-07-18"
-    ],
+    "scheduledDates": [],
     "scheduledSessionHours": {
       "2026-07-12": 2,
       "2026-07-18": 2
     },
-    "scheduledSlotName": "Shops Errands"
+    "scheduledSlotName": "Shops Errands",
+    "sortOrder": -1
   },
   {
     "id": "er05",
