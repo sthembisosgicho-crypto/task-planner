@@ -5095,5 +5095,25 @@
       "2026-07-16": 0.5
     },
     "scheduledSlotName": "Engineering"
+  },
+  {
+    "id": "mrfrnh6tjsc0f",
+    "title": "New Task",
+    "category": "Engineering",
+    "priority": "Normal",
+    "duration": 1,
+    "deadline": null,
+    "notes": "",
+    "workType": "Project Work",
+    "status": "thisweek",
+    "scheduledDate": "2026-07-28",
+    "subtasks": [],
+    "scheduledDates": [
+      "2026-07-28"
+    ],
+    "scheduledSessionHours": {
+      "2026-07-28": 1
+    },
+    "scheduledSlotName": "Engineering"
   }
 ]
