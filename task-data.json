@@ -5090,5 +5090,20 @@
     "subtasks": [],
     "totalHours": 0,
     "hoursDone": 0
+  },
+  {
+    "id": "mrozclperx9ah",
+    "title": "Add a oppositing of predicessor on app",
+    "category": "Engineering",
+    "priority": "Urgent",
+    "duration": 0,
+    "deadline": null,
+    "notes": "",
+    "workType": "Project Work",
+    "status": "backlog",
+    "scheduledDate": null,
+    "subtasks": [],
+    "totalHours": 0,
+    "hoursDone": 0
   }
 ]
