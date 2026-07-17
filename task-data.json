@@ -5568,11 +5568,18 @@
     "deadline": null,
     "notes": "Must remain dated 06 June",
     "workType": "Project Work",
-    "status": "backlog",
-    "scheduledDate": null,
+    "status": "thisweek",
+    "scheduledDate": "2026-08-10",
     "subtasks": [],
     "totalHours": 0,
-    "hoursDone": 0
+    "hoursDone": 0,
+    "scheduledDates": [
+      "2026-08-10"
+    ],
+    "scheduledSessionHours": {
+      "2026-08-10": 2
+    },
+    "scheduledSlotName": "Engineering"
   },
   {
     "id": "mrp30uqv20ntd",
