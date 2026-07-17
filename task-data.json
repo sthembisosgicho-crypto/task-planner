@@ -5004,5 +5004,20 @@
     "subtasks": [],
     "totalHours": 0,
     "hoursDone": 0
+  },
+  {
+    "id": "mroyy3csxwdvb",
+    "title": "Watch ECSA Recording",
+    "category": "Engineering",
+    "priority": "Normal",
+    "duration": 2,
+    "deadline": null,
+    "notes": "",
+    "workType": "Personal Dev",
+    "status": "backlog",
+    "scheduledDate": null,
+    "subtasks": [],
+    "totalHours": 0,
+    "hoursDone": 0
   }
 ]
