@@ -5307,18 +5307,16 @@
     "hoursDone": 0
   },
   {
-    "id": "mrp2rkrzwy1w0",
-    "title": "Call Pieter on PWP + check Stand pipes",
+    "id": "mrp2v5nxiej5x",
+    "title": "New Task",
     "category": "Engineering",
-    "priority": "Urgent",
-    "duration": 2,
+    "priority": "Normal",
+    "duration": 0,
     "deadline": null,
     "notes": "",
     "workType": "Project Work",
     "status": "backlog",
     "scheduledDate": null,
-    "subtasks": [],
-    "totalHours": 0,
-    "hoursDone": 0
+    "subtasks": []
   }
 ]
