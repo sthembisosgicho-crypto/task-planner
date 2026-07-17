@@ -5356,7 +5356,7 @@
     "priority": "Normal",
     "duration": 0,
     "deadline": null,
-    "notes": "Get Kat to include vane shear on report\n\nGet Kayla to include seimic data:\n\n-check 1.02mm\n- add 30th percentile \n-Write on seimic data \n--use Maseve structure",
+    "notes": "Get Kat to include vane shear on report\n\nGet Kayla to include seimic data:\n\n-check 1.02mm\n- add 30th percentile \n-Write on seimic data \n--use Maseve structure\n\nLiq suc-(100 , 0.5 , >0.5)",
     "workType": "Project Work",
     "status": "backlog",
     "scheduledDate": null,
