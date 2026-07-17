@@ -5033,5 +5033,48 @@
     "subtasks": [],
     "totalHours": 0,
     "hoursDone": 0
+  },
+  {
+    "id": "mroz6zzcw6uml",
+    "title": "Tooth Removal",
+    "category": "Errands",
+    "priority": "Urgent",
+    "duration": 4,
+    "deadline": null,
+    "notes": "",
+    "status": "backlog",
+    "scheduledDate": null,
+    "subtasks": [],
+    "totalHours": 0,
+    "hoursDone": 0
+  },
+  {
+    "id": "mroz81qw6kspw",
+    "title": "ECSA Presentation",
+    "category": "Errands",
+    "priority": "Urgent",
+    "duration": 4,
+    "deadline": "2026-07-24",
+    "notes": "",
+    "status": "backlog",
+    "scheduledDate": null,
+    "subtasks": [],
+    "totalHours": 0,
+    "hoursDone": 0
+  },
+  {
+    "id": "mroz8yzshqshz",
+    "title": "ECSA follow up",
+    "category": "Engineering",
+    "priority": "Urgent",
+    "duration": 1,
+    "deadline": null,
+    "notes": "Ask HR to assist",
+    "workType": "Personal Dev",
+    "status": "backlog",
+    "scheduledDate": null,
+    "subtasks": [],
+    "totalHours": 0,
+    "hoursDone": 0
   }
 ]
