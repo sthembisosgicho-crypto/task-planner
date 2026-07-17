@@ -5564,7 +5564,7 @@
     "title": "Geotech Report",
     "category": "Engineering",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 2,
     "deadline": null,
     "notes": "Must remain dated 06 June",
     "workType": "Project Work",
