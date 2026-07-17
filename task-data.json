@@ -5575,19 +5575,6 @@
     "scheduledSlotName": "Engineering"
   },
   {
-    "id": "mrp3bk91hwi8a",
-    "title": "New Task",
-    "category": "Engineering",
-    "priority": "Normal",
-    "duration": 0,
-    "deadline": null,
-    "notes": "",
-    "workType": "Project Work",
-    "status": "backlog",
-    "scheduledDate": null,
-    "subtasks": []
-  },
-  {
     "id": "mrp3jxqamvmjb",
     "title": "Invoice UCT",
     "category": "Engineering",
@@ -5601,19 +5588,6 @@
     "subtasks": [],
     "totalHours": 0,
     "hoursDone": 0
-  },
-  {
-    "id": "mrp3rbgtj7kl4",
-    "title": "New Task",
-    "category": "Engineering",
-    "priority": "Normal",
-    "duration": 0,
-    "deadline": null,
-    "notes": "",
-    "workType": "Project Work",
-    "status": "backlog",
-    "scheduledDate": null,
-    "subtasks": []
   },
   {
     "id": "mrp3sc885g3sg",
@@ -5662,32 +5636,6 @@
     "scheduledSlotName": "Engineering"
   },
   {
-    "id": "mrp3uag36g9mu",
-    "title": "New Task",
-    "category": "Engineering",
-    "priority": "Normal",
-    "duration": 0,
-    "deadline": null,
-    "notes": "",
-    "workType": "Project Work",
-    "status": "backlog",
-    "scheduledDate": null,
-    "subtasks": []
-  },
-  {
-    "id": "mrp3uic32073a",
-    "title": "New Task",
-    "category": "Engineering",
-    "priority": "Normal",
-    "duration": 0,
-    "deadline": null,
-    "notes": "",
-    "workType": "Project Work",
-    "status": "backlog",
-    "scheduledDate": null,
-    "subtasks": []
-  },
-  {
     "id": "mrp3vmqrnnk32",
     "title": "Check Rate22 vs engineer price",
     "category": "Engineering",
@@ -5708,19 +5656,6 @@
       "2026-08-03": 1
     },
     "scheduledSlotName": "Engineering"
-  },
-  {
-    "id": "mrp89lzdb12rz",
-    "title": "New Task",
-    "category": "Engineering",
-    "priority": "Normal",
-    "duration": 0,
-    "deadline": null,
-    "notes": "",
-    "workType": "Project Work",
-    "status": "backlog",
-    "scheduledDate": null,
-    "subtasks": []
   },
   {
     "id": "mrp8eeun0l46w",
