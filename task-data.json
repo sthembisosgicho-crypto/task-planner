@@ -5247,5 +5247,18 @@
     "status": "backlog",
     "scheduledDate": null,
     "subtasks": []
+  },
+  {
+    "id": "mrp1uhp22s84i",
+    "title": "New Task",
+    "category": "Engineering",
+    "priority": "Normal",
+    "duration": 0,
+    "deadline": null,
+    "notes": "",
+    "workType": "Project Work",
+    "status": "backlog",
+    "scheduledDate": null,
+    "subtasks": []
   }
 ]
