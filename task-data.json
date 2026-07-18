@@ -5189,7 +5189,7 @@
   {
     "id": "mroz81qw6kspw",
     "title": "ECSA Presentation",
-    "category": "Errands",
+    "category": "Engineering",
     "priority": "Urgent",
     "duration": 4,
     "deadline": "2026-07-24",
@@ -5205,7 +5205,8 @@
     "scheduledSessionHours": {
       "2026-07-18": 4
     },
-    "scheduledSlotName": "Shops Errands"
+    "scheduledSlotName": "Shops Errands",
+    "workType": "Admin"
   },
   {
     "id": "mroz8yzshqshz",
