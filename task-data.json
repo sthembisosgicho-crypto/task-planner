@@ -2147,7 +2147,7 @@
     "scheduledSessionHours": {
       "2026-07-18": 1
     },
-    "scheduledSlotName": "Weekend Duties",
+    "scheduledSlotName": "Shops Errands",
     "sortOrder": -1
   },
   {
@@ -2162,14 +2162,12 @@
     "scheduledDate": "2026-07-18",
     "tierSortOrder": 76,
     "scheduledDates": [
-      "2026-07-18",
-      "2026-07-19"
+      "2026-07-18"
     ],
     "scheduledSessionHours": {
-      "2026-07-18": 0.5,
-      "2026-07-19": 0.5
+      "2026-07-18": 1
     },
-    "scheduledSlotName": "Weekend Duties",
+    "scheduledSlotName": "Shops Errands",
     "sortOrder": -1
   },
   {
@@ -2180,16 +2178,16 @@
     "duration": 1.5,
     "deadline": null,
     "notes": "",
-    "status": "thisweek",
-    "scheduledDate": "2026-07-19",
+    "status": "today",
+    "scheduledDate": "2026-07-18",
     "tierSortOrder": 77,
     "scheduledDates": [
-      "2026-07-19"
+      "2026-07-18"
     ],
     "scheduledSessionHours": {
-      "2026-07-19": 1.5
+      "2026-07-18": 1.5
     },
-    "scheduledSlotName": "Weekend Duties",
+    "scheduledSlotName": "Shops Errands",
     "sortOrder": -1
   },
   {
@@ -2200,16 +2198,16 @@
     "duration": 2,
     "deadline": null,
     "notes": "",
-    "status": "thisweek",
-    "scheduledDate": "2026-07-25",
+    "status": "today",
+    "scheduledDate": "2026-07-18",
     "tierSortOrder": 78,
     "scheduledDates": [
-      "2026-07-25"
+      "2026-07-18"
     ],
     "scheduledSessionHours": {
-      "2026-07-25": 2
+      "2026-07-18": 2
     },
-    "scheduledSlotName": "Weekend Duties",
+    "scheduledSlotName": "Shops Errands",
     "sortOrder": -1
   },
   {
@@ -2220,16 +2218,16 @@
     "duration": 3,
     "deadline": null,
     "notes": "",
-    "status": "thisweek",
-    "scheduledDate": "2026-07-26",
+    "status": "today",
+    "scheduledDate": "2026-07-18",
     "tierSortOrder": 79,
     "scheduledDates": [
-      "2026-07-26",
-      "2026-08-01"
+      "2026-07-18",
+      "2026-07-19"
     ],
     "scheduledSessionHours": {
-      "2026-07-26": 2,
-      "2026-08-01": 1
+      "2026-07-18": 2,
+      "2026-07-19": 1
     },
     "scheduledSlotName": "Weekend Duties"
   },
@@ -2242,17 +2240,15 @@
     "deadline": null,
     "notes": "",
     "status": "thisweek",
-    "scheduledDate": "2026-08-01",
+    "scheduledDate": "2026-07-19",
     "tierSortOrder": 80,
     "scheduledDates": [
-      "2026-08-01",
-      "2026-08-02"
+      "2026-07-19"
     ],
     "scheduledSessionHours": {
-      "2026-08-01": 1,
-      "2026-08-02": 2
+      "2026-07-19": 3
     },
-    "scheduledSlotName": "Weekend Duties"
+    "scheduledSlotName": "Shops Errands"
   },
   {
     "id": "hc07",
@@ -2263,15 +2259,15 @@
     "deadline": null,
     "notes": "",
     "status": "thisweek",
-    "scheduledDate": "2026-08-08",
+    "scheduledDate": "2026-07-19",
     "tierSortOrder": 81,
     "scheduledDates": [
-      "2026-08-08"
+      "2026-07-19"
     ],
     "scheduledSessionHours": {
-      "2026-08-08": 1
+      "2026-07-19": 1
     },
-    "scheduledSlotName": "Weekend Duties"
+    "scheduledSlotName": "Shops Errands"
   },
   {
     "id": "hc08",
@@ -2282,15 +2278,15 @@
     "deadline": null,
     "notes": "",
     "status": "thisweek",
-    "scheduledDate": "2026-08-08",
+    "scheduledDate": "2026-07-19",
     "tierSortOrder": 82,
     "scheduledDates": [
-      "2026-08-08"
+      "2026-07-19"
     ],
     "scheduledSessionHours": {
-      "2026-08-08": 1
+      "2026-07-19": 1
     },
-    "scheduledSlotName": "Weekend Duties"
+    "scheduledSlotName": "Shops Errands"
   },
   {
     "id": "hc09",
@@ -2301,13 +2297,13 @@
     "deadline": null,
     "notes": "",
     "status": "thisweek",
-    "scheduledDate": "2026-08-09",
+    "scheduledDate": "2026-07-19",
     "tierSortOrder": 83,
     "scheduledDates": [
-      "2026-08-09"
+      "2026-07-19"
     ],
     "scheduledSessionHours": {
-      "2026-08-09": 1
+      "2026-07-19": 1
     },
     "scheduledSlotName": "Weekend Duties"
   },
@@ -2320,13 +2316,13 @@
     "deadline": null,
     "notes": "",
     "status": "thisweek",
-    "scheduledDate": "2026-08-09",
+    "scheduledDate": "2026-07-19",
     "tierSortOrder": 84,
     "scheduledDates": [
-      "2026-08-09"
+      "2026-07-19"
     ],
     "scheduledSessionHours": {
-      "2026-08-09": 1
+      "2026-07-19": 1
     },
     "scheduledSlotName": "Weekend Duties"
   },
@@ -2339,15 +2335,15 @@
     "deadline": null,
     "notes": "",
     "status": "thisweek",
-    "scheduledDate": "2026-08-15",
+    "scheduledDate": "2026-07-25",
     "tierSortOrder": 85,
     "scheduledDates": [
-      "2026-08-15"
+      "2026-07-25"
     ],
     "scheduledSessionHours": {
-      "2026-08-15": 1
+      "2026-07-25": 1
     },
-    "scheduledSlotName": "Weekend Duties"
+    "scheduledSlotName": "Shops Errands"
   },
   {
     "id": "hc12",
@@ -2358,15 +2354,15 @@
     "deadline": null,
     "notes": "",
     "status": "thisweek",
-    "scheduledDate": "2026-08-15",
+    "scheduledDate": "2026-07-25",
     "tierSortOrder": 86,
     "scheduledDates": [
-      "2026-08-15"
+      "2026-07-25"
     ],
     "scheduledSessionHours": {
-      "2026-08-15": 0.25
+      "2026-07-25": 0.25
     },
-    "scheduledSlotName": "Weekend Duties"
+    "scheduledSlotName": "Shops Errands"
   },
   {
     "id": "hc13",
@@ -2377,15 +2373,15 @@
     "deadline": null,
     "notes": "",
     "status": "thisweek",
-    "scheduledDate": "2026-08-15",
+    "scheduledDate": "2026-07-25",
     "tierSortOrder": 87,
     "scheduledDates": [
-      "2026-08-15"
+      "2026-07-25"
     ],
     "scheduledSessionHours": {
-      "2026-08-15": 0.25
+      "2026-07-25": 0.25
     },
-    "scheduledSlotName": "Weekend Duties"
+    "scheduledSlotName": "Shops Errands"
   },
   {
     "id": "sp01",
@@ -2623,18 +2619,12 @@
     "duration": 4,
     "deadline": null,
     "notes": "",
-    "status": "today",
-    "scheduledDate": "2026-07-18",
+    "status": "backlog",
+    "scheduledDate": null,
     "tierSortOrder": 107,
-    "scheduledDates": [
-      "2026-07-18",
-      "2026-07-19"
-    ],
-    "scheduledSessionHours": {
-      "2026-07-18": 2,
-      "2026-07-19": 2
-    },
-    "scheduledSlotName": "Shops Errands",
+    "scheduledDates": [],
+    "scheduledSessionHours": {},
+    "scheduledSlotName": null,
     "sortOrder": -1
   },
   {
@@ -2645,16 +2635,12 @@
     "duration": 3,
     "deadline": null,
     "notes": "",
-    "status": "thisweek",
-    "scheduledDate": "2026-07-19",
+    "status": "backlog",
+    "scheduledDate": null,
     "tierSortOrder": 108,
-    "scheduledDates": [
-      "2026-07-19"
-    ],
-    "scheduledSessionHours": {
-      "2026-07-19": 3
-    },
-    "scheduledSlotName": "Shops Errands",
+    "scheduledDates": [],
+    "scheduledSessionHours": {},
+    "scheduledSlotName": null,
     "sortOrder": -1
   },
   {
@@ -2665,18 +2651,12 @@
     "duration": 3,
     "deadline": null,
     "notes": "",
-    "status": "thisweek",
-    "scheduledDate": "2026-07-19",
+    "status": "backlog",
+    "scheduledDate": null,
     "tierSortOrder": 109,
-    "scheduledDates": [
-      "2026-07-19",
-      "2026-07-25"
-    ],
-    "scheduledSessionHours": {
-      "2026-07-19": 1,
-      "2026-07-25": 2
-    },
-    "scheduledSlotName": "Shops Errands",
+    "scheduledDates": [],
+    "scheduledSessionHours": {},
+    "scheduledSlotName": null,
     "sortOrder": -1
   },
   {
@@ -2687,16 +2667,12 @@
     "duration": 4,
     "deadline": null,
     "notes": "",
-    "status": "thisweek",
-    "scheduledDate": "2026-07-25",
+    "status": "backlog",
+    "scheduledDate": null,
     "tierSortOrder": 110,
-    "scheduledDates": [
-      "2026-07-25"
-    ],
-    "scheduledSessionHours": {
-      "2026-07-25": 4
-    },
-    "scheduledSlotName": "Shops Errands",
+    "scheduledDates": [],
+    "scheduledSessionHours": {},
+    "scheduledSlotName": null,
     "sortOrder": -1
   },
   {
@@ -2707,16 +2683,12 @@
     "duration": 2,
     "deadline": null,
     "notes": "",
-    "status": "thisweek",
-    "scheduledDate": "2026-07-26",
+    "status": "backlog",
+    "scheduledDate": null,
     "tierSortOrder": 111,
-    "scheduledDates": [
-      "2026-07-26"
-    ],
-    "scheduledSessionHours": {
-      "2026-07-26": 2
-    },
-    "scheduledSlotName": "Shops Errands"
+    "scheduledDates": [],
+    "scheduledSessionHours": {},
+    "scheduledSlotName": null
   },
   {
     "id": "er06",
@@ -2726,16 +2698,12 @@
     "duration": 0.5,
     "deadline": null,
     "notes": "",
-    "status": "thisweek",
-    "scheduledDate": "2026-07-26",
+    "status": "backlog",
+    "scheduledDate": null,
     "tierSortOrder": 112,
-    "scheduledDates": [
-      "2026-07-26"
-    ],
-    "scheduledSessionHours": {
-      "2026-07-26": 0.5
-    },
-    "scheduledSlotName": "Shops Errands"
+    "scheduledDates": [],
+    "scheduledSessionHours": {},
+    "scheduledSlotName": null
   },
   {
     "id": "er07",
@@ -2745,16 +2713,12 @@
     "duration": 1,
     "deadline": null,
     "notes": "",
-    "status": "thisweek",
-    "scheduledDate": "2026-07-26",
+    "status": "backlog",
+    "scheduledDate": null,
     "tierSortOrder": 113,
-    "scheduledDates": [
-      "2026-07-26"
-    ],
-    "scheduledSessionHours": {
-      "2026-07-26": 1
-    },
-    "scheduledSlotName": "Shops Errands"
+    "scheduledDates": [],
+    "scheduledSessionHours": {},
+    "scheduledSlotName": null
   },
   {
     "id": "er08",
@@ -2764,18 +2728,12 @@
     "duration": 4,
     "deadline": null,
     "notes": "",
-    "status": "thisweek",
-    "scheduledDate": "2026-07-26",
+    "status": "backlog",
+    "scheduledDate": null,
     "tierSortOrder": 114,
-    "scheduledDates": [
-      "2026-07-26",
-      "2026-08-01"
-    ],
-    "scheduledSessionHours": {
-      "2026-07-26": 2.5,
-      "2026-08-01": 1.5
-    },
-    "scheduledSlotName": "Shops Errands"
+    "scheduledDates": [],
+    "scheduledSessionHours": {},
+    "scheduledSlotName": null
   },
   {
     "id": "er09",
@@ -2785,16 +2743,12 @@
     "duration": 4,
     "deadline": null,
     "notes": "",
-    "status": "thisweek",
-    "scheduledDate": "2026-08-01",
+    "status": "backlog",
+    "scheduledDate": null,
     "tierSortOrder": 115,
-    "scheduledDates": [
-      "2026-08-01"
-    ],
-    "scheduledSessionHours": {
-      "2026-08-01": 4
-    },
-    "scheduledSlotName": "Shops Errands"
+    "scheduledDates": [],
+    "scheduledSessionHours": {},
+    "scheduledSlotName": null
   },
   {
     "id": "er10",
@@ -2804,18 +2758,12 @@
     "duration": 1,
     "deadline": null,
     "notes": "",
-    "status": "thisweek",
-    "scheduledDate": "2026-08-01",
+    "status": "backlog",
+    "scheduledDate": null,
     "tierSortOrder": 116,
-    "scheduledDates": [
-      "2026-08-01",
-      "2026-08-02"
-    ],
-    "scheduledSessionHours": {
-      "2026-08-01": 0.5,
-      "2026-08-02": 0.5
-    },
-    "scheduledSlotName": "Shops Errands"
+    "scheduledDates": [],
+    "scheduledSessionHours": {},
+    "scheduledSlotName": null
   },
   {
     "id": "er11",
@@ -2825,16 +2773,12 @@
     "duration": 1,
     "deadline": null,
     "notes": "",
-    "status": "thisweek",
-    "scheduledDate": "2026-08-02",
+    "status": "backlog",
+    "scheduledDate": null,
     "tierSortOrder": 117,
-    "scheduledDates": [
-      "2026-08-02"
-    ],
-    "scheduledSessionHours": {
-      "2026-08-02": 1
-    },
-    "scheduledSlotName": "Shops Errands"
+    "scheduledDates": [],
+    "scheduledSessionHours": {},
+    "scheduledSlotName": null
   },
   {
     "id": "er12",
@@ -2844,16 +2788,12 @@
     "duration": 0.5,
     "deadline": null,
     "notes": "",
-    "status": "thisweek",
-    "scheduledDate": "2026-08-02",
+    "status": "backlog",
+    "scheduledDate": null,
     "tierSortOrder": 118,
-    "scheduledDates": [
-      "2026-08-02"
-    ],
-    "scheduledSessionHours": {
-      "2026-08-02": 0.5
-    },
-    "scheduledSlotName": "Shops Errands"
+    "scheduledDates": [],
+    "scheduledSessionHours": {},
+    "scheduledSlotName": null
   },
   {
     "id": "er13",
@@ -4817,17 +4757,17 @@
     "deadline": null,
     "notes": "",
     "status": "thisweek",
-    "scheduledDate": "2026-08-15",
+    "scheduledDate": "2026-07-25",
     "subtasks": [],
     "totalHours": 0,
     "hoursDone": 0,
     "scheduledDates": [
-      "2026-08-15"
+      "2026-07-25"
     ],
     "scheduledSessionHours": {
-      "2026-08-15": 0.25
+      "2026-07-25": 0.25
     },
-    "scheduledSlotName": "Weekend Duties"
+    "scheduledSlotName": "Shops Errands"
   },
   {
     "id": "mrfso47ncvpc8",
@@ -5041,19 +4981,17 @@
     "deadline": null,
     "notes": "Include wipes etc.",
     "status": "thisweek",
-    "scheduledDate": "2026-08-15",
+    "scheduledDate": "2026-07-25",
     "subtasks": [],
     "totalHours": 0,
     "hoursDone": 0,
     "scheduledDates": [
-      "2026-08-15",
-      "2026-08-16"
+      "2026-07-25"
     ],
     "scheduledSessionHours": {
-      "2026-08-15": 0.25,
-      "2026-08-16": 0.25
+      "2026-07-25": 0.5
     },
-    "scheduledSlotName": "Weekend Duties"
+    "scheduledSlotName": "Shops Errands"
   },
   {
     "id": "mrgnk7oxv5v98",
@@ -5175,18 +5113,14 @@
     "duration": 4,
     "deadline": null,
     "notes": "",
-    "status": "today",
-    "scheduledDate": "2026-07-18",
+    "status": "backlog",
+    "scheduledDate": null,
     "subtasks": [],
     "totalHours": 0,
     "hoursDone": 0,
-    "scheduledDates": [
-      "2026-07-18"
-    ],
-    "scheduledSessionHours": {
-      "2026-07-18": 4
-    },
-    "scheduledSlotName": "Shops Errands"
+    "scheduledDates": [],
+    "scheduledSessionHours": {},
+    "scheduledSlotName": null
   },
   {
     "id": "mroz81qw6kspw",
@@ -5382,7 +5316,7 @@
     "scheduledSessionHours": {
       "2026-07-18": 0.5
     },
-    "scheduledSlotName": "Weekend Duties",
+    "scheduledSlotName": "Shops Errands",
     "sortOrder": -1
   },
   {
