@@ -2388,18 +2388,6 @@
     "scheduledSlotName": "Weekend staff"
   },
   {
-    "id": "sp01",
-    "title": "Pots",
-    "category": "Shopping",
-    "priority": "Normal",
-    "duration": 0,
-    "deadline": null,
-    "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
-    "tierSortOrder": 88
-  },
-  {
     "id": "sp02",
     "title": "Calculator",
     "category": "Shopping",
@@ -2410,18 +2398,6 @@
     "status": "backlog",
     "scheduledDate": null,
     "tierSortOrder": 89
-  },
-  {
-    "id": "sp03",
-    "title": "Dojo App",
-    "category": "Shopping",
-    "priority": "Normal",
-    "duration": 0,
-    "deadline": null,
-    "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
-    "tierSortOrder": 90
   },
   {
     "id": "sp04",
