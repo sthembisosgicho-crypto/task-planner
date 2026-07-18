@@ -5775,5 +5775,18 @@
       "2026-08-10": 1
     },
     "scheduledSlotName": "Engineering"
+  },
+  {
+    "id": "mrq0f8kqud1cv",
+    "title": "New Task",
+    "category": "Engineering",
+    "priority": "Normal",
+    "duration": 0,
+    "deadline": null,
+    "notes": "",
+    "workType": "Project Work",
+    "status": "backlog",
+    "scheduledDate": null,
+    "subtasks": []
   }
 ]
