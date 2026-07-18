@@ -935,7 +935,7 @@
     "duration": 0.5,
     "deadline": null,
     "notes": "",
-    "status": "thisweek",
+    "status": "done",
     "scheduledDate": "2026-07-19",
     "tierSortOrder": 20,
     "subtasks": [],
@@ -948,7 +948,9 @@
       "2026-07-19": 0.5
     },
     "scheduledSlotName": "Weekend staff",
-    "sortOrder": -1
+    "sortOrder": -1,
+    "completedDate": "2026-07-18T10:00:00.000Z",
+    "actualHours": 0.5
   },
   {
     "id": "chr06",
@@ -1540,7 +1542,7 @@
     "duration": 0.5,
     "deadline": null,
     "notes": "",
-    "status": "done",
+    "status": "thisweek",
     "scheduledDate": "2026-07-26",
     "tierSortOrder": 48,
     "scheduledDates": [
@@ -1549,9 +1551,7 @@
     "scheduledSessionHours": {
       "2026-07-26": 0.5
     },
-    "scheduledSlotName": "Weekend staff",
-    "completedDate": "2026-07-15T10:00:00.000Z",
-    "actualHours": 0.5
+    "scheduledSlotName": "Weekend staff"
   },
   {
     "id": "cd09",
@@ -4435,7 +4435,7 @@
     "duration": 2,
     "deadline": null,
     "notes": "",
-    "status": "thisweek",
+    "status": "done",
     "scheduledDate": "2026-07-19",
     "subtasks": [],
     "totalHours": 0,
@@ -4447,7 +4447,9 @@
       "2026-07-19": 2
     },
     "scheduledSlotName": "Weekend staff",
-    "sortOrder": -1
+    "sortOrder": -1,
+    "completedDate": "2026-07-17T10:00:00.000Z",
+    "actualHours": 2
   },
   {
     "id": "mrdqrhzts3y4z",
