@@ -543,7 +543,8 @@
     "scheduledSessionHours": {
       "2026-08-14": 1
     },
-    "scheduledSlotName": "Engineering"
+    "scheduledSlotName": "Engineering",
+    "subtasks": []
   },
   {
     "id": "eng18",
@@ -1495,25 +1496,6 @@
       "2026-07-24": 2
     },
     "scheduledSlotName": "Homework"
-  },
-  {
-    "id": "cd06",
-    "title": "Medical",
-    "category": "Chores Desk",
-    "priority": "Normal",
-    "duration": 2,
-    "deadline": null,
-    "notes": "",
-    "status": "thisweek",
-    "scheduledDate": "2026-07-26",
-    "tierSortOrder": 46,
-    "scheduledDates": [
-      "2026-07-26"
-    ],
-    "scheduledSessionHours": {
-      "2026-07-26": 2
-    },
-    "scheduledSlotName": "Weekend staff"
   },
   {
     "id": "cd07",
@@ -5861,19 +5843,6 @@
     "deadline": null,
     "notes": "",
     "workType": "Robot",
-    "status": "backlog",
-    "scheduledDate": null,
-    "subtasks": []
-  },
-  {
-    "id": "mrqice0ou3m9y",
-    "title": "New Task",
-    "category": "Engineering",
-    "priority": "Normal",
-    "duration": 0,
-    "deadline": null,
-    "notes": "",
-    "workType": "Project Work",
     "status": "backlog",
     "scheduledDate": null,
     "subtasks": []
