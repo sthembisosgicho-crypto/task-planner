@@ -477,7 +477,7 @@ input, select, textarea { font-family: inherit; }
 <!-- Main -->
 <div class="main-content">
   <div class="app-header">
-    <h1>Task Scheduler <span style="font-size:0.6rem;font-weight:400;color:var(--text-dim);vertical-align:middle">v60</span></h1>
+    <h1>Task Scheduler <span style="font-size:0.6rem;font-weight:400;color:var(--text-dim);vertical-align:middle">v61</span></h1>
     <div class="header-actions">
       <button class="btn-primary" id="addTaskBtn">+ Add Task</button>
       <button class="btn-secondary" id="autoScheduleBtn">Auto-Schedule</button>
@@ -665,7 +665,8 @@ input, select, textarea { font-family: inherit; }
     <h2 style="font-size:1rem;margin-bottom:12px">&#9881; Slot Settings</h2>
     <div style="display:flex;gap:8px;margin-bottom:14px">
       <button id="slotTabWeekday" onclick="slotTab('weekday')" class="btn-primary" style="font-size:0.8rem;padding:5px 14px">Weekdays</button>
-      <button id="slotTabWeekend" onclick="slotTab('weekend')" class="btn-secondary" style="font-size:0.8rem;padding:5px 14px">Weekends</button>
+      <button id="slotTabSat" onclick="slotTab('saturday')" class="btn-secondary" style="font-size:0.8rem;padding:5px 14px">Saturday</button>
+      <button id="slotTabSun" onclick="slotTab('sunday')" class="btn-secondary" style="font-size:0.8rem;padding:5px 14px">Sunday</button>
       <button id="slotTabSubgroups" onclick="slotTab('subgroups')" class="btn-secondary" style="font-size:0.8rem;padding:5px 14px">Subgroups</button>
       <button onclick="resetSlots()" class="btn-secondary" style="font-size:0.8rem;padding:5px 14px;margin-left:auto;color:#f87171;border-color:#f87171">Reset Defaults</button>
     </div>
@@ -800,7 +801,15 @@ const DEFAULT_WEEKDAY_SLOTS = [
   { name: 'Supper Chill', start: 19, end: 20, categories: [] },
   { name: 'Planning', start: 20, end: 21, categories: [] },
 ];
-const DEFAULT_WEEKEND_SLOTS = [
+const DEFAULT_SAT_SLOTS = [
+  { name: 'Side Hustle', start: 5, end: 9, categories: ['Side Hustle','Markets','Health'] },
+  { name: 'Washing', start: 9, end: 10, categories: [] },
+  { name: 'Shops Errands', start: 10, end: 16, categories: ['Shopping','Errands'] },
+  { name: 'Weekend Duties', start: 16, end: 18, categories: ['House Chores'] },
+  { name: 'Supper Chill', start: 18, end: 20, categories: [] },
+  { name: 'Planning', start: 20, end: 21, categories: [] },
+];
+const DEFAULT_SUN_SLOTS = [
   { name: 'Side Hustle', start: 5, end: 9, categories: ['Side Hustle','Markets','Health'] },
   { name: 'Washing', start: 9, end: 10, categories: [] },
   { name: 'Shops Errands', start: 10, end: 16, categories: ['Shopping','Errands'] },
@@ -809,16 +818,28 @@ const DEFAULT_WEEKEND_SLOTS = [
   { name: 'Planning', start: 20, end: 21, categories: [] },
 ];
 let WEEKDAY_SLOTS = JSON.parse(localStorage.getItem('weekdaySlots')) || JSON.parse(JSON.stringify(DEFAULT_WEEKDAY_SLOTS));
-let WEEKEND_SLOTS = JSON.parse(localStorage.getItem('weekendSlots')) || JSON.parse(JSON.stringify(DEFAULT_WEEKEND_SLOTS));
+const _legacyWeekend = JSON.parse(localStorage.getItem('weekendSlots'));
+let SAT_SLOTS = JSON.parse(localStorage.getItem('satSlots')) || (_legacyWeekend ? JSON.parse(JSON.stringify(_legacyWeekend)) : JSON.parse(JSON.stringify(DEFAULT_SAT_SLOTS)));
+let SUN_SLOTS = JSON.parse(localStorage.getItem('sunSlots')) || (_legacyWeekend ? JSON.parse(JSON.stringify(_legacyWeekend)) : JSON.parse(JSON.stringify(DEFAULT_SUN_SLOTS)));
 const DEFAULT_SUBGROUPS = { Engineering: { label: 'Work Type', values: ['Project Work', 'R&D', 'Admin', 'Personal Dev'] } };
 let CATEGORY_SUBGROUPS = JSON.parse(localStorage.getItem('categorySubgroups') || 'null') || JSON.parse(JSON.stringify(DEFAULT_SUBGROUPS));
 function saveSubgroups() { localStorage.setItem('categorySubgroups', JSON.stringify(CATEGORY_SUBGROUPS)); }
 function saveSlotSettings() {
   localStorage.setItem('weekdaySlots', JSON.stringify(WEEKDAY_SLOTS));
-  localStorage.setItem('weekendSlots', JSON.stringify(WEEKEND_SLOTS));
+  localStorage.setItem('satSlots', JSON.stringify(SAT_SLOTS));
+  localStorage.setItem('sunSlots', JSON.stringify(SUN_SLOTS));
 }
 
-function getSlotsForDay(dayOfWeek) { return (dayOfWeek === 0 || dayOfWeek === 6) ? WEEKEND_SLOTS : WEEKDAY_SLOTS; }
+function getSlotsForDay(dayOfWeek) {
+  if (dayOfWeek === 6) return SAT_SLOTS;
+  if (dayOfWeek === 0) return SUN_SLOTS;
+  return WEEKDAY_SLOTS;
+}
+function getTabSlots() {
+  if (_slotTab === 'saturday') return SAT_SLOTS;
+  if (_slotTab === 'sunday') return SUN_SLOTS;
+  return WEEKDAY_SLOTS;
+}
 function slotCapacity(slot) { return slot.end - slot.start; }
 function formatTime(h) { const hh = Math.floor(h); const mm = Math.round((h % 1) * 60); return `${String(hh).padStart(2,'0')}:${String(mm).padStart(2,'0')}`; }
 
@@ -1803,7 +1824,7 @@ function autoSchedule() {
   // ── Step 2: assign each task to its slot queue ─────────────────────────────
   // Engineering tasks always go in the Engineering queue; all others go in the
   // first slot whose categories list includes the task's category.
-  const allSlotDefs = [...WEEKDAY_SLOTS, ...WEEKEND_SLOTS];
+  const allSlotDefs = [...WEEKDAY_SLOTS, ...SAT_SLOTS, ...SUN_SLOTS];
   const slotQueues = {};
   allSlotDefs.forEach(s => { if (!slotQueues[s.name]) slotQueues[s.name] = []; });
 
@@ -2384,14 +2405,15 @@ function closeSlotSettings() { document.getElementById('slotSettingsModal').clas
 function slotTab(tab) {
   _slotTab = tab;
   document.getElementById('slotTabWeekday').className = tab === 'weekday' ? 'btn-primary' : 'btn-secondary';
-  document.getElementById('slotTabWeekend').className = tab === 'weekend' ? 'btn-primary' : 'btn-secondary';
+  document.getElementById('slotTabSat').className = tab === 'saturday' ? 'btn-primary' : 'btn-secondary';
+  document.getElementById('slotTabSun').className = tab === 'sunday' ? 'btn-primary' : 'btn-secondary';
   document.getElementById('slotTabSubgroups').className = tab === 'subgroups' ? 'btn-primary' : 'btn-secondary';
   document.getElementById('addSlotBtn').style.display = tab === 'subgroups' ? 'none' : '';
   renderSlotSettings();
 }
 function renderSlotSettings() {
   if (_slotTab === 'subgroups') { renderSubgroupSettings(); return; }
-  const slots = _slotTab === 'weekday' ? WEEKDAY_SLOTS : WEEKEND_SLOTS;
+  const slots = getTabSlots();
   const list = document.getElementById('slotSettingsList');
   list.innerHTML = slots.map((slot, i) => `
     <div style="background:var(--surface2);border-radius:var(--radius);padding:12px;margin-bottom:8px">
@@ -2423,30 +2445,28 @@ function renderSlotSettings() {
     </div>`).join('');
 }
 function slotUpdate(i, field, value) {
-  const slots = _slotTab === 'weekday' ? WEEKDAY_SLOTS : WEEKEND_SLOTS;
-  slots[i][field] = value;
+  getTabSlots()[i][field] = value;
   saveSlotSettings();
 }
 function slotToggleCat(i, cat, checked) {
-  const slots = _slotTab === 'weekday' ? WEEKDAY_SLOTS : WEEKEND_SLOTS;
+  const slots = getTabSlots();
   if (checked) { if (!slots[i].categories.includes(cat)) slots[i].categories.push(cat); }
   else { slots[i].categories = slots[i].categories.filter(c => c !== cat); }
   saveSlotSettings();
 }
 function addSlot() {
-  const slots = _slotTab === 'weekday' ? WEEKDAY_SLOTS : WEEKEND_SLOTS;
-  slots.push({ name: 'New Slot', start: 12, end: 13, categories: [] });
+  getTabSlots().push({ name: 'New Slot', start: 12, end: 13, categories: [] });
   saveSlotSettings(); renderSlotSettings();
 }
 function deleteSlot(i) {
-  const slots = _slotTab === 'weekday' ? WEEKDAY_SLOTS : WEEKEND_SLOTS;
-  slots.splice(i, 1);
+  getTabSlots().splice(i, 1);
   saveSlotSettings(); renderSlotSettings();
 }
 function resetSlots() {
   if (!confirm('Reset all slots to defaults? This cannot be undone.')) return;
   WEEKDAY_SLOTS = JSON.parse(JSON.stringify(DEFAULT_WEEKDAY_SLOTS));
-  WEEKEND_SLOTS = JSON.parse(JSON.stringify(DEFAULT_WEEKEND_SLOTS));
+  SAT_SLOTS = JSON.parse(JSON.stringify(DEFAULT_SAT_SLOTS));
+  SUN_SLOTS = JSON.parse(JSON.stringify(DEFAULT_SUN_SLOTS));
   saveSlotSettings(); renderSlotSettings();
 }
 document.getElementById('slotSettingsModal').addEventListener('click', e => { if (e.target.id === 'slotSettingsModal') closeSlotSettings(); });
