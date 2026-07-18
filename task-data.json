@@ -5799,5 +5799,36 @@
       "2026-07-20": 0.25
     },
     "scheduledSlotName": "Engineering"
+  },
+  {
+    "id": "mrqerlw4b4fge",
+    "title": "Update format and send Cv to Son",
+    "category": "Chores Desk",
+    "priority": "Normal",
+    "duration": 1,
+    "deadline": null,
+    "notes": "",
+    "status": "backlog",
+    "scheduledDate": null,
+    "subtasks": [],
+    "predecessors": [
+      "mrdqb6at262wo"
+    ],
+    "totalHours": 0,
+    "hoursDone": 0
+  },
+  {
+    "id": "mrqetor16vfw2",
+    "title": "July 08-08-2026 Embo - Plan / Assess",
+    "category": "Chores Desk",
+    "priority": "Soon",
+    "duration": 1,
+    "deadline": null,
+    "notes": "",
+    "status": "backlog",
+    "scheduledDate": null,
+    "subtasks": [],
+    "totalHours": 0,
+    "hoursDone": 0
   }
 ]
