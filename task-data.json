@@ -5848,25 +5848,6 @@
     "subtasks": []
   },
   {
-    "id": "cd06",
-    "title": "Medical",
-    "category": "Chores Desk",
-    "priority": "Normal",
-    "duration": 2,
-    "deadline": null,
-    "notes": "",
-    "status": "thisweek",
-    "scheduledDate": "2026-07-26",
-    "tierSortOrder": 46,
-    "scheduledDates": [
-      "2026-07-26"
-    ],
-    "scheduledSessionHours": {
-      "2026-07-26": 2
-    },
-    "scheduledSlotName": "Weekend staff"
-  },
-  {
     "id": "mrqice0ou3m9y",
     "title": "New Task",
     "category": "Engineering",
