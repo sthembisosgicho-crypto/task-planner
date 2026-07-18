@@ -1202,12 +1202,12 @@ document.addEventListener('visibilitychange', () => {
 function getDeletedIds() { try { return new Set(JSON.parse(localStorage.getItem('deletedTaskIds') || '[]')); } catch(e) { return new Set(); } }
 function markDeleted(id) { var s = getDeletedIds(); s.add(id); localStorage.setItem('deletedTaskIds', JSON.stringify([...s])); }
 function exportData() {
-  localStorage.setItem('taskDataJson', JSON.stringify(tasks));
+  // taskDataJson is kept in sync with tasks via saveTasks (encrypted if key set)
   localStorage.setItem('taskDataJsonTime', new Date().toISOString());
 }
 function importData() {
   const saved = localStorage.getItem('taskDataJson');
-  if (saved) { try { tasks = JSON.parse(saved); saveTasks(); } catch(e) {} }
+  if (saved) { try { const p = JSON.parse(saved); if (Array.isArray(p)) { tasks = p; saveTasks(); } } catch(e) {} }
 }
 
 // ===== POOL GROUPS =====
