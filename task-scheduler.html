@@ -229,6 +229,14 @@ input, select, textarea { font-family: inherit; }
 .checklist-item .ci-btn.ci-promote:hover { background: rgba(78,205,196,0.2); color: var(--normal); }
 .checklist-item .ci-dur { font-size: 0.65rem; color: var(--text-dim); min-width: 28px; }
 
+/* Lock overlay */
+#lockOverlay { position: fixed; inset: 0; z-index: 10000; background: var(--bg); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; padding: 24px; }
+#lockOverlay h2 { margin: 0; font-size: 1.2rem; }
+#lockOverlay input { width: 100%; max-width: 300px; font-size: 1rem; padding: 10px 14px; }
+#lockOverlay button.lock-primary { width: 100%; max-width: 300px; }
+#lockOverlay .lock-hint { font-size: 0.72rem; color: var(--text-dim); max-width: 300px; text-align: center; line-height: 1.5; }
+#lockOverlay .lock-error { color: #f87171; font-size: 0.82rem; min-height: 1.2em; }
+
 /* Modal */
 .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 1000; align-items: center; justify-content: center; }
 .modal-overlay.active { display: flex; }
@@ -464,6 +472,17 @@ input, select, textarea { font-family: inherit; }
 </style>
 </head>
 <body>
+<!-- Lock screen -->
+<div id="lockOverlay">
+  <div style="font-size:2.5rem;line-height:1" id="lockIcon">&#128274;</div>
+  <h2 id="lockTitle">Task Scheduler</h2>
+  <p id="lockSubtitle" style="color:var(--text-dim);font-size:0.85rem;margin:0;text-align:center">Enter your password to continue</p>
+  <input type="password" id="lockPassword" placeholder="Password" autocomplete="current-password">
+  <input type="password" id="lockConfirm" placeholder="Confirm password" autocomplete="new-password" style="display:none;width:100%;max-width:300px;font-size:1rem;padding:10px 14px">
+  <p class="lock-error" id="lockError"></p>
+  <button class="btn-primary lock-primary" id="lockBtn">Unlock</button>
+  <p class="lock-hint">Your tasks are encrypted with AES-256. If you forget your password, data cannot be recovered.</p>
+</div>
 
 <!-- Task Pool -->
 <aside class="task-pool" id="taskPool">
@@ -477,7 +496,7 @@ input, select, textarea { font-family: inherit; }
 <!-- Main -->
 <div class="main-content">
   <div class="app-header">
-    <h1>Task Scheduler <span style="font-size:0.6rem;font-weight:400;color:var(--text-dim);vertical-align:middle">v61</span></h1>
+    <h1>Task Scheduler <span style="font-size:0.6rem;font-weight:400;color:var(--text-dim);vertical-align:middle">v62</span></h1>
     <div class="header-actions">
       <button class="btn-primary" id="addTaskBtn">+ Add Task</button>
       <button class="btn-secondary" id="autoScheduleBtn">Auto-Schedule</button>
@@ -486,6 +505,7 @@ input, select, textarea { font-family: inherit; }
       <button class="btn-secondary" id="exportBtn">Export JSON</button>
       <button class="btn-secondary" id="ghSyncBtn" title="GitHub Sync — click to configure"><span id="ghSyncDot" style="color:#6b6b80">○</span></button>
       <button class="btn-secondary" id="headerInstallBtn" style="display:none;background:#0f3460;color:#a78bfa;font-weight:600" title="Install app">&#8659; Install</button>
+      <button class="btn-secondary" id="lockAppBtn" title="Lock app" style="font-size:1rem;padding:0 10px">&#128274;</button>
       <button class="mobile-hamburger-btn" id="mobileHamburgerBtn" title="Menu">&#9776;</button>
       <span class="sync-status" id="syncStatus"></span>
     </div>
@@ -1033,10 +1053,13 @@ const DEFAULT_TASKS = [
   {id:'cd48',title:'SAICE recording',category:'Chores Desk',priority:'Normal',duration:0,deadline:null,notes:'',status:'backlog',scheduledDate:null},
 ];
 
-let tasks = JSON.parse(localStorage.getItem('taskDataJson') || 'null') || JSON.parse(localStorage.getItem('tasks') || 'null');
+function _parsePlainTasks(raw) {
+  if (!raw) return null;
+  try { const p = JSON.parse(raw); return Array.isArray(p) ? p : null; } catch { return null; }
+}
+let tasks = _parsePlainTasks(localStorage.getItem('taskDataJson')) || _parsePlainTasks(localStorage.getItem('tasks'));
 if (!tasks || tasks.length === 0) { tasks = DEFAULT_TASKS; }
 tasks.forEach(t => { if (t.priority === 'Recurring') { if (!t.recurrence) t.recurrence = { type: 'daily' }; t.priority = 'Normal'; } });
-localStorage.setItem('tasks', JSON.stringify(tasks));
 let editingTaskId = null;
 let preAutoScheduleSnapshot = null;
 let dayViewDate = new Date(getLocalDateStr() + 'T00:00:00');
@@ -1044,7 +1067,123 @@ let calendarMonth = new Date().getMonth();
 let calendarYear = new Date().getFullYear();
 
 function generateId() { return Date.now().toString(36) + Math.random().toString(36).substr(2,5); }
-function saveTasks() { localStorage.setItem('tasks', JSON.stringify(tasks)); }
+// ===== ENCRYPTION / LOCK =====
+let _cryptoKey = null;
+let _idleTimer = null;
+const IDLE_MS = 15 * 60 * 1000;
+
+async function _deriveKey(password, salt) {
+  const km = await crypto.subtle.importKey('raw', new TextEncoder().encode(password), 'PBKDF2', false, ['deriveKey']);
+  return crypto.subtle.deriveKey({ name: 'PBKDF2', salt, iterations: 200000, hash: 'SHA-256' }, km, { name: 'AES-GCM', length: 256 }, false, ['encrypt', 'decrypt']);
+}
+function _getOrCreateSalt() {
+  const s = localStorage.getItem('encSalt');
+  if (s) return new Uint8Array(JSON.parse(s));
+  const salt = crypto.getRandomValues(new Uint8Array(16));
+  localStorage.setItem('encSalt', JSON.stringify(Array.from(salt)));
+  return salt;
+}
+async function _encryptTasks(key) {
+  const iv = crypto.getRandomValues(new Uint8Array(12));
+  const buf = await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, key, new TextEncoder().encode(JSON.stringify(tasks)));
+  localStorage.setItem('tasks', JSON.stringify({ enc: 1, iv: Array.from(iv), d: Array.from(new Uint8Array(buf)) }));
+}
+function saveTasks() {
+  if (_cryptoKey) { _encryptTasks(_cryptoKey); } else { localStorage.setItem('tasks', JSON.stringify(tasks)); }
+}
+
+function lockApp() {
+  _cryptoKey = null;
+  if (_idleTimer) clearTimeout(_idleTimer);
+  document.getElementById('lockTitle').textContent = 'Task Scheduler';
+  document.getElementById('lockSubtitle').textContent = 'Enter your password to continue';
+  document.getElementById('lockIcon').textContent = '🔒';
+  document.getElementById('lockBtn').textContent = 'Unlock';
+  document.getElementById('lockConfirm').style.display = 'none';
+  document.getElementById('lockPassword').value = '';
+  document.getElementById('lockError').textContent = '';
+  document.getElementById('lockOverlay').style.display = 'flex';
+  setTimeout(() => document.getElementById('lockPassword').focus(), 50);
+}
+
+function _resetIdle() {
+  if (!_cryptoKey) return;
+  if (_idleTimer) clearTimeout(_idleTimer);
+  _idleTimer = setTimeout(lockApp, IDLE_MS);
+}
+
+async function _doUnlock(password) {
+  const errEl = document.getElementById('lockError');
+  errEl.textContent = '';
+  if (!password) { errEl.textContent = 'Enter a password'; return; }
+
+  const isSetupMode = document.getElementById('lockConfirm').style.display !== 'none';
+
+  if (isSetupMode) {
+    const confirm = document.getElementById('lockConfirm').value;
+    if (password !== confirm) { errEl.textContent = 'Passwords do not match'; return; }
+    const salt = _getOrCreateSalt();
+    _cryptoKey = await _deriveKey(password, salt);
+    await _encryptTasks(_cryptoKey);
+    document.getElementById('lockOverlay').style.display = 'none';
+    _resetIdle();
+    return;
+  }
+
+  const stored = localStorage.getItem('tasks');
+  try {
+    const parsed = JSON.parse(stored || '{}');
+    if (!parsed.enc) {
+      _cryptoKey = await _deriveKey(password, _getOrCreateSalt());
+      await _encryptTasks(_cryptoKey);
+      document.getElementById('lockOverlay').style.display = 'none';
+      _resetIdle();
+      return;
+    }
+    const key = await _deriveKey(password, _getOrCreateSalt());
+    const plain = await crypto.subtle.decrypt({ name: 'AES-GCM', iv: new Uint8Array(parsed.iv) }, key, new Uint8Array(parsed.d));
+    const decrypted = JSON.parse(new TextDecoder().decode(plain));
+    tasks = Array.isArray(decrypted) ? decrypted : tasks;
+    tasks.forEach(t => { if (t.priority === 'Recurring') { if (!t.recurrence) t.recurrence = { type: 'daily' }; t.priority = 'Normal'; } });
+    _cryptoKey = key;
+    document.getElementById('lockOverlay').style.display = 'none';
+    renderAll();
+    _resetIdle();
+  } catch {
+    document.getElementById('lockError').textContent = 'Incorrect password';
+  }
+}
+
+document.getElementById('lockBtn').addEventListener('click', () => _doUnlock(document.getElementById('lockPassword').value));
+document.getElementById('lockPassword').addEventListener('keydown', e => { if (e.key === 'Enter') _doUnlock(document.getElementById('lockPassword').value); });
+document.getElementById('lockConfirm').addEventListener('keydown', e => { if (e.key === 'Enter') _doUnlock(document.getElementById('lockPassword').value); });
+document.getElementById('lockAppBtn').addEventListener('click', lockApp);
+['click','keydown','touchstart','mousemove'].forEach(ev => document.addEventListener(ev, _resetIdle, { passive: true }));
+let _hiddenAt = null;
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) { _hiddenAt = Date.now(); }
+  else if (_hiddenAt && Date.now() - _hiddenAt > 60000) { lockApp(); } else { _hiddenAt = null; }
+});
+
+(function initLock() {
+  const stored = localStorage.getItem('tasks');
+  const hasEncSalt = !!localStorage.getItem('encSalt');
+  let isEncrypted = false;
+  try { const p = JSON.parse(stored || '{}'); isEncrypted = p && p.enc === 1; } catch {}
+
+  if (isEncrypted || hasEncSalt) {
+    document.getElementById('lockOverlay').style.display = 'flex';
+    setTimeout(() => document.getElementById('lockPassword').focus(), 50);
+  } else {
+    document.getElementById('lockTitle').textContent = 'Set Up Password';
+    document.getElementById('lockSubtitle').textContent = 'Protect your tasks with a password';
+    document.getElementById('lockIcon').textContent = '🔐';
+    document.getElementById('lockBtn').textContent = 'Set Password';
+    document.getElementById('lockConfirm').style.display = '';
+    document.getElementById('lockOverlay').style.display = 'flex';
+    setTimeout(() => document.getElementById('lockPassword').focus(), 50);
+  }
+})();
 function getDeletedIds() { try { return new Set(JSON.parse(localStorage.getItem('deletedTaskIds') || '[]')); } catch(e) { return new Set(); } }
 function markDeleted(id) { var s = getDeletedIds(); s.add(id); localStorage.setItem('deletedTaskIds', JSON.stringify([...s])); }
 function exportData() {
