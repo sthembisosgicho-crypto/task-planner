@@ -5849,5 +5849,18 @@
     "subtasks": [],
     "totalHours": 0,
     "hoursDone": 0
+  },
+  {
+    "id": "mrqi5hv8m8ij3",
+    "title": "New Task",
+    "category": "Engineering",
+    "priority": "Normal",
+    "duration": 0,
+    "deadline": null,
+    "notes": "",
+    "workType": "Robot",
+    "status": "backlog",
+    "scheduledDate": null,
+    "subtasks": []
   }
 ]
