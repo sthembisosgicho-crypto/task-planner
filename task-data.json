@@ -129,10 +129,8 @@
     "notes": "",
     "workType": "Project Work",
     "status": "thisweek",
-    "scheduledDate": "2026-07-20",
-    "scheduledDates": [
-      "2026-07-20"
-    ],
+    "scheduledDate": "2026-07-27",
+    "scheduledDates": [],
     "scheduledSessionHours": {
       "2026-07-20": 3
     },
@@ -215,10 +213,8 @@
     "notes": "",
     "workType": "Project Work",
     "status": "thisweek",
-    "scheduledDate": "2026-07-20",
-    "scheduledDates": [
-      "2026-07-20"
-    ],
+    "scheduledDate": "2026-07-27",
+    "scheduledDates": [],
     "scheduledSessionHours": {
       "2026-07-20": 4
     },
@@ -614,12 +610,10 @@
     "duration": 3,
     "deadline": null,
     "notes": "",
-    "status": "today",
-    "scheduledDate": "2026-07-18",
+    "status": "thisweek",
+    "scheduledDate": "2026-09-20",
     "tierSortOrder": 11,
-    "scheduledDates": [
-      "2026-07-18"
-    ],
+    "scheduledDates": [],
     "sortOrder": -1,
     "scheduledSessionHours": {
       "2026-07-18": 3
@@ -634,12 +628,9 @@
     "duration": 2,
     "deadline": null,
     "notes": "",
-    "status": "today",
-    "scheduledDate": "2026-07-18",
-    "scheduledDates": [
-      "2026-07-18",
-      "2026-07-19"
-    ],
+    "status": "thisweek",
+    "scheduledDate": "2026-09-20",
+    "scheduledDates": [],
     "tierSortOrder": 12,
     "sortOrder": -1,
     "scheduledSessionHours": {
@@ -657,11 +648,9 @@
     "deadline": null,
     "notes": "",
     "status": "thisweek",
-    "scheduledDate": "2026-07-19",
+    "scheduledDate": "2026-09-26",
     "tierSortOrder": 13,
-    "scheduledDates": [
-      "2026-07-19"
-    ],
+    "scheduledDates": [],
     "scheduledSessionHours": {
       "2026-07-19": 1
     },
@@ -677,11 +666,9 @@
     "deadline": null,
     "notes": "",
     "status": "thisweek",
-    "scheduledDate": "2026-07-19",
+    "scheduledDate": "2026-09-20",
     "tierSortOrder": 14,
-    "scheduledDates": [
-      "2026-07-19"
-    ],
+    "scheduledDates": [],
     "scheduledSessionHours": {
       "2026-07-19": 1
     },
@@ -891,10 +878,8 @@
     "deadline": null,
     "notes": "",
     "status": "thisweek",
-    "scheduledDate": "2026-07-19",
-    "scheduledDates": [
-      "2026-07-19"
-    ],
+    "scheduledDate": "2026-08-11",
+    "scheduledDates": [],
     "tierSortOrder": 18,
     "subtasks": [],
     "totalHours": 0,
@@ -962,14 +947,12 @@
     "deadline": null,
     "notes": "",
     "status": "thisweek",
-    "scheduledDate": "2026-07-19",
+    "scheduledDate": "2026-08-11",
     "tierSortOrder": 21,
     "subtasks": [],
     "totalHours": 0,
     "hoursDone": 0,
-    "scheduledDates": [
-      "2026-07-19"
-    ],
+    "scheduledDates": [],
     "scheduledSessionHours": {
       "2026-07-19": 1
     },
@@ -985,10 +968,8 @@
     "deadline": null,
     "notes": "Daily",
     "status": "thisweek",
-    "scheduledDate": "2026-07-20",
-    "scheduledDates": [
-      "2026-07-20"
-    ],
+    "scheduledDate": "2026-07-24",
+    "scheduledDates": [],
     "tierSortOrder": 22,
     "scheduledSessionHours": {
       "2026-07-20": 0.25
@@ -1401,7 +1382,7 @@
     "duration": 1,
     "deadline": null,
     "notes": "",
-    "status": "thisweek",
+    "status": "done",
     "scheduledDate": "2026-07-20",
     "tierSortOrder": 42,
     "scheduledDates": [
@@ -1410,7 +1391,8 @@
     "scheduledSessionHours": {
       "2026-07-20": 1
     },
-    "scheduledSlotName": "Homework"
+    "scheduledSlotName": "Homework",
+    "completedDate": "2026-07-24T06:47:02.677Z"
   },
   {
     "id": "cd02",
@@ -1443,19 +1425,16 @@
     "deadline": null,
     "notes": "",
     "status": "thisweek",
-    "scheduledDate": "2026-07-20",
+    "scheduledDate": "2026-08-19",
     "tierSortOrder": 43,
-    "scheduledDates": [
-      "2026-07-20",
-      "2026-07-21",
-      "2026-07-22"
-    ],
+    "scheduledDates": [],
     "scheduledSessionHours": {
       "2026-07-20": 1,
       "2026-07-21": 2,
       "2026-07-22": 1
     },
-    "scheduledSlotName": "Homework"
+    "scheduledSlotName": "Homework",
+    "sortOrder": -1
   },
   {
     "id": "cd04",
@@ -1466,17 +1445,15 @@
     "deadline": null,
     "notes": "",
     "status": "thisweek",
-    "scheduledDate": "2026-07-22",
+    "scheduledDate": "2026-08-21",
     "tierSortOrder": 44,
-    "scheduledDates": [
-      "2026-07-22",
-      "2026-07-23"
-    ],
+    "scheduledDates": [],
     "scheduledSessionHours": {
       "2026-07-22": 1,
       "2026-07-23": 2
     },
-    "scheduledSlotName": "Homework"
+    "scheduledSlotName": "Homework",
+    "sortOrder": -1
   },
   {
     "id": "cd05",
@@ -2144,13 +2121,10 @@
     "duration": 1,
     "deadline": null,
     "notes": "",
-    "status": "today",
-    "scheduledDate": "2026-07-18",
+    "status": "thisweek",
+    "scheduledDate": "2026-07-26",
     "tierSortOrder": 76,
-    "scheduledDates": [
-      "2026-07-18",
-      "2026-07-19"
-    ],
+    "scheduledDates": [],
     "scheduledSessionHours": {
       "2026-07-18": 0.5,
       "2026-07-19": 0.5
@@ -2167,11 +2141,9 @@
     "deadline": null,
     "notes": "",
     "status": "thisweek",
-    "scheduledDate": "2026-07-19",
+    "scheduledDate": "2026-07-26",
     "tierSortOrder": 77,
-    "scheduledDates": [
-      "2026-07-19"
-    ],
+    "scheduledDates": [],
     "scheduledSessionHours": {
       "2026-07-19": 1.5
     },
@@ -2585,13 +2557,10 @@
     "duration": 4,
     "deadline": null,
     "notes": "",
-    "status": "today",
-    "scheduledDate": "2026-07-18",
+    "status": "thisweek",
+    "scheduledDate": "2026-08-22",
     "tierSortOrder": 107,
-    "scheduledDates": [
-      "2026-07-18",
-      "2026-07-25"
-    ],
+    "scheduledDates": [],
     "scheduledSessionHours": {
       "2026-07-18": 2,
       "2026-07-25": 2
@@ -3126,16 +3095,14 @@
     "notes": "",
     "workType": "Project Work",
     "status": "thisweek",
-    "scheduledDate": "2026-07-21",
-    "scheduledDates": [
-      "2026-07-21",
-      "2026-07-23"
-    ],
+    "scheduledDate": "2026-07-30",
+    "scheduledDates": [],
     "scheduledSessionHours": {
       "2026-07-21": 0.25,
       "2026-07-23": 1.75
     },
-    "scheduledSlotName": "Engineering"
+    "scheduledSlotName": "Engineering",
+    "sortOrder": -1
   },
   {
     "id": "eng27",
@@ -3383,11 +3350,8 @@
     "notes": "Top soil stripped, Black turf to be tested for re-use only need phi and c prime, Clay to be removed on site and stockpile wasterock, 2-3 tests one is for VSR Norite remoulded, Enzo?, 1 page results interpretation",
     "workType": "Project Work",
     "status": "thisweek",
-    "scheduledDate": "2026-07-20",
-    "scheduledDates": [
-      "2026-07-20",
-      "2026-07-21"
-    ],
+    "scheduledDate": "2026-08-06",
+    "scheduledDates": [],
     "scheduledSessionHours": {
       "2026-07-20": 1.25,
       "2026-07-21": 4.75
@@ -3439,11 +3403,9 @@
     "notes": "",
     "workType": "R&D",
     "status": "thisweek",
-    "scheduledDate": "2026-07-22",
+    "scheduledDate": "2026-07-29",
     "tierSortOrder": 134,
-    "scheduledDates": [
-      "2026-07-22"
-    ],
+    "scheduledDates": [],
     "scheduledSessionHours": {
       "2026-07-22": 0.25
     },
@@ -3756,20 +3718,11 @@
     "notes": "",
     "workType": "Project Work",
     "status": "thisweek",
-    "scheduledDate": "2026-07-21",
+    "scheduledDate": "2026-08-11",
     "subtasks": [],
     "totalHours": 32,
     "hoursDone": 0,
-    "scheduledDates": [
-      "2026-07-21",
-      "2026-07-23",
-      "2026-07-27",
-      "2026-07-28",
-      "2026-07-30",
-      "2026-08-03",
-      "2026-08-04",
-      "2026-08-06"
-    ],
+    "scheduledDates": [],
     "scheduledSessionHours": {
       "2026-07-21": 4,
       "2026-07-23": 4,
@@ -3815,13 +3768,11 @@
     "deadline": null,
     "notes": "",
     "status": "thisweek",
-    "scheduledDate": "2026-07-19",
+    "scheduledDate": "2026-08-23",
     "subtasks": [],
     "totalHours": 0,
     "hoursDone": 0,
-    "scheduledDates": [
-      "2026-07-19"
-    ],
+    "scheduledDates": [],
     "scheduledSessionHours": {
       "2026-07-19": 1.25
     },
@@ -3935,10 +3886,8 @@
     "notes": "",
     "workType": "R&D",
     "status": "thisweek",
-    "scheduledDate": "2026-07-22",
-    "scheduledDates": [
-      "2026-07-22"
-    ],
+    "scheduledDate": "2026-07-29",
+    "scheduledDates": [],
     "scheduledSessionHours": {
       "2026-07-22": 2
     },
@@ -4795,106 +4744,15 @@
     "duration": 0.25,
     "deadline": null,
     "notes": "",
-    "status": "today",
-    "scheduledDate": "2026-07-18",
+    "status": "thisweek",
+    "scheduledDate": "2026-07-24",
     "subtasks": [],
     "totalHours": 40,
     "hoursDone": 0,
     "recurrence": {
       "type": "daily"
     },
-    "scheduledDates": [
-      "2026-07-18",
-      "2026-07-19",
-      "2026-07-20",
-      "2026-07-21",
-      "2026-07-22",
-      "2026-07-23",
-      "2026-07-24",
-      "2026-07-25",
-      "2026-07-26",
-      "2026-07-27",
-      "2026-07-28",
-      "2026-07-29",
-      "2026-07-30",
-      "2026-07-31",
-      "2026-08-01",
-      "2026-08-02",
-      "2026-08-03",
-      "2026-08-04",
-      "2026-08-05",
-      "2026-08-06",
-      "2026-08-07",
-      "2026-08-08",
-      "2026-08-09",
-      "2026-08-10",
-      "2026-08-11",
-      "2026-08-12",
-      "2026-08-13",
-      "2026-08-14",
-      "2026-08-15",
-      "2026-08-16",
-      "2026-08-17",
-      "2026-08-18",
-      "2026-08-19",
-      "2026-08-20",
-      "2026-08-21",
-      "2026-08-22",
-      "2026-08-23",
-      "2026-08-24",
-      "2026-08-25",
-      "2026-08-26",
-      "2026-08-27",
-      "2026-08-28",
-      "2026-08-29",
-      "2026-08-30",
-      "2026-08-31",
-      "2026-09-01",
-      "2026-09-02",
-      "2026-09-03",
-      "2026-09-04",
-      "2026-09-05",
-      "2026-09-06",
-      "2026-09-07",
-      "2026-09-08",
-      "2026-09-09",
-      "2026-09-10",
-      "2026-09-11",
-      "2026-09-12",
-      "2026-09-13",
-      "2026-09-14",
-      "2026-09-15",
-      "2026-09-16",
-      "2026-09-17",
-      "2026-09-18",
-      "2026-09-19",
-      "2026-09-20",
-      "2026-09-21",
-      "2026-09-22",
-      "2026-09-23",
-      "2026-09-24",
-      "2026-09-25",
-      "2026-09-26",
-      "2026-09-27",
-      "2026-09-28",
-      "2026-09-29",
-      "2026-09-30",
-      "2026-10-01",
-      "2026-10-02",
-      "2026-10-03",
-      "2026-10-04",
-      "2026-10-05",
-      "2026-10-06",
-      "2026-10-07",
-      "2026-10-08",
-      "2026-10-09",
-      "2026-10-10",
-      "2026-10-11",
-      "2026-10-12",
-      "2026-10-13",
-      "2026-10-14",
-      "2026-10-15"
-    ],
+    "scheduledDates": [],
     "scheduledSessionHours": {
       "2026-07-18": 0.5,
       "2026-07-19": 0.5,
@@ -5042,13 +4900,11 @@
     "notes": "",
     "workType": "Project Work",
     "status": "thisweek",
-    "scheduledDate": "2026-07-20",
+    "scheduledDate": "2026-08-11",
     "subtasks": [],
     "totalHours": 0,
     "hoursDone": 0,
-    "scheduledDates": [
-      "2026-07-20"
-    ],
+    "scheduledDates": [],
     "scheduledSessionHours": {
       "2026-07-20": 0.5
     },
@@ -5110,13 +4966,11 @@
     "deadline": "2026-07-18",
     "notes": "",
     "status": "thisweek",
-    "scheduledDate": "2026-07-19",
+    "scheduledDate": "2026-08-23",
     "subtasks": [],
     "totalHours": 0,
     "hoursDone": 0,
-    "scheduledDates": [
-      "2026-07-19"
-    ],
+    "scheduledDates": [],
     "scheduledSessionHours": {
       "2026-07-19": 0.25
     },
@@ -5131,18 +4985,17 @@
     "duration": 4,
     "deadline": null,
     "notes": "",
-    "status": "today",
-    "scheduledDate": "2026-07-18",
+    "status": "thisweek",
+    "scheduledDate": "2026-08-29",
     "subtasks": [],
     "totalHours": 0,
     "hoursDone": 0,
-    "scheduledDates": [
-      "2026-07-18"
-    ],
+    "scheduledDates": [],
     "scheduledSessionHours": {
       "2026-07-18": 4
     },
-    "scheduledSlotName": "Shops Errands"
+    "scheduledSlotName": "Shops Errands",
+    "sortOrder": -1
   },
   {
     "id": "mroz81qw6kspw",
@@ -5221,17 +5074,16 @@
     "notes": "",
     "workType": "Project Work",
     "status": "thisweek",
-    "scheduledDate": "2026-07-23",
+    "scheduledDate": "2026-08-11",
     "subtasks": [],
     "totalHours": 0,
     "hoursDone": 0,
-    "scheduledDates": [
-      "2026-07-23"
-    ],
+    "scheduledDates": [],
     "scheduledSessionHours": {
       "2026-07-23": 1
     },
-    "scheduledSlotName": "Engineering"
+    "scheduledSlotName": "Engineering",
+    "sortOrder": -1
   },
   {
     "id": "mrozea7taoad7",
@@ -5331,14 +5183,12 @@
     "duration": 0.5,
     "deadline": null,
     "notes": "",
-    "status": "today",
-    "scheduledDate": "2026-07-18",
+    "status": "thisweek",
+    "scheduledDate": "2026-08-02",
     "subtasks": [],
     "totalHours": 0,
     "hoursDone": 0,
-    "scheduledDates": [
-      "2026-07-18"
-    ],
+    "scheduledDates": [],
     "scheduledSessionHours": {
       "2026-07-18": 0.5
     },
@@ -5413,19 +5263,17 @@
     "notes": "- Inclination tracking limit ? \n- Hard layers refusal plan \n- Method statement from contractor\n-Piezo from geosense",
     "workType": "Project Work",
     "status": "thisweek",
-    "scheduledDate": "2026-07-23",
+    "scheduledDate": "2026-08-13",
     "subtasks": [],
     "totalHours": 0,
     "hoursDone": 0,
-    "scheduledDates": [
-      "2026-07-23",
-      "2026-07-27"
-    ],
+    "scheduledDates": [],
     "scheduledSessionHours": {
       "2026-07-23": 2.25,
       "2026-07-27": 1.75
     },
-    "scheduledSlotName": "Engineering"
+    "scheduledSlotName": "Engineering",
+    "sortOrder": -1
   },
   {
     "id": "mrp2etjgs9d70",
@@ -5776,17 +5624,16 @@
     "notes": "",
     "workType": "Project Work",
     "status": "thisweek",
-    "scheduledDate": "2026-07-20",
+    "scheduledDate": "2026-08-13",
     "subtasks": [],
     "totalHours": 0,
     "hoursDone": 0,
-    "scheduledDates": [
-      "2026-07-20"
-    ],
+    "scheduledDates": [],
     "scheduledSessionHours": {
       "2026-07-20": 0.25
     },
-    "scheduledSlotName": "Engineering"
+    "scheduledSlotName": "Engineering",
+    "sortOrder": -1
   },
   {
     "id": "mrqerlw4b4fge",
