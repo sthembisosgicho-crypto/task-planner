@@ -6622,5 +6622,18 @@
       "2026-07-28": 1
     },
     "scheduledSlotName": "Homework"
+  },
+  {
+    "id": "ms2ydwfgad3e3",
+    "title": "New Task",
+    "category": "Engineering",
+    "priority": "Normal",
+    "duration": 0,
+    "deadline": null,
+    "notes": "",
+    "workType": "Project Work",
+    "status": "backlog",
+    "scheduledDate": null,
+    "subtasks": []
   }
 ]
