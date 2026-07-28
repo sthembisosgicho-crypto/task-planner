@@ -210,8 +210,8 @@
     "title": "Start annual reports",
     "category": "Engineering",
     "priority": "Normal",
-    "duration": 4,
-    "deadline": "2026-06-22",
+    "duration": 2,
+    "deadline": "2026-07-31",
     "notes": "",
     "workType": "Project Work",
     "status": "today",
@@ -223,7 +223,13 @@
       "2026-07-28": 4
     },
     "scheduledSlotName": "Engineering",
-    "sortOrder": -1
+    "sortOrder": -1,
+    "subtasks": [],
+    "totalHours": 40,
+    "hoursDone": 0,
+    "recurrence": {
+      "type": "daily"
+    }
   },
   {
     "id": "eng07",
