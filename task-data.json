@@ -6437,5 +6437,20 @@
     "status": "backlog",
     "scheduledDate": null,
     "subtasks": []
+  },
+  {
+    "id": "ms628s1o3ep4v",
+    "title": "Deformation  + Vane shear ICOLD check",
+    "category": "Engineering",
+    "priority": "Normal",
+    "duration": 2,
+    "deadline": null,
+    "notes": "",
+    "workType": "Project Work",
+    "status": "backlog",
+    "scheduledDate": null,
+    "subtasks": [],
+    "totalHours": 0,
+    "hoursDone": 0
   }
 ]
