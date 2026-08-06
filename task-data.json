@@ -6438,5 +6438,33 @@
     "subtasks": [],
     "totalHours": 0,
     "hoursDone": 0
+  },
+  {
+    "id": "mshawla0oxof9",
+    "title": "Make programme locking to be less frequent",
+    "category": "Chores Desk",
+    "priority": "Urgent",
+    "duration": 0.75,
+    "deadline": null,
+    "notes": "",
+    "status": "backlog",
+    "scheduledDate": null,
+    "subtasks": [],
+    "totalHours": 0,
+    "hoursDone": 0
+  },
+  {
+    "id": "mshaxtwqo517u",
+    "title": "Make programme to not save task without duration ,etc",
+    "category": "Chores Desk",
+    "priority": "Urgent",
+    "duration": 0.5,
+    "deadline": null,
+    "notes": "",
+    "status": "backlog",
+    "scheduledDate": null,
+    "subtasks": [],
+    "totalHours": 0,
+    "hoursDone": 0
   }
 ]
