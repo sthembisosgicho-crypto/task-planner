@@ -1186,37 +1186,56 @@ document.addEventListener('visibilitychange', () => {
   else if (_hiddenAt && Date.now() - _hiddenAt > IDLE_MS) { lockApp(); } else { _hiddenAt = null; }
 });
 
-// ===== BIOMETRIC / CREDENTIAL MANAGEMENT =====
-const _biometricSupported = !!window.PasswordCredential;
+// ===== BIOMETRIC (WebAuthn + sessionStorage) =====
+const _webAuthnSupported = !!(navigator.credentials && window.PublicKeyCredential);
+
+function _b64ToBytes(b64) { return Uint8Array.from(atob(b64), c => c.charCodeAt(0)); }
+function _bytesToB64(buf) { return btoa(String.fromCharCode(...new Uint8Array(buf))); }
+
+async function _registerWebAuthn() {
+  if (!_webAuthnSupported) return false;
+  try {
+    const cred = await navigator.credentials.create({ publicKey: {
+      challenge: crypto.getRandomValues(new Uint8Array(32)),
+      rp: { name: 'Task Planner' },
+      user: { id: crypto.getRandomValues(new Uint8Array(16)), name: 'user', displayName: 'Task Planner' },
+      pubKeyCredParams: [{ type: 'public-key', alg: -7 }, { type: 'public-key', alg: -257 }],
+      authenticatorSelection: { authenticatorAttachment: 'platform', userVerification: 'required', residentKey: 'preferred' },
+      timeout: 60000
+    }});
+    if (cred) { localStorage.setItem('waCredId', _bytesToB64(cred.rawId)); return true; }
+  } catch(e) {}
+  return false;
+}
+
+async function _authenticateWebAuthn() {
+  if (!_webAuthnSupported) return false;
+  const credId = localStorage.getItem('waCredId');
+  if (!credId) return false;
+  try {
+    const assertion = await navigator.credentials.get({ publicKey: {
+      challenge: crypto.getRandomValues(new Uint8Array(32)),
+      allowCredentials: [{ type: 'public-key', id: _b64ToBytes(credId) }],
+      userVerification: 'required',
+      timeout: 60000
+    }});
+    return !!assertion;
+  } catch(e) { return false; }
+}
 
 async function _saveBiometricCredential(password) {
-  if (!_biometricSupported) return;
-  try {
-    const cred = new PasswordCredential({ id: 'task-planner-user', password, name: 'Task Planner' });
-    await navigator.credentials.store(cred);
-  } catch(e) {}
+  sessionStorage.setItem('_sp', password);
+  if (!localStorage.getItem('waCredId')) await _registerWebAuthn();
 }
 
-async function _tryBiometricSilent() {
-  if (!_biometricSupported) return;
-  try {
-    const cred = await navigator.credentials.get({ password: true, mediation: 'silent' });
-    if (cred && cred.password) await _doUnlock(cred.password);
-  } catch(e) {}
-}
+async function _tryBiometricSilent() { /* no-op — WebAuthn requires explicit user gesture */ }
 
 async function _tryBiometricRequired() {
-  if (!_biometricSupported) return;
-  try {
-    const cred = await navigator.credentials.get({ password: true, mediation: 'required' });
-    if (cred && cred.password) {
-      await _doUnlock(cred.password);
-    } else {
-      document.getElementById('lockError').textContent = 'No saved credential — unlock with password first';
-    }
-  } catch(e) {
-    document.getElementById('lockError').textContent = 'Biometric cancelled — enter password manually';
-  }
+  const sp = sessionStorage.getItem('_sp');
+  if (!sp) { document.getElementById('lockError').textContent = 'New session — unlock with password first to enable biometric'; return; }
+  const ok = await _authenticateWebAuthn();
+  if (ok) { await _doUnlock(sp); }
+  else { document.getElementById('lockError').textContent = 'Biometric failed — enter password manually'; }
 }
 
 document.getElementById('biometricBtn').addEventListener('click', _tryBiometricRequired);
@@ -1229,10 +1248,11 @@ document.getElementById('biometricBtn').addEventListener('click', _tryBiometricR
   try { const p = JSON.parse(stored || '{}'); isEncrypted = p && p.enc === 1; } catch {}
 
   if (isEncrypted || hasEncSalt) {
-    // Existing encrypted data — show unlock, try biometric silently
+    // Existing encrypted data — show unlock
     document.getElementById('lockOverlay').style.display = 'flex';
-    if (_biometricSupported) document.getElementById('biometricBtn').style.display = '';
-    _tryBiometricSilent();
+    if (_webAuthnSupported && localStorage.getItem('waCredId') && sessionStorage.getItem('_sp')) {
+      document.getElementById('biometricBtn').style.display = '';
+    }
     setTimeout(() => document.getElementById('lockPassword').focus(), 50);
   } else if (!stored || _parsePlainTasks(stored)?.length === 0) {
     // First time / empty — prompt to set a password
