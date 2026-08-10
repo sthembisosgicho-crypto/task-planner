@@ -2800,6 +2800,7 @@ setInterval(() => { if (document.getElementById('dayView').classList.contains('a
 
 // Auto-pull from GitHub every 2 minutes
 setInterval(async function() {
+  if (!_cryptoKey) return; // don't pull while locked
   var token = getGhToken();
   if (!token || !navigator.onLine) return;
   if (_ghSyncState === 'pending' || _ghSyncState === 'pushing') return;
@@ -2814,7 +2815,6 @@ setInterval(async function() {
     if (JSON.stringify(tasks) !== JSON.stringify(remoteTasks)) {
       tasks = remoteTasks;
       saveTasks();
-      localStorage.setItem('taskDataJson', JSON.stringify(remoteTasks));
       renderAll();
       showStatus('Auto-synced from GitHub');
     }
@@ -3276,7 +3276,6 @@ async function doPush(retryCount) {
               var localOnly = tasks.filter(function(t){ return !remoteIds.has(t.id); });
               tasks = mTasks.concat(localOnly);
               saveTasks();
-              localStorage.setItem('taskDataJson', JSON.stringify(tasks));
               localStorage.setItem('ghLastKnownSha', mData.sha);
             }
           }
@@ -3371,8 +3370,6 @@ document.getElementById('ghSyncSaveBtn').addEventListener('click', async functio
       if (Array.isArray(remoteTasks) && remoteTasks.length > 0) {
         tasks = remoteTasks;
         saveTasks();
-        localStorage.setItem('taskDataJson', JSON.stringify(remoteTasks));
-        localStorage.setItem('taskDataJsonTime', new Date().toISOString());
         renderAll();
         showStatus('Pulled latest tasks from GitHub');
       }
@@ -3407,8 +3404,6 @@ document.getElementById('ghPullNowBtn').addEventListener('click', async function
     if (!Array.isArray(remoteTasks) || remoteTasks.length === 0) { showStatus('Nothing to pull'); return; }
     tasks = remoteTasks;
     saveTasks();
-    localStorage.setItem('taskDataJson', JSON.stringify(remoteTasks));
-    localStorage.setItem('taskDataJsonTime', new Date().toISOString());
     renderAll();
     setGhSyncState('ok','Pulled at '+new Date().toLocaleTimeString('en-ZA',{hour:'2-digit',minute:'2-digit'}));
     showStatus('Pulled '+remoteTasks.length+' tasks from GitHub');
@@ -3469,8 +3464,6 @@ window.addEventListener('beforeunload', function(e) {
             var localOnly = tasks.filter(function(t){ return !remoteIds.has(t.id); });
             tasks = chkTasks.concat(localOnly);
             saveTasks();
-            localStorage.setItem('taskDataJson', JSON.stringify(tasks));
-            localStorage.setItem('taskDataJsonTime', new Date().toISOString());
             localStorage.setItem('ghLastKnownSha', remoteSha);
             renderAll();
             if (localOnly.length > 0) {
@@ -3506,8 +3499,6 @@ window.addEventListener('beforeunload', function(e) {
     if (localJson !== remoteJson) {
       tasks = remoteTasks;
       saveTasks();
-      localStorage.setItem('taskDataJson', remoteJson);
-      localStorage.setItem('taskDataJsonTime', new Date().toISOString());
       renderAll();
       showStatus('Pulled latest tasks from GitHub');
     }
