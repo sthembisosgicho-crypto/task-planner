@@ -1209,7 +1209,11 @@ async function _tryBiometricRequired() {
   if (!_biometricSupported) return;
   try {
     const cred = await navigator.credentials.get({ password: true, mediation: 'required' });
-    if (cred && cred.password) await _doUnlock(cred.password);
+    if (cred && cred.password) {
+      await _doUnlock(cred.password);
+    } else {
+      document.getElementById('lockError').textContent = 'No saved credential — unlock with password first';
+    }
   } catch(e) {
     document.getElementById('lockError').textContent = 'Biometric cancelled — enter password manually';
   }
