@@ -6652,5 +6652,34 @@
     "subtasks": [],
     "totalHours": 0,
     "hoursDone": 0
+  },
+  {
+    "id": "msmt1hom7ic44",
+    "title": "Send david VC",
+    "category": "Chores Desk",
+    "priority": "Normal",
+    "duration": 1,
+    "deadline": null,
+    "notes": "",
+    "status": "backlog",
+    "scheduledDate": null,
+    "subtasks": [],
+    "predecessors": [
+      "mrdqb6at262wo"
+    ],
+    "totalHours": 0,
+    "hoursDone": 0
+  },
+  {
+    "id": "msmt36zt6ygtn",
+    "title": "New Task",
+    "category": "Engineering",
+    "priority": "Normal",
+    "duration": 0,
+    "deadline": null,
+    "notes": "",
+    "status": "backlog",
+    "scheduledDate": null,
+    "subtasks": []
   }
 ]
