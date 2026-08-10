@@ -481,6 +481,7 @@ input, select, textarea { font-family: inherit; }
   <input type="password" id="lockConfirm" placeholder="Confirm password" autocomplete="new-password" style="display:none;width:100%;max-width:300px;font-size:1rem;padding:10px 14px">
   <p class="lock-error" id="lockError"></p>
   <button class="btn-primary lock-primary" id="lockBtn">Unlock</button>
+  <button class="btn-secondary lock-primary" id="biometricBtn" style="display:none">&#128274; Use Biometric</button>
   <p class="lock-hint">Your tasks are encrypted with AES-256. If you forget your password, data cannot be recovered.</p>
 </div>
 
@@ -1129,6 +1130,7 @@ async function _doUnlock(password) {
     await _encryptTasks(_cryptoKey);
     document.getElementById('lockOverlay').style.display = 'none';
     _resetIdle();
+    _saveBiometricCredential(password);
     rolloverOverdueTasks();
     return;
   }
@@ -1153,6 +1155,7 @@ async function _doUnlock(password) {
       await _encryptTasks(_cryptoKey);
       document.getElementById('lockOverlay').style.display = 'none';
       _resetIdle();
+      _saveBiometricCredential(password);
       rolloverOverdueTasks();
       return;
     }
@@ -1165,6 +1168,7 @@ async function _doUnlock(password) {
     document.getElementById('lockOverlay').style.display = 'none';
     renderAll();
     _resetIdle();
+    _saveBiometricCredential(password);
     rolloverOverdueTasks();
   } catch {
     document.getElementById('lockError').textContent = 'Incorrect password';
@@ -1182,6 +1186,37 @@ document.addEventListener('visibilitychange', () => {
   else if (_hiddenAt && Date.now() - _hiddenAt > IDLE_MS) { lockApp(); } else { _hiddenAt = null; }
 });
 
+// ===== BIOMETRIC / CREDENTIAL MANAGEMENT =====
+const _biometricSupported = !!window.PasswordCredential;
+
+async function _saveBiometricCredential(password) {
+  if (!_biometricSupported) return;
+  try {
+    const cred = new PasswordCredential({ id: 'task-planner-user', password, name: 'Task Planner' });
+    await navigator.credentials.store(cred);
+  } catch(e) {}
+}
+
+async function _tryBiometricSilent() {
+  if (!_biometricSupported) return;
+  try {
+    const cred = await navigator.credentials.get({ password: true, mediation: 'silent' });
+    if (cred && cred.password) await _doUnlock(cred.password);
+  } catch(e) {}
+}
+
+async function _tryBiometricRequired() {
+  if (!_biometricSupported) return;
+  try {
+    const cred = await navigator.credentials.get({ password: true, mediation: 'required' });
+    if (cred && cred.password) await _doUnlock(cred.password);
+  } catch(e) {
+    document.getElementById('lockError').textContent = 'Biometric cancelled — enter password manually';
+  }
+}
+
+document.getElementById('biometricBtn').addEventListener('click', _tryBiometricRequired);
+
 // Init: check if encrypted data exists; if so show lock screen, else check first-time setup
 (function initLock() {
   const stored = localStorage.getItem('tasks');
@@ -1190,8 +1225,10 @@ document.addEventListener('visibilitychange', () => {
   try { const p = JSON.parse(stored || '{}'); isEncrypted = p && p.enc === 1; } catch {}
 
   if (isEncrypted || hasEncSalt) {
-    // Existing encrypted data — show unlock
+    // Existing encrypted data — show unlock, try biometric silently
     document.getElementById('lockOverlay').style.display = 'flex';
+    if (_biometricSupported) document.getElementById('biometricBtn').style.display = '';
+    _tryBiometricSilent();
     setTimeout(() => document.getElementById('lockPassword').focus(), 50);
   } else if (!stored || _parsePlainTasks(stored)?.length === 0) {
     // First time / empty — prompt to set a password
