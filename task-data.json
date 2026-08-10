@@ -6357,7 +6357,7 @@
     "title": "STP UP",
     "category": "Engineering",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 0.25,
     "deadline": null,
     "notes": "",
     "workType": "",
@@ -6388,32 +6388,6 @@
     },
     "scheduledSlotName": "Homework",
     "sortOrder": -1
-  },
-  {
-    "id": "ms2ydwfgad3e3",
-    "title": "New Task",
-    "category": "Engineering",
-    "priority": "Normal",
-    "duration": 0,
-    "deadline": null,
-    "notes": "",
-    "workType": "Project Work",
-    "status": "backlog",
-    "scheduledDate": null,
-    "subtasks": []
-  },
-  {
-    "id": "ms627jvytzirs",
-    "title": "New Task",
-    "category": "Engineering",
-    "priority": "Normal",
-    "duration": 0,
-    "deadline": null,
-    "notes": "",
-    "workType": "Project Work",
-    "status": "backlog",
-    "scheduledDate": null,
-    "subtasks": []
   },
   {
     "id": "ms628s1o3ep4v",
@@ -6543,18 +6517,6 @@
     "scheduledSlotName": "Homework"
   },
   {
-    "id": "mshb34d91ahzy",
-    "title": "New Task",
-    "category": "Engineering",
-    "priority": "Normal",
-    "duration": 0,
-    "deadline": null,
-    "notes": "",
-    "status": "backlog",
-    "scheduledDate": null,
-    "subtasks": []
-  },
-  {
     "id": "mshb3dzim0s69",
     "title": "RINSING AGENT",
     "category": "Shopping",
@@ -6594,7 +6556,7 @@
     "title": "Miyelani",
     "category": "Engineering",
     "priority": "Normal",
-    "duration": 0,
+    "duration": 0.25,
     "deadline": null,
     "notes": "",
     "workType": "Admin",
