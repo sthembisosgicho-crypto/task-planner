@@ -496,7 +496,7 @@ input, select, textarea { font-family: inherit; }
 <!-- Main -->
 <div class="main-content">
   <div class="app-header">
-    <h1>Task Scheduler <span style="font-size:0.6rem;font-weight:400;color:var(--text-dim);vertical-align:middle">v62</span></h1>
+    <h1>Task Scheduler <span style="font-size:0.6rem;font-weight:400;color:var(--text-dim);vertical-align:middle">v63</span></h1>
     <div class="header-actions">
       <button class="btn-primary" id="addTaskBtn">+ Add Task</button>
       <button class="btn-secondary" id="autoScheduleBtn">Auto-Schedule</button>
@@ -1070,7 +1070,7 @@ function generateId() { return Date.now().toString(36) + Math.random().toString(
 // ===== ENCRYPTION / LOCK =====
 let _cryptoKey = null;
 let _idleTimer = null;
-const IDLE_MS = 15 * 60 * 1000;
+const IDLE_MS = 60 * 60 * 1000;
 
 async function _deriveKey(password, salt) {
   const km = await crypto.subtle.importKey('raw', new TextEncoder().encode(password), 'PBKDF2', false, ['deriveKey']);
@@ -1129,6 +1129,7 @@ async function _doUnlock(password) {
     await _encryptTasks(_cryptoKey);
     document.getElementById('lockOverlay').style.display = 'none';
     _resetIdle();
+    rolloverOverdueTasks();
     return;
   }
 
@@ -1136,11 +1137,23 @@ async function _doUnlock(password) {
   try {
     const { enc, iv, d } = JSON.parse(stored || '{}');
     if (!enc) {
-      // Data not yet encrypted — accept any password and start encrypting
+      // Data not yet encrypted — require confirmation before accepting any password
+      const confirmEl = document.getElementById('lockConfirm');
+      if (confirmEl.style.display === 'none') {
+        document.getElementById('lockTitle').textContent = 'Set New Password';
+        document.getElementById('lockSubtitle').textContent = 'Your data is unencrypted. Set a password to protect it.';
+        confirmEl.style.display = '';
+        document.getElementById('lockBtn').textContent = 'Set Password';
+        errEl.textContent = '';
+        return;
+      }
+      const confirm = confirmEl.value;
+      if (password !== confirm) { errEl.textContent = 'Passwords do not match'; return; }
       _cryptoKey = await _deriveKey(password, _getOrCreateSalt());
       await _encryptTasks(_cryptoKey);
       document.getElementById('lockOverlay').style.display = 'none';
       _resetIdle();
+      rolloverOverdueTasks();
       return;
     }
     const key = await _deriveKey(password, _getOrCreateSalt());
@@ -1152,6 +1165,7 @@ async function _doUnlock(password) {
     document.getElementById('lockOverlay').style.display = 'none';
     renderAll();
     _resetIdle();
+    rolloverOverdueTasks();
   } catch {
     document.getElementById('lockError').textContent = 'Incorrect password';
   }
@@ -1165,7 +1179,7 @@ document.getElementById('lockAppBtn').addEventListener('click', lockApp);
 let _hiddenAt = null;
 document.addEventListener('visibilitychange', () => {
   if (document.hidden) { _hiddenAt = Date.now(); }
-  else if (_hiddenAt && Date.now() - _hiddenAt > 60000) { lockApp(); } else { _hiddenAt = null; }
+  else if (_hiddenAt && Date.now() - _hiddenAt > IDLE_MS) { lockApp(); } else { _hiddenAt = null; }
 });
 
 // Init: check if encrypted data exists; if so show lock screen, else check first-time setup
@@ -1207,7 +1221,10 @@ function exportData() {
 }
 function importData() {
   const saved = localStorage.getItem('taskDataJson');
-  if (saved) { try { const p = JSON.parse(saved); if (Array.isArray(p)) { tasks = p; saveTasks(); } } catch(e) {} }
+  if (saved) {
+    try { const p = JSON.parse(saved); if (Array.isArray(p)) { tasks = p; } } catch(e) {}
+    localStorage.removeItem('taskDataJson'); // clear stale plain-text copy
+  }
 }
 
 // ===== POOL GROUPS =====
@@ -2777,8 +2794,6 @@ function closeIncompleteModal() {
 }
 
 // ===== INIT =====
-importData();
-rolloverOverdueTasks();
 renderAll();
 // Update time indicator every minute
 setInterval(() => { if (document.getElementById('dayView').classList.contains('active')) renderDayView(); }, 60000);
