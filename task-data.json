@@ -6695,5 +6695,47 @@
     "subtasks": [],
     "totalHours": 0,
     "hoursDone": 0
+  },
+  {
+    "id": "mspp5rxohey47",
+    "title": "Hair Cut",
+    "category": "Chores Desk",
+    "priority": "Normal",
+    "duration": 0.5,
+    "deadline": null,
+    "notes": "",
+    "status": "backlog",
+    "scheduledDate": null,
+    "subtasks": [],
+    "totalHours": 0,
+    "hoursDone": 0
+  },
+  {
+    "id": "mspp67ngdf211",
+    "title": "Car wash",
+    "category": "Chores Desk",
+    "priority": "Normal",
+    "duration": 0.75,
+    "deadline": null,
+    "notes": "",
+    "status": "backlog",
+    "scheduledDate": null,
+    "subtasks": [],
+    "totalHours": 0,
+    "hoursDone": 0
+  },
+  {
+    "id": "mspp6mlw9bkna",
+    "title": "prestick",
+    "category": "Shopping",
+    "priority": "Normal",
+    "duration": 0,
+    "deadline": null,
+    "notes": "",
+    "status": "backlog",
+    "scheduledDate": null,
+    "subtasks": [],
+    "totalHours": 0,
+    "hoursDone": 0
   }
 ]
