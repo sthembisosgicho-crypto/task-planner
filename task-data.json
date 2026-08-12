@@ -6751,5 +6751,35 @@
     "subtasks": [],
     "totalHours": 0,
     "hoursDone": 0
+  },
+  {
+    "id": "mspp7tuacu94e",
+    "title": "Slow PC, solely",
+    "category": "Engineering",
+    "priority": "Normal",
+    "duration": 0.5,
+    "deadline": null,
+    "notes": "",
+    "workType": "Admin",
+    "status": "backlog",
+    "scheduledDate": null,
+    "subtasks": [],
+    "totalHours": 0,
+    "hoursDone": 0
+  },
+  {
+    "id": "mspp8jr4rk9yv",
+    "title": "Share lab sheets with Lefoka",
+    "category": "Engineering",
+    "priority": "Normal",
+    "duration": 0.75,
+    "deadline": null,
+    "notes": "",
+    "workType": "R&D",
+    "status": "backlog",
+    "scheduledDate": null,
+    "subtasks": [],
+    "totalHours": 0,
+    "hoursDone": 0
   }
 ]
