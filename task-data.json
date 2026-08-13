@@ -6587,5 +6587,20 @@
     "subtasks": [],
     "totalHours": 0,
     "hoursDone": 0
+  },
+  {
+    "id": "msr2s2fc095eb",
+    "title": "Get Client AI policy",
+    "category": "Engineering",
+    "priority": "Normal",
+    "duration": 0.5,
+    "deadline": null,
+    "notes": "",
+    "workType": "Admin",
+    "status": "backlog",
+    "scheduledDate": null,
+    "subtasks": [],
+    "totalHours": 0,
+    "hoursDone": 0
   }
 ]
