@@ -6573,5 +6573,19 @@
     "subtasks": [],
     "totalHours": 0,
     "hoursDone": 0
+  },
+  {
+    "id": "msr1tejhmolqx",
+    "title": "Download nkozo vidios and call home",
+    "category": "Chores Desk",
+    "priority": "Normal",
+    "duration": 0.5,
+    "deadline": null,
+    "notes": "",
+    "status": "backlog",
+    "scheduledDate": null,
+    "subtasks": [],
+    "totalHours": 0,
+    "hoursDone": 0
   }
 ]
