@@ -6575,11 +6575,11 @@
     "hoursDone": 0
   },
   {
-    "id": "msr24hnv0rk9j",
+    "id": "msr26ogqrfxlx",
     "title": "Eye test",
-    "category": "Chores Desk",
+    "category": "Errands",
     "priority": "Normal",
-    "duration": 0.25,
+    "duration": 0.75,
     "deadline": null,
     "notes": "",
     "status": "backlog",
