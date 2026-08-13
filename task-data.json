@@ -953,11 +953,8 @@
     "deadline": null,
     "notes": "",
     "status": "thisweek",
-    "scheduledDate": "2026-08-12",
-    "scheduledDates": [
-      "2026-08-12",
-      "2026-08-13"
-    ],
+    "scheduledDate": "2026-10-02",
+    "scheduledDates": [],
     "tierSortOrder": 18,
     "subtasks": [],
     "totalHours": 0,
@@ -1049,7 +1046,7 @@
     "deadline": null,
     "notes": "Daily",
     "status": "thisweek",
-    "scheduledDate": "2026-08-12",
+    "scheduledDate": "2026-08-13",
     "scheduledDates": [],
     "tierSortOrder": 22,
     "scheduledSessionHours": {
@@ -4412,10 +4409,8 @@
     "notes": "",
     "workType": "R&D",
     "status": "thisweek",
-    "scheduledDate": "2026-08-12",
-    "scheduledDates": [
-      "2026-08-12"
-    ],
+    "scheduledDate": "2026-08-19",
+    "scheduledDates": [],
     "scheduledSessionHours": {
       "2026-08-12": 2
     },
@@ -4432,14 +4427,13 @@
     "notes": "",
     "workType": "R&D",
     "status": "thisweek",
-    "scheduledDate": "2026-08-12",
-    "scheduledDates": [
-      "2026-08-12"
-    ],
+    "scheduledDate": "2026-08-19",
+    "scheduledDates": [],
     "scheduledSessionHours": {
       "2026-08-12": 0.25
     },
-    "scheduledSlotName": "Engineering"
+    "scheduledSlotName": "Engineering",
+    "sortOrder": -1
   },
   {
     "id": "eng38",
@@ -5238,7 +5232,7 @@
     "deadline": null,
     "notes": "",
     "status": "thisweek",
-    "scheduledDate": "2026-08-12",
+    "scheduledDate": "2026-08-13",
     "subtasks": [],
     "totalHours": 40,
     "hoursDone": 0,
@@ -6106,13 +6100,11 @@
     "deadline": null,
     "notes": "",
     "status": "thisweek",
-    "scheduledDate": "2026-08-12",
+    "scheduledDate": "2026-11-09",
     "subtasks": [],
     "totalHours": 0,
     "hoursDone": 0,
-    "scheduledDates": [
-      "2026-08-12"
-    ],
+    "scheduledDates": [],
     "scheduledSessionHours": {
       "2026-08-12": 1
     },
@@ -6249,17 +6241,16 @@
     "notes": "",
     "workType": "R&D",
     "status": "thisweek",
-    "scheduledDate": "2026-08-12",
+    "scheduledDate": "2026-08-19",
     "subtasks": [],
     "totalHours": 0,
     "hoursDone": 0,
-    "scheduledDates": [
-      "2026-08-12"
-    ],
+    "scheduledDates": [],
     "scheduledSessionHours": {
       "2026-08-12": 0.25
     },
-    "scheduledSlotName": "Engineering"
+    "scheduledSlotName": "Engineering",
+    "sortOrder": -1
   },
   {
     "id": "mshawla0oxof9",
