@@ -9,10 +9,8 @@
     "notes": "",
     "workType": "Admin",
     "status": "thisweek",
-    "scheduledDate": "2026-08-14",
-    "scheduledDates": [
-      "2026-08-14"
-    ],
+    "scheduledDate": "2026-08-21",
+    "scheduledDates": [],
     "scheduledSessionHours": {
       "2026-08-14": 0.25
     },
@@ -129,7 +127,7 @@
     "notes": "",
     "workType": "Project Work",
     "status": "thisweek",
-    "scheduledDate": "2026-08-13",
+    "scheduledDate": "2026-08-17",
     "scheduledDates": [],
     "scheduledSessionHours": {
       "2026-08-10": 3
@@ -193,10 +191,8 @@
     "notes": "",
     "workType": "Personal Dev",
     "status": "thisweek",
-    "scheduledDate": "2026-08-14",
-    "scheduledDates": [
-      "2026-08-14"
-    ],
+    "scheduledDate": "2026-08-28",
+    "scheduledDates": [],
     "scheduledSessionHours": {
       "2026-08-14": 2
     },
@@ -213,7 +209,7 @@
     "notes": "",
     "workType": "Project Work",
     "status": "thisweek",
-    "scheduledDate": "2026-08-13",
+    "scheduledDate": "2026-08-17",
     "scheduledDates": [],
     "scheduledSessionHours": {
       "2026-08-10": 4
@@ -1023,14 +1019,12 @@
     "deadline": null,
     "notes": "",
     "status": "thisweek",
-    "scheduledDate": "2026-08-13",
+    "scheduledDate": "2026-10-02",
     "tierSortOrder": 21,
     "subtasks": [],
     "totalHours": 0,
     "hoursDone": 0,
-    "scheduledDates": [
-      "2026-08-13"
-    ],
+    "scheduledDates": [],
     "scheduledSessionHours": {
       "2026-08-13": 1
     },
@@ -1046,7 +1040,7 @@
     "deadline": null,
     "notes": "Daily",
     "status": "thisweek",
-    "scheduledDate": "2026-08-13",
+    "scheduledDate": "2026-08-17",
     "scheduledDates": [],
     "tierSortOrder": 22,
     "scheduledSessionHours": {
@@ -1595,13 +1589,9 @@
     "deadline": null,
     "notes": "",
     "status": "thisweek",
-    "scheduledDate": "2026-08-13",
+    "scheduledDate": "2026-11-09",
     "tierSortOrder": 43,
-    "scheduledDates": [
-      "2026-08-13",
-      "2026-08-14",
-      "2026-08-17"
-    ],
+    "scheduledDates": [],
     "scheduledSessionHours": {
       "2026-08-13": 0.75,
       "2026-08-14": 2,
@@ -3664,10 +3654,8 @@
     "notes": "",
     "workType": "Personal Dev",
     "status": "thisweek",
-    "scheduledDate": "2026-08-14",
-    "scheduledDates": [
-      "2026-08-14"
-    ],
+    "scheduledDate": "2026-09-04",
+    "scheduledDates": [],
     "scheduledSessionHours": {
       "2026-08-14": 1
     },
@@ -3684,10 +3672,8 @@
     "notes": "",
     "workType": "Personal Dev",
     "status": "thisweek",
-    "scheduledDate": "2026-08-14",
-    "scheduledDates": [
-      "2026-08-14"
-    ],
+    "scheduledDate": "2026-09-04",
+    "scheduledDates": [],
     "scheduledSessionHours": {
       "2026-08-14": 1
     },
@@ -4709,13 +4695,11 @@
     "notes": "",
     "workType": "Admin",
     "status": "thisweek",
-    "scheduledDate": "2026-08-14",
+    "scheduledDate": "2026-08-21",
     "subtasks": [],
     "totalHours": 0,
     "hoursDone": 0,
-    "scheduledDates": [
-      "2026-08-14"
-    ],
+    "scheduledDates": [],
     "scheduledSessionHours": {
       "2026-08-14": 1.5
     },
@@ -4827,14 +4811,12 @@
     "deadline": "2026-07-10",
     "notes": "",
     "workType": "Admin",
-    "status": "thisweek",
-    "scheduledDate": "2026-08-14",
+    "status": "backlog",
+    "scheduledDate": null,
     "subtasks": [],
     "totalHours": 0,
     "hoursDone": 0,
-    "scheduledDates": [
-      "2026-08-14"
-    ],
+    "scheduledDates": [],
     "scheduledSessionHours": {
       "2026-08-14": 0.25
     },
@@ -5109,14 +5091,11 @@
     "notes": "https://www.isdcg2027.com/\n\n\nSAIMM Tailings (Johannesburg, March 2026)\nISSMGE Soil Mechanics (Vienna, June 2026)\nSAICE Young Geotechnical Engineers (YGE) (Drakensberg, September 2026)\nTailings and Mine Waste (Denver, November 2026)",
     "workType": "Personal Dev",
     "status": "thisweek",
-    "scheduledDate": "2026-08-14",
+    "scheduledDate": "2026-09-04",
     "subtasks": [],
     "totalHours": 0,
     "hoursDone": 0,
-    "scheduledDates": [
-      "2026-08-14",
-      "2026-08-21"
-    ],
+    "scheduledDates": [],
     "scheduledSessionHours": {
       "2026-08-14": 1,
       "2026-08-21": 1
@@ -5232,7 +5211,7 @@
     "deadline": null,
     "notes": "",
     "status": "thisweek",
-    "scheduledDate": "2026-08-13",
+    "scheduledDate": "2026-08-17",
     "subtasks": [],
     "totalHours": 40,
     "hoursDone": 0,
@@ -5490,15 +5469,12 @@
     "duration": 4,
     "deadline": "2026-07-24",
     "notes": "",
-    "status": "thisweek",
-    "scheduledDate": "2026-08-14",
+    "status": "backlog",
+    "scheduledDate": null,
     "subtasks": [],
     "totalHours": 0,
     "hoursDone": 0,
-    "scheduledDates": [
-      "2026-08-14",
-      "2026-08-21"
-    ],
+    "scheduledDates": [],
     "scheduledSessionHours": {
       "2026-08-14": 2,
       "2026-08-21": 2
@@ -5556,13 +5532,11 @@
     "notes": "",
     "workType": "Project Work",
     "status": "thisweek",
-    "scheduledDate": "2026-08-13",
+    "scheduledDate": "2026-08-18",
     "subtasks": [],
     "totalHours": 0,
     "hoursDone": 0,
-    "scheduledDates": [
-      "2026-08-13"
-    ],
+    "scheduledDates": [],
     "scheduledSessionHours": {
       "2026-08-13": 1
     },
@@ -5721,14 +5695,11 @@
     "notes": "- Inclination tracking limit ? \n- Hard layers refusal plan \n- Method statement from contractor\n-Piezo from geosense",
     "workType": "Project Work",
     "status": "thisweek",
-    "scheduledDate": "2026-08-13",
+    "scheduledDate": "2026-08-20",
     "subtasks": [],
     "totalHours": 0,
     "hoursDone": 0,
-    "scheduledDates": [
-      "2026-08-13",
-      "2026-08-17"
-    ],
+    "scheduledDates": [],
     "scheduledSessionHours": {
       "2026-08-13": 2.25,
       "2026-08-17": 1.75
