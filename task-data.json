@@ -6573,5 +6573,19 @@
     "subtasks": [],
     "totalHours": 0,
     "hoursDone": 0
+  },
+  {
+    "id": "mstvfkan04xfc",
+    "title": "Shop for new insurance + Tracker",
+    "category": "Chores Desk",
+    "priority": "Normal",
+    "duration": 0.25,
+    "deadline": null,
+    "notes": "",
+    "status": "backlog",
+    "scheduledDate": null,
+    "subtasks": [],
+    "totalHours": 0,
+    "hoursDone": 0
   }
 ]
