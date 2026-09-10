@@ -983,7 +983,7 @@
     "deadline": null,
     "notes": "Daily",
     "status": "thisweek",
-    "scheduledDate": "2026-09-09",
+    "scheduledDate": "2026-09-10",
     "scheduledDates": [],
     "tierSortOrder": 22,
     "scheduledSessionHours": {
@@ -1539,7 +1539,7 @@
     "deadline": null,
     "notes": "",
     "status": "thisweek",
-    "scheduledDate": "2026-09-09",
+    "scheduledDate": "2026-09-10",
     "tierSortOrder": 44,
     "scheduledDates": [],
     "scheduledSessionHours": {
@@ -2106,17 +2106,15 @@
     "deadline": null,
     "notes": "",
     "status": "thisweek",
-    "scheduledDate": "2026-09-09",
+    "scheduledDate": "2026-09-24",
     "tierSortOrder": 66,
-    "scheduledDates": [
-      "2026-09-09",
-      "2026-09-10"
-    ],
+    "scheduledDates": [],
     "scheduledSessionHours": {
       "2026-09-09": 0.5,
       "2026-09-10": 0.5
     },
-    "scheduledSlotName": "Homework"
+    "scheduledSlotName": "Homework",
+    "sortOrder": -1
   },
   {
     "id": "cd28",
@@ -4146,7 +4144,7 @@
     "notes": "",
     "workType": "R&D",
     "status": "thisweek",
-    "scheduledDate": "2026-09-09",
+    "scheduledDate": "2026-09-16",
     "scheduledDates": [],
     "scheduledSessionHours": {
       "2026-08-12": 2
@@ -4164,7 +4162,7 @@
     "notes": "",
     "workType": "R&D",
     "status": "thisweek",
-    "scheduledDate": "2026-09-09",
+    "scheduledDate": "2026-09-16",
     "scheduledDates": [],
     "scheduledSessionHours": {
       "2026-08-12": 0.25
@@ -4954,7 +4952,7 @@
     "deadline": null,
     "notes": "",
     "status": "thisweek",
-    "scheduledDate": "2026-09-09",
+    "scheduledDate": "2026-09-10",
     "subtasks": [],
     "totalHours": 40,
     "hoursDone": 0,
@@ -5935,7 +5933,7 @@
     "notes": "",
     "workType": "R&D",
     "status": "thisweek",
-    "scheduledDate": "2026-09-09",
+    "scheduledDate": "2026-09-16",
     "subtasks": [],
     "totalHours": 0,
     "hoursDone": 0,
