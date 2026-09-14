@@ -8,14 +8,15 @@
     "deadline": "2026-06-22",
     "notes": "",
     "workType": "Admin",
-    "status": "thisweek",
+    "status": "done",
     "scheduledDate": "2026-09-11",
     "scheduledDates": [],
     "scheduledSessionHours": {
       "2026-08-14": 0.25
     },
     "scheduledSlotName": "Engineering",
-    "sortOrder": -1
+    "sortOrder": -1,
+    "completedDate": "2026-09-14T06:43:21.363Z"
   },
   {
     "id": "eng02",
@@ -126,7 +127,7 @@
     "deadline": "2026-06-18",
     "notes": "",
     "workType": "Project Work",
-    "status": "thisweek",
+    "status": "done",
     "scheduledDate": "2026-09-10",
     "scheduledDates": [],
     "scheduledSessionHours": {
@@ -136,7 +137,8 @@
     "sortOrder": -1,
     "subtasks": [],
     "totalHours": 0,
-    "hoursDone": 0
+    "hoursDone": 0,
+    "completedDate": "2026-09-14T06:43:23.330Z"
   },
   {
     "id": "eng04",
