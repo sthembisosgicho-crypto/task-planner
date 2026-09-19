@@ -6895,5 +6895,19 @@
     "subtasks": [],
     "totalHours": 0,
     "hoursDone": 0
+  },
+  {
+    "id": "mu8erwkczsh5t",
+    "title": "Fix phones",
+    "category": "Errands",
+    "priority": "Normal",
+    "duration": 1.25,
+    "deadline": null,
+    "notes": "",
+    "status": "backlog",
+    "scheduledDate": null,
+    "subtasks": [],
+    "totalHours": 0,
+    "hoursDone": 0
   }
 ]
