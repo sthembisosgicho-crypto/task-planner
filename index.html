@@ -3089,7 +3089,7 @@ if (isMobile()) { mobileUpdateKanban(); }
   const APP_VER = 'v63';
   const stored = localStorage.getItem('appVersion');
   localStorage.setItem('appVersion', APP_VER);
-  if (stored && stored !== APP_VER) {
+  if (stored !== APP_VER) {
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.getRegistrations()
         .then(regs => Promise.all(regs.map(r => r.unregister())))
